@@ -11,15 +11,13 @@
                     <key>kind</key>
                     <string>software-package</string>
                     <key>url</key>
-
-                    <string>https://github.com/DFW-PMA/VisitManagementApp/releases/download/PDG-10.8/VisitManagementApp_iOS.1.01.35.01.25C051.ipa</string>
-                <!--<string>https://github.com/DFW-PMA/VisitManagementApp/releases/download/PDF-10.8/VisitManagementApp_iOS.1.01.30.12.25C044.ipa</string> -->
+                    <string></string>
                 </dict>
             </array>
             <key>metadata</key>
             <dict>
                 <key>bundle-identifier</key>
-                <string>com.PreferredMobileApplications.VisitManagementApp</string>
+                <string>com.PreferredMobileApplications.VisitManagementApp1</string>
                 <key>bundle-version</key>
                 <string>1.01</string>
                 <key>kind</key>

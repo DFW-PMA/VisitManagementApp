@@ -954,7 +954,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 01.05.25C127;
+				CURRENT_PROJECT_VERSION = 01.07.25C127;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -979,7 +979,7 @@
 				MARKETING_VERSION = 1.01;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "VisitManagementApp/Objective-C/CalledObjCModule-Bridging-Header.h";
@@ -998,7 +998,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 01.05.25C127;
+				CURRENT_PROJECT_VERSION = 01.07.25C127;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1023,7 +1023,7 @@
 				MARKETING_VERSION = 1.01;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "VisitManagementApp/Objective-C/CalledObjCModule-Bridging-Header.h";
@@ -1041,7 +1041,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 01.05.25C127;
+				CURRENT_PROJECT_VERSION = 01.07.25C127;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1070,7 +1070,7 @@
 				MARKETING_VERSION = 1.01;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1092,7 +1092,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 01.05.25C127;
+				CURRENT_PROJECT_VERSION = 01.07.25C127;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1121,7 +1121,7 @@
 				MARKETING_VERSION = 1.01;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
