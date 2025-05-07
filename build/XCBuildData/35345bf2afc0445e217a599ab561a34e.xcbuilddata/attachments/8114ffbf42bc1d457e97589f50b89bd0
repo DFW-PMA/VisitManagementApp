@@ -1,0 +1,100 @@
+{
+  "" : {
+    "const-values" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementApp_Mac-master.swiftconstvalues",
+    "dependencies" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementApp_Mac-master.d",
+    "diagnostics" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementApp_Mac-master.dia",
+    "emit-module-dependencies" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementApp_Mac-master-emit-module.d",
+    "emit-module-diagnostics" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementApp_Mac-master-emit-module.dia",
+    "swift-dependencies" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementApp_Mac-master.swiftdeps"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/GeneratedAssetSymbols.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/GeneratedAssetSymbols.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/Commands/AppInfoCommands.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/AppInfoCommands.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/AppInfoCommands.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/AppInfoCommands.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/Commands/HelpCommands.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpCommands.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpCommands.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpCommands.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/JmObjCSwiftEnvBridge.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmObjCSwiftEnvBridge.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmObjCSwiftEnvBridge.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmObjCSwiftEnvBridge.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/JmUtils/JmAppDelegateVisitor.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmAppDelegateVisitor.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmAppDelegateVisitor.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmAppDelegateVisitor.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/JmUtils/JmFileIO.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmFileIO.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmFileIO.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmFileIO.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/JmUtils/JmStringExtensions.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmStringExtensions.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmStringExtensions.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmStringExtensions.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/JmUtils/JmUserDefaults.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmUserDefaults.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmUserDefaults.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmUserDefaults.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/JmUtils/JmXcodeBuildSettings.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmXcodeBuildSettings.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmXcodeBuildSettings.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/JmXcodeBuildSettings.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/VisitManagementAppApp.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementAppApp.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementAppApp.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementAppApp.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/VisitManagementAppAppGlobalInfo.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementAppAppGlobalInfo.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementAppAppGlobalInfo.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementAppAppGlobalInfo.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/VisitManagementAppNSAppDelegate.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementAppNSAppDelegate.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementAppNSAppDelegate.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/VisitManagementAppNSAppDelegate.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/Models/HelpBasicLoader.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpBasicLoader.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpBasicLoader.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpBasicLoader.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/Models/HelpBasicMode.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpBasicMode.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpBasicMode.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpBasicMode.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/Views/ContentView.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/ContentView.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/ContentView.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/ContentView.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/Views/HelpBasicView.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpBasicView.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpBasicView.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/HelpBasicView.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/Views/LogFileView.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/LogFileView.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/LogFileView.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/LogFileView.o"
+  },
+  "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/VisitManagementApp/Views/SettingsSingleView.swift" : {
+    "index-unit-output-path" : "/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/SettingsSingleView.o",
+    "llvm-bc" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/SettingsSingleView.bc",
+    "object" : "/Volumes/Crucial-X6-2-SSD/Users/Shared/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SwiftUI_GUI_tools/DrcSwiftUI4MastersWork1/VisitManagementApp/build/VisitManagementApp.build/Release/VisitManagementApp_Mac.build/Objects-normal/x86_64/SettingsSingleView.o"
+  }
+}

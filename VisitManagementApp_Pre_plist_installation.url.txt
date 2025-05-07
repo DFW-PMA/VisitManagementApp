@@ -1,0 +1,1 @@
+itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/DFW-PMA/VisitManagementApp/refs/heads/main/VisitManagementApp_Pre.plist

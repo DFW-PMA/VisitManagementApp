@@ -1,0 +1,1305 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		F0BCCC772C821E34007EA382 /* VisitManagementApp_ALL */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F0BCCC782C821E34007EA382 /* Build configuration list for PBXAggregateTarget "VisitManagementApp_ALL" */;
+			buildPhases = (
+			);
+			dependencies = (
+				F0BCCC7C2C8221B9007EA382 /* PBXTargetDependency */,
+				F0BCCC7E2C8221B9007EA382 /* PBXTargetDependency */,
+				F0BCCC802C8221B9007EA382 /* PBXTargetDependency */,
+				F0BCCC822C8221B9007EA382 /* PBXTargetDependency */,
+			);
+			name = VisitManagementApp_ALL;
+			productName = VisitManagementApp;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		F0002DC02C7C0ABF00520A9F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F0002DBF2C7C0ABF00520A9F /* README.md */; };
+		F00619A02C94A8060094614E /* MultipartRequestDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006199A2C94A8060094614E /* MultipartRequestDriver.swift */; };
+		F00619A12C94A8060094614E /* MultipartRequestDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006199A2C94A8060094614E /* MultipartRequestDriver.swift */; };
+		F00619A22C94A8060094614E /* MultipartDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006199B2C94A8060094614E /* MultipartDataExtension.swift */; };
+		F00619A32C94A8060094614E /* MultipartDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006199B2C94A8060094614E /* MultipartDataExtension.swift */; };
+		F00619A42C94A8060094614E /* MultipartRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006199C2C94A8060094614E /* MultipartRequest.swift */; };
+		F00619A52C94A8060094614E /* MultipartRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006199C2C94A8060094614E /* MultipartRequest.swift */; };
+		F00619A62C94A8060094614E /* MultipartRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006199D2C94A8060094614E /* MultipartRequestInfo.swift */; };
+		F00619A72C94A8060094614E /* MultipartRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006199D2C94A8060094614E /* MultipartRequestInfo.swift */; };
+		F00619A82C94AEBE0094614E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F091A2942C8F865700FB85D5 /* LaunchScreen.storyboard */; };
+		F00D1CEA2D95D219001386F5 /* AppVisitMgmtSchedule1DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D1CE92D95D219001386F5 /* AppVisitMgmtSchedule1DetailsView.swift */; };
+		F00D1CEB2D95D219001386F5 /* AppVisitMgmtSchedule1DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00D1CE92D95D219001386F5 /* AppVisitMgmtSchedule1DetailsView.swift */; };
+		F00DC4A02DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00DC49F2DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift */; };
+		F00DC4A12DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00DC49F2DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift */; };
+		F02204B12D4D670E00C5B182 /* ParsePFPatientFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02204B02D4D670E00C5B182 /* ParsePFPatientFileItem.swift */; };
+		F02204B22D4D670E00C5B182 /* ParsePFPatientFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02204B02D4D670E00C5B182 /* ParsePFPatientFileItem.swift */; };
+		F0289D292C53D85B001B19CD /* JmUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0289D282C53D85B001B19CD /* JmUserDefaults.swift */; };
+		F0289D2B2C53D863001B19CD /* HelpBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0289D2A2C53D863001B19CD /* HelpBasicView.swift */; };
+		F0289D2F2C53D933001B19CD /* HelpBasic.html in Resources */ = {isa = PBXBuildFile; fileRef = F0289D2D2C53D933001B19CD /* HelpBasic.html */; };
+		F0289D302C53D933001B19CD /* HelpBasic.md in Resources */ = {isa = PBXBuildFile; fileRef = F0289D2E2C53D933001B19CD /* HelpBasic.md */; };
+		F0289D332C53D98D001B19CD /* HelpBasicMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0289D312C53D98D001B19CD /* HelpBasicMode.swift */; };
+		F0289D342C53D98D001B19CD /* HelpBasicLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0289D322C53D98D001B19CD /* HelpBasicLoader.swift */; };
+		F028C5B12C48610A007C459E /* VisitManagementAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028C5B02C48610A007C459E /* VisitManagementAppApp.swift */; };
+		F028C5B32C48610A007C459E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028C5B22C48610A007C459E /* ContentView.swift */; };
+		F028C5B52C48610B007C459E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F028C5B42C48610B007C459E /* Assets.xcassets */; };
+		F028C5B82C48610B007C459E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F028C5B72C48610B007C459E /* Preview Assets.xcassets */; };
+		F029E0B62C82386D00FC96B9 /* SettingsSingleViewIos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F029E0B32C82386D00FC96B9 /* SettingsSingleViewIos.swift */; };
+		F029E0B72C82386D00FC96B9 /* SettingsSingleViewMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = F029E0B42C82386D00FC96B9 /* SettingsSingleViewMac.swift */; };
+		F029E0BB2C823ACB00FC96B9 /* AppAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F029E0B92C823ACB00FC96B9 /* AppAboutView.swift */; };
+		F02C7A1C2D3990BE00E9F92C /* JmAppParseCoreBkgdDataRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C7A1B2D3990BE00E9F92C /* JmAppParseCoreBkgdDataRepo.swift */; };
+		F02C7A1D2D3990BE00E9F92C /* JmAppParseCoreBkgdDataRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C7A1B2D3990BE00E9F92C /* JmAppParseCoreBkgdDataRepo.swift */; };
+		F03240302C49672900ED9508 /* VisitManagementAppNSAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032402F2C49672900ED9508 /* VisitManagementAppNSAppDelegate.swift */; };
+		F042521C2C59356600EA22D8 /* CalledObjCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F04252192C59356600EA22D8 /* CalledObjCModule.m */; };
+		F0474E592CDAA54A0079B1E0 /* JmAppUserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0474E582CDAA54A0079B1E0 /* JmAppUserNotificationManager.swift */; };
+		F0474E5A2CDAA54A0079B1E0 /* JmAppUserNotificationIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0474E572CDAA54A0079B1E0 /* JmAppUserNotificationIdentifiers.swift */; };
+		F0474E5B2CDAA54A0079B1E0 /* JmAppUserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0474E582CDAA54A0079B1E0 /* JmAppUserNotificationManager.swift */; };
+		F0474E5C2CDAA54A0079B1E0 /* JmAppUserNotificationIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0474E572CDAA54A0079B1E0 /* JmAppUserNotificationIdentifiers.swift */; };
+		F048393E2D2733430060D765 /* ParsePFTherapistFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048393D2D2733430060D765 /* ParsePFTherapistFileItem.swift */; };
+		F048393F2D2733430060D765 /* ParsePFTherapistFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F048393D2D2733430060D765 /* ParsePFTherapistFileItem.swift */; };
+		F04D88A22CDAA8A00002AA0B /* MultipartZipFileCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04D88A12CDAA8A00002AA0B /* MultipartZipFileCreator.swift */; };
+		F04D88A32CDAA8A00002AA0B /* MultipartZipFileCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04D88A12CDAA8A00002AA0B /* MultipartZipFileCreator.swift */; };
+		F05B51552CE7D8B5008A0EEE /* ParsePFCscDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05B51542CE7D8B5008A0EEE /* ParsePFCscDataItem.swift */; };
+		F05B51562CE7D8B5008A0EEE /* ParsePFCscDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05B51542CE7D8B5008A0EEE /* ParsePFCscDataItem.swift */; };
+		F05E47122D5D0D550059F4C2 /* AppVisitMgmtTherapist3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E47112D5D0D550059F4C2 /* AppVisitMgmtTherapist3View.swift */; };
+		F05E47132D5D0D550059F4C2 /* AppVisitMgmtTherapist3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E47112D5D0D550059F4C2 /* AppVisitMgmtTherapist3View.swift */; };
+		F05E47152D5D29150059F4C2 /* AppVisitMgmtPatient3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E47142D5D29150059F4C2 /* AppVisitMgmtPatient3View.swift */; };
+		F05E47162D5D29150059F4C2 /* AppVisitMgmtPatient3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E47142D5D29150059F4C2 /* AppVisitMgmtPatient3View.swift */; };
+		F05E875B2DB29C1C00C309B7 /* ScheduledPatientLocationItemEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E875A2DB29C1C00C309B7 /* ScheduledPatientLocationItemEnums.swift */; };
+		F05E875C2DB29C1C00C309B7 /* ScheduledPatientLocationItemEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05E875A2DB29C1C00C309B7 /* ScheduledPatientLocationItemEnums.swift */; };
+		F05EBBB12D2C7A6A00E5EE06 /* AppVisitMgmtTherapist2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EBBB02D2C7A6A00E5EE06 /* AppVisitMgmtTherapist2View.swift */; };
+		F05EBBB22D2C7A6A00E5EE06 /* AppVisitMgmtTherapist2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EBBB02D2C7A6A00E5EE06 /* AppVisitMgmtTherapist2View.swift */; };
+		F05EDC312D53FA2F00306C62 /* AppVisitMgmtPatient1DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EDC2E2D53FA2F00306C62 /* AppVisitMgmtPatient1DetailsView.swift */; };
+		F05EDC322D53FA2F00306C62 /* AppVisitMgmtPatient1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EDC2F2D53FA2F00306C62 /* AppVisitMgmtPatient1View.swift */; };
+		F05EDC332D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EDC302D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift */; };
+		F05EDC342D53FA2F00306C62 /* AppVisitMgmtPatient1DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EDC2E2D53FA2F00306C62 /* AppVisitMgmtPatient1DetailsView.swift */; };
+		F05EDC352D53FA2F00306C62 /* AppVisitMgmtPatient1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EDC2F2D53FA2F00306C62 /* AppVisitMgmtPatient1View.swift */; };
+		F05EDC362D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EDC302D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift */; };
+		F05EDC382D53FB7C00306C62 /* AppSearchablePatientName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EDC372D53FB7C00306C62 /* AppSearchablePatientName.swift */; };
+		F05EDC392D53FB7C00306C62 /* AppSearchablePatientName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EDC372D53FB7C00306C62 /* AppSearchablePatientName.swift */; };
+		F05EE1D22D380E3700ABC0C5 /* AlarmSwiftDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EE1D12D380E3700ABC0C5 /* AlarmSwiftDataItem.swift */; };
+		F05EE1D32D380E3700ABC0C5 /* AlarmSwiftDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EE1D12D380E3700ABC0C5 /* AlarmSwiftDataItem.swift */; };
+		F05EE1D52D380E4E00ABC0C5 /* JmAppAlarmSoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EE1D42D380E4E00ABC0C5 /* JmAppAlarmSoundManager.swift */; };
+		F05EE1D62D380E4E00ABC0C5 /* JmAppAlarmSoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05EE1D42D380E4E00ABC0C5 /* JmAppAlarmSoundManager.swift */; };
+		F0601D932C77C73C00443D72 /* JmXcodeBuildSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0601D922C77C73C00443D72 /* JmXcodeBuildSettings.swift */; };
+		F069E2AC2CEF8C42001F0A5E /* ParsePFAdminsDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F069E2AB2CEF8C42001F0A5E /* ParsePFAdminsDataItem.swift */; };
+		F069E2AD2CEF8C42001F0A5E /* ParsePFAdminsDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F069E2AB2CEF8C42001F0A5E /* ParsePFAdminsDataItem.swift */; };
+		F069E2AF2CEFADE5001F0A5E /* AppAuthenticateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F069E2AE2CEFADE5001F0A5E /* AppAuthenticateView.swift */; };
+		F069E2B02CEFADE5001F0A5E /* AppAuthenticateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F069E2AE2CEFADE5001F0A5E /* AppAuthenticateView.swift */; };
+		F06BB2942D0B6D7200E524E5 /* JmAppSwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06BB2932D0B6D7200E524E5 /* JmAppSwiftDataManager.swift */; };
+		F06BB2952D0B6D7200E524E5 /* JmAppSwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06BB2932D0B6D7200E524E5 /* JmAppSwiftDataManager.swift */; };
+		F06C01B92CFE0A16007703E2 /* PFAdminsSwiftDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06C01B82CFE0A16007703E2 /* PFAdminsSwiftDataItem.swift */; };
+		F06C01BA2CFE0A16007703E2 /* PFAdminsSwiftDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06C01B82CFE0A16007703E2 /* PFAdminsSwiftDataItem.swift */; };
+		F06E184D2D52616700633988 /* AppLogPFDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E184C2D52616700633988 /* AppLogPFDataView.swift */; };
+		F06E184E2D52616700633988 /* AppLogPFDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E184C2D52616700633988 /* AppLogPFDataView.swift */; };
+		F0786E462CE68E9E0052A534 /* CoreLocationModelObservable2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0786E442CE68E9E0052A534 /* CoreLocationModelObservable2.swift */; };
+		F0786E472CE68E9E0052A534 /* CoreLocationSiteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0786E452CE68E9E0052A534 /* CoreLocationSiteItem.swift */; };
+		F0786E482CE68E9E0052A534 /* CoreLocationModelObservable2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0786E442CE68E9E0052A534 /* CoreLocationModelObservable2.swift */; };
+		F0786E492CE68E9E0052A534 /* CoreLocationSiteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0786E452CE68E9E0052A534 /* CoreLocationSiteItem.swift */; };
+		F07F7B952C94DB2D0094AE18 /* DefinesObjCOverrides.m in Sources */ = {isa = PBXBuildFile; fileRef = F07F7B942C94DB2D0094AE18 /* DefinesObjCOverrides.m */; };
+		F07F7B962C94DB2D0094AE18 /* DefinesObjCOverrides.m in Sources */ = {isa = PBXBuildFile; fileRef = F07F7B942C94DB2D0094AE18 /* DefinesObjCOverrides.m */; };
+		F08A94762D11F1A900B69C3C /* AppTidScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08A94752D11F1A900B69C3C /* AppTidScheduleView.swift */; };
+		F08A94772D11F1A900B69C3C /* AppTidScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08A94752D11F1A900B69C3C /* AppTidScheduleView.swift */; };
+		F08C00C72CE536430045A5CD /* JmAppParseCoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08C00C62CE536430045A5CD /* JmAppParseCoreManager.swift */; };
+		F08C00C82CE536430045A5CD /* JmAppParseCoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08C00C62CE536430045A5CD /* JmAppParseCoreManager.swift */; };
+		F08C00CB2CE537420045A5CD /* ParseLiveQuery in Frameworks */ = {isa = PBXBuildFile; productRef = F08C00CA2CE537420045A5CD /* ParseLiveQuery */; };
+		F08C00CD2CE537420045A5CD /* ParseObjC in Frameworks */ = {isa = PBXBuildFile; productRef = F08C00CC2CE537420045A5CD /* ParseObjC */; };
+		F08C86B02D1DBAEF00D5B19A /* AppVisitMgmtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08C86AF2D1DBAEF00D5B19A /* AppVisitMgmtView.swift */; };
+		F08C86B12D1DBAEF00D5B19A /* AppVisitMgmtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08C86AF2D1DBAEF00D5B19A /* AppVisitMgmtView.swift */; };
+		F08C86B32D1DD6C100D5B19A /* AppVisitMgmtTherapist1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08C86B22D1DD6C100D5B19A /* AppVisitMgmtTherapist1View.swift */; };
+		F08C86B42D1DD6C100D5B19A /* AppVisitMgmtTherapist1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08C86B22D1DD6C100D5B19A /* AppVisitMgmtTherapist1View.swift */; };
+		F08C86B62D1DF34600D5B19A /* AppVisitMgmtTherapist1DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08C86B52D1DF34600D5B19A /* AppVisitMgmtTherapist1DetailsView.swift */; };
+		F08C86B72D1DF34600D5B19A /* AppVisitMgmtTherapist1DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08C86B52D1DF34600D5B19A /* AppVisitMgmtTherapist1DetailsView.swift */; };
+		F091A2842C8F6FEF00FB85D5 /* RestURLData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091A2802C8F6FEE00FB85D5 /* RestURLData.swift */; };
+		F091A2852C8F6FEF00FB85D5 /* RestURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091A2812C8F6FEF00FB85D5 /* RestURLResponse.swift */; };
+		F091A2862C8F6FEF00FB85D5 /* RestURLEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091A2822C8F6FEF00FB85D5 /* RestURLEndpoint.swift */; };
+		F091A2872C8F6FEF00FB85D5 /* RestURLProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091A2832C8F6FEF00FB85D5 /* RestURLProcessor.swift */; };
+		F091A2882C8F73DD00FB85D5 /* RestURLData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091A2802C8F6FEE00FB85D5 /* RestURLData.swift */; };
+		F091A2892C8F73DD00FB85D5 /* RestURLEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091A2822C8F6FEF00FB85D5 /* RestURLEndpoint.swift */; };
+		F091A28A2C8F73DD00FB85D5 /* RestURLProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091A2832C8F6FEF00FB85D5 /* RestURLProcessor.swift */; };
+		F091A28B2C8F73DD00FB85D5 /* RestURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091A2812C8F6FEF00FB85D5 /* RestURLResponse.swift */; };
+		F091A6662D402F9D003C881E /* AppSearchableTherapistName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091A6652D402F9C003C881E /* AppSearchableTherapistName.swift */; };
+		F091A6672D402F9D003C881E /* AppSearchableTherapistName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091A6652D402F9C003C881E /* AppSearchableTherapistName.swift */; };
+		F0981DB42C52C5AE0054CE7C /* VisitManagementAppAppGlobalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0981DB32C52C5AD0054CE7C /* VisitManagementAppAppGlobalInfo.swift */; };
+		F0988A142DB2B7F800F8BEDC /* SwiftXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = F0988A132DB2B7F800F8BEDC /* SwiftXLSX */; };
+		F0988A162DB2B81900F8BEDC /* SwiftXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = F0988A152DB2B81900F8BEDC /* SwiftXLSX */; };
+		F0A443392C498ED6005EEE81 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		F0A59E052C5962E900302BA8 /* JmObjCSwiftEnvBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A59E032C5962E900302BA8 /* JmObjCSwiftEnvBridge.swift */; };
+		F0A8FB3E2D650BBF00ADD658 /* AppSchedPatLocMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A8FB3D2D650BBF00ADD658 /* AppSchedPatLocMapView.swift */; };
+		F0A8FB3F2D650BBF00ADD658 /* AppSchedPatLocMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A8FB3D2D650BBF00ADD658 /* AppSchedPatLocMapView.swift */; };
+		F0BB63FE2CF4DB6900B22F9D /* SettingsSingleViewCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BB63FD2CF4DB6900B22F9D /* SettingsSingleViewCore.swift */; };
+		F0BB63FF2CF4DB6900B22F9D /* SettingsSingleViewCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BB63FD2CF4DB6900B22F9D /* SettingsSingleViewCore.swift */; };
+		F0BCCC572C820EF1007EA382 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028C5B22C48610A007C459E /* ContentView.swift */; };
+		F0BCCC582C820EF1007EA382 /* HelpBasicMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0289D312C53D98D001B19CD /* HelpBasicMode.swift */; };
+		F0BCCC592C820EF1007EA382 /* VisitManagementAppUIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BCCC4F2C820ECB007EA382 /* VisitManagementAppUIAppDelegate.swift */; };
+		F0BCCC5A2C820EF1007EA382 /* VisitManagementAppAppGlobalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0981DB32C52C5AD0054CE7C /* VisitManagementAppAppGlobalInfo.swift */; };
+		F0BCCC5B2C820EF1007EA382 /* CalledObjCModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F04252192C59356600EA22D8 /* CalledObjCModule.m */; };
+		F0BCCC5C2C820EF1007EA382 /* LogFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17B912C52E951000E5A52 /* LogFileView.swift */; };
+		F0BCCC5D2C820EF1007EA382 /* HelpBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0289D2A2C53D863001B19CD /* HelpBasicView.swift */; };
+		F0BCCC5E2C820EF1007EA382 /* SettingsSingleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17B902C52E951000E5A52 /* SettingsSingleView.swift */; };
+		F0BCCC602C820EF1007EA382 /* JmFileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17B872C52E414000E5A52 /* JmFileIO.swift */; };
+		F0BCCC612C820EF1007EA382 /* JmUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0289D282C53D85B001B19CD /* JmUserDefaults.swift */; };
+		F0BCCC632C820EF1007EA382 /* VisitManagementAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028C5B02C48610A007C459E /* VisitManagementAppApp.swift */; };
+		F0BCCC642C820EF1007EA382 /* JmXcodeBuildSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0601D922C77C73C00443D72 /* JmXcodeBuildSettings.swift */; };
+		F0BCCC652C820EF1007EA382 /* JmAppDelegateVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D473972C7AD2960027F651 /* JmAppDelegateVisitor.swift */; };
+		F0BCCC662C820EF1007EA382 /* JmObjCSwiftEnvBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A59E032C5962E900302BA8 /* JmObjCSwiftEnvBridge.swift */; };
+		F0BCCC672C820EF1007EA382 /* HelpBasicLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0289D322C53D98D001B19CD /* HelpBasicLoader.swift */; };
+		F0BCCC682C820EF1007EA382 /* JmStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17B882C52E414000E5A52 /* JmStringExtensions.swift */; };
+		F0BCCC6A2C820EF1007EA382 /* ObjcExceptionBridging in Frameworks */ = {isa = PBXBuildFile; productRef = F0BCCC522C820EF1007EA382 /* ObjcExceptionBridging */; settings = {ATTRIBUTES = (Required, ); }; };
+		F0BCCC6B2C820EF1007EA382 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		F0BCCC6C2C820EF1007EA382 /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = F0BCCC542C820EF1007EA382 /* XCGLogger */; };
+		F0BCCC6E2C820EF1007EA382 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F028C5B72C48610B007C459E /* Preview Assets.xcassets */; };
+		F0BCCC6F2C820EF1007EA382 /* HelpBasic.html in Resources */ = {isa = PBXBuildFile; fileRef = F0289D2D2C53D933001B19CD /* HelpBasic.html */; };
+		F0BCCC702C820EF1007EA382 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F0002DBF2C7C0ABF00520A9F /* README.md */; };
+		F0BCCC712C820EF1007EA382 /* HelpBasic.md in Resources */ = {isa = PBXBuildFile; fileRef = F0289D2E2C53D933001B19CD /* HelpBasic.md */; };
+		F0BCCC722C820EF1007EA382 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F028C5B42C48610B007C459E /* Assets.xcassets */; };
+		F0BD25052DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BD25042DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift */; };
+		F0BD25062DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BD25042DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift */; };
+		F0C6A8FF2C4AA2A40004606A /* ObjcExceptionBridging in Frameworks */ = {isa = PBXBuildFile; productRef = F0C6A8FE2C4AA2A40004606A /* ObjcExceptionBridging */; settings = {ATTRIBUTES = (Required, ); }; };
+		F0C6A9012C4AA2A40004606A /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = F0C6A9002C4AA2A40004606A /* XCGLogger */; };
+		F0CBE9002CEBDD6E00B0625E /* AppWorkRouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CBE8FF2CEBDD6E00B0625E /* AppWorkRouteMapView.swift */; };
+		F0CBE9012CEBDD6E00B0625E /* AppWorkRouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CBE8FF2CEBDD6E00B0625E /* AppWorkRouteMapView.swift */; };
+		F0D0AD142D5F956B00C34916 /* AppScheduleLoadingAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0AD132D5F956B00C34916 /* AppScheduleLoadingAssistant.swift */; };
+		F0D0AD152D5F956B00C34916 /* AppScheduleLoadingAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0AD132D5F956B00C34916 /* AppScheduleLoadingAssistant.swift */; };
+		F0D17B892C52E414000E5A52 /* JmFileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17B872C52E414000E5A52 /* JmFileIO.swift */; };
+		F0D17B8A2C52E414000E5A52 /* JmStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17B882C52E414000E5A52 /* JmStringExtensions.swift */; };
+		F0D17B8D2C52E572000E5A52 /* AppInfoCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17B8C2C52E572000E5A52 /* AppInfoCommands.swift */; };
+		F0D17B8F2C52E942000E5A52 /* HelpCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17B8E2C52E942000E5A52 /* HelpCommands.swift */; };
+		F0D17B922C52E951000E5A52 /* SettingsSingleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17B902C52E951000E5A52 /* SettingsSingleView.swift */; };
+		F0D17B932C52E951000E5A52 /* LogFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D17B912C52E951000E5A52 /* LogFileView.swift */; };
+		F0D473982C7AD2960027F651 /* JmAppDelegateVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D473972C7AD2960027F651 /* JmAppDelegateVisitor.swift */; };
+		F0D524FA2D5FE3CA006216D8 /* AppTidScheduleRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D524F92D5FE3CA006216D8 /* AppTidScheduleRowView.swift */; };
+		F0D524FB2D5FE3CA006216D8 /* AppTidScheduleRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D524F92D5FE3CA006216D8 /* AppTidScheduleRowView.swift */; };
+		F0DC5D312CDBCE7A009F0090 /* MultipartZipFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DC5D302CDBCE7A009F0090 /* MultipartZipFileService.swift */; };
+		F0DC5D322CDBCE7A009F0090 /* MultipartZipFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DC5D302CDBCE7A009F0090 /* MultipartZipFileService.swift */; };
+		F0EDCABA2CE54444003A4D79 /* ParseLiveQuery in Frameworks */ = {isa = PBXBuildFile; productRef = F0EDCAB92CE54444003A4D79 /* ParseLiveQuery */; };
+		F0EDCABC2CE54444003A4D79 /* ParseObjC in Frameworks */ = {isa = PBXBuildFile; productRef = F0EDCABB2CE54444003A4D79 /* ParseObjC */; };
+		F0EEDD872CADC38400E437E8 /* JmAppMetricKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EEDD852CADC38400E437E8 /* JmAppMetricKitManager.swift */; };
+		F0EEDD882CADC38400E437E8 /* JmAppMetricKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EEDD852CADC38400E437E8 /* JmAppMetricKitManager.swift */; };
+		F0EF09D32D00B6CC0088D819 /* ScheduledPatientLocationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF09D22D00B6CC0088D819 /* ScheduledPatientLocationItem.swift */; };
+		F0EF09D42D00B6CC0088D819 /* ScheduledPatientLocationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF09D22D00B6CC0088D819 /* ScheduledPatientLocationItem.swift */; };
+		F0EF628B2C8B70BE00DB79DB /* DeveloperSupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF628A2C8B70BD00DB79DB /* DeveloperSupportEmail.swift */; };
+		F0EF628C2C8B70BE00DB79DB /* DeveloperSupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EF628A2C8B70BD00DB79DB /* DeveloperSupportEmail.swift */; };
+		F0F1277D2CEB944D00656B7E /* AppWorkRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1277C2CEB944D00656B7E /* AppWorkRouteView.swift */; };
+		F0F1277E2CEB944D00656B7E /* AppWorkRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1277C2CEB944D00656B7E /* AppWorkRouteView.swift */; };
+		F0F7177F2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F7177E2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift */; };
+		F0F717802DAEE43600E7CA2A /* ParsePFBackupFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F7177E2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift */; };
+		F0FBE7762D63C8A200028CBA /* AppSchedPatLocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBE7752D63C8A200028CBA /* AppSchedPatLocView.swift */; };
+		F0FBE7772D63C8A200028CBA /* AppSchedPatLocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBE7752D63C8A200028CBA /* AppSchedPatLocView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F0BCCC7B2C8221B9007EA382 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F028C5A52C486109007C459E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F028C5AC2C48610A007C459E;
+			remoteInfo = VisitManagementApp_Mac;
+		};
+		F0BCCC7D2C8221B9007EA382 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F028C5A52C486109007C459E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F0BCCC512C820EF1007EA382;
+			remoteInfo = VisitManagementApp_iOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F0002DBF2C7C0ABF00520A9F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F006199A2C94A8060094614E /* MultipartRequestDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartRequestDriver.swift; sourceTree = "<group>"; };
+		F006199B2C94A8060094614E /* MultipartDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartDataExtension.swift; sourceTree = "<group>"; };
+		F006199C2C94A8060094614E /* MultipartRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartRequest.swift; sourceTree = "<group>"; };
+		F006199D2C94A8060094614E /* MultipartRequestInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartRequestInfo.swift; sourceTree = "<group>"; };
+		F00D1CE92D95D219001386F5 /* AppVisitMgmtSchedule1DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtSchedule1DetailsView.swift; sourceTree = "<group>"; };
+		F00DC49F2DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtSchedule1ExportView.swift; sourceTree = "<group>"; };
+		F02204B02D4D670E00C5B182 /* ParsePFPatientFileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsePFPatientFileItem.swift; sourceTree = "<group>"; };
+		F0289D282C53D85B001B19CD /* JmUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JmUserDefaults.swift; sourceTree = "<group>"; };
+		F0289D2A2C53D863001B19CD /* HelpBasicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpBasicView.swift; sourceTree = "<group>"; };
+		F0289D2D2C53D933001B19CD /* HelpBasic.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = HelpBasic.html; sourceTree = "<group>"; };
+		F0289D2E2C53D933001B19CD /* HelpBasic.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = HelpBasic.md; sourceTree = "<group>"; };
+		F0289D312C53D98D001B19CD /* HelpBasicMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpBasicMode.swift; sourceTree = "<group>"; };
+		F0289D322C53D98D001B19CD /* HelpBasicLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpBasicLoader.swift; sourceTree = "<group>"; };
+		F028C5AD2C48610A007C459E /* VisitManagementApp_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisitManagementApp_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F028C5B02C48610A007C459E /* VisitManagementAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitManagementAppApp.swift; sourceTree = "<group>"; };
+		F028C5B22C48610A007C459E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F028C5B42C48610B007C459E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F028C5B72C48610B007C459E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F028C5B92C48610B007C459E /* VisitManagementApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VisitManagementApp.entitlements; sourceTree = "<group>"; };
+		F029E0B32C82386D00FC96B9 /* SettingsSingleViewIos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSingleViewIos.swift; sourceTree = "<group>"; };
+		F029E0B42C82386D00FC96B9 /* SettingsSingleViewMac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSingleViewMac.swift; sourceTree = "<group>"; };
+		F029E0B92C823ACB00FC96B9 /* AppAboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAboutView.swift; sourceTree = "<group>"; };
+		F02C7A1B2D3990BE00E9F92C /* JmAppParseCoreBkgdDataRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JmAppParseCoreBkgdDataRepo.swift; sourceTree = "<group>"; };
+		F032402F2C49672900ED9508 /* VisitManagementAppNSAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitManagementAppNSAppDelegate.swift; sourceTree = "<group>"; };
+		F04252192C59356600EA22D8 /* CalledObjCModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalledObjCModule.m; sourceTree = "<group>"; };
+		F042521A2C59356600EA22D8 /* CalledObjCModule-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CalledObjCModule-Bridging-Header.h"; sourceTree = "<group>"; };
+		F042521B2C59356600EA22D8 /* CalledObjCModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalledObjCModule.h; sourceTree = "<group>"; };
+		F0474E572CDAA54A0079B1E0 /* JmAppUserNotificationIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JmAppUserNotificationIdentifiers.swift; sourceTree = "<group>"; };
+		F0474E582CDAA54A0079B1E0 /* JmAppUserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JmAppUserNotificationManager.swift; sourceTree = "<group>"; };
+		F048393D2D2733430060D765 /* ParsePFTherapistFileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsePFTherapistFileItem.swift; sourceTree = "<group>"; };
+		F04D88A12CDAA8A00002AA0B /* MultipartZipFileCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartZipFileCreator.swift; sourceTree = "<group>"; };
+		F05B51542CE7D8B5008A0EEE /* ParsePFCscDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsePFCscDataItem.swift; sourceTree = "<group>"; };
+		F05E47112D5D0D550059F4C2 /* AppVisitMgmtTherapist3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtTherapist3View.swift; sourceTree = "<group>"; };
+		F05E47142D5D29150059F4C2 /* AppVisitMgmtPatient3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtPatient3View.swift; sourceTree = "<group>"; };
+		F05E875A2DB29C1C00C309B7 /* ScheduledPatientLocationItemEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledPatientLocationItemEnums.swift; sourceTree = "<group>"; };
+		F05EBBB02D2C7A6A00E5EE06 /* AppVisitMgmtTherapist2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtTherapist2View.swift; sourceTree = "<group>"; };
+		F05EDC2E2D53FA2F00306C62 /* AppVisitMgmtPatient1DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtPatient1DetailsView.swift; sourceTree = "<group>"; };
+		F05EDC2F2D53FA2F00306C62 /* AppVisitMgmtPatient1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtPatient1View.swift; sourceTree = "<group>"; };
+		F05EDC302D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtPatient2View.swift; sourceTree = "<group>"; };
+		F05EDC372D53FB7C00306C62 /* AppSearchablePatientName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchablePatientName.swift; sourceTree = "<group>"; };
+		F05EE1D12D380E3700ABC0C5 /* AlarmSwiftDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSwiftDataItem.swift; sourceTree = "<group>"; };
+		F05EE1D42D380E4E00ABC0C5 /* JmAppAlarmSoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JmAppAlarmSoundManager.swift; sourceTree = "<group>"; };
+		F0601D922C77C73C00443D72 /* JmXcodeBuildSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JmXcodeBuildSettings.swift; sourceTree = "<group>"; };
+		F069E2AB2CEF8C42001F0A5E /* ParsePFAdminsDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsePFAdminsDataItem.swift; sourceTree = "<group>"; };
+		F069E2AE2CEFADE5001F0A5E /* AppAuthenticateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAuthenticateView.swift; sourceTree = "<group>"; };
+		F06BB2932D0B6D7200E524E5 /* JmAppSwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JmAppSwiftDataManager.swift; sourceTree = "<group>"; };
+		F06C01B82CFE0A16007703E2 /* PFAdminsSwiftDataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PFAdminsSwiftDataItem.swift; sourceTree = "<group>"; };
+		F06E184C2D52616700633988 /* AppLogPFDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogPFDataView.swift; sourceTree = "<group>"; };
+		F0786E442CE68E9E0052A534 /* CoreLocationModelObservable2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationModelObservable2.swift; sourceTree = "<group>"; };
+		F0786E452CE68E9E0052A534 /* CoreLocationSiteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationSiteItem.swift; sourceTree = "<group>"; };
+		F07F7B932C94DB2D0094AE18 /* DefinesObjCOverrides.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefinesObjCOverrides.h; sourceTree = "<group>"; };
+		F07F7B942C94DB2D0094AE18 /* DefinesObjCOverrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefinesObjCOverrides.m; sourceTree = "<group>"; };
+		F08A94752D11F1A900B69C3C /* AppTidScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTidScheduleView.swift; sourceTree = "<group>"; };
+		F08C00C62CE536430045A5CD /* JmAppParseCoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JmAppParseCoreManager.swift; sourceTree = "<group>"; };
+		F08C86AF2D1DBAEF00D5B19A /* AppVisitMgmtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtView.swift; sourceTree = "<group>"; };
+		F08C86B22D1DD6C100D5B19A /* AppVisitMgmtTherapist1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtTherapist1View.swift; sourceTree = "<group>"; };
+		F08C86B52D1DF34600D5B19A /* AppVisitMgmtTherapist1DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtTherapist1DetailsView.swift; sourceTree = "<group>"; };
+		F091A2802C8F6FEE00FB85D5 /* RestURLData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestURLData.swift; sourceTree = "<group>"; };
+		F091A2812C8F6FEF00FB85D5 /* RestURLResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestURLResponse.swift; sourceTree = "<group>"; };
+		F091A2822C8F6FEF00FB85D5 /* RestURLEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestURLEndpoint.swift; sourceTree = "<group>"; };
+		F091A2832C8F6FEF00FB85D5 /* RestURLProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestURLProcessor.swift; sourceTree = "<group>"; };
+		F091A2922C8F849C00FB85D5 /* VisitManagementApp-Mac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "VisitManagementApp-Mac-Info.plist"; sourceTree = "<group>"; };
+		F091A2932C8F84E600FB85D5 /* VisitManagementApp-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "VisitManagementApp-iOS-Info.plist"; sourceTree = "<group>"; };
+		F091A2942C8F865700FB85D5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F091A6652D402F9C003C881E /* AppSearchableTherapistName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchableTherapistName.swift; sourceTree = "<group>"; };
+		F0981DB32C52C5AD0054CE7C /* VisitManagementAppAppGlobalInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitManagementAppAppGlobalInfo.swift; sourceTree = "<group>"; };
+		F0A59E032C5962E900302BA8 /* JmObjCSwiftEnvBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JmObjCSwiftEnvBridge.swift; sourceTree = "<group>"; };
+		F0A59E042C5962E900302BA8 /* JmObjCSwiftEnvBridge-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JmObjCSwiftEnvBridge-Bridging-Header.h"; sourceTree = "<group>"; };
+		F0A8FB3D2D650BBF00ADD658 /* AppSchedPatLocMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSchedPatLocMapView.swift; sourceTree = "<group>"; };
+		F0BB63FD2CF4DB6900B22F9D /* SettingsSingleViewCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSingleViewCore.swift; sourceTree = "<group>"; };
+		F0BCCC4F2C820ECB007EA382 /* VisitManagementAppUIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitManagementAppUIAppDelegate.swift; sourceTree = "<group>"; };
+		F0BCCC762C820EF1007EA382 /* VisitManagementApp_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisitManagementApp_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0BD25042DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtExportAudit1DetailsView.swift; sourceTree = "<group>"; };
+		F0CBE8FF2CEBDD6E00B0625E /* AppWorkRouteMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWorkRouteMapView.swift; sourceTree = "<group>"; };
+		F0D0AD132D5F956B00C34916 /* AppScheduleLoadingAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScheduleLoadingAssistant.swift; sourceTree = "<group>"; };
+		F0D17B872C52E414000E5A52 /* JmFileIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JmFileIO.swift; sourceTree = "<group>"; };
+		F0D17B882C52E414000E5A52 /* JmStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JmStringExtensions.swift; sourceTree = "<group>"; };
+		F0D17B8C2C52E572000E5A52 /* AppInfoCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInfoCommands.swift; sourceTree = "<group>"; };
+		F0D17B8E2C52E942000E5A52 /* HelpCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpCommands.swift; sourceTree = "<group>"; };
+		F0D17B902C52E951000E5A52 /* SettingsSingleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSingleView.swift; sourceTree = "<group>"; };
+		F0D17B912C52E951000E5A52 /* LogFileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFileView.swift; sourceTree = "<group>"; };
+		F0D473972C7AD2960027F651 /* JmAppDelegateVisitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JmAppDelegateVisitor.swift; sourceTree = "<group>"; };
+		F0D524F92D5FE3CA006216D8 /* AppTidScheduleRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTidScheduleRowView.swift; sourceTree = "<group>"; };
+		F0DC5D302CDBCE7A009F0090 /* MultipartZipFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartZipFileService.swift; sourceTree = "<group>"; };
+		F0EEDD842CADC38400E437E8 /* JmAppDelegateVisitor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JmAppDelegateVisitor-Bridging-Header.h"; sourceTree = "<group>"; };
+		F0EEDD852CADC38400E437E8 /* JmAppMetricKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JmAppMetricKitManager.swift; sourceTree = "<group>"; };
+		F0EEDD862CADC38400E437E8 /* JmUserDefaults-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JmUserDefaults-Bridging-Header.h"; sourceTree = "<group>"; };
+		F0EF09D22D00B6CC0088D819 /* ScheduledPatientLocationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledPatientLocationItem.swift; sourceTree = "<group>"; };
+		F0EF628A2C8B70BD00DB79DB /* DeveloperSupportEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperSupportEmail.swift; sourceTree = "<group>"; };
+		F0F1277C2CEB944D00656B7E /* AppWorkRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWorkRouteView.swift; sourceTree = "<group>"; };
+		F0F7177E2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsePFBackupFileItem.swift; sourceTree = "<group>"; };
+		F0FBE7752D63C8A200028CBA /* AppSchedPatLocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSchedPatLocView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F028C5AA2C48610A007C459E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0988A162DB2B81900F8BEDC /* SwiftXLSX in Frameworks */,
+				F0C6A8FF2C4AA2A40004606A /* ObjcExceptionBridging in Frameworks */,
+				F0EDCABC2CE54444003A4D79 /* ParseObjC in Frameworks */,
+				F0A443392C498ED6005EEE81 /* (null) in Frameworks */,
+				F0C6A9012C4AA2A40004606A /* XCGLogger in Frameworks */,
+				F0EDCABA2CE54444003A4D79 /* ParseLiveQuery in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0BCCC692C820EF1007EA382 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0988A142DB2B7F800F8BEDC /* SwiftXLSX in Frameworks */,
+				F0BCCC6A2C820EF1007EA382 /* ObjcExceptionBridging in Frameworks */,
+				F08C00CD2CE537420045A5CD /* ParseObjC in Frameworks */,
+				F0BCCC6B2C820EF1007EA382 /* (null) in Frameworks */,
+				F0BCCC6C2C820EF1007EA382 /* XCGLogger in Frameworks */,
+				F08C00CB2CE537420045A5CD /* ParseLiveQuery in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F0289D272C53D84A001B19CD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F0289D2D2C53D933001B19CD /* HelpBasic.html */,
+				F0289D2E2C53D933001B19CD /* HelpBasic.md */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F0289D2C2C53D920001B19CD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F05E875A2DB29C1C00C309B7 /* ScheduledPatientLocationItemEnums.swift */,
+				F0F7177E2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift */,
+				F05EDC372D53FB7C00306C62 /* AppSearchablePatientName.swift */,
+				F02204B02D4D670E00C5B182 /* ParsePFPatientFileItem.swift */,
+				F091A6652D402F9C003C881E /* AppSearchableTherapistName.swift */,
+				F05EE1D12D380E3700ABC0C5 /* AlarmSwiftDataItem.swift */,
+				F048393D2D2733430060D765 /* ParsePFTherapistFileItem.swift */,
+				F0EF09D22D00B6CC0088D819 /* ScheduledPatientLocationItem.swift */,
+				F06C01B82CFE0A16007703E2 /* PFAdminsSwiftDataItem.swift */,
+				F0786E442CE68E9E0052A534 /* CoreLocationModelObservable2.swift */,
+				F0786E452CE68E9E0052A534 /* CoreLocationSiteItem.swift */,
+				F0EF628A2C8B70BD00DB79DB /* DeveloperSupportEmail.swift */,
+				F0289D322C53D98D001B19CD /* HelpBasicLoader.swift */,
+				F0289D312C53D98D001B19CD /* HelpBasicMode.swift */,
+				F006199B2C94A8060094614E /* MultipartDataExtension.swift */,
+				F006199C2C94A8060094614E /* MultipartRequest.swift */,
+				F006199A2C94A8060094614E /* MultipartRequestDriver.swift */,
+				F006199D2C94A8060094614E /* MultipartRequestInfo.swift */,
+				F04D88A12CDAA8A00002AA0B /* MultipartZipFileCreator.swift */,
+				F0DC5D302CDBCE7A009F0090 /* MultipartZipFileService.swift */,
+				F069E2AB2CEF8C42001F0A5E /* ParsePFAdminsDataItem.swift */,
+				F05B51542CE7D8B5008A0EEE /* ParsePFCscDataItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F028C5A42C486109007C459E = {
+			isa = PBXGroup;
+			children = (
+				F028C5AE2C48610A007C459E /* Products */,
+				F028C5AF2C48610A007C459E /* VisitManagementApp */,
+				F091A2932C8F84E600FB85D5 /* VisitManagementApp-iOS-Info.plist */,
+				F091A2922C8F849C00FB85D5 /* VisitManagementApp-Mac-Info.plist */,
+			);
+			sourceTree = "<group>";
+		};
+		F028C5AE2C48610A007C459E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F028C5AD2C48610A007C459E /* VisitManagementApp_Mac.app */,
+				F0BCCC762C820EF1007EA382 /* VisitManagementApp_iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F028C5AF2C48610A007C459E /* VisitManagementApp */ = {
+			isa = PBXGroup;
+			children = (
+				F028C5B42C48610B007C459E /* Assets.xcassets */,
+				F0D17B8B2C52E4BD000E5A52 /* Commands */,
+				F0D17B862C52E3D5000E5A52 /* JmUtils */,
+				F091A2942C8F865700FB85D5 /* LaunchScreen.storyboard */,
+				F0289D2C2C53D920001B19CD /* Models */,
+				F04252182C59352800EA22D8 /* Objective-C */,
+				F028C5B62C48610B007C459E /* Preview Content */,
+				F028C5B92C48610B007C459E /* VisitManagementApp.entitlements */,
+				F028C5B02C48610A007C459E /* VisitManagementAppApp.swift */,
+				F0981DB32C52C5AD0054CE7C /* VisitManagementAppAppGlobalInfo.swift */,
+				F032402F2C49672900ED9508 /* VisitManagementAppNSAppDelegate.swift */,
+				F0BCCC4F2C820ECB007EA382 /* VisitManagementAppUIAppDelegate.swift */,
+				F0002DBF2C7C0ABF00520A9F /* README.md */,
+				F0289D272C53D84A001B19CD /* Resources */,
+				F091A27F2C8F68A600FB85D5 /* RestApis */,
+				F028C5BF2C486134007C459E /* Views */,
+			);
+			path = VisitManagementApp;
+			sourceTree = "<group>";
+		};
+		F028C5B62C48610B007C459E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F028C5B72C48610B007C459E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F028C5BF2C486134007C459E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F0BD25042DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift */,
+				F00DC49F2DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift */,
+				F00D1CE92D95D219001386F5 /* AppVisitMgmtSchedule1DetailsView.swift */,
+				F0A8FB3D2D650BBF00ADD658 /* AppSchedPatLocMapView.swift */,
+				F0FBE7752D63C8A200028CBA /* AppSchedPatLocView.swift */,
+				F0D524F92D5FE3CA006216D8 /* AppTidScheduleRowView.swift */,
+				F0D0AD132D5F956B00C34916 /* AppScheduleLoadingAssistant.swift */,
+				F05E47142D5D29150059F4C2 /* AppVisitMgmtPatient3View.swift */,
+				F05E47112D5D0D550059F4C2 /* AppVisitMgmtTherapist3View.swift */,
+				F05EDC2E2D53FA2F00306C62 /* AppVisitMgmtPatient1DetailsView.swift */,
+				F05EDC2F2D53FA2F00306C62 /* AppVisitMgmtPatient1View.swift */,
+				F05EDC302D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift */,
+				F06E184C2D52616700633988 /* AppLogPFDataView.swift */,
+				F05EBBB02D2C7A6A00E5EE06 /* AppVisitMgmtTherapist2View.swift */,
+				F08C86B52D1DF34600D5B19A /* AppVisitMgmtTherapist1DetailsView.swift */,
+				F08C86B22D1DD6C100D5B19A /* AppVisitMgmtTherapist1View.swift */,
+				F08C86AF2D1DBAEF00D5B19A /* AppVisitMgmtView.swift */,
+				F08A94752D11F1A900B69C3C /* AppTidScheduleView.swift */,
+				F029E0B92C823ACB00FC96B9 /* AppAboutView.swift */,
+				F069E2AE2CEFADE5001F0A5E /* AppAuthenticateView.swift */,
+				F0CBE8FF2CEBDD6E00B0625E /* AppWorkRouteMapView.swift */,
+				F0F1277C2CEB944D00656B7E /* AppWorkRouteView.swift */,
+				F028C5B22C48610A007C459E /* ContentView.swift */,
+				F0289D2A2C53D863001B19CD /* HelpBasicView.swift */,
+				F0D17B912C52E951000E5A52 /* LogFileView.swift */,
+				F0D17B902C52E951000E5A52 /* SettingsSingleView.swift */,
+				F0BB63FD2CF4DB6900B22F9D /* SettingsSingleViewCore.swift */,
+				F029E0B32C82386D00FC96B9 /* SettingsSingleViewIos.swift */,
+				F029E0B42C82386D00FC96B9 /* SettingsSingleViewMac.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F04252182C59352800EA22D8 /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				F042521B2C59356600EA22D8 /* CalledObjCModule.h */,
+				F04252192C59356600EA22D8 /* CalledObjCModule.m */,
+				F042521A2C59356600EA22D8 /* CalledObjCModule-Bridging-Header.h */,
+				F07F7B932C94DB2D0094AE18 /* DefinesObjCOverrides.h */,
+				F07F7B942C94DB2D0094AE18 /* DefinesObjCOverrides.m */,
+			);
+			path = "Objective-C";
+			sourceTree = "<group>";
+		};
+		F091A27F2C8F68A600FB85D5 /* RestApis */ = {
+			isa = PBXGroup;
+			children = (
+				F091A2802C8F6FEE00FB85D5 /* RestURLData.swift */,
+				F091A2822C8F6FEF00FB85D5 /* RestURLEndpoint.swift */,
+				F091A2832C8F6FEF00FB85D5 /* RestURLProcessor.swift */,
+				F091A2812C8F6FEF00FB85D5 /* RestURLResponse.swift */,
+			);
+			path = RestApis;
+			sourceTree = "<group>";
+		};
+		F0D17B862C52E3D5000E5A52 /* JmUtils */ = {
+			isa = PBXGroup;
+			children = (
+				F02C7A1B2D3990BE00E9F92C /* JmAppParseCoreBkgdDataRepo.swift */,
+				F05EE1D42D380E4E00ABC0C5 /* JmAppAlarmSoundManager.swift */,
+				F06BB2932D0B6D7200E524E5 /* JmAppSwiftDataManager.swift */,
+				F0D473972C7AD2960027F651 /* JmAppDelegateVisitor.swift */,
+				F0EEDD842CADC38400E437E8 /* JmAppDelegateVisitor-Bridging-Header.h */,
+				F0EEDD852CADC38400E437E8 /* JmAppMetricKitManager.swift */,
+				F08C00C62CE536430045A5CD /* JmAppParseCoreManager.swift */,
+				F0474E572CDAA54A0079B1E0 /* JmAppUserNotificationIdentifiers.swift */,
+				F0474E582CDAA54A0079B1E0 /* JmAppUserNotificationManager.swift */,
+				F0D17B872C52E414000E5A52 /* JmFileIO.swift */,
+				F0A59E032C5962E900302BA8 /* JmObjCSwiftEnvBridge.swift */,
+				F0A59E042C5962E900302BA8 /* JmObjCSwiftEnvBridge-Bridging-Header.h */,
+				F0D17B882C52E414000E5A52 /* JmStringExtensions.swift */,
+				F0289D282C53D85B001B19CD /* JmUserDefaults.swift */,
+				F0EEDD862CADC38400E437E8 /* JmUserDefaults-Bridging-Header.h */,
+				F0601D922C77C73C00443D72 /* JmXcodeBuildSettings.swift */,
+			);
+			path = JmUtils;
+			sourceTree = "<group>";
+		};
+		F0D17B8B2C52E4BD000E5A52 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				F0D17B8C2C52E572000E5A52 /* AppInfoCommands.swift */,
+				F0D17B8E2C52E942000E5A52 /* HelpCommands.swift */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F028C5AC2C48610A007C459E /* VisitManagementApp_Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F028C5BC2C48610B007C459E /* Build configuration list for PBXNativeTarget "VisitManagementApp_Mac" */;
+			buildPhases = (
+				F028C5A92C48610A007C459E /* Sources */,
+				F028C5AA2C48610A007C459E /* Frameworks */,
+				F028C5AB2C48610A007C459E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VisitManagementApp_Mac;
+			packageProductDependencies = (
+				F0C6A8FE2C4AA2A40004606A /* ObjcExceptionBridging */,
+				F0C6A9002C4AA2A40004606A /* XCGLogger */,
+				F0EDCAB92CE54444003A4D79 /* ParseLiveQuery */,
+				F0EDCABB2CE54444003A4D79 /* ParseObjC */,
+				F0988A152DB2B81900F8BEDC /* SwiftXLSX */,
+			);
+			productName = VisitManagementApp;
+			productReference = F028C5AD2C48610A007C459E /* VisitManagementApp_Mac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F0BCCC512C820EF1007EA382 /* VisitManagementApp_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F0BCCC732C820EF1007EA382 /* Build configuration list for PBXNativeTarget "VisitManagementApp_iOS" */;
+			buildPhases = (
+				F0BCCC552C820EF1007EA382 /* Sources */,
+				F0BCCC692C820EF1007EA382 /* Frameworks */,
+				F0BCCC6D2C820EF1007EA382 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VisitManagementApp_iOS;
+			packageProductDependencies = (
+				F0BCCC522C820EF1007EA382 /* ObjcExceptionBridging */,
+				F0BCCC542C820EF1007EA382 /* XCGLogger */,
+				F08C00CA2CE537420045A5CD /* ParseLiveQuery */,
+				F08C00CC2CE537420045A5CD /* ParseObjC */,
+				F0988A132DB2B7F800F8BEDC /* SwiftXLSX */,
+			);
+			productName = VisitManagementApp;
+			productReference = F0BCCC762C820EF1007EA382 /* VisitManagementApp_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F028C5A52C486109007C459E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					F028C5AC2C48610A007C459E = {
+						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1540;
+					};
+					F0BCCC772C821E34007EA382 = {
+						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1630;
+					};
+				};
+			};
+			buildConfigurationList = F028C5A82C486109007C459E /* Build configuration list for PBXProject "VisitManagementApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F028C5A42C486109007C459E;
+			packageReferences = (
+				F0C6A8FD2C4AA2A40004606A /* XCRemoteSwiftPackageReference "XCGLogger" */,
+				F08C00C92CE537420045A5CD /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */,
+				F0988A122DB2B7F800F8BEDC /* XCLocalSwiftPackageReference "../../../JWeb_MacOSx_apps/SwiftUI_GUI_tools/3973770_SwiftXLSX/SwiftXLSX" */,
+			);
+			productRefGroup = F028C5AE2C48610A007C459E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F028C5AC2C48610A007C459E /* VisitManagementApp_Mac */,
+				F0BCCC512C820EF1007EA382 /* VisitManagementApp_iOS */,
+				F0BCCC772C821E34007EA382 /* VisitManagementApp_ALL */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F028C5AB2C48610A007C459E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F028C5B82C48610B007C459E /* Preview Assets.xcassets in Resources */,
+				F0289D2F2C53D933001B19CD /* HelpBasic.html in Resources */,
+				F0002DC02C7C0ABF00520A9F /* README.md in Resources */,
+				F0289D302C53D933001B19CD /* HelpBasic.md in Resources */,
+				F028C5B52C48610B007C459E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0BCCC6D2C820EF1007EA382 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0BCCC6E2C820EF1007EA382 /* Preview Assets.xcassets in Resources */,
+				F0BCCC6F2C820EF1007EA382 /* HelpBasic.html in Resources */,
+				F0BCCC702C820EF1007EA382 /* README.md in Resources */,
+				F00619A82C94AEBE0094614E /* LaunchScreen.storyboard in Resources */,
+				F0BCCC712C820EF1007EA382 /* HelpBasic.md in Resources */,
+				F0BCCC722C820EF1007EA382 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F028C5A92C48610A007C459E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0D17B8F2C52E942000E5A52 /* HelpCommands.swift in Sources */,
+				F02C7A1D2D3990BE00E9F92C /* JmAppParseCoreBkgdDataRepo.swift in Sources */,
+				F069E2AD2CEF8C42001F0A5E /* ParsePFAdminsDataItem.swift in Sources */,
+				F029E0B72C82386D00FC96B9 /* SettingsSingleViewMac.swift in Sources */,
+				F05E47152D5D29150059F4C2 /* AppVisitMgmtPatient3View.swift in Sources */,
+				F0EEDD882CADC38400E437E8 /* JmAppMetricKitManager.swift in Sources */,
+				F0FBE7762D63C8A200028CBA /* AppSchedPatLocView.swift in Sources */,
+				F05E47122D5D0D550059F4C2 /* AppVisitMgmtTherapist3View.swift in Sources */,
+				F0D0AD142D5F956B00C34916 /* AppScheduleLoadingAssistant.swift in Sources */,
+				F0D524FB2D5FE3CA006216D8 /* AppTidScheduleRowView.swift in Sources */,
+				F05EBBB22D2C7A6A00E5EE06 /* AppVisitMgmtTherapist2View.swift in Sources */,
+				F00DC4A02DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift in Sources */,
+				F0474E592CDAA54A0079B1E0 /* JmAppUserNotificationManager.swift in Sources */,
+				F0474E5A2CDAA54A0079B1E0 /* JmAppUserNotificationIdentifiers.swift in Sources */,
+				F02204B22D4D670E00C5B182 /* ParsePFPatientFileItem.swift in Sources */,
+				F06BB2952D0B6D7200E524E5 /* JmAppSwiftDataManager.swift in Sources */,
+				F08C00C72CE536430045A5CD /* JmAppParseCoreManager.swift in Sources */,
+				F091A2872C8F6FEF00FB85D5 /* RestURLProcessor.swift in Sources */,
+				F028C5B32C48610A007C459E /* ContentView.swift in Sources */,
+				F0F1277E2CEB944D00656B7E /* AppWorkRouteView.swift in Sources */,
+				F0289D332C53D98D001B19CD /* HelpBasicMode.swift in Sources */,
+				F08C86B02D1DBAEF00D5B19A /* AppVisitMgmtView.swift in Sources */,
+				F05EE1D52D380E4E00ABC0C5 /* JmAppAlarmSoundManager.swift in Sources */,
+				F05EDC312D53FA2F00306C62 /* AppVisitMgmtPatient1DetailsView.swift in Sources */,
+				F05EDC322D53FA2F00306C62 /* AppVisitMgmtPatient1View.swift in Sources */,
+				F05EDC332D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift in Sources */,
+				F00619A62C94A8060094614E /* MultipartRequestInfo.swift in Sources */,
+				F0A8FB3F2D650BBF00ADD658 /* AppSchedPatLocMapView.swift in Sources */,
+				F091A2862C8F6FEF00FB85D5 /* RestURLEndpoint.swift in Sources */,
+				F00619A02C94A8060094614E /* MultipartRequestDriver.swift in Sources */,
+				F0981DB42C52C5AE0054CE7C /* VisitManagementAppAppGlobalInfo.swift in Sources */,
+				F0BD25062DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift in Sources */,
+				F00619A42C94A8060094614E /* MultipartRequest.swift in Sources */,
+				F05B51552CE7D8B5008A0EEE /* ParsePFCscDataItem.swift in Sources */,
+				F091A6672D402F9D003C881E /* AppSearchableTherapistName.swift in Sources */,
+				F048393F2D2733430060D765 /* ParsePFTherapistFileItem.swift in Sources */,
+				F05EDC382D53FB7C00306C62 /* AppSearchablePatientName.swift in Sources */,
+				F00D1CEA2D95D219001386F5 /* AppVisitMgmtSchedule1DetailsView.swift in Sources */,
+				F00619A22C94A8060094614E /* MultipartDataExtension.swift in Sources */,
+				F0EF09D32D00B6CC0088D819 /* ScheduledPatientLocationItem.swift in Sources */,
+				F06E184D2D52616700633988 /* AppLogPFDataView.swift in Sources */,
+				F0BB63FF2CF4DB6900B22F9D /* SettingsSingleViewCore.swift in Sources */,
+				F08C86B62D1DF34600D5B19A /* AppVisitMgmtTherapist1DetailsView.swift in Sources */,
+				F042521C2C59356600EA22D8 /* CalledObjCModule.m in Sources */,
+				F091A2842C8F6FEF00FB85D5 /* RestURLData.swift in Sources */,
+				F06C01BA2CFE0A16007703E2 /* PFAdminsSwiftDataItem.swift in Sources */,
+				F04D88A22CDAA8A00002AA0B /* MultipartZipFileCreator.swift in Sources */,
+				F08A94772D11F1A900B69C3C /* AppTidScheduleView.swift in Sources */,
+				F0D17B932C52E951000E5A52 /* LogFileView.swift in Sources */,
+				F05E875B2DB29C1C00C309B7 /* ScheduledPatientLocationItemEnums.swift in Sources */,
+				F0786E462CE68E9E0052A534 /* CoreLocationModelObservable2.swift in Sources */,
+				F069E2B02CEFADE5001F0A5E /* AppAuthenticateView.swift in Sources */,
+				F0CBE9012CEBDD6E00B0625E /* AppWorkRouteMapView.swift in Sources */,
+				F0786E472CE68E9E0052A534 /* CoreLocationSiteItem.swift in Sources */,
+				F07F7B952C94DB2D0094AE18 /* DefinesObjCOverrides.m in Sources */,
+				F05EE1D22D380E3700ABC0C5 /* AlarmSwiftDataItem.swift in Sources */,
+				F0289D2B2C53D863001B19CD /* HelpBasicView.swift in Sources */,
+				F0D17B922C52E951000E5A52 /* SettingsSingleView.swift in Sources */,
+				F03240302C49672900ED9508 /* VisitManagementAppNSAppDelegate.swift in Sources */,
+				F0D17B892C52E414000E5A52 /* JmFileIO.swift in Sources */,
+				F0289D292C53D85B001B19CD /* JmUserDefaults.swift in Sources */,
+				F0DC5D312CDBCE7A009F0090 /* MultipartZipFileService.swift in Sources */,
+				F0D17B8D2C52E572000E5A52 /* AppInfoCommands.swift in Sources */,
+				F0F717802DAEE43600E7CA2A /* ParsePFBackupFileItem.swift in Sources */,
+				F091A2852C8F6FEF00FB85D5 /* RestURLResponse.swift in Sources */,
+				F028C5B12C48610A007C459E /* VisitManagementAppApp.swift in Sources */,
+				F0601D932C77C73C00443D72 /* JmXcodeBuildSettings.swift in Sources */,
+				F0D473982C7AD2960027F651 /* JmAppDelegateVisitor.swift in Sources */,
+				F0A59E052C5962E900302BA8 /* JmObjCSwiftEnvBridge.swift in Sources */,
+				F08C86B32D1DD6C100D5B19A /* AppVisitMgmtTherapist1View.swift in Sources */,
+				F0EF628B2C8B70BE00DB79DB /* DeveloperSupportEmail.swift in Sources */,
+				F0289D342C53D98D001B19CD /* HelpBasicLoader.swift in Sources */,
+				F0D17B8A2C52E414000E5A52 /* JmStringExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0BCCC552C820EF1007EA382 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F091A2882C8F73DD00FB85D5 /* RestURLData.swift in Sources */,
+				F0FBE7772D63C8A200028CBA /* AppSchedPatLocView.swift in Sources */,
+				F05E47132D5D0D550059F4C2 /* AppVisitMgmtTherapist3View.swift in Sources */,
+				F08C00C82CE536430045A5CD /* JmAppParseCoreManager.swift in Sources */,
+				F091A2892C8F73DD00FB85D5 /* RestURLEndpoint.swift in Sources */,
+				F08C86B42D1DD6C100D5B19A /* AppVisitMgmtTherapist1View.swift in Sources */,
+				F091A28A2C8F73DD00FB85D5 /* RestURLProcessor.swift in Sources */,
+				F0D0AD152D5F956B00C34916 /* AppScheduleLoadingAssistant.swift in Sources */,
+				F091A28B2C8F73DD00FB85D5 /* RestURLResponse.swift in Sources */,
+				F069E2AF2CEFADE5001F0A5E /* AppAuthenticateView.swift in Sources */,
+				F00619A72C94A8060094614E /* MultipartRequestInfo.swift in Sources */,
+				F0BCCC572C820EF1007EA382 /* ContentView.swift in Sources */,
+				F0BCCC582C820EF1007EA382 /* HelpBasicMode.swift in Sources */,
+				F0BCCC592C820EF1007EA382 /* VisitManagementAppUIAppDelegate.swift in Sources */,
+				F0F7177F2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift in Sources */,
+				F08C86B72D1DF34600D5B19A /* AppVisitMgmtTherapist1DetailsView.swift in Sources */,
+				F091A6662D402F9D003C881E /* AppSearchableTherapistName.swift in Sources */,
+				F0BCCC5A2C820EF1007EA382 /* VisitManagementAppAppGlobalInfo.swift in Sources */,
+				F05E47162D5D29150059F4C2 /* AppVisitMgmtPatient3View.swift in Sources */,
+				F08A94762D11F1A900B69C3C /* AppTidScheduleView.swift in Sources */,
+				F0BCCC5B2C820EF1007EA382 /* CalledObjCModule.m in Sources */,
+				F00D1CEB2D95D219001386F5 /* AppVisitMgmtSchedule1DetailsView.swift in Sources */,
+				F06BB2942D0B6D7200E524E5 /* JmAppSwiftDataManager.swift in Sources */,
+				F0BCCC5C2C820EF1007EA382 /* LogFileView.swift in Sources */,
+				F069E2AC2CEF8C42001F0A5E /* ParsePFAdminsDataItem.swift in Sources */,
+				F05EBBB12D2C7A6A00E5EE06 /* AppVisitMgmtTherapist2View.swift in Sources */,
+				F0BCCC5D2C820EF1007EA382 /* HelpBasicView.swift in Sources */,
+				F0BCCC5E2C820EF1007EA382 /* SettingsSingleView.swift in Sources */,
+				F0EF628C2C8B70BE00DB79DB /* DeveloperSupportEmail.swift in Sources */,
+				F08C86B12D1DBAEF00D5B19A /* AppVisitMgmtView.swift in Sources */,
+				F0CBE9002CEBDD6E00B0625E /* AppWorkRouteMapView.swift in Sources */,
+				F0F1277D2CEB944D00656B7E /* AppWorkRouteView.swift in Sources */,
+				F0474E5B2CDAA54A0079B1E0 /* JmAppUserNotificationManager.swift in Sources */,
+				F05EE1D32D380E3700ABC0C5 /* AlarmSwiftDataItem.swift in Sources */,
+				F0474E5C2CDAA54A0079B1E0 /* JmAppUserNotificationIdentifiers.swift in Sources */,
+				F0D524FA2D5FE3CA006216D8 /* AppTidScheduleRowView.swift in Sources */,
+				F0BD25052DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift in Sources */,
+				F00619A52C94A8060094614E /* MultipartRequest.swift in Sources */,
+				F05B51562CE7D8B5008A0EEE /* ParsePFCscDataItem.swift in Sources */,
+				F0BCCC602C820EF1007EA382 /* JmFileIO.swift in Sources */,
+				F00619A32C94A8060094614E /* MultipartDataExtension.swift in Sources */,
+				F0BCCC612C820EF1007EA382 /* JmUserDefaults.swift in Sources */,
+				F029E0B62C82386D00FC96B9 /* SettingsSingleViewIos.swift in Sources */,
+				F06C01B92CFE0A16007703E2 /* PFAdminsSwiftDataItem.swift in Sources */,
+				F048393E2D2733430060D765 /* ParsePFTherapistFileItem.swift in Sources */,
+				F0BCCC632C820EF1007EA382 /* VisitManagementAppApp.swift in Sources */,
+				F07F7B962C94DB2D0094AE18 /* DefinesObjCOverrides.m in Sources */,
+				F029E0BB2C823ACB00FC96B9 /* AppAboutView.swift in Sources */,
+				F05E875C2DB29C1C00C309B7 /* ScheduledPatientLocationItemEnums.swift in Sources */,
+				F0EEDD872CADC38400E437E8 /* JmAppMetricKitManager.swift in Sources */,
+				F0786E482CE68E9E0052A534 /* CoreLocationModelObservable2.swift in Sources */,
+				F0786E492CE68E9E0052A534 /* CoreLocationSiteItem.swift in Sources */,
+				F00619A12C94A8060094614E /* MultipartRequestDriver.swift in Sources */,
+				F02204B12D4D670E00C5B182 /* ParsePFPatientFileItem.swift in Sources */,
+				F0EF09D42D00B6CC0088D819 /* ScheduledPatientLocationItem.swift in Sources */,
+				F0BCCC642C820EF1007EA382 /* JmXcodeBuildSettings.swift in Sources */,
+				F0BCCC652C820EF1007EA382 /* JmAppDelegateVisitor.swift in Sources */,
+				F0DC5D322CDBCE7A009F0090 /* MultipartZipFileService.swift in Sources */,
+				F0BCCC662C820EF1007EA382 /* JmObjCSwiftEnvBridge.swift in Sources */,
+				F0BB63FE2CF4DB6900B22F9D /* SettingsSingleViewCore.swift in Sources */,
+				F05EDC392D53FB7C00306C62 /* AppSearchablePatientName.swift in Sources */,
+				F05EE1D62D380E4E00ABC0C5 /* JmAppAlarmSoundManager.swift in Sources */,
+				F04D88A32CDAA8A00002AA0B /* MultipartZipFileCreator.swift in Sources */,
+				F06E184E2D52616700633988 /* AppLogPFDataView.swift in Sources */,
+				F02C7A1C2D3990BE00E9F92C /* JmAppParseCoreBkgdDataRepo.swift in Sources */,
+				F0BCCC672C820EF1007EA382 /* HelpBasicLoader.swift in Sources */,
+				F05EDC342D53FA2F00306C62 /* AppVisitMgmtPatient1DetailsView.swift in Sources */,
+				F05EDC352D53FA2F00306C62 /* AppVisitMgmtPatient1View.swift in Sources */,
+				F05EDC362D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift in Sources */,
+				F0A8FB3E2D650BBF00ADD658 /* AppSchedPatLocMapView.swift in Sources */,
+				F00DC4A12DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift in Sources */,
+				F0BCCC682C820EF1007EA382 /* JmStringExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F0BCCC7C2C8221B9007EA382 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F028C5AC2C48610A007C459E /* VisitManagementApp_Mac */;
+			targetProxy = F0BCCC7B2C8221B9007EA382 /* PBXContainerItemProxy */;
+		};
+		F0BCCC7E2C8221B9007EA382 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F0BCCC512C820EF1007EA382 /* VisitManagementApp_iOS */;
+			targetProxy = F0BCCC7D2C8221B9007EA382 /* PBXContainerItemProxy */;
+		};
+		F0BCCC802C8221B9007EA382 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = F0BCCC7F2C8221B9007EA382 /* ObjcExceptionBridging */;
+		};
+		F0BCCC822C8221B9007EA382 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = F0BCCC812C8221B9007EA382 /* XCGLogger */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F028C5BA2C48610B007C459E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F028C5BB2C48610B007C459E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		F028C5BD2C48610B007C459E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 58.01.25C121;
+				DEAD_CODE_STRIPPING = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 6CVN7U97NK;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "VisitManagementApp-Mac-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = VisitManagementApp;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) JustMacApps 2023-2024. All Rights Reserved.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This App uses your Location to provice City information";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.01;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "VisitManagementApp/Objective-C/CalledObjCModule-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F028C5BE2C48610B007C459E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 58.01.25C121;
+				DEAD_CODE_STRIPPING = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 6CVN7U97NK;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "VisitManagementApp-Mac-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = VisitManagementApp;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) JustMacApps 2023-2024. All Rights Reserved.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This App uses your Location to provice City information";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.01;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "VisitManagementApp/Objective-C/CalledObjCModule-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F0BCCC742C820EF1007EA382 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 58.16.25C121;
+				DEAD_CODE_STRIPPING = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 6CVN7U97NK;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "VisitManagementApp-iOS-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = VisitManagementApp;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID is used for access to App functionality...";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.01;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "VisitManagementApp/Objective-C/CalledObjCModule-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F0BCCC752C820EF1007EA382 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 58.16.25C121;
+				DEAD_CODE_STRIPPING = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 6CVN7U97NK;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "VisitManagementApp-iOS-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = VisitManagementApp;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID is used for access to App functionality...";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This App uses your Location to provice City information";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.01;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PreferredMobileApplications.VisitManagementApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "VisitManagementApp/Objective-C/CalledObjCModule-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F0BCCC792C821E34007EA382 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J434W9VGHF;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = driverkit;
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F0BCCC7A2C821E34007EA382 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J434W9VGHF;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = driverkit;
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F028C5A82C486109007C459E /* Build configuration list for PBXProject "VisitManagementApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F028C5BA2C48610B007C459E /* Debug */,
+				F028C5BB2C48610B007C459E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F028C5BC2C48610B007C459E /* Build configuration list for PBXNativeTarget "VisitManagementApp_Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F028C5BD2C48610B007C459E /* Debug */,
+				F028C5BE2C48610B007C459E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F0BCCC732C820EF1007EA382 /* Build configuration list for PBXNativeTarget "VisitManagementApp_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0BCCC742C820EF1007EA382 /* Debug */,
+				F0BCCC752C820EF1007EA382 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F0BCCC782C821E34007EA382 /* Build configuration list for PBXAggregateTarget "VisitManagementApp_ALL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0BCCC792C821E34007EA382 /* Debug */,
+				F0BCCC7A2C821E34007EA382 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		F0988A122DB2B7F800F8BEDC /* XCLocalSwiftPackageReference "../../../JWeb_MacOSx_apps/SwiftUI_GUI_tools/3973770_SwiftXLSX/SwiftXLSX" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../JWeb_MacOSx_apps/SwiftUI_GUI_tools/3973770_SwiftXLSX/SwiftXLSX;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F08C00C92CE537420045A5CD /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/parse-community/Parse-SDK-iOS-OSX";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.2;
+			};
+		};
+		F0BCCC532C820EF1007EA382 /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.5;
+			};
+		};
+		F0C6A8FD2C4AA2A40004606A /* XCRemoteSwiftPackageReference "XCGLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DaveWoodCom/XCGLogger";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F08C00CA2CE537420045A5CD /* ParseLiveQuery */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F08C00C92CE537420045A5CD /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */;
+			productName = ParseLiveQuery;
+		};
+		F08C00CC2CE537420045A5CD /* ParseObjC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F08C00C92CE537420045A5CD /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */;
+			productName = ParseObjC;
+		};
+		F0988A132DB2B7F800F8BEDC /* SwiftXLSX */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftXLSX;
+		};
+		F0988A152DB2B81900F8BEDC /* SwiftXLSX */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftXLSX;
+		};
+		F0BCCC522C820EF1007EA382 /* ObjcExceptionBridging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0BCCC532C820EF1007EA382 /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = ObjcExceptionBridging;
+		};
+		F0BCCC542C820EF1007EA382 /* XCGLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0BCCC532C820EF1007EA382 /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = XCGLogger;
+		};
+		F0BCCC7F2C8221B9007EA382 /* ObjcExceptionBridging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0C6A8FD2C4AA2A40004606A /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = ObjcExceptionBridging;
+		};
+		F0BCCC812C8221B9007EA382 /* XCGLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0C6A8FD2C4AA2A40004606A /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = XCGLogger;
+		};
+		F0C6A8FE2C4AA2A40004606A /* ObjcExceptionBridging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0C6A8FD2C4AA2A40004606A /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = ObjcExceptionBridging;
+		};
+		F0C6A9002C4AA2A40004606A /* XCGLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0C6A8FD2C4AA2A40004606A /* XCRemoteSwiftPackageReference "XCGLogger" */;
+			productName = XCGLogger;
+		};
+		F0EDCAB92CE54444003A4D79 /* ParseLiveQuery */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F08C00C92CE537420045A5CD /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */;
+			productName = ParseLiveQuery;
+		};
+		F0EDCABB2CE54444003A4D79 /* ParseObjC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F08C00C92CE537420045A5CD /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */;
+			productName = ParseObjC;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F028C5A52C486109007C459E /* Project object */;
+}
