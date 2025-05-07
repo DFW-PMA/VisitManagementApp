@@ -15,7 +15,7 @@ struct AppSchedPatLocView: View
     {
         
         static let sClsId        = "AppSchedPatLocView"
-        static let sClsVers      = "v1.0903"
+        static let sClsVers      = "v1.1001"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -37,13 +37,6 @@ struct AppSchedPatLocView: View
     static          var timerOnDemand90Sec                                      = Timer()
     static          var timerOnDemand3Sec                                       = Timer()
     
-//  @State private  var sTherapistTID:String                                    = ""
-    
-//  @State private  var cAppLogPFDataButtonPresses:Int                          = 0
-//  @State private  var cAppTidScheduleViewButtonPresses:Int                    = 0
-
-//  @State private  var isAppLogPFDataViewModal:Bool                            = false
-
     @State private  var cAppSchedExportViewButtonPresses:Int                    = 0
     @State private  var cAppSchedPatLocViewRebuildButtonPresses:Int             = 0
     @State private  var cAppSchedPatLocViewRefreshButtonPresses:Int             = 0
@@ -53,7 +46,6 @@ struct AppSchedPatLocView: View
 
     @State private  var isAppSchedExportByTidShowing:Bool                       = false
     @State private  var isAppDataViewModal:Bool                                 = false
-//  @State private  var isAppTidScheduleViewModal:Bool                          = false
 
            private  var dictOfSortedSchedPatientLocItems:[String:[ScheduledPatientLocationItem]]
                                                                                 = [String:[ScheduledPatientLocationItem]]()
@@ -115,69 +107,10 @@ struct AppSchedPatLocView: View
                 HStack(alignment:.center)
                 {
 
-                //  if (AppGlobalInfo.bPerformAppDevTesting == true)
-                //  {
-                //
-                //      Button
-                //      {
-                //
-                //          self.cAppLogPFDataButtonPresses += 1
-                //
-                //          let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):AppSchedPatLocView.Button(Xcode).'Log/Reload Data'.#(\(self.cAppLogPFDataButtonPresses)) pressed...")
-                //
-                //          self.isAppLogPFDataViewModal.toggle()
-                //
-                //      }
-                //      label:
-                //      {
-                //
-                //          VStack(alignment:.center)
-                //          {
-                //
-                //              Label("", systemImage: "doc.text.magnifyingglass")
-                //                  .help(Text("Log PFXxxDataItem(s)..."))
-                //                  .imageScale(.medium)
-                //
-                //              Text("Log/Reload Data")
-                //                  .font(.footnote)
-                //
-                //          }
-                //
-                //      }
-                //  #if os(macOS)
-                //      .sheet(isPresented:$isAppLogPFDataViewModal, content:
-                //          {
-                //
-                //              AppLogPFDataView()
-                //
-                //          }
-                //      )
-                //  #endif
-                //  #if os(iOS)
-                //      .fullScreenCover(isPresented:$isAppLogPFDataViewModal)
-                //      {
-                //
-                //          AppLogPFDataView()
-                //
-                //      }
-                //  #endif
-                //      .padding()
-                //  #if os(macOS)
-                //      .buttonStyle(.borderedProminent)
-                //  //  .background(???.isPressed ? .blue : .gray)
-                //      .cornerRadius(10)
-                //      .foregroundColor(Color.primary)
-                //  #endif
-                //
-                //  Spacer()
-                //
-                //  }
-
                     Button
                     {
 
                         self.cAppSchedExportViewButtonPresses += 1
-                    //  self.sTherapistTID                     = "-1"
 
                         let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppTidScheduleView.Button(Xcode).'Sched Export'.#(\(self.cAppSchedExportViewButtonPresses)) for TID 'self.sTherapistTID' of [-1]...")
 
@@ -218,6 +151,12 @@ struct AppSchedPatLocView: View
                     }
                 #endif
                     .padding()
+                #if os(macOS)
+                    .buttonStyle(.borderedProminent)
+                //  .background(???.isPressed ? .blue : .gray)
+                    .cornerRadius(10)
+                    .foregroundColor(Color.primary)
+                #endif
 
                     Spacer()
 
@@ -298,9 +237,6 @@ struct AppSchedPatLocView: View
                     self.cAppSchedPatLocViewRefreshButtonPresses += 1
 
                     let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppSchedPatLocView.Button(Xcode).'Recount'.#(\(self.cAppSchedPatLocViewRefreshButtonPresses))...")
-
-                //  let _ = self.checkIfAppParseCoreHasPFCscDataItems(bRefresh:true)
-                //  let _ = self.checkIfAppParseCoreHasPFQueryBackgroundItems(bRefresh:true)
 
                 }
                 label:
@@ -433,9 +369,6 @@ struct AppSchedPatLocView: View
                             }
                         })
 
-            //  Text("Auto-Update #(\(jmAppParseCoreManager.cPFCscObjectsRefresh)):(\(cAppSchedPatLocViewRefreshButtonPresses).\(cAppSchedPatLocViewRefreshAutoTimer).\(cAppScheduleViewRefreshAutoTimer)) - Total Therapist(s) #(\(cTherapistsWithScheduledPatients)) - Total Visit(s) #(\(cTotalScheduledPatientVisits))...")
-            //  Text("Auto-Update #(\(jmAppParseCoreManager.cPFCscObjectsRefresh)):(\(cAppSchedPatLocViewRefreshButtonPresses).\(cAppSchedPatLocViewRefreshAutoTimer).\(cAppScheduleViewRefreshAutoTimer)) - Total Therapist(s) #(\(dictOfSortedSchedPatientLocItems.count)) - Total Visit(s) #(\(self.countDictionaryOfScheduledPatientLocationItemsVisits()))...")
-            //  Text("Auto-Update #(\(jmAppParseCoreManager.cPFCscObjectsRefresh)):(\(cAppSchedPatLocViewRefreshButtonPresses).\(cAppSchedPatLocViewRefreshAutoTimer).\(cAppScheduleViewRefreshAutoTimer)) - Total Therapist(s) #(\(self.appScheduleLoadingAssistant.dictOfSortedSchedPatientLocItems.count)) - Total Visit(s) #(\(self.appScheduleLoadingAssistant.cTotalScheduledPatientVisits))...")
                 Text("Auto-Update #(\(jmAppParseCoreManager.cPFCscObjectsRefresh)):(\(cAppSchedPatLocViewRefreshButtonPresses).\(cAppSchedPatLocViewRefreshAutoTimer).\(cAppScheduleViewRefreshAutoTimer)) --->>> #(\(self.appScheduleLoadingAssistant.dictOfSortedSchedPatientLocItems.count):\(self.appScheduleLoadingAssistant.cTotalTidsOnWorkRoute):\(self.appScheduleLoadingAssistant.cTotalTidsOnWorkRouteToday)) Therapists with #(\(self.appScheduleLoadingAssistant.cTotalScheduledPatientVisits)) Total Visits...")
                     .bold()
                     .italic()
@@ -491,10 +424,6 @@ struct AppSchedPatLocView: View
                                 .font(.footnote)
                             Text("WorkRoute")
                                 .font(.footnote)
-                        //  Text("Time")
-                        //      .font(.footnote)
-                        //  Text("Address or Location")
-                        //      .font(.footnote)
 
                         }
                         .font(.title3) 
@@ -503,13 +432,6 @@ struct AppSchedPatLocView: View
 
                         // Item Rows:
 
-                    //  ForEach(Array(jmAppParseCoreManager.dictSchedPatientLocItems), id:\.key)
-                    //  ForEach(Array(self.sortDictionaryOfScheduledPatientLocationItems()), id:\.key)
-                    //  ForEach(Array(self.appScheduleLoadingAssistant.loadSortedScheduledPatientLocationItems(dictSchedPatientLocItems:jmAppParseCoreManager.dictSchedPatientLocItems)), id:\.key)
-                    //  { sTherapistTID, listScheduledPatientLocationItems in
-                    //  ForEach(self.appScheduleLoadingAssistant.loadSortedScheduledPatientLocationItemsAsTIDList(dictSchedPatientLocItems:jmAppParseCoreManager.dictSchedPatientLocItems), 
-                    //          id:\.self)
-                    //  { sTherapistTID in
                         ForEach(self.appScheduleLoadingAssistant.loadSortedScheduledPatientLocationItemsAsTNamesList(dictSchedPatientLocItems:jmAppParseCoreManager.dictSchedPatientLocItems), 
                                 id:\.self)
                         { sTherapistTName in
@@ -518,8 +440,6 @@ struct AppSchedPatLocView: View
                                 = self.locateAppTherapistTIDByTName(sTherapistName:sTherapistTName)
                             let listScheduledPatientLocationItems:[ScheduledPatientLocationItem]
                                 = self.appScheduleLoadingAssistant.getScheduledPatientLocationItemsForTid(sPFTherapistTID:sTherapistTID)
-                        //  let pfCscObject:ParsePFCscDataItem
-                        //      = self.jmAppParseCoreManager.locatePFCscDataItemByTherapistTID(sTherapistTID:sTherapistTID)
 
                             GridRow(alignment:.bottom)
                             {
@@ -610,7 +530,6 @@ struct AppSchedPatLocView: View
                             #if os(iOS)
                                 NavigationLink
                                 {
-                                //  AppTidScheduleView(listScheduledPatientLocationItems:self.appScheduleLoadingAssistant.getScheduledPatientLocationItemsForTid(sPFTherapistTID:sTherapistTID))
                                     AppTidScheduleView(listScheduledPatientLocationItems:listScheduledPatientLocationItems)
                                         .navigationBarBackButtonHidden(true)
                                 }
@@ -630,7 +549,6 @@ struct AppSchedPatLocView: View
                                                 let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppSchedPatLocView.GridRow.NavigationLink.'.onTapGesture()' received - Map for TID #(\(sTherapistTID))...")
                           
                                                 let _ = AppTidScheduleView(listScheduledPatientLocationItems:listScheduledPatientLocationItems)
-                                            //  let _ = AppTidScheduleView(listScheduledPatientLocationItems:self.appScheduleLoadingAssistant.getScheduledPatientLocationItemsForTid(sPFTherapistTID:sTherapistTID))
                           
                                             }
                                         #endif
@@ -649,16 +567,13 @@ struct AppSchedPatLocView: View
                                     .font(.footnote)
 
                                 Text(listScheduledPatientLocationItems[0].sVDateShortDisplay)
-                                //  .bold()
                                     .font(.footnote)
                                     .foregroundStyle((self.isDateInToday(sDateToCheck:listScheduledPatientLocationItems[0].sVDateShortDisplay) == false) ? .red : .primary)
 
                                 Text(sTherapistTID)
-                                //  .bold()
                                     .font(.footnote)
 
                                 Text(self.locateAppTherapistNamebyTid(sTherapistTID:sTherapistTID))
-                                //  .bold()
                                     .font(.footnote)
 
                             let pfCscObject:ParsePFCscDataItem
@@ -685,32 +600,6 @@ struct AppSchedPatLocView: View
 
                             }
                                 
-                        //      Text(pfCscObject.sPFCscParseLastLocDate)
-                        //          .gridColumnAlignment(.center)
-                        //          .font(.footnote)
-                        //      Text(pfCscObject.sPFCscParseLastLocTime)
-                        //          .gridColumnAlignment(.center)
-                        //          .font(.footnote)
-                        //          .onChange(of:jmAppParseCoreManager.cPFCscObjectsRefresh)
-                        //          {
-                        //              let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onChange #1 - GridRow(Item(s)) #(\(pfCscObject.idPFCscObject)) for [\(pfCscObject.sPFCscParseName)] received a 'refresh' COUNT update #(\(jmAppParseCoreManager.cPFCscObjectsRefresh))...")
-                        //          }
-                        //  if (pfCscObject.sCurrentLocationName.count < 1 ||
-                        //      pfCscObject.sCurrentCity.count         < 1)
-                        //  {
-                        //  
-                        //      Text("\(pfCscObject.dblConvertedLatitude), \(pfCscObject.dblConvertedLongitude)")
-                        //          .font(.footnote)
-                        //
-                        //  }
-                        //  else
-                        //  {
-                        //  
-                        //      Text("\(pfCscObject.sCurrentLocationName), \(pfCscObject.sCurrentCity)")
-                        //          .font(.footnote)
-                        //
-                        //  }
-
                             }
 
                         }
@@ -885,7 +774,6 @@ struct AppSchedPatLocView: View
         {
         
             sTherapistTID = ""
-        //  sTherapistTID = "-1"
         
         }
 

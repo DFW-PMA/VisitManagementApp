@@ -954,7 +954,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 58.01.25C121;
+				CURRENT_PROJECT_VERSION = 01.05.25C127;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -966,7 +966,7 @@
 				INFOPLIST_FILE = "VisitManagementApp-Mac-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = VisitManagementApp;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) JustMacApps 2023-2024. All Rights Reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) DFWPMA 2023-2024. All Rights Reserved.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses your Location to provice City information";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This App uses your Location to provice City information";
 				INFOPLIST_KEY_NSLocationUsageDescription = "This App uses your Location to provice City information";
@@ -998,7 +998,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 58.01.25C121;
+				CURRENT_PROJECT_VERSION = 01.05.25C127;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1010,7 +1010,7 @@
 				INFOPLIST_FILE = "VisitManagementApp-Mac-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = VisitManagementApp;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) JustMacApps 2023-2024. All Rights Reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) DFWPMA 2023-2024. All Rights Reserved.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses your Location to provice City information";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This App uses your Location to provice City information";
 				INFOPLIST_KEY_NSLocationUsageDescription = "This App uses your Location to provice City information";
@@ -1041,7 +1041,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 58.16.25C121;
+				CURRENT_PROJECT_VERSION = 01.05.25C127;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1054,7 +1054,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = VisitManagementApp;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID is used for access to App functionality...";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) DFWPMA 2023-2025. All Rights Reserved.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses your Location to provice City information";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This App uses your Location to provice City information";
 				INFOPLIST_KEY_NSLocationUsageDescription = "This App uses your Location to provice City information";
@@ -1092,7 +1092,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 58.16.25C121;
+				CURRENT_PROJECT_VERSION = 01.05.25C127;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1105,7 +1105,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = VisitManagementApp;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Face ID is used for access to App functionality...";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (C) DFWPMA 2023-2025. All Rights Reserved.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This App uses your Location to provice City information";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "This App uses your Location to provice City information";
 				INFOPLIST_KEY_NSLocationUsageDescription = "This App uses your Location to provice City information";

@@ -17,7 +17,7 @@ struct ContentView: View
     {
         
         static let sClsId        = "ContentView"
-        static let sClsVers      = "v1.3501"
+        static let sClsVers      = "v1.3602"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -118,74 +118,13 @@ struct ContentView: View
         VStack 
         {
             
-        #if os(iOS)
-
             HStack
             {
-
-            //  if (AppGlobalInfo.bPerformAppDevTesting == true)
-            //  {
-            //
-            //      Button
-            //      {
-            //
-            //          self.cAppLogPFDataButtonPresses += 1
-            //
-            //          let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):ContentView.Button(Xcode).'Log/Reload Data'.#(\(self.cAppLogPFDataButtonPresses)) pressed...")
-            //
-            //          self.isAppLogPFDataViewModal.toggle()
-            //
-            //      //  self.detailPFCscDataItems()
-            //
-            //      }
-            //      label:
-            //      {
-            //
-            //          VStack(alignment:.center)
-            //          {
-            //
-            //              Label("", systemImage: "doc.text.magnifyingglass")
-            //                  .help(Text("Log PFXxxDataItem(s)..."))
-            //                  .imageScale(.small)
-            //
-            //              Text("Log/Reload Data")
-            //                  .font(.caption2)
-            //
-            //          }
-            //
-            //      }
-            //  #if os(macOS)
-            //      .sheet(isPresented:$isAppLogPFDataViewModal, content:
-            //          {
-            //
-            //              AppLogPFDataView()
-            //
-            //          }
-            //      )
-            //  #endif
-            //  #if os(iOS)
-            //      .fullScreenCover(isPresented:$isAppLogPFDataViewModal)
-            //      {
-            //
-            //          AppLogPFDataView()
-            //
-            //      }
-            //  #endif
-            //      .padding()
-            //  #if os(macOS)
-            //      .buttonStyle(.borderedProminent)
-            //  //  .background(???.isPressed ? .blue : .gray)
-            //      .cornerRadius(10)
-            //      .foregroundColor(Color.primary)
-            //  #endif
-            //
-            //  }
 
                 Button
                 {
 
                     self.cAppSchedExportViewButtonPresses += 1
-                //  self.sTherapistTID                     = "-1"
 
                     let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppTidScheduleView.Button(Xcode).'Sched Export'.#(\(self.cAppSchedExportViewButtonPresses)) for TID 'self.sTherapistTID' of [-1]...")
 
@@ -226,6 +165,13 @@ struct ContentView: View
                 }
             #endif
                 .padding()
+            #if os(macOS)
+                .buttonStyle(.borderedProminent)
+                .padding()
+            //  .background(???.isPressed ? .blue : .gray)
+                .cornerRadius(10)
+                .foregroundColor(Color.primary)
+            #endif
 
                 Spacer()
 
@@ -273,6 +219,13 @@ struct ContentView: View
                 }
             #endif
                 .padding()
+            #if os(macOS)
+                .buttonStyle(.borderedProminent)
+                .padding()
+            //  .background(???.isPressed ? .blue : .gray)
+                .cornerRadius(10)
+                .foregroundColor(Color.primary)
+            #endif
 
                 Spacer()
 
@@ -309,6 +262,8 @@ struct ContentView: View
             #endif
 
                 Spacer()
+
+            #if os(iOS)
 
                 Button
                 {
@@ -354,9 +309,9 @@ struct ContentView: View
             #endif
                 .padding()
 
-            }
+            #endif
 
-        #endif
+            }
             
             Spacer(minLength:10)
 
