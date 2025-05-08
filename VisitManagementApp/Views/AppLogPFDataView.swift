@@ -89,7 +89,7 @@ struct AppLogPFDataView: View
     {
         
         static let sClsId        = "AppLogPFDataView"
-        static let sClsVers      = "v1.1201"
+        static let sClsVers      = "v1.1402"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -124,7 +124,9 @@ struct AppLogPFDataView: View
     @State private  var cAppLogPFDataLoggingExportBackupFileButtonPresses:Int     = 0
     @State private  var cAppLogPFDataLoggingExportLastBackupFileButtonPresses:Int = 0
 
-    @State private  var isAppLogPFDataReloading:Bool                              = false
+    @StateObject    var progressTrigger:ProgressOverlayTrigger                    = ProgressOverlayTrigger()
+
+//  @State private  var isAppLogPFDataReloading:Bool                              = false
 //  @State private  var isAppLogPFDataReloading:Bool                              = true
 
     @State private  var cAppLogPFDataReloadPFAdminsButtonPresses:Int              = 0
@@ -1083,15 +1085,17 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses))...")
 
-                                self.isAppLogPFDataReloading = true
+                            //  self.isAppLogPFDataReloading = true
+                                self.progressTrigger.isProgressOverlayOn.toggle()
 
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.isAppLogPFDataReloading' is [\(self.isAppLogPFDataReloading)] <should be 'true'>...")
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'true'>...")
 
                                 self.reloadTherapistFileItems()
 
-                                self.isAppLogPFDataReloading = false
+                            //  self.isAppLogPFDataReloading = false
+                                self.progressTrigger.isProgressOverlayOn.toggle()
 
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.isAppLogPFDataReloading' is [\(self.isAppLogPFDataReloading)] <should be 'false'>...")
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'false'>...")
 
                             }
                             label:
@@ -1107,7 +1111,7 @@ struct AppLogPFDataView: View
                                         .imageScale(.small)
 
                                     Text("Reload PFData (PFTherapistFile) - #(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses))...")
-                                        .progressOverlay(isContentLoading:$isAppLogPFDataReloading)
+                                        .progressOverlay(trigger:self.progressTrigger)
                                         .font(.caption2)
 
                                     Spacer()
@@ -2004,15 +2008,17 @@ struct AppLogPFDataView: View
 
         // Reload the ParseCoreBkgdDataRepo PFTherapistFileItem(s) (deepcopy to ParseCoreManager)...
 
-        self.isAppLogPFDataReloading = true
+    //  self.isAppLogPFDataReloading = true
+        self.progressTrigger.isProgressOverlayOn = true
     
         self.xcgLogMsg("\(sCurrMethodDisp) Calling the 'jmAppParseCoreBkgdDataRepo' method 'getJmAppParsePFQueryForTherapistFileToAddToAdmins()' to get Therapist dictionaries (TherapistFile, TherapistXref, TherapistNames)...")
 
         let _ = self.jmAppParseCoreBkgdDataRepo.getJmAppParsePFQueryForTherapistFileToAddToAdmins(bForceReloadOfPFQuery:true)
 
         self.xcgLogMsg("\(sCurrMethodDisp) Called  the 'jmAppParseCoreBkgdDataRepo' method 'getJmAppParsePFQueryForTherapistFileToAddToAdmins()' to get Therapist dictionaries (TherapistFile, TherapistXref, TherapistNames)...")
-
-        self.isAppLogPFDataReloading = false
+        
+    //  self.isAppLogPFDataReloading = false
+        self.progressTrigger.isProgressOverlayOn = false
 
         // Exit:
 

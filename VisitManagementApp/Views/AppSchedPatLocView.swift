@@ -9,10 +9,10 @@
 import Foundation
 import SwiftUI
 
-class ProgressOverlayTrigger:ObservableObject
-{
-    @Published var isProgressOverlayOn:Bool = false
-}
+//  class ProgressOverlayTrigger:ObservableObject
+//  {
+//      @Published var isProgressOverlayOn:Bool = false
+//  }
 
 struct AppSchedPatLocView: View 
 {
@@ -21,7 +21,7 @@ struct AppSchedPatLocView: View
     {
         
         static let sClsId        = "AppSchedPatLocView"
-        static let sClsVers      = "v1.1111"
+        static let sClsVers      = "v1.1205"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -53,7 +53,8 @@ struct AppSchedPatLocView: View
     @State private  var isAppSchedExportByTidShowing:Bool                       = false
     @State private  var isAppDataViewModal:Bool                                 = false
 
-    @ObservedObject var isAppSchedPatLocViewRebuilding:ProgressOverlayTrigger   = ProgressOverlayTrigger()
+    @StateObject    var progressTrigger:ProgressOverlayTrigger                  = ProgressOverlayTrigger()
+//  @ObservedObject var isAppSchedPatLocViewRebuilding:ProgressOverlayTrigger   = ProgressOverlayTrigger()
 //  @EnvironmentObject
 //                  var isAppSchedPatLocViewRebuilding:ProgressOverlayTrigger
 
@@ -212,17 +213,19 @@ struct AppSchedPatLocView: View
                         let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppSchedPatLocView.Button(Xcode).'Rebuild'.#(\(self.cAppSchedPatLocViewRebuildButtonPresses))...")
 
                     //  self.isAppSchedPatLocViewRebuilding.isProgressOverlayOn = true
-                        self.isAppSchedPatLocViewRebuilding.isProgressOverlayOn.toggle()
+                    //  self.progressTrigger.isProgressOverlayOn.toggle()
+                        self.progressTrigger.setProgressOverlay(isProgressOverlayOn:true)
 
-                        let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppSchedPatLocView.Button(Xcode).'Rebuild'.#(\(self.cAppSchedPatLocViewRebuildButtonPresses)) - 'self.isAppSchedPatLocViewRebuilding.isProgressOverlayOn' is [\(self.isAppSchedPatLocViewRebuilding.isProgressOverlayOn)] <should be 'true'> <ProgressOverlay>...")
+                        let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppSchedPatLocView.Button(Xcode).'Rebuild'.#(\(self.cAppSchedPatLocViewRebuildButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'true'> <ProgressOverlay>...")
 
                         let _ = self.checkIfAppParseCoreHasPFCscDataItems(bRefresh:true)
                         let _ = self.checkIfAppParseCoreHasPFQueryBackgroundItems(bRefresh:true)
 
                     //  self.isAppSchedPatLocViewRebuilding.isProgressOverlayOn = false
-                        self.isAppSchedPatLocViewRebuilding.isProgressOverlayOn.toggle()
+                    //  self.progressTrigger.isProgressOverlayOn.toggle()
+                        self.progressTrigger.setProgressOverlay(isProgressOverlayOn:false)
 
-                        let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppSchedPatLocView.Button(Xcode).'Rebuild'.#(\(self.cAppSchedPatLocViewRebuildButtonPresses)) - 'self.isAppSchedPatLocViewRebuilding.isProgressOverlayOn' is [\(self.isAppSchedPatLocViewRebuilding.isProgressOverlayOn)] <should be 'false'> <ProgressOverlay>...")
+                        let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppSchedPatLocView.Button(Xcode).'Rebuild'.#(\(self.cAppSchedPatLocViewRebuildButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'false'> <ProgressOverlay>...")
 
                     }
                     label:
@@ -234,17 +237,17 @@ struct AppSchedPatLocView: View
                             Label("", systemImage: "arrow.down.app")
                                 .help(Text("'Rebuild' App SchedPatLoc Screen..."))
                                 .imageScale(.medium)
-                                .progressOverlay(isContentLoading:$isAppSchedPatLocViewRebuilding.isProgressOverlayOn)
+                                .progressOverlay(trigger:self.progressTrigger)
 
                             Text("Rebuild - #(\(self.cAppSchedPatLocViewRebuildButtonPresses))")
-                                .progressOverlay(isContentLoading:$isAppSchedPatLocViewRebuilding.isProgressOverlayOn)
+                                .progressOverlay(trigger:self.progressTrigger)
                                 .font(.footnote)
 
                         }
-                        .progressOverlay(isContentLoading:$isAppSchedPatLocViewRebuilding.isProgressOverlayOn)
+                        .progressOverlay(trigger:self.progressTrigger)
 
                     }
-                    .progressOverlay(isContentLoading:$isAppSchedPatLocViewRebuilding.isProgressOverlayOn)
+                    .progressOverlay(trigger:self.progressTrigger)
                 #if os(macOS)
                     .buttonStyle(.borderedProminent)
                     .padding()
@@ -376,10 +379,10 @@ struct AppSchedPatLocView: View
                     .padding()
 
                 }
-                .progressOverlay(isContentLoading:$isAppSchedPatLocViewRebuilding.isProgressOverlayOn)
+                .progressOverlay(trigger:self.progressTrigger)
 
                 Text("")
-                    .progressOverlay(isContentLoading:$isAppSchedPatLocViewRebuilding.isProgressOverlayOn)
+                    .progressOverlay(trigger:self.progressTrigger)
                     .onAppear(
                         perform:
                         {
@@ -670,10 +673,10 @@ struct AppSchedPatLocView: View
                         })
 
                 }
-                .progressOverlay(isContentLoading:$isAppSchedPatLocViewRebuilding.isProgressOverlayOn)
+                .progressOverlay(trigger:self.progressTrigger)
 
             }
-            .progressOverlay(isContentLoading:$isAppSchedPatLocViewRebuilding.isProgressOverlayOn)
+            .progressOverlay(trigger:self.progressTrigger)
 
             Text("")            
                 .hidden()
@@ -686,7 +689,7 @@ struct AppSchedPatLocView: View
                     })
 
         }
-        .progressOverlay(isContentLoading:$isAppSchedPatLocViewRebuilding.isProgressOverlayOn)
+        .progressOverlay(trigger:self.progressTrigger)
         .padding()
         
     }
@@ -1013,7 +1016,7 @@ struct AppSchedPatLocView: View
   
         return
   
-    }   // End of private func syncPFDataItems()
+    }   // End of private func syncPFDataItems().
 
     private func detailPFCscDataItems()
     {
@@ -1039,7 +1042,7 @@ struct AppSchedPatLocView: View
     
         return
     
-    }   // End of private func detailPFCscDataItems()
+    }   // End of private func detailPFCscDataItems().
 
 }   // End of struct AppSchedPatLocView(View).
 
