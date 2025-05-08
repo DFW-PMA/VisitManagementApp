@@ -9,79 +9,6 @@
 import Foundation
 import SwiftUI
 
-//  // Reusable ProgressOverlay modifier and View extension...
-//
-//  struct ProgressOverlay:ViewModifier
-//  {
-//
-//      @Binding var isContentLoading:Bool
-//               var backgroundColor:Color
-//               var opacity:Double
-//      
-//      public func xcgLogMsg(_ sMessage:String)
-//      {
-//
-//          let dtFormatterDateStamp:DateFormatter = DateFormatter()
-//
-//          dtFormatterDateStamp.locale     = Locale(identifier: "en_US")
-//          dtFormatterDateStamp.timeZone   = TimeZone.current
-//          dtFormatterDateStamp.dateFormat = "yyyy-MM-dd hh:mm:ss.SSS"
-//
-//          let dateStampNow:Date = .now
-//          let sDateStamp:String = ("\(dtFormatterDateStamp.string(from:dateStampNow)) >> ")
-//
-//          print("\(sDateStamp)\(sMessage)")
-//
-//          // Exit:
-//
-//          return
-//
-//      }   // End of public func xcgLogMsg().
-//
-//      func body(content:Content)->some View 
-//      {
-//
-//          let _ = self.xcgLogMsg("<ContentLoading> ProgressOverlay:ViewModifier - 'isContentLoading' is [\(isContentLoading)] - launching the 'ZStack'...")
-//
-//          ZStack 
-//          {
-//
-//              content
-//                  .disabled(isContentLoading)
-//                  .blur(radius:((isContentLoading == true) ? 3 : 0))
-//              
-//              if (isContentLoading == true)
-//              {
-//
-//                  backgroundColor
-//                      .opacity(opacity)
-//                      .edgesIgnoringSafeArea(.all)
-//                  
-//                  ProgressView()
-//                      .progressViewStyle(CircularProgressViewStyle(tint:.white))
-//                      .scaleEffect(1.5)
-//
-//              }
-//
-//          }
-//          .animation(.default, value:isContentLoading)
-//
-//      }   // End of func body(content:Content)->some View.
-//
-//  }   // End of struct ProgressOverlay:ViewModifier.
-//
-//  extension View 
-//  {
-//
-//      func progressOverlay(isContentLoading:Binding<Bool>, backgroundColor:Color = .black, opacity:Double = 0.6)->some View 
-//      {
-//
-//          modifier(ProgressOverlay(isContentLoading:isContentLoading, backgroundColor:backgroundColor, opacity:opacity))
-//
-//      }   // End of func ProgressOverlay(isContentLoading:Binding<Bool>, backgroundColor:Color=.black, opacity:Double=0.6)->some View.
-//
-//  }   // End of extension View.
-
 struct AppLogPFDataView: View 
 {
     
@@ -89,7 +16,7 @@ struct AppLogPFDataView: View
     {
         
         static let sClsId        = "AppLogPFDataView"
-        static let sClsVers      = "v1.1402"
+        static let sClsVers      = "v1.1503"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -125,9 +52,6 @@ struct AppLogPFDataView: View
     @State private  var cAppLogPFDataLoggingExportLastBackupFileButtonPresses:Int = 0
 
     @StateObject    var progressTrigger:ProgressOverlayTrigger                    = ProgressOverlayTrigger()
-
-//  @State private  var isAppLogPFDataReloading:Bool                              = false
-//  @State private  var isAppLogPFDataReloading:Bool                              = true
 
     @State private  var cAppLogPFDataReloadPFAdminsButtonPresses:Int              = 0
     @State private  var cAppLogPFDataReloadPFCscButtonPresses:Int                 = 0
@@ -1085,17 +1009,20 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses))...")
 
-                            //  self.isAppLogPFDataReloading = true
-                                self.progressTrigger.isProgressOverlayOn.toggle()
+                                self.progressTrigger.setProgressOverlay(isProgressOverlayOn:true)
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'true'>...")
 
-                                self.reloadTherapistFileItems()
+                                DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                                {
 
-                            //  self.isAppLogPFDataReloading = false
-                                self.progressTrigger.isProgressOverlayOn.toggle()
+                                    self.reloadTherapistFileItems()
 
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'false'>...")
+                                    self.progressTrigger.setProgressOverlay(isProgressOverlayOn:false)
+
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'false'>...")
+
+                                }
 
                             }
                             label:
@@ -1111,16 +1038,14 @@ struct AppLogPFDataView: View
                                         .imageScale(.small)
 
                                     Text("Reload PFData (PFTherapistFile) - #(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses))...")
-                                        .progressOverlay(trigger:self.progressTrigger)
                                         .font(.caption2)
 
                                     Spacer()
 
                                 }
-                            //  .progressOverlay(isContentLoading:$isAppLogPFDataReloading)
+                                .progressOverlay(trigger:self.progressTrigger)
 
                             }
-                        //  .progressOverlay(isContentLoading:$isAppLogPFDataReloading)
                         #if os(macOS)
                             .buttonStyle(.borderedProminent)
                             .padding()
@@ -1132,7 +1057,6 @@ struct AppLogPFDataView: View
                             Spacer()
 
                         }
-                    //  .progressOverlay(isContentLoading:$isAppLogPFDataReloading)
 
                         HStack(alignment:.center)
                         {
@@ -2009,7 +1933,7 @@ struct AppLogPFDataView: View
         // Reload the ParseCoreBkgdDataRepo PFTherapistFileItem(s) (deepcopy to ParseCoreManager)...
 
     //  self.isAppLogPFDataReloading = true
-        self.progressTrigger.isProgressOverlayOn = true
+    //  self.progressTrigger.isProgressOverlayOn = true
     
         self.xcgLogMsg("\(sCurrMethodDisp) Calling the 'jmAppParseCoreBkgdDataRepo' method 'getJmAppParsePFQueryForTherapistFileToAddToAdmins()' to get Therapist dictionaries (TherapistFile, TherapistXref, TherapistNames)...")
 
@@ -2018,7 +1942,7 @@ struct AppLogPFDataView: View
         self.xcgLogMsg("\(sCurrMethodDisp) Called  the 'jmAppParseCoreBkgdDataRepo' method 'getJmAppParsePFQueryForTherapistFileToAddToAdmins()' to get Therapist dictionaries (TherapistFile, TherapistXref, TherapistNames)...")
         
     //  self.isAppLogPFDataReloading = false
-        self.progressTrigger.isProgressOverlayOn = false
+    //  self.progressTrigger.isProgressOverlayOn = false
 
         // Exit:
 

@@ -18,7 +18,7 @@ class ProgressOverlayTrigger:ObservableObject
     {
         
         static let sClsId        = "ProgressOverlayTrigger"
-        static let sClsVers      = "v1.0212"
+        static let sClsVers      = "v1.0215"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -72,18 +72,18 @@ class ProgressOverlayTrigger:ObservableObject
             
         }
 
-        // If the field is 'on', delay for ###/1000th of a second to allow SwiftUI to render the new View...
-
-        if (self.isProgressOverlayOn == true)
-        {
-            
-            let iDelayTime:UInt32 = (100 * 1000)
-
-            self.xcgLogMsg("\(sCurrMethodDisp) Intermediate - Delaying for 'iDelayTime' of (\(iDelayTime)) <1000th of a second> - 'self.isProgressOverlayOn' is [\(self.isProgressOverlayOn)]...")
-
-            usleep(iDelayTime)
-            
-        }
+    //  // If the field is 'on', delay for ###/1000th of a second to allow SwiftUI to render the new View...
+    //
+    //  if (self.isProgressOverlayOn == true)
+    //  {
+    //      
+    //      let iDelayTime:UInt32 = (100 * 1000)
+    //
+    //      self.xcgLogMsg("\(sCurrMethodDisp) Intermediate - Delaying for 'iDelayTime' of (\(iDelayTime)) <1000th of a second> - 'self.isProgressOverlayOn' is [\(self.isProgressOverlayOn)]...")
+    //
+    //      usleep(iDelayTime)
+    //      
+    //  }
 
         // Exit...
     
@@ -104,7 +104,7 @@ struct ProgressOverlayModifier:ViewModifier
     {
         
         static let sClsId        = "ProgressOverlay"
-        static let sClsVers      = "v1.0205"
+        static let sClsVers      = "v1.0210"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -115,9 +115,6 @@ struct ProgressOverlayModifier:ViewModifier
     // App Data field(s):
 
     @ObservedObject var trigger:ProgressOverlayTrigger
-//  @Binding var isContentLoading:Bool
-//           var backgroundColor:Color
-//           var opacity:Double
     
     public func xcgLogMsg(_ sMessage:String)
     {
@@ -150,7 +147,7 @@ struct ProgressOverlayModifier:ViewModifier
             content
                 .disabled(self.trigger.isProgressOverlayOn)
             //  .blur(radius:((isProgressOverlayOn == true) ? 2 : 0))
-                .opacity(trigger.isProgressOverlayOn ? 0.6 : 1.0)
+                .opacity(trigger.isProgressOverlayOn ? 0.25 : 1.0)
                 // Optional: dim the content when overlay is active...
 
         if (trigger.isProgressOverlayOn == true)
@@ -162,25 +159,26 @@ struct ProgressOverlayModifier:ViewModifier
                 // Semi-transparent background...
 
                 Color.black
-                    .opacity(0.4)
+                    .opacity(0.5)
                     .edgesIgnoringSafeArea(.all)
 
                 // Progress indicator...
 
-                VStack(spacing:16) 
+            //  VStack(spacing:16) 
+                HStack
                 {
 
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint:.white))
-                        .scaleEffect(1.5)
+                        .scaleEffect(0.65)
 
-                    Text("Loading...")
+                    Text("...Loading...")
                         .foregroundColor(.white)
-                        .font(.headline)
+                        .font(.caption2)
 
                 }
-                .padding(24)
-                .background(RoundedRectangle(cornerRadius:12).fill(Color.gray.opacity(0.7)))
+                .padding()
+                .background(RoundedRectangle(cornerRadius:1).fill(Color.gray.opacity(0.5)))
 
             }
             .transition(.opacity)
