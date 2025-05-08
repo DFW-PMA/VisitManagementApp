@@ -282,6 +282,7 @@
 		F0A59E032C5962E900302BA8 /* JmObjCSwiftEnvBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JmObjCSwiftEnvBridge.swift; sourceTree = "<group>"; };
 		F0A59E042C5962E900302BA8 /* JmObjCSwiftEnvBridge-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JmObjCSwiftEnvBridge-Bridging-Header.h"; sourceTree = "<group>"; };
 		F0A8FB3D2D650BBF00ADD658 /* AppSchedPatLocMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSchedPatLocMapView.swift; sourceTree = "<group>"; };
+		F0B61C0B2DCD499B00E96A4C /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 		F0BB63FD2CF4DB6900B22F9D /* SettingsSingleViewCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSingleViewCore.swift; sourceTree = "<group>"; };
 		F0BCCC4F2C820ECB007EA382 /* VisitManagementAppUIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitManagementAppUIAppDelegate.swift; sourceTree = "<group>"; };
 		F0BCCC762C820EF1007EA382 /* VisitManagementApp_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisitManagementApp_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -469,6 +470,7 @@
 		F04252182C59352800EA22D8 /* Objective-C */ = {
 			isa = PBXGroup;
 			children = (
+				F0B61C0B2DCD499B00E96A4C /* Defines.h */,
 				F042521B2C59356600EA22D8 /* CalledObjCModule.h */,
 				F04252192C59356600EA22D8 /* CalledObjCModule.m */,
 				F042521A2C59356600EA22D8 /* CalledObjCModule-Bridging-Header.h */,
@@ -1052,7 +1054,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 02.18.25C128;
+				CURRENT_PROJECT_VERSION = 02.19.25C128;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1103,7 +1105,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 02.18.25C128;
+				CURRENT_PROJECT_VERSION = 02.19.25C128;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
