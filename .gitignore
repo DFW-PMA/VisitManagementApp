@@ -14,6 +14,14 @@
 # ignore ALL Xcode 
 *.xcuserstate
 
+# ignore ALL Swift *.stringsdata
+*.stringsdata
+
+# ignore ALL Swift *.stringsdata
+*.stringsdata
+*/Metadata-stringsdata/arguments.plist
+*/Code-stringsdata/arguments.plist
+
 # ignore VisualSlickEdit Project file(s)
 *.vtg
 *.vpw
@@ -30,3 +38,7 @@ VisitManagementApp/Views/.smbdeleteAAAa312c
 VisitManagementApp/Views/.smbdeleteAAAa312d
 VisitManagementApp/Views/.smbdeleteAAAa312e
 VisitManagementApp/Views/.smbdeleteAAAa3130
+(A Document Being Saved By Xcode)/IDELocalization/44750750-A0E3-4996-8131-E8B09CF34D9A/VisitManagementApp/VisitManagementApp_iOS-/Volumes/Crucial-X10-2-SSD/Users/Shared/public_hda2/JWeb.Software/Dfw-PTS_OSx_apps/VisitManagementApp_VMA-001/VisitManagementApp/VisitManagementApp.xcodeproj/VisitManagementApp_iOS-F0BCCC512C820EF1007EA382/Code-stringsdata/arguments.plist
+(A Document Being Saved By Xcode)/IDELocalization/44750750-A0E3-4996-8131-E8B09CF34D9A/VisitManagementApp/VisitManagementApp_iOS-/Volumes/Crucial-X10-2-SSD/Users/Shared/public_hda2/JWeb.Software/Dfw-PTS_OSx_apps/VisitManagementApp_VMA-001/VisitManagementApp/VisitManagementApp.xcodeproj/VisitManagementApp_iOS-F0BCCC512C820EF1007EA382/Metadata-stringsdata/arguments.plist
+(A Document Being Saved By Xcode)/IDELocalization/44750750-A0E3-4996-8131-E8B09CF34D9A/VisitManagementApp/VisitManagementApp_Mac-/Volumes/Crucial-X10-2-SSD/Users/Shared/public_hda2/JWeb.Software/Dfw-PTS_OSx_apps/VisitManagementApp_VMA-001/VisitManagementApp/VisitManagementApp.xcodeproj/VisitManagementApp_Mac-F028C5AC2C48610A007C459E/Code-stringsdata/arguments.plist
+(A Document Being Saved By Xcode)/IDELocalization/44750750-A0E3-4996-8131-E8B09CF34D9A/VisitManagementApp/VisitManagementApp_Mac-/Volumes/Crucial-X10-2-SSD/Users/Shared/public_hda2/JWeb.Software/Dfw-PTS_OSx_apps/VisitManagementApp_VMA-001/VisitManagementApp/VisitManagementApp.xcodeproj/VisitManagementApp_Mac-F028C5AC2C48610A007C459E/Metadata-stringsdata/arguments.plist

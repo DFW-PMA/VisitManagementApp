@@ -1,0 +1,1341 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    " " : {
+
+    },
+    "     (-1 for All)" : {
+
+    },
+    " - - - " : {
+
+    },
+    " - - - - - " : {
+
+    },
+    " - - - - - - - - - - - - - - - " : {
+
+    },
+    " - - - - - - - - - - - - - - - - - - - - " : {
+
+    },
+    " @ " : {
+
+    },
+    " => DATA Gatherer #3..." : {
+
+    },
+    "--- [%@] ---" : {
+
+    },
+    "--- Omitted in the Database - Warning! ---" : {
+
+    },
+    "::: Patient: PID #" : {
+
+    },
+    "::: Patients' PID: " : {
+
+    },
+    "::: Therapist: TID #" : {
+
+    },
+    "::: Therapists' TID: " : {
+
+    },
+    "...Loading..." : {
+
+    },
+    "'Map' the App ScheduledPatientLocations..." : {
+
+    },
+    "'Map' the App WorkRoute..." : {
+
+    },
+    "'Rebuild' App SchedPatLoc Screen..." : {
+
+    },
+    "'Rebuild' App WorkRoute Screen..." : {
+
+    },
+    "'Recount' App SchedPatLoc Screen..." : {
+
+    },
+    "'Refresh' App 'Authenticate' Screen..." : {
+
+    },
+    "'Refresh' App Data Gatherer Patient by Name Screen..." : {
+
+    },
+    "'Refresh' App Data Gatherer Patient by PID Screen..." : {
+
+    },
+    "'Refresh' App Data Gatherer Patient Screen..." : {
+
+    },
+    "'Refresh' App Data Gatherer Screen..." : {
+
+    },
+    "'Refresh' App Data Gatherer Therapist by TID Screen..." : {
+
+    },
+    "'Refresh' App Data Gatherer Therapist by tName Screen..." : {
+
+    },
+    "'Refresh' App Data Gatherer Therapist Screen..." : {
+
+    },
+    "'Refresh' App Log/Reload Data Screen..." : {
+
+    },
+    "'Refresh' App Screen..." : {
+
+    },
+    "'Refresh' App TID Schedule Screen..." : {
+
+    },
+    "'Refresh' App WorkRoute Screen..." : {
+
+    },
+    "'Send' %@ App LOG" : {
+
+    },
+    "'Send' current App LOG" : {
+
+    },
+    "'Start' [%@]/'End' [%@]" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "'Start' [%1$@]/'End' [%2$@]"
+          }
+        }
+      }
+    },
+    "(%lld)" : {
+
+    },
+    "%@" : {
+
+    },
+    "%@ - %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ - %2$@"
+          }
+        }
+      }
+    },
+    "%@ - try again..." : {
+
+    },
+    "%@ 'Basic' HELP viewer..." : {
+
+    },
+    "%@ 'clear' Log file" : {
+
+    },
+    "%@ 'help' #1..." : {
+
+    },
+    "%@ 'send' the 'current' App Log file to Devs" : {
+
+    },
+    "%@ 'send' the %@ App Log file to Devs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ 'send' the %2$@ App Log file to Devs"
+          }
+        }
+      }
+    },
+    "%@ @ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ @ %2$@"
+          }
+        }
+      }
+    },
+    "%@ <%@>" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ <%2$@>"
+          }
+        }
+      }
+    },
+    "%@ LOG" : {
+
+    },
+    "%@ Log file viewer..." : {
+
+    },
+    "%@, %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@"
+          }
+        }
+      }
+    },
+    "%@, %@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@, %2$@ %3$@"
+          }
+        }
+      }
+    },
+    "%@,%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@,%2$@"
+          }
+        }
+      }
+    },
+    "%lf, %lf" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lf, %2$lf"
+          }
+        }
+      }
+    },
+    "%lld" : {
+
+    },
+    "<%@>" : {
+
+    },
+    "<<< NO Data >>>" : {
+
+    },
+    "<under-construction>" : {
+
+    },
+    "===> Patients' Name: " : {
+
+    },
+    "===> Patients' PID: " : {
+
+    },
+    "===> Therapists' Name: " : {
+
+    },
+    "===> Therapists' TID: " : {
+
+    },
+    "=> Current Report Date(s): " : {
+
+    },
+    "=> Enable the 'selection' of Report 'Start'/'End' Date(s)? " : {
+
+    },
+    "=> Enter the Patients' Name: " : {
+
+    },
+    "=> Enter the Patients' PID: " : {
+
+    },
+    "=> Enter the Therapists' Name: " : {
+
+    },
+    "=> Enter the Therapists' TID: " : {
+
+    },
+    "=> Export the Schedule(s)..." : {
+
+    },
+    "=> Locate Patient by Name" : {
+
+    },
+    "=> Locate Patient by PID" : {
+
+    },
+    "=> Locate Therapist by TID" : {
+
+    },
+    "=> Locate Therapist by tName" : {
+
+    },
+    "=> Select the Report 'End'   Date: " : {
+
+    },
+    "=> Select the Report 'Start' Date: " : {
+
+    },
+    "About" : {
+
+    },
+    "About %@" : {
+
+    },
+    "Address or Location" : {
+
+    },
+    "ALL Therapists" : {
+
+    },
+    "App 'download' Pre-Release" : {
+
+    },
+    "App 'download' RELEASE" : {
+
+    },
+    "App 'logout'" : {
+
+    },
+    "App %@" : {
+
+    },
+    "App About Information" : {
+
+    },
+    "App Data Gatherer" : {
+
+    },
+    "App HELP Information" : {
+
+    },
+    "App Log has been 'Cleared'..." : {
+
+    },
+    "App LOG Viewer" : {
+
+    },
+    "App SchedPatLoc (Location) Information" : {
+
+    },
+    "App Settings" : {
+
+    },
+    "App TID/Patient Schedule Viewer" : {
+
+    },
+    "App WorkRoute (Location) Information" : {
+
+    },
+    "Application Category:" : {
+
+    },
+    "Application Setting(s):" : {
+
+    },
+    "AppSchedPatLoc" : {
+
+    },
+    "AppTidSchedule" : {
+
+    },
+    "AppVisitMgmt" : {
+
+    },
+    "AppWorkRoute" : {
+
+    },
+    "AppWorkRouteMap" : {
+
+    },
+    "Are you sure you want to 'crash' this App?" : {
+
+    },
+    "Are you sure you want to 'suspend' this App?" : {
+
+    },
+    "Are you sure you want to TEST this App 'creating' a ZIP File?" : {
+
+    },
+    "Audit Export" : {
+
+    },
+    "Audit the Schedule Export data..." : {
+
+    },
+    "Auto-Update #(%lld):(%lld.%lld.%lld)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto-Update #(%1$lld):(%2$lld.%3$lld.%4$lld)"
+          }
+        }
+      }
+    },
+    "Auto-Update #(%lld):(%lld.%lld.%lld) --->>> #(%lld:%lld:%lld) Therapists with #(%lld) Total Visits..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto-Update #(%1$lld):(%2$lld.%3$lld.%4$lld) --->>> #(%5$lld:%6$lld:%7$lld) Therapists with #(%8$lld) Total Visits..."
+          }
+        }
+      }
+    },
+    "Cancel" : {
+
+    },
+    "Clear LOG" : {
+
+    },
+    "Clear the LOG file..." : {
+
+    },
+    "Copy to Clipboard" : {
+
+    },
+    "Current LOG" : {
+
+    },
+    "Data" : {
+
+    },
+    "DATA Gatherer - 'Audit' Export Schedule" : {
+
+    },
+    "DATA Gatherer - Patient Details by PID/Name" : {
+
+    },
+    "DATA Gatherer - Schedule Details by TID/PID" : {
+
+    },
+    "DATA Gatherer - Schedule Export by TID" : {
+
+    },
+    "DATA Gatherer - Therapist Details by TID/tName" : {
+
+    },
+    "Data Logging Options:" : {
+
+    },
+    "Data Reloading (Cloud) Options:" : {
+
+    },
+    "Date" : {
+
+    },
+    "Delete Name" : {
+
+    },
+    "Delete Patient Name" : {
+
+    },
+    "Delete Patient PID" : {
+
+    },
+    "Delete PID" : {
+
+    },
+    "Delete the Patient Name..." : {
+
+    },
+    "Delete the Patient PID..." : {
+
+    },
+    "Delete the Therapist TID..." : {
+
+    },
+    "Delete the Therapist tName..." : {
+
+    },
+    "Delete Therapist Name" : {
+
+    },
+    "Delete Therapist TID" : {
+
+    },
+    "Delete TID" : {
+
+    },
+    "Details..." : {
+
+    },
+    "Dismiss" : {
+
+    },
+    "Dismiss this Screen" : {
+
+    },
+    "Do you want to 'download' (and install) the App Pre-Release?" : {
+
+    },
+    "Do you want to 'download' (and install) the App RELEASE?" : {
+
+    },
+    "Download Pre-Release" : {
+
+    },
+    "Download RELEASE" : {
+
+    },
+    "Enter your Login information:" : {
+
+    },
+    "Export the Schedule by TID View..." : {
+
+    },
+    "Export the Schedule(s) for the Therapist(s)..." : {
+
+    },
+    "Force CRASH" : {
+
+    },
+    "FORCE this App to CRASH" : {
+
+    },
+    "Gathering Authentication material(s)..." : {
+
+    },
+    "Help" : {
+
+    },
+    "Item" : {
+
+    },
+    "Locate" : {
+
+    },
+    "Locate the Patient by Name..." : {
+
+    },
+    "Locate the Patient by PID or Name..." : {
+
+    },
+    "Locate the Patient by PID..." : {
+
+    },
+    "Locate the Therapist by TID or tName..." : {
+
+    },
+    "Locate the Therapist by TID..." : {
+
+    },
+    "Locate the Therapist by tName..." : {
+
+    },
+    "Log Data 'export' (BackupFile) - #(%lld)..." : {
+
+    },
+    "Log Data 'export' (SchedPatLoc) - #(%lld)..." : {
+
+    },
+    "Log Data 'export' LAST (BackupFile) - #(%lld)..." : {
+
+    },
+    "Log Data (PFAdmins) - #(%lld)..." : {
+
+    },
+    "Log Data (PFCsc) - #(%lld)..." : {
+
+    },
+    "Log Data (PFPatient) Names - #(%lld)..." : {
+
+    },
+    "Log Data (PFPatientFile) - #(%lld)..." : {
+
+    },
+    "Log Data (PFTherapist) Names - #(%lld)..." : {
+
+    },
+    "Log Data (PFTherapistFile) - #(%lld)..." : {
+
+    },
+    "Log Data (SchedPatLoc) - #(%lld)..." : {
+
+    },
+    "Log Data for 'export' BackupFile item(s)..." : {
+
+    },
+    "Log Data for 'export' LAST BackupFile item(s)..." : {
+
+    },
+    "Log Data for 'export' SchedPatLoc..." : {
+
+    },
+    "Log Data for PFAdmins..." : {
+
+    },
+    "Log Data for PFCsc..." : {
+
+    },
+    "Log Data for PFPatient (Names)..." : {
+
+    },
+    "Log Data for PFPatientFile..." : {
+
+    },
+    "Log Data for PFTherapist (Names)..." : {
+
+    },
+    "Log Data for PFTherapistFile..." : {
+
+    },
+    "Log Data for SchedPatLoc..." : {
+
+    },
+    "Log Dictionary (PatientXref) - #(%lld)..." : {
+
+    },
+    "Log Dictionary (TherapistXref) - #(%lld)..." : {
+
+    },
+    "Log Dictionary for PatientXref..." : {
+
+    },
+    "Log Dictionary for TherapistXref..." : {
+
+    },
+    "Log file 'size' is: [%@]" : {
+
+    },
+    "Log file:" : {
+
+    },
+    "Log PFXxxDataItem(s)..." : {
+
+    },
+    "Log/Reload Data" : {
+
+    },
+    "Login" : {
+
+    },
+    "Logout" : {
+
+    },
+    "Map" : {
+
+    },
+    "Map #(%lld)" : {
+
+    },
+    "Map #(%lld)::%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Map #(%1$lld)::%2$@"
+          }
+        }
+      }
+    },
+    "Map..." : {
+
+    },
+    "Metric" : {
+
+    },
+    "Name" : {
+
+    },
+    "Name::%@" : {
+
+    },
+    "Ok" : {
+
+    },
+    "Password" : {
+
+    },
+    "Patient" : {
+
+    },
+    "Patient - Data Gatherer by PID or Name - #(%lld)..." : {
+
+    },
+    "Patient Data Gatherer #3 by PID or Name Screen..." : {
+
+    },
+    "Patient Details by PID #(%@)" : {
+
+    },
+    "Patient Details..." : {
+
+    },
+    "Patient is 'Discharged'?" : {
+
+    },
+    "Patient is 'On Hold'?" : {
+
+    },
+    "Patient is 'Real' Patient?" : {
+
+    },
+    "Patient Name..." : {
+
+    },
+    "Patient PID #(%@)" : {
+
+    },
+    "Patient PID..." : {
+
+    },
+    "Patient(s)" : {
+
+    },
+    "Patients' 'On Hold' Date" : {
+
+    },
+    "Patients' 'On Hold' Reason" : {
+
+    },
+    "Patients' Alergies" : {
+
+    },
+    "Patients' Authorization 'begin'" : {
+
+    },
+    "Patients' Authorization 'end'" : {
+
+    },
+    "Patients' Behavior Observations" : {
+
+    },
+    "Patients' Current Authorization 'begin'" : {
+
+    },
+    "Patients' Current Authorization 'end'" : {
+
+    },
+    "Patients' Current Diet" : {
+
+    },
+    "Patients' Current Frequencies" : {
+
+    },
+    "Patients' Current TID(s)" : {
+
+    },
+    "Patients' DME" : {
+
+    },
+    "Patients' DOB (Date Of Birth)" : {
+
+    },
+    "Patients' Emergency Contact(s)" : {
+
+    },
+    "Patients' Evaluation Meds" : {
+
+    },
+    "Patients' Expected Frequency" : {
+
+    },
+    "Patients' Expected Visits" : {
+
+    },
+    "Patients' File 'created at" : {
+
+    },
+    "Patients' File 'updated' at" : {
+
+    },
+    "Patients' File is 'to' Supervisor?" : {
+
+    },
+    "Patients' First Name" : {
+
+    },
+    "Patients' First Visit Date" : {
+
+    },
+    "Patients' have Admin Visits?" : {
+
+    },
+    "Patients' have Missed Visits?" : {
+
+    },
+    "Patients' Home Location (Address)" : {
+
+    },
+    "Patients' Home Location (Lat/Long)" : {
+
+    },
+    "Patients' is Ready for Supervisor?" : {
+
+    },
+    "Patients' Language preference" : {
+
+    },
+    "Patients' Last Doctor Visit Date" : {
+
+    },
+    "Patients' Last Evaluation Date" : {
+
+    },
+    "Patients' Last Name" : {
+
+    },
+    "Patients' Last Visit Date" : {
+
+    },
+    "Patients' Makeups Allowed?" : {
+
+    },
+    "Patients' Med Number" : {
+
+    },
+    "Patients' Name (No Whitespace)" : {
+
+    },
+    "Patients' Name: " : {
+
+    },
+    "Patients' NEW Visit Count" : {
+
+    },
+    "Patients' NO Pre Sig required?" : {
+
+    },
+    "Patients' Number of Visits Done" : {
+
+    },
+    "Patients' Parent ID" : {
+
+    },
+    "Patients' Parent Name" : {
+
+    },
+    "Patients' Pertinent History" : {
+
+    },
+    "Patients' Primary Insurance" : {
+
+    },
+    "Patients' Registered Names" : {
+
+    },
+    "Patients' Safeties" : {
+
+    },
+    "Patients' Secondary Insurance" : {
+
+    },
+    "Patients' Start Authorization 'begin'" : {
+
+    },
+    "Patients' Start Authorization 'end'" : {
+
+    },
+    "Patients' Start Therapist (TID)" : {
+
+    },
+    "Patients' Start TID Frequencies" : {
+
+    },
+    "Patients' Start TID(s)" : {
+
+    },
+    "Patients' Supervised Visits" : {
+
+    },
+    "Patients' Supervisor (SID)" : {
+
+    },
+    "Patients' Therapist (TID)" : {
+
+    },
+    "Patients' Total Number of Authorized Visits" : {
+
+    },
+    "Patients' Total Number of Missed Visits" : {
+
+    },
+    "Patients' Treatment DX" : {
+
+    },
+    "Patients' TYPE" : {
+
+    },
+    "Patients' Visit Count" : {
+
+    },
+    "Patients' Visit Count #2" : {
+
+    },
+    "Patients' Visits Done" : {
+
+    },
+    "PID" : {
+
+    },
+    "Preview LOG" : {
+
+    },
+    "Preview the LOG file..." : {
+
+    },
+    "Rebuild - #(%lld)" : {
+
+    },
+    "Rebuild - #(%lld)..." : {
+
+    },
+    "Recount - #(%lld)" : {
+
+    },
+    "Refresh - #(%lld)..." : {
+
+    },
+    "Refresh Screen - #(%lld)..." : {
+
+    },
+    "Reload PFData 'export' (BackupFile) - #(%lld)..." : {
+
+    },
+    "Reload PFData 'export' (SchedPatLoc) - #(%lld)..." : {
+
+    },
+    "Reload PFData 'export' LAST (BackupFile) - #(%lld)..." : {
+
+    },
+    "Reload PFData (PFAdmins) - #(%lld)..." : {
+
+    },
+    "Reload PFData (PFCsc) - #(%lld)..." : {
+
+    },
+    "Reload PFData (PFPatientFile) - #(%lld)..." : {
+
+    },
+    "Reload PFData (PFTherapistFile) - #(%lld)..." : {
+
+    },
+    "Reload PFData (SchedPatLoc) - #(%lld)..." : {
+
+    },
+    "Reload PFData for 'export' BackupFile item(s)..." : {
+
+    },
+    "Reload PFData for 'export' LAST BackupFile item(s)..." : {
+
+    },
+    "Reload PFData for 'export' SchedPatLoc..." : {
+
+    },
+    "Reload PFData for PFAdmins..." : {
+
+    },
+    "Reload PFData for PFCsc..." : {
+
+    },
+    "Reload PFData for PFPatientFile..." : {
+
+    },
+    "Reload PFData for PFTherapistFile..." : {
+
+    },
+    "Reload PFData for SchedPatLoc..." : {
+
+    },
+    "SchedPatLoc" : {
+
+    },
+    "Schedule" : {
+
+    },
+    "Schedule 'cloned' From" : {
+
+    },
+    "Schedule 'cloned' To" : {
+
+    },
+    "Schedule Details by TID #(%@)" : {
+
+    },
+    "Schedule Export" : {
+
+    },
+    "Schedule Item 'last' VDate" : {
+
+    },
+    "Schedule Item 'last' VDate 'type'" : {
+
+    },
+    "Schedule Item 'last' VDate 'type' <Int>" : {
+
+    },
+    "Schedule Item 'last' VDate Addr/Lat/Long" : {
+
+    },
+    "Schedule Item 'last' VDate Address" : {
+
+    },
+    "Schedule Item 'last' VDate Coordinate" : {
+
+    },
+    "Schedule Item 'last' VDate Latitude" : {
+
+    },
+    "Schedule Item 'last' VDate Longitude" : {
+
+    },
+    "Schedule Item 'status'" : {
+
+    },
+    "Schedule Item 'status' Color" : {
+
+    },
+    "Schedule Item ID" : {
+
+    },
+    "Schedule Item Patient DOB" : {
+
+    },
+    "Schedule Item Patient Name" : {
+
+    },
+    "Schedule Item PID" : {
+
+    },
+    "Schedule Item PID <Int>" : {
+
+    },
+    "Schedule Item Therapist Name" : {
+
+    },
+    "Schedule Item Therapist TName" : {
+
+    },
+    "Schedule Item TID" : {
+
+    },
+    "Schedule Item TID <Int>" : {
+
+    },
+    "Schedule Item VDate" : {
+
+    },
+    "Schedule Item VDate 'short' Display" : {
+
+    },
+    "Schedule Item VDate 'start' Time" : {
+
+    },
+    "Schedule Item VDate 'start' Time (24 hour)" : {
+
+    },
+    "Schedule Item VDate 'start' Time (24 hour) <Int>" : {
+
+    },
+    "Schedule Object ID" : {
+
+    },
+    "Schedule Today" : {
+
+    },
+    "Schedule::%@ TID #(%@) Visits #(%lld)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Schedule::%1$@ TID #(%2$@) Visits #(%3$lld)"
+          }
+        }
+      }
+    },
+    "Schedule(s)" : {
+
+    },
+    "Scheduled Patient visit" : {
+
+    },
+    "ScheduleType.DateError   " : {
+
+    },
+    "ScheduleType.Done   " : {
+
+    },
+    "ScheduleType.Missed   " : {
+
+    },
+    "ScheduleType.PastDate   " : {
+
+    },
+    "ScheduleType.Scheduled   " : {
+
+    },
+    "ScheduleType.Undefined   " : {
+
+    },
+    "Select ALL Therapist(s)..." : {
+
+    },
+    "Settings" : {
+
+    },
+    "Show Patient Detail(s) by Name..." : {
+
+    },
+    "Show Patient Detail(s) by PID..." : {
+
+    },
+    "Show Start Therapist Detail(s) by TID..." : {
+
+    },
+    "Show Supervisor Detail(s) by TID (SID)..." : {
+
+    },
+    "Show Supervisor Detail(s) by TID..." : {
+
+    },
+    "Show Therapist Detail(s) by TID..." : {
+
+    },
+    "Show Therapist Detail(s) by tName..." : {
+
+    },
+    "Start Therapist Details..." : {
+
+    },
+    "Status" : {
+
+    },
+    "Supervisor Details..." : {
+
+    },
+    "Suspend App" : {
+
+    },
+    "Suspend this App" : {
+
+    },
+    "Sync Data" : {
+
+    },
+    "Sync PFData" : {
+
+    },
+    "Sync PFQuery Data Item(s)..." : {
+
+    },
+    "Test this App creating a ZIP File" : {
+
+    },
+    "Test ZIP File" : {
+
+    },
+    "Therapist - Data Gatherer by TID or tName - #(%lld)..." : {
+
+    },
+    "Therapist 'current' location" : {
+
+    },
+    "Therapist Data Gatherer #3 by TID or tName Screen..." : {
+
+    },
+    "Therapist Details by TID #(%@)" : {
+
+    },
+    "Therapist Details..." : {
+
+    },
+    "Therapist TID #(%@)" : {
+
+    },
+    "Therapist TID #(%@) - Patient PID #[%@]" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Therapist TID #(%1$@) - Patient PID #[%2$@]"
+          }
+        }
+      }
+    },
+    "Therapist TID..." : {
+
+    },
+    "Therapist tName..." : {
+
+    },
+    "Therapist(s)" : {
+
+    },
+    "Therapists' # of EXPECTED Week Visit(s)" : {
+
+    },
+    "Therapists' # of LATE Week Visit(s)" : {
+
+    },
+    "Therapists' # of Previous Week VOID(s)" : {
+
+    },
+    "Therapists' 2nd FINAL Sync" : {
+
+    },
+    "Therapists' Address" : {
+
+    },
+    "Therapists' BADGE" : {
+
+    },
+    "Therapists' Email" : {
+
+    },
+    "Therapists' FINAL Sync" : {
+
+    },
+    "Therapists' Final Sync Ratios" : {
+
+    },
+    "Therapists' has Assistant(s)?" : {
+
+    },
+    "Therapists' HOME Location" : {
+
+    },
+    "Therapists' iPad Update #" : {
+
+    },
+    "Therapists' iPhone Update #" : {
+
+    },
+    "Therapists' is OFFICE?" : {
+
+    },
+    "Therapists' is Supervisor?" : {
+
+    },
+    "Therapists' LAST (Device) Sync" : {
+
+    },
+    "Therapists' License #" : {
+
+    },
+    "Therapists' Makeups Allowed?" : {
+
+    },
+    "Therapists' Mentor TID #" : {
+
+    },
+    "Therapists' Name (No Whitespace)" : {
+
+    },
+    "Therapists' Name: " : {
+
+    },
+    "Therapists' NOT Active?" : {
+
+    },
+    "Therapists' Over 50 Allowed?" : {
+
+    },
+    "Therapists' Parent ID(s)" : {
+
+    },
+    "Therapists' Password" : {
+
+    },
+    "Therapists' Phone #" : {
+
+    },
+    "Therapists' PID(s) for Friday" : {
+
+    },
+    "Therapists' Start Invoice" : {
+
+    },
+    "Therapists' Start Week" : {
+
+    },
+    "Therapists' Supervisor TID #" : {
+
+    },
+    "Therapists' TYPE" : {
+
+    },
+    "Therapists' Username" : {
+
+    },
+    "Therapists' Week Patient(s) 'missing' visit(s)" : {
+
+    },
+    "TherapistTID..." : {
+
+    },
+    "There are NO Scheduled visit(s)..." : {
+
+    },
+    "TID" : {
+
+    },
+    "TID #(%@) Visits #(%lld)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TID #(%1$@) Visits #(%2$lld)"
+          }
+        }
+      }
+    },
+    "Time" : {
+
+    },
+    "TotalNoLastVDate   " : {
+
+    },
+    "TotalNoLastVDateAddress   " : {
+
+    },
+    "TotalNoLastVDateLatitude   " : {
+
+    },
+    "TotalNoLastVDateLongitude   " : {
+
+    },
+    "TotalPatientVisits   " : {
+
+    },
+    "TotalTIDs   " : {
+
+    },
+    "TotalTIDsCounted   " : {
+
+    },
+    "TotalUniquePIDs   " : {
+
+    },
+    "TotalUniqueTIDs   " : {
+
+    },
+    "Username" : {
+
+    },
+    "Value" : {
+
+    },
+    "View Log" : {
+
+    },
+    "Visits" : {
+
+    },
+    "WorkRoute" : {
+
+    }
+  },
+  "version" : "1.0"
+}
