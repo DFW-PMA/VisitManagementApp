@@ -82,8 +82,8 @@
 //#define HIDE_PUSHES
 //////////
 //  RequestSync
-#define UPDATE_NUMBER   279.147
-#define UPDATE_STRING   @"279.147"
+#define UPDATE_NUMBER   279.152
+#define UPDATE_STRING   @"279.152"
 
 //#define   DISPLAY_PATIENTS_DATABASE
 
