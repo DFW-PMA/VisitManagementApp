@@ -17,7 +17,7 @@ struct ContentView: View
     {
         
         static let sClsId        = "ContentView"
-        static let sClsVers      = "v1.3602"
+        static let sClsVers      = "v1.3702"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -482,7 +482,7 @@ struct ContentView: View
                     VStack(alignment:.center)
                     {
 
-                        Label("", systemImage: "location.viewfinder")
+                        Label("", systemImage: "wifi.router")
                             .help(Text("App WorkRoute (Location) Information"))
                             .imageScale(.large)
 
@@ -545,7 +545,7 @@ struct ContentView: View
                     VStack(alignment:.center)
                     {
 
-                        Label("", systemImage: "location.viewfinder")
+                        Label("", systemImage: "list.bullet.rectangle")
                             .help(Text("App SchedPatLoc (Location) Information"))
                             .imageScale(.large)
 

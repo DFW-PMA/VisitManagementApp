@@ -17,7 +17,7 @@ struct AppAboutView: View
     {
         
         static let sClsId        = "AppAboutView"
-        static let sClsVers      = "v1.1101"
+        static let sClsVers      = "v1.1203"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright © JustMacApps 2023-2025. All rights reserved."
         static let bClsTrace     = true
@@ -30,7 +30,14 @@ struct AppAboutView: View
 //  @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
 
-    var jmAppDelegateVisitor:JmAppDelegateVisitor = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
+#if os(macOS)
+    private let pasteboard                                = NSPasteboard.general
+#elseif os(iOS)
+    private let pasteboard                                = UIPasteboard.general
+#endif
+
+            var appGlobalInfo:AppGlobalInfo               = AppGlobalInfo.ClassSingleton.appGlobalInfo
+            var jmAppDelegateVisitor:JmAppDelegateVisitor = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
     
     init()
     {
@@ -78,8 +85,6 @@ struct AppAboutView: View
         VStack
         {
 
-            Spacer()
-
             HStack(alignment:.center)
             {
 
@@ -101,19 +106,18 @@ struct AppAboutView: View
                     VStack(alignment:.center)
                     {
 
-                        Label("", systemImage: "xmark.circle")
+                        Label("", systemImage:"xmark.circle")
                             .help(Text("Dismiss this Screen"))
-                            .imageScale(.large)
+                            .imageScale(.small)
 
                         Text("Dismiss")
-                            .font(.caption)
+                            .font(.caption2)
 
                     }
 
                 }
             #if os(macOS)
                 .buttonStyle(.borderedProminent)
-                .padding()
             //  .background(???.isPressed ? .blue : .gray)
                 .cornerRadius(10)
                 .foregroundColor(Color.primary)
@@ -122,58 +126,163 @@ struct AppAboutView: View
 
             }
 
-            Spacer()
-
             if #available(iOS 17.0, *)
             {
 
-                Image(ImageResource(name: "Gfx/AppIcon", bundle: Bundle.main))
+                Image(ImageResource(name:"Gfx/AppIcon", bundle:Bundle.main))
                     .resizable()
                     .scaledToFit()
                     .containerRelativeFrame(.horizontal)
                         { size, axis in
-                            size * 0.15
+                            size * 0.10
                         }
 
             }
             else
             {
 
-                Image(ImageResource(name: "Gfx/AppIcon", bundle: Bundle.main))
+                Image(ImageResource(name:"Gfx/AppIcon", bundle:Bundle.main))
                     .resizable()
                     .scaledToFit()
-                    .frame(width:75, height: 75, alignment:.center)
+                    .frame(width:50, height:50, alignment:.center)
+
+            }
+
+            ScrollView
+            {
+
+                Text("")
+                Text("Display Name: \(JmXcodeBuildSettings.jmAppDisplayName)")
+                    .bold()
+                Text("")
+                Text("Application Category:")
+                    .bold()
+                    .italic()
+                Text("\(JmXcodeBuildSettings.jmAppCategory)")
+                Text("")
+                Text("\(JmXcodeBuildSettings.jmAppVersionAndBuildNumber)")     // <=== Version...
+                    .italic()
+
+                Text("")
+                Text("- - - - - - - - - - - - - - -")
+                Text("Log file:")
+                    .font(.caption2)
+                Text(self.jmAppDelegateVisitor.sAppDelegateVisitorLogFilespec ?? "...empty...")
+                    .font(.caption2)
+                    .contextMenu
+                    {
+                        Button
+                        {
+                            let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppAboutView in Text.contextMenu.'copy' button #1...")
+
+                            copyLogFilespecToClipboard()
+                        }
+                        label:
+                        {
+                            Text("Copy to Clipboard")
+                        }
+                    }
+                Text("Log file 'size' is: [\(self.getLogFilespecFileSizeDisplayableMB())]")
+                    .font(.caption2)
+                Text("")
+                Text("UserDefaults file:")
+                    .font(.caption2)
+                Text("\(self.appGlobalInfo.sAppUserDefaultsFileLocation)")
+                    .font(.caption2)
+                    .contextMenu
+                    {
+                        Button
+                        {
+                            let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppAboutView in Text.contextMenu.'copy' button #2...")
+
+                            copyUserDefaultsFilespecToClipboard()
+                        }
+                        label:
+                        {
+                            Text("Copy to Clipboard")
+                        }
+                    }
+                Text("- - - - - - - - - - - - - - -")
+                Text("")
+
+                Text("\(JmXcodeBuildSettings.jmAppCopyright)")
+                    .italic()
 
             }
 
             Spacer()
 
-            Text("\(JmXcodeBuildSettings.jmAppDisplayName)")
-                .bold()
-            Text("")
-            Text("Application Category:")
-                .bold()
-                .italic()
-            Text("\(JmXcodeBuildSettings.jmAppCategory)")
-
-            Spacer(minLength:2)
-
-            Text("\(JmXcodeBuildSettings.jmAppVersionAndBuildNumber)")     // <=== Version...
-                .italic()
-
-            Spacer(minLength:4)
-
-            Text("\(JmXcodeBuildSettings.jmAppCopyright)")
-                .italic()
-
-            Spacer()
-
         }
-    //  .padding()
         
     }
     
-}
+    private func copyLogFilespecToClipboard()
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+          
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked - for text of [\(self.jmAppDelegateVisitor.sAppDelegateVisitorLogFilespec!)]...")
+        
+    #if os(macOS)
+        pasteboard.prepareForNewContents()
+        pasteboard.setString(self.jmAppDelegateVisitor.sAppDelegateVisitorLogFilespec!, forType:.string)
+    #elseif os(iOS)
+        pasteboard.string = self.jmAppDelegateVisitor.sAppDelegateVisitorLogFilespec!
+    #endif
+
+        // Exit...
+    
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+    
+        return
+        
+    }   // End of private func copyLogFilespecToClipboard().
+    
+    private func getLogFilespecFileSizeDisplayableMB()->String
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+          
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked - 'sAppDelegateVisitorLogFilespec' is [\(jmAppDelegateVisitor.sAppDelegateVisitorLogFilespec!)]...")
+
+        // Get the size of the LogFilespec in a displayable MB string...
+
+        let sLogFilespecSizeInMB:String = JmFileIO.getFilespecSizeAsDisplayableMB(sFilespec:self.jmAppDelegateVisitor.sAppDelegateVisitorLogFilespec)
+
+        // Exit...
+    
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sLogFilespecSizeInMB' is [\(sLogFilespecSizeInMB)] for 'sAppDelegateVisitorLogFilespec' of [\(jmAppDelegateVisitor.sAppDelegateVisitorLogFilespec!)]...")
+    
+        return sLogFilespecSizeInMB
+        
+    }   // End of private func getLogFilespecFileSizeDisplayableMB()->String.
+    
+    private func copyUserDefaultsFilespecToClipboard()
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+          
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked - for text of [\(self.appGlobalInfo.sAppUserDefaultsFileLocation)]...")
+        
+    #if os(macOS)
+        pasteboard.prepareForNewContents()
+        pasteboard.setString(self.appGlobalInfo.sAppUserDefaultsFileLocation, forType:.string)
+    #elseif os(iOS)
+        pasteboard.string = self.appGlobalInfo.sAppUserDefaultsFileLocation
+    #endif
+
+        // Exit...
+    
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+    
+        return
+        
+    }   // End of private func copyUserDefaultsFilespecToClipboard().
+    
+}   // End of struct AppAboutView:View.
 
 @available(iOS 14.0, *)
 #Preview

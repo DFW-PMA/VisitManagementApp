@@ -178,6 +178,8 @@
 		F0D524FB2D5FE3CA006216D8 /* AppTidScheduleRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D524F92D5FE3CA006216D8 /* AppTidScheduleRowView.swift */; };
 		F0DC5D312CDBCE7A009F0090 /* MultipartZipFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DC5D302CDBCE7A009F0090 /* MultipartZipFileService.swift */; };
 		F0DC5D322CDBCE7A009F0090 /* MultipartZipFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DC5D302CDBCE7A009F0090 /* MultipartZipFileService.swift */; };
+		F0E4C4622DD7D1E4000F79DF /* AppVisitMgmtCoreLocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E4C4612DD7D1E4000F79DF /* AppVisitMgmtCoreLocView.swift */; };
+		F0E4C4632DD7D1E4000F79DF /* AppVisitMgmtCoreLocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E4C4612DD7D1E4000F79DF /* AppVisitMgmtCoreLocView.swift */; };
 		F0EDCABA2CE54444003A4D79 /* ParseLiveQuery in Frameworks */ = {isa = PBXBuildFile; productRef = F0EDCAB92CE54444003A4D79 /* ParseLiveQuery */; };
 		F0EDCABC2CE54444003A4D79 /* ParseObjC in Frameworks */ = {isa = PBXBuildFile; productRef = F0EDCABB2CE54444003A4D79 /* ParseObjC */; };
 		F0EEDD872CADC38400E437E8 /* JmAppMetricKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EEDD852CADC38400E437E8 /* JmAppMetricKitManager.swift */; };
@@ -298,6 +300,7 @@
 		F0D473972C7AD2960027F651 /* JmAppDelegateVisitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JmAppDelegateVisitor.swift; sourceTree = "<group>"; };
 		F0D524F92D5FE3CA006216D8 /* AppTidScheduleRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTidScheduleRowView.swift; sourceTree = "<group>"; };
 		F0DC5D302CDBCE7A009F0090 /* MultipartZipFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartZipFileService.swift; sourceTree = "<group>"; };
+		F0E4C4612DD7D1E4000F79DF /* AppVisitMgmtCoreLocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtCoreLocView.swift; sourceTree = "<group>"; };
 		F0EEDD842CADC38400E437E8 /* JmAppDelegateVisitor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JmAppDelegateVisitor-Bridging-Header.h"; sourceTree = "<group>"; };
 		F0EEDD852CADC38400E437E8 /* JmAppMetricKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JmAppMetricKitManager.swift; sourceTree = "<group>"; };
 		F0EEDD862CADC38400E437E8 /* JmUserDefaults-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JmUserDefaults-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -434,6 +437,7 @@
 		F028C5BF2C486134007C459E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F0E4C4612DD7D1E4000F79DF /* AppVisitMgmtCoreLocView.swift */,
 				F0BD25042DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift */,
 				F00DC49F2DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift */,
 				F00D1CE92D95D219001386F5 /* AppVisitMgmtSchedule1DetailsView.swift */,
@@ -711,6 +715,7 @@
 				F0786E462CE68E9E0052A534 /* CoreLocationModelObservable2.swift in Sources */,
 				F069E2B02CEFADE5001F0A5E /* AppAuthenticateView.swift in Sources */,
 				F0CBE9012CEBDD6E00B0625E /* AppWorkRouteMapView.swift in Sources */,
+				F0E4C4632DD7D1E4000F79DF /* AppVisitMgmtCoreLocView.swift in Sources */,
 				F0786E472CE68E9E0052A534 /* CoreLocationSiteItem.swift in Sources */,
 				F07F7B952C94DB2D0094AE18 /* DefinesObjCOverrides.m in Sources */,
 				F05EE1D22D380E3700ABC0C5 /* AlarmSwiftDataItem.swift in Sources */,
@@ -741,6 +746,7 @@
 				F091A2882C8F73DD00FB85D5 /* RestURLData.swift in Sources */,
 				F0FBE7772D63C8A200028CBA /* AppSchedPatLocView.swift in Sources */,
 				F05E47132D5D0D550059F4C2 /* AppVisitMgmtTherapist3View.swift in Sources */,
+				F0E4C4622DD7D1E4000F79DF /* AppVisitMgmtCoreLocView.swift in Sources */,
 				F08C00C82CE536430045A5CD /* JmAppParseCoreManager.swift in Sources */,
 				F091A2892C8F73DD00FB85D5 /* RestURLEndpoint.swift in Sources */,
 				F08C86B42D1DD6C100D5B19A /* AppVisitMgmtTherapist1View.swift in Sources */,
@@ -967,7 +973,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 03.01.25C129;
+				CURRENT_PROJECT_VERSION = 04.08.25C136;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1011,7 +1017,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 03.01.25C129;
+				CURRENT_PROJECT_VERSION = 04.08.25C136;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1054,7 +1060,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 03.01.25C129;
+				CURRENT_PROJECT_VERSION = 04.08.25C136;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1105,7 +1111,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 03.01.25C129;
+				CURRENT_PROJECT_VERSION = 04.08.25C136;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";

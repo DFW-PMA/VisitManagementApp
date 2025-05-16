@@ -17,7 +17,7 @@ public class JmXcodeBuildSettings
     {
 
         static let sClsId        = "JmXcodeBuildSettings"
-        static let sClsVers      = "v1.0501"
+        static let sClsVers      = "v1.0703"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = false
@@ -30,21 +30,21 @@ public class JmXcodeBuildSettings
     static var jmAppCategory:String
     {
 
-        return getAppInfoPlistString(for: "LSApplicationCategoryType")
+        return getAppInfoPlistString(for:"LSApplicationCategoryType")
 
     }
 
     static var jmAppDisplayName:String
     {
 
-        return getAppInfoPlistString(for: "CFBundleDisplayName")
+        return getAppInfoPlistString(for:"CFBundleDisplayName")
 
     }
 
     static var jmAppBundleIdentifier:String
     {
 
-        return getAppInfoPlistString(for: "CFBundleIdentifier")
+        return getAppInfoPlistString(for:"CFBundleIdentifier")
 
     }
 
@@ -62,21 +62,29 @@ public class JmXcodeBuildSettings
     static var jmAppCopyright:String
     {
 
-        return getAppInfoPlistString(for: "NSHumanReadableCopyright")
+    //  return getAppCopyright()
+        return getAppInfoPlistString(for:"NSHumanReadableCopyright")
+
+    }
+
+    static var jmAppUserDefaultsFileLocation:String
+    {
+
+        return getAppUserDefaultsFileLocation()
 
     }
 
     static var jmAppJmaUserSetting1:String
     {
 
-        return getAppInfoPlistString(for: "JMA_USER_SETTING_1")
+        return getAppInfoPlistString(for:"JMA_USER_SETTING_1")
 
     }
 
     static var jmAppJmaUserSetting2:String
     {
 
-        return getAppInfoPlistString(for: "JMA_USER_SETTING_2")
+        return getAppInfoPlistString(for:"JMA_USER_SETTING_2")
 
     }
 
@@ -104,7 +112,27 @@ public class JmXcodeBuildSettings
 
     }   // End of private func xcgLogMsg().
 
-    class public func toString() -> String
+//  class private func xcgLogMsg(_ sMessage:String)
+//  {
+//
+//      let dtFormatterDateStamp:DateFormatter = DateFormatter()
+//
+//      dtFormatterDateStamp.locale     = Locale(identifier: "en_US")
+//      dtFormatterDateStamp.timeZone   = TimeZone.current
+//      dtFormatterDateStamp.dateFormat = "yyyy-MM-dd hh:mm:ss.SSS"
+//
+//      let dateStampNow:Date = .now
+//      let sDateStamp:String = ("\(dtFormatterDateStamp.string(from:dateStampNow)) >> ")
+//
+//      print("\(sDateStamp)\(sMessage)")
+//
+//      // Exit:
+//
+//      return
+//
+//  }   // End of class private func xcgLogMsg().
+
+    class public func toString()->String
     {
 
         var asToString:[String] = Array()
@@ -124,6 +152,7 @@ public class JmXcodeBuildSettings
         asToString.append("'jmAppBundleIdentifier': [\(self.jmAppBundleIdentifier)],")
         asToString.append("'jmAppVersionAndBuildNumber': [\(self.jmAppVersionAndBuildNumber)],")
         asToString.append("'jmAppCopyright': [\(self.jmAppCopyright)],")
+        asToString.append("'jmAppUserDefaultsFileLocation': [\(self.jmAppUserDefaultsFileLocation)],")
         asToString.append("'jmAppJmaUserSetting1': [\(self.jmAppJmaUserSetting1)],")
         asToString.append("'jmAppJmaUserSetting2': [\(self.jmAppJmaUserSetting2)],")
         asToString.append("],")
@@ -133,9 +162,9 @@ public class JmXcodeBuildSettings
 
         return sContents
 
-    }   // End of class public func toString().
+    }   // End of class public func toString()->String.
 
-    class public func getAppCategory() -> String 
+    class public func getAppCategory()->String 
     {
 
         let sCurrMethod:String = #function
@@ -151,9 +180,9 @@ public class JmXcodeBuildSettings
 
         return sAppCategory
 
-    }   // End of class public func getAppCategory().
+    }   // End of class public func getAppCategory()->String.
 
-    class public func getAppDisplayName() -> String 
+    class public func getAppDisplayName()->String 
     {
 
         let sCurrMethod:String = #function
@@ -169,9 +198,9 @@ public class JmXcodeBuildSettings
 
         return sAppDiaplayName
 
-    }   // End of class public func getAppDisplayName().
+    }   // End of class public func getAppDisplayName()->String.
 
-    class public func getAppBundleIdentifier() -> String 
+    class public func getAppBundleIdentifier()->String 
     {
 
         let sCurrMethod:String = #function
@@ -187,9 +216,9 @@ public class JmXcodeBuildSettings
 
         return sAppBundleIdentifier
 
-    }   // End of class public func getAppBundleIdentifier().
+    }   // End of class public func getAppBundleIdentifier()->String.
 
-    class public func getAppVersionAndBuildNumber() -> String 
+    class public func getAppVersionAndBuildNumber()->String 
     {
 
         let sCurrMethod:String = #function
@@ -207,9 +236,9 @@ public class JmXcodeBuildSettings
 
         return sAppVersionAndBuildNumber
 
-    }   // End of class public func getAppVersionAndBuildNumber().
+    }   // End of class public func getAppVersionAndBuildNumber()->String.
 
-    class public func getAppCopyright() -> String 
+    class public func getAppCopyright()->String 
     {
 
         let sCurrMethod:String = #function
@@ -225,14 +254,222 @@ public class JmXcodeBuildSettings
 
         return sAppCopyRight
 
-    }   // End of class public func getAppCopyright().
+    }   // End of class public func getAppCopyright()->String.
 
-    class public func getAppInfoPlistString(for key:String) -> String
+    class public func getAppInfoPlistString(for key:String)->String
     {
 
         return (Bundle.main.infoDictionary?[key] as? String) ?? "-N/A-"
 
-    }   // End of class public func getAppInfoPlistString(for key:).
+    }   // End of class public func getAppInfoPlistString(for key:)->String.
+
+    class public func getAppUserDefaultsFileLocation(bIsBootstrapInit:Bool = false)->String 
+    {
+
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+        
+        if (bIsBootstrapInit == false)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - parameter 'bIsBootstrapInit' is [\(bIsBootstrapInit)]...")
+        }
+
+        var sAppUserDefaultsFileLocation:String   = ""
+        var sAppBundleMainBundleIdentifier:String = ""
+
+        // Get the Application's Bundle 'identifier'...
+
+        guard let bundleIdentifier = Bundle.main.bundleIdentifier 
+        else 
+        {
+
+            sAppUserDefaultsFileLocation = "Error: Could NOT retrieve the App's Bundle 'identifier' <pass #1>..."
+
+            // Exit:
+
+            if (bIsBootstrapInit == false)
+            {
+                self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sAppUserDefaultsFileLocation' is [\(sAppUserDefaultsFileLocation)]...")
+            }
+
+            return sAppUserDefaultsFileLocation
+
+        }
+
+        sAppBundleMainBundleIdentifier = bundleIdentifier
+
+        if (sAppBundleMainBundleIdentifier.count < 1)
+        {
+        
+            sAppBundleMainBundleIdentifier = jmAppBundleIdentifier
+        
+        }
+        
+        if (sAppBundleMainBundleIdentifier.count < 1)
+        {
+        
+            sAppUserDefaultsFileLocation = "Error: Could NOT retrieve the App's Bundle 'identifier' <pass #2>..."
+
+            // Exit:
+
+            if (bIsBootstrapInit == false)
+            {
+                self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sAppUserDefaultsFileLocation' is [\(sAppUserDefaultsFileLocation)]...")
+            }
+
+            return sAppUserDefaultsFileLocation
+
+        }
+
+        // First approach: Search in Library/Preferences...
+
+        if let preferencesDir = FileManager.default.urls(for:.libraryDirectory, in:.userDomainMask).first 
+        {
+
+            let preferencesPath   = preferencesDir.appendingPathComponent("Preferences")
+            let defaultsPlistPath = preferencesPath.appendingPathComponent("\(sAppBundleMainBundleIdentifier).plist")
+
+            if FileManager.default.fileExists(atPath:defaultsPlistPath.path) 
+            {
+
+                sAppUserDefaultsFileLocation = defaultsPlistPath.path
+
+                // Exit:
+
+                if (bIsBootstrapInit == false)
+                {
+                    self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sAppUserDefaultsFileLocation' is [\(sAppUserDefaultsFileLocation)]...")
+                }
+
+                return sAppUserDefaultsFileLocation
+
+            }
+
+        }
+
+        // Second approach: Search in Application Support directory...
+
+        if let appSupportDir = FileManager.default.urls(for:.applicationSupportDirectory, in:.userDomainMask).first 
+        {
+
+            let possiblePath = appSupportDir.appendingPathComponent("\(sAppBundleMainBundleIdentifier).plist")
+
+            if FileManager.default.fileExists(atPath:possiblePath.path) 
+            {
+
+                sAppUserDefaultsFileLocation = possiblePath.path
+
+                // Exit:
+
+                if (bIsBootstrapInit == false)
+                {
+                    self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sAppUserDefaultsFileLocation' is [\(sAppUserDefaultsFileLocation)]...")
+                }
+
+                return sAppUserDefaultsFileLocation
+
+            }
+
+        }
+
+        // Third approach: Search in the container directory (iOS)...
+
+        if let containerDir = FileManager.default.urls(for:.documentDirectory, in:.userDomainMask).first?.deletingLastPathComponent() 
+        {
+
+            let libPath   = containerDir.appendingPathComponent("Library")
+            let prefsPath = libPath.appendingPathComponent("Preferences")
+            let plistPath = prefsPath.appendingPathComponent("\(sAppBundleMainBundleIdentifier).plist")
+
+            if FileManager.default.fileExists(atPath:plistPath.path) 
+            {
+
+                sAppUserDefaultsFileLocation = plistPath.path
+
+                // Exit:
+
+                if (bIsBootstrapInit == false)
+                {
+                    self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sAppUserDefaultsFileLocation' is [\(sAppUserDefaultsFileLocation)]...")
+                }
+
+                return sAppUserDefaultsFileLocation
+
+            }
+
+        }
+
+        // Additional approach: List all files in Library/Preferences to aid debugging...
+
+        do 
+        {
+
+            if let preferencesDir = FileManager.default.urls(for:.libraryDirectory, in:.userDomainMask).first?.appendingPathComponent("Preferences") 
+            {
+
+                let files         = try FileManager.default.contentsOfDirectory(atPath:preferencesDir.path)
+                let relevantFiles = files.filter 
+                {
+
+                    $0.contains(sAppBundleMainBundleIdentifier) || $0.contains("UserDefaults")
+
+                }
+
+                if (!relevantFiles.isEmpty)
+                {
+
+                    let relevantPaths = relevantFiles.map 
+                    {
+
+                        preferencesDir.appendingPathComponent($0).path
+
+                    }
+
+                    sAppUserDefaultsFileLocation = "Found potential matches:\n"+relevantPaths.joined(separator:"\n")
+
+                    // Exit:
+
+                    if (bIsBootstrapInit == false)
+                    {
+                        self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sAppUserDefaultsFileLocation' is [\(sAppUserDefaultsFileLocation)]...")
+                    }
+
+                    return sAppUserDefaultsFileLocation
+
+                }
+
+            }
+
+        }
+        catch 
+        {
+            // Continue to the fallback if these approachs fail...
+        }
+
+        // Fallback: Provide information about common locations...
+
+        sAppUserDefaultsFileLocation = 
+            """
+            Could not locate UserDefaults plist file.
+
+            Common locations:
+            - iOS: /Library/Preferences/\(sAppBundleMainBundleIdentifier).plist
+            - macOS: ~/Library/Preferences/\(sAppBundleMainBundleIdentifier).plist
+            - Simulator: ~/Library/Developer/CoreSimulator/Devices/<DEVICE_ID>/data/Containers/Data/Application/<APP_ID>/Library/Preferences/\(sAppBundleMainBundleIdentifier).plist
+
+            Bundle identifier: \(sAppBundleMainBundleIdentifier)
+            """
+
+        // Exit:
+
+        if (bIsBootstrapInit == false)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sAppUserDefaultsFileLocation' is [\(sAppUserDefaultsFileLocation)]...")
+        }
+
+        return sAppUserDefaultsFileLocation
+
+    }   // End of class public func getAppUserDefaultsFileLocation(bIsBootstrapInit:Bool)->String.
 
 }   // End of public class JmXcodeBuildSettings.
 

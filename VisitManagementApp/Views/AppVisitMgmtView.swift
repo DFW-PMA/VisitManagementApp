@@ -16,7 +16,7 @@ struct AppVisitMgmtView: View
     {
         
         static let sClsId        = "AppVisitMgmtView"
-        static let sClsVers      = "v1.0902"
+        static let sClsVers      = "v1.1002"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -31,23 +31,25 @@ struct AppVisitMgmtView: View
     
 //  @StateObject    var jmAppParseCoreManager:JmAppParseCoreManager
     
-    @State private  var cAppLogPFDataButtonPresses:Int                 = 0
+    @State private  var cAppLogPFDataButtonPresses:Int              = 0
     @State private  var cAppVisitMgmtViewRefreshButtonPresses:Int   = 0
-    @State private  var cContentViewAppWorkRouteButtonPresses:Int      = 0
+    @State private  var cContentViewAppWorkRouteButtonPresses:Int   = 0
     @State private  var cAppVisitMgmtViewTherapistButtonPresses:Int = 0
     @State private  var cAppVisitMgmtViewPatientButtonPresses:Int   = 0
+    @State private  var cAppVisitMgmtViewCoreLocButtonPresses:Int   = 0
 
-    @State private  var isAppLogPFDataViewModal:Bool                   = false
-    @State private  var isAppWorkRouteViewModal:Bool                    = false
-    @State private  var isAppDataTherapist1ViewModal:Bool              = false
-    @State private  var isAppDataTherapist2ViewModal:Bool              = false
-    @State private  var isAppDataTherapist3ViewModal:Bool              = false
-    @State private  var isAppDataPatient1ViewModal:Bool                = false
-    @State private  var isAppDataPatient2ViewModal:Bool                = false
-    @State private  var isAppDataPatient3ViewModal:Bool                = false
+    @State private  var isAppLogPFDataViewModal:Bool                = false
+    @State private  var isAppWorkRouteViewModal:Bool                = false
+    @State private  var isAppDataTherapist1ViewModal:Bool           = false
+    @State private  var isAppDataTherapist2ViewModal:Bool           = false
+    @State private  var isAppDataTherapist3ViewModal:Bool           = false
+    @State private  var isAppDataPatient1ViewModal:Bool             = false
+    @State private  var isAppDataPatient2ViewModal:Bool             = false
+    @State private  var isAppDataPatient3ViewModal:Bool             = false
+    @State private  var isAppDataCoreLocViewModal:Bool              = false
 
-                    var jmAppDelegateVisitor:JmAppDelegateVisitor      = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
-    @ObservedObject var jmAppParseCoreManager:JmAppParseCoreManager    = JmAppParseCoreManager.ClassSingleton.appParseCodeManager
+                    var jmAppDelegateVisitor:JmAppDelegateVisitor   = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
+    @ObservedObject var jmAppParseCoreManager:JmAppParseCoreManager = JmAppParseCoreManager.ClassSingleton.appParseCodeManager
     
     init()
     {
@@ -90,7 +92,7 @@ struct AppVisitMgmtView: View
     var body: some View
     {
         
-        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) \(ClassInfo.sClsCopyRight)...")
+        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) \(JmXcodeBuildSettings.jmAppVersionAndBuildNumber)...")
         
         NavigationStack
         {
@@ -221,7 +223,7 @@ struct AppVisitMgmtView: View
                         VStack(alignment:.center)
                         {
 
-                            Label("", systemImage: "location.viewfinder")
+                            Label("", systemImage: "wifi.router")
                                 .help(Text("App WorkRoute (Location) Information"))
                                 .imageScale(.large)
 
@@ -261,7 +263,7 @@ struct AppVisitMgmtView: View
                     Button
                     {
 
-                        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppVisitMgmtView.Button(Xcode).'Dismiss' pressed...")
+                        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):AppVisitMgmtView.Button(Xcode).'Dismiss' pressed...")
 
                         self.presentationMode.wrappedValue.dismiss()
 
@@ -718,6 +720,201 @@ struct AppVisitMgmtView: View
                     {
 
                         Text("Schedule(s)")
+                            .bold()
+                            .italic()
+                            .underline()
+                            .font(.caption)
+
+                    }
+
+                    Section
+                    {
+
+                    //  HStack(alignment:.center)
+                    //  {
+                    //
+                    //      Spacer()
+                    //
+                    //      Button
+                    //      {
+                    //
+                    //          self.cAppVisitMgmtViewPatientButtonPresses += 1
+                    //
+                    //          let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppVisitMgmtView.Button(Xcode).'Patient Gatherer by PID'.#(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
+                    //
+                    //          self.isAppDataPatient1ViewModal.toggle()
+                    //
+                    //      }
+                    //      label:
+                    //      {
+                    //
+                    //          VStack(alignment:.center)
+                    //          {
+                    //
+                    //              Label("", systemImage: "person.text.rectangle")
+                    //                  .help(Text("Patient Data Gatherer #1 by PID Screen..."))
+                    //                  .imageScale(.medium)
+                    //
+                    //              Text("Patient - Data Gatherer by PID - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
+                    //                  .font(.caption2)
+                    //
+                    //          }
+                    //
+                    //      }
+                    //  #if os(macOS)
+                    //      .sheet(isPresented:$isAppDataPatient1ViewModal, content:
+                    //          {
+                    //
+                    //              AppVisitMgmtPatient1View()
+                    //
+                    //          }
+                    //      )
+                    //  #endif
+                    //  #if os(iOS)
+                    //      .fullScreenCover(isPresented:$isAppDataPatient1ViewModal)
+                    //      {
+                    //
+                    //          AppVisitMgmtPatient1View()
+                    //
+                    //      }
+                    //  #endif
+                    //  #if os(macOS)
+                    //      .buttonStyle(.borderedProminent)
+                    //      .padding()
+                    //  //  .background(???.isPressed ? .blue : .gray)
+                    //      .cornerRadius(10)
+                    //      .foregroundColor(Color.primary)
+                    //  #endif
+                    //
+                    //      Spacer()
+                    //
+                    //  }
+                    //
+                    //  HStack(alignment:.center)
+                    //  {
+                    //
+                    //      Spacer()
+                    //
+                    //      Button
+                    //      {
+                    //
+                    //          self.cAppVisitMgmtViewPatientButtonPresses += 1
+                    //
+                    //          let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppVisitMgmtView.Button(Xcode).'Patient Gatherer by Name'.#(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
+                    //
+                    //          self.isAppDataPatient2ViewModal.toggle()
+                    //
+                    //      }
+                    //      label:
+                    //      {
+                    //
+                    //          VStack(alignment:.center)
+                    //          {
+                    //
+                    //              Label("", systemImage: "person.text.rectangle")
+                    //                  .help(Text("Patient Data Gatherer #2 by Name Screen..."))
+                    //                  .imageScale(.medium)
+                    //
+                    //              Text("Patient - Data Gatherer by Name - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
+                    //                  .font(.caption2)
+                    //
+                    //          }
+                    //
+                    //      }
+                    //  #if os(macOS)
+                    //      .sheet(isPresented:$isAppDataPatient2ViewModal, content:
+                    //          {
+                    //
+                    //              AppVisitMgmtPatient2View()
+                    //
+                    //          }
+                    //      )
+                    //  #endif
+                    //  #if os(iOS)
+                    //      .fullScreenCover(isPresented:$isAppDataPatient2ViewModal)
+                    //      {
+                    //
+                    //          AppVisitMgmtPatient2View()
+                    //
+                    //      }
+                    //  #endif
+                    //  #if os(macOS)
+                    //      .buttonStyle(.borderedProminent)
+                    //      .padding()
+                    //  //  .background(???.isPressed ? .blue : .gray)
+                    //      .cornerRadius(10)
+                    //      .foregroundColor(Color.primary)
+                    //  #endif
+                    //
+                    //      Spacer()
+                    //
+                    //  }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppVisitMgmtViewCoreLocButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppVisitMgmtView.Button(Xcode).'CoreLoc View'.#(\(self.cAppVisitMgmtViewCoreLocButtonPresses))...")
+
+                                self.isAppDataCoreLocViewModal.toggle()
+
+                            }
+                            label:
+                            {
+
+                                VStack(alignment:.center)
+                                {
+
+                                    Label("", systemImage: "location.viewfinder")
+                                        .help(Text("CoreLocation View..."))
+                                        .imageScale(.medium)
+
+                                    Text("CoreLoc - Core Location - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
+                                        .font(.caption2)
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .sheet(isPresented:$isAppDataCoreLocViewModal, content:
+                                {
+
+                                    AppVisitMgmtCoreLocView()
+
+                                }
+                            )
+                        #endif
+                        #if os(iOS)
+                            .fullScreenCover(isPresented:$isAppDataCoreLocViewModal)
+                            {
+
+                                AppVisitMgmtCoreLocView()
+
+                            }
+                        #endif
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                    }
+                    header:
+                    {
+
+                        Text("CoreLoc")
                             .bold()
                             .italic()
                             .underline()

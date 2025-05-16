@@ -28,7 +28,7 @@ public class AppGlobalInfo: NSObject
     }
 
     static let sGlobalInfoAppId:String                                   = "VisitManagementApp"
-    static let sGlobalInfoAppVers:String                                 = "v1.3109"
+    static let sGlobalInfoAppVers:String                                 = "v1.3401"
     static let sGlobalInfoAppDisp:String                                 = sGlobalInfoAppId+".("+sGlobalInfoAppVers+"): "
     static let sGlobalInfoAppCopyRight:String                            = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
     static let sGlobalInfoAppLogFilespecMaxSize:Int64                    = 50000000
@@ -45,7 +45,8 @@ public class AppGlobalInfo: NSObject
 
 #if os(macOS)
 
-    static let sHelpBasicFileExt:String                                  = "html"        // 'help' File extension: "md", "html", or "txt"
+//  static let sHelpBasicFileExt:String                                  = "html"        // 'help' File extension: "md", "html", or "txt"
+    static let sHelpBasicFileExt:String                                  = "md"          // 'help' File extension: "md", "html", or "txt"
 
 #elseif os(iOS)
 
@@ -64,6 +65,7 @@ public class AppGlobalInfo: NSObject
     static let bIssueTestAppUserNotifications:Bool                       = false
     static let bIssueShortAppUserNotifications:Bool                      = true
     static let bInstantiateAppParseCoreManager:Bool                      = true
+    static let bInstantiateAppParseCoreBkgdDataRepo2:Bool                = false
     static let bInstantiateAppCoreLocationSupport:Bool                   = true
     static let bPerformAppCoreLocationTesting:Bool                       = true
     static let bInstantiateAppMenuBarStatusBar:Bool                      = false
@@ -71,6 +73,8 @@ public class AppGlobalInfo: NSObject
     static let bEnableAppReleaseDownloads:Bool                           = true
     static let bInstantiateAppNWSWeatherModelObservable:Bool             = false
     static let bTestStringManipulations:Bool                             = true
+    static let bTestAppBigTestTracking1:Bool                             = false
+    static let bTestAppBigTestTracking2:Bool                             = false
     static let sAppUploadNotifyFrom:String                               = "dcox@justmacapps.net"
 
     // Various 'App' (tracking) information:
@@ -173,6 +177,7 @@ public class AppGlobalInfo: NSObject
            var sAppBundleIdentifier:String                               = "-unknown-"
            var sAppVersionAndBuildNumber:String                          = "-unknown-"
            var sAppCopyright:String                                      = "-unknown-"
+           var sAppUserDefaultsFileLocation:String                       = "-unknown-"
 
     // App 'delegate' Visitor:
 
@@ -328,6 +333,8 @@ public class AppGlobalInfo: NSObject
         self.sAppBundleIdentifier                   = JmXcodeBuildSettings.jmAppBundleIdentifier
         self.sAppVersionAndBuildNumber              = JmXcodeBuildSettings.jmAppVersionAndBuildNumber
         self.sAppCopyright                          = JmXcodeBuildSettings.jmAppCopyright      
+        self.sAppUserDefaultsFileLocation           = JmXcodeBuildSettings.getAppUserDefaultsFileLocation(bIsBootstrapInit:true)
+    //  self.sAppUserDefaultsFileLocation           = JmXcodeBuildSettings.jmAppUserDefaultsFileLocation
 
         self.updateUIDeviceOrientation()
 
@@ -434,7 +441,7 @@ public class AppGlobalInfo: NSObject
         self.updateUIDeviceOrientation()
         self.displayUIDeviceInformation()
 
-        // If we're flaggedto 'test' String manipulation(s), then do so...
+        // If we're flagged to 'test' String manipulation(s), then do so...
 
         if (AppGlobalInfo.bTestStringManipulations == true)
         {
@@ -488,6 +495,20 @@ public class AppGlobalInfo: NSObject
             self.xcgLogMsg("------------------------------------------------------------")
         
         }
+
+    //  // Instantiate the 'shared' instance of App BigTest tracking...
+    //
+    //  self.xcgLogMsg("------------------------------------------------------------")
+    //
+    //  self.xcgLogMsg("\(sCurrMethodDisp) Instantiating the 'VisitVerifyAppBigTestTracking' instance...")
+    //
+    //  let vvAppBigTestTracking:VisitVerifyAppBigTestTracking = VisitVerifyAppBigTestTracking.vvAppBigTestTracking
+    //
+    //  vvAppBigTestTracking.setJmAppDelegateVisitorInstance(jmAppDelegateVisitor:self.jmAppDelegateVisitor!)
+    //
+    //  self.xcgLogMsg("\(sCurrMethodDisp) Instantiated  the 'VisitVerifyAppBigTestTracking' instance...")
+    //
+    //  self.xcgLogMsg("------------------------------------------------------------")
 
         // Exit:
 
@@ -600,6 +621,8 @@ public class AppGlobalInfo: NSObject
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bEnableAppReleaseDownloads' is [\(String(describing: AppGlobalInfo.bEnableAppReleaseDownloads))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bInstantiateAppNWSWeatherModelObservable' is [\(String(describing: AppGlobalInfo.bInstantiateAppNWSWeatherModelObservable))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bTestStringManipulations' is [\(String(describing: AppGlobalInfo.bTestStringManipulations))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bTestAppBigTestTracking1' is [\(String(describing: AppGlobalInfo.bTestAppBigTestTracking1))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bTestAppBigTestTracking2' is [\(String(describing: AppGlobalInfo.bTestAppBigTestTracking2))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.sAppUploadNotifyFrom' is [\(String(describing: AppGlobalInfo.sAppUploadNotifyFrom))]...")
 
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.tiGlobalAppStartTime' is [\(String(describing: self.tiGlobalAppStartTime))]...")
@@ -666,6 +689,7 @@ public class AppGlobalInfo: NSObject
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.sAppBundleIdentifier' is [\(String(describing: self.sAppBundleIdentifier))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.sAppVersionAndBuildNumber' is [\(String(describing: self.sAppVersionAndBuildNumber))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.sAppCopyright' is [\(String(describing: self.sAppCopyright))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.sAppUserDefaultsFileLocation' is [\(String(describing: self.sAppUserDefaultsFileLocation))]...")
 
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.listPreXCGLoggerMessages' has (\(self.listPreXCGLoggerMessages.count)) message(s)...")
 

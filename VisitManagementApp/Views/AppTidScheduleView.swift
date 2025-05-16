@@ -18,7 +18,7 @@ struct AppTidScheduleView: View
     {
         
         static let sClsId        = "AppTidScheduleView"
-        static let sClsVers      = "v1.1201"
+        static let sClsVers      = "v1.1401"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright © JustMacApps 2023-2025. All rights reserved."
         static let bClsTrace     = true
@@ -488,9 +488,9 @@ struct AppTidScheduleView: View
                         {
                     
                             AppVisitMgmtSchedule1DetailsView(sTherapistTID:$sTherapistTID,
-                                                                sPatientPID:  $sPatientPID)
+                                                             sPatientPID:  $sPatientPID)
                         //  AppVisitMgmtSchedule1DetailsView(sTherapistTID:                  $sTherapistTID,
-                        //                                      sScheduledPatientLocationItemID:$sScheduledPatientLocationItemID)
+                        //                                   sScheduledPatientLocationItemID:$sScheduledPatientLocationItemID)
                     
                         })
                     #endif
@@ -499,9 +499,9 @@ struct AppTidScheduleView: View
                         {
                     
                             AppVisitMgmtSchedule1DetailsView(sTherapistTID:$sTherapistTID,
-                                                                sPatientPID:  $sPatientPID)
+                                                             sPatientPID:  $sPatientPID)
                         //  AppVisitMgmtSchedule1DetailsView(sTherapistTID:                  $sTherapistTID,
-                        //                                      sScheduledPatientLocationItemID:$sScheduledPatientLocationItemID)
+                        //                                   sScheduledPatientLocationItemID:$sScheduledPatientLocationItemID)
                     
                         }
                     #endif

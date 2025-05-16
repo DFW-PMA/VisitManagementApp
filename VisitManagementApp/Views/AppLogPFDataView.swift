@@ -16,7 +16,7 @@ struct AppLogPFDataView: View
     {
         
         static let sClsId        = "AppLogPFDataView"
-        static let sClsVers      = "v1.1503"
+        static let sClsVers      = "v1.1701"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -251,7 +251,7 @@ struct AppLogPFDataView: View
                         VStack(alignment:.center)
                         {
 
-                            Label("", systemImage: "location.viewfinder")
+                            Label("", systemImage: "wifi.router")
                                 .help(Text("App WorkRoute (Location) Information"))
                                 .imageScale(.large)
 
@@ -1070,7 +1070,20 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses))...")
 
-                                self.reloadPatientFileItems()
+                                self.progressTrigger.setProgressOverlay(isProgressOverlayOn:true)
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'true'>...")
+
+                                DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                                {
+
+                                    self.reloadPatientFileItems()
+
+                                    self.progressTrigger.setProgressOverlay(isProgressOverlayOn:false)
+
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'false'>...")
+
+                                }
 
                             }
                             label:
