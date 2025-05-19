@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-enum CLRevLocType: String, CaseIterable
+enum CLRevLocType:String, CaseIterable
 {
     
     case primary   = "primary"
@@ -19,14 +19,14 @@ enum CLRevLocType: String, CaseIterable
     
 }   // End of enum CLRevLocType(String, CaseIterable).
 
-class CoreLocationModelObservable2: NSObject, CLLocationManagerDelegate, ObservableObject
+class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, ObservableObject
 {
     
     struct ClassInfo
     {
         
         static let sClsId        = "CoreLocationModelObservable2"
-        static let sClsVers      = "v1.0802"
+        static let sClsVers      = "v1.0901"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -140,7 +140,7 @@ class CoreLocationModelObservable2: NSObject, CLLocationManagerDelegate, Observa
 
     }   // End of private func xcgLogMsg().
 
-    public func toString() -> String
+    public func toString()->String
     {
 
         var asToString:[String] = Array()
@@ -476,7 +476,7 @@ class CoreLocationModelObservable2: NSObject, CLLocationManagerDelegate, Observa
         
     }   // End of public func stopLocationUpdate().
     
-    public func updateGeocoderLocation(latitude: Double, longitude: Double) -> Bool
+    public func updateGeocoderLocation(latitude:Double, longitude:Double)->Bool
     {
         
         let sCurrMethod:String = #function
@@ -495,7 +495,7 @@ class CoreLocationModelObservable2: NSObject, CLLocationManagerDelegate, Observa
         self.clearLastCLLocationSettings()
         
         let clGeocoder:CLGeocoder      = CLGeocoder()
-        let currentLocation:CLLocation = CLLocation(latitude: latitude, longitude: longitude)
+        let currentLocation:CLLocation = CLLocation(latitude:latitude, longitude:longitude)
         
         clGeocoder.reverseGeocodeLocation(currentLocation, completionHandler: 
             { (placemarks, error) in
@@ -568,7 +568,7 @@ class CoreLocationModelObservable2: NSObject, CLLocationManagerDelegate, Observa
         
     }   // End of public func updateGeocoderLocations().
 
-    public func updateGeocoderLocations(requestID:Int = 1, latitude: Double, longitude: Double, withCompletionHandler completionHandler:@escaping(_ requestID:Int, _ dictCurrentLocation:[String:Any])->Void) -> Bool
+    public func updateGeocoderLocations(requestID:Int = 1, latitude:Double, longitude:Double, withCompletionHandler completionHandler:@escaping(_ requestID:Int, _ dictCurrentLocation:[String:Any])->Void)->Bool
     {
         
         let sCurrMethod:String = #function
@@ -587,7 +587,7 @@ class CoreLocationModelObservable2: NSObject, CLLocationManagerDelegate, Observa
         self.clearLastCLLocationSettings()
         
         let clGeocoder:CLGeocoder      = CLGeocoder()
-        let currentLocation:CLLocation = CLLocation(latitude: latitude, longitude: longitude)
+        let currentLocation:CLLocation = CLLocation(latitude:latitude, longitude:longitude)
         
         clGeocoder.reverseGeocodeLocation(currentLocation, completionHandler: 
             { (placemarks, error) in
@@ -613,6 +613,10 @@ class CoreLocationModelObservable2: NSObject, CLLocationManagerDelegate, Observa
                     self.sCurrentSubAdministrativeArea = firstLocation?.subAdministrativeArea ?? "-N/A-"
 
                     let _ = self.updateCoreLocationSiteItemList()
+
+                    dictCurrentLocation["iRequestID"]                    = "\(requestID)"
+                    dictCurrentLocation["dblLatitude"]                   = "\(latitude)"
+                    dictCurrentLocation["dblLongitude"]                  = "\(longitude)"
 
                     dictCurrentLocation["clCurrentLocation"]             = self.clCurrentLocation            
                     dictCurrentLocation["sCurrentLocationName"]          = self.sCurrentLocationName         
