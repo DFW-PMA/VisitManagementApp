@@ -16,7 +16,7 @@ struct AppVisitMgmtCoreLocView:View
     {
         
         static let sClsId        = "AppVisitMgmtCoreLocView"
-        static let sClsVers      = "v1.0105"
+        static let sClsVers      = "v1.0201"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true

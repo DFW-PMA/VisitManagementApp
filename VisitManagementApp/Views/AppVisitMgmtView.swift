@@ -16,7 +16,7 @@ struct AppVisitMgmtView: View
     {
         
         static let sClsId        = "AppVisitMgmtView"
-        static let sClsVers      = "v1.1002"
+        static let sClsVers      = "v1.1101"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -34,12 +34,16 @@ struct AppVisitMgmtView: View
     @State private  var cAppLogPFDataButtonPresses:Int              = 0
     @State private  var cAppVisitMgmtViewRefreshButtonPresses:Int   = 0
     @State private  var cContentViewAppWorkRouteButtonPresses:Int   = 0
+    @State private  var cAppSchedPatLocButtonPresses:Int            = 0
+
     @State private  var cAppVisitMgmtViewTherapistButtonPresses:Int = 0
     @State private  var cAppVisitMgmtViewPatientButtonPresses:Int   = 0
     @State private  var cAppVisitMgmtViewCoreLocButtonPresses:Int   = 0
 
     @State private  var isAppLogPFDataViewModal:Bool                = false
     @State private  var isAppWorkRouteViewModal:Bool                = false
+    @State private  var isAppSchedPatLocViewModal:Bool              = false
+
     @State private  var isAppDataTherapist1ViewModal:Bool           = false
     @State private  var isAppDataTherapist2ViewModal:Bool           = false
     @State private  var isAppDataTherapist3ViewModal:Bool           = false
@@ -247,6 +251,69 @@ struct AppVisitMgmtView: View
                     {
 
                         AppWorkRouteView()
+
+                    }
+                #endif
+                #if os(macOS)
+                    .buttonStyle(.borderedProminent)
+                    .padding()
+                //  .background(???.isPressed ? .blue : .gray)
+                    .cornerRadius(10)
+                    .foregroundColor(Color.primary)
+                #endif
+
+                    Spacer()
+
+                    Button
+                    {
+
+                        self.cAppSchedPatLocButtonPresses += 1
+
+                        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):ContentView.Button(Xcode).'App SchedPatLoc'.#(\(self.cAppSchedPatLocButtonPresses))...")
+
+                        self.isAppSchedPatLocViewModal.toggle()
+
+                //  #if os(macOS)
+                //
+                //      // Using -> @Environment(\.openWindow)var openWindow and 'openWindow(id:"...")' on MacOS...
+                //      openWindow(id:"AppSchedPatLocView", value:self.getAppParseCoreManagerInstance())
+                //
+                //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Encodable'
+                //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Decodable'
+                //
+                //  #endif
+                //
+                    }
+                    label:
+                    {
+
+                        VStack(alignment:.center)
+                        {
+
+                            Label("", systemImage: "list.bullet.rectangle")
+                                .help(Text("App SchedPatLoc (Location) Information"))
+                                .imageScale(.large)
+
+                            Text("SchedPatLoc")
+                                .font(.caption)
+
+                        }
+
+                    }
+                #if os(macOS)
+                    .sheet(isPresented:$isAppSchedPatLocViewModal, content:
+                        {
+              
+                            AppSchedPatLocView()
+              
+                        }
+                    )
+                #endif
+                #if os(iOS)
+                    .fullScreenCover(isPresented:$isAppSchedPatLocViewModal)
+                    {
+
+                        AppSchedPatLocView()
 
                     }
                 #endif

@@ -16,7 +16,7 @@ struct AppLogPFDataView: View
     {
         
         static let sClsId        = "AppLogPFDataView"
-        static let sClsVers      = "v1.1801"
+        static let sClsVers      = "v1.1802"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -30,42 +30,50 @@ struct AppLogPFDataView: View
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.openWindow)       var openWindow
 
-    @State private  var cAppDataButtonPresses:Int                                 = 0
-    @State private  var cAppWorkRouteButtonPresses:Int                            = 0
+    @State private  var cAppDataButtonPresses:Int                                  = 0
+    @State private  var cAppWorkRouteButtonPresses:Int                             = 0
+    @State private  var cAppSchedPatLocButtonPresses:Int                           = 0
     
-    @State private  var isAppDataViewModal:Bool                                   = false
-    @State private  var isAppWorkRouteViewModal:Bool                              = false
+    @State private  var isAppDataViewModal:Bool                                    = false
+    @State private  var isAppWorkRouteViewModal:Bool                               = false
+    @State private  var isAppSchedPatLocViewModal:Bool                             = false
 
-    @State private  var cAppLogPFDataLoggingRefreshButtonPresses:Int              = 0
-    @State private  var cAppLogPFDataLoggingPFAdminsButtonPresses:Int             = 0
-    @State private  var cAppLogPFDataLoggingPFCscButtonPresses:Int                = 0
-    @State private  var cAppLogPFDataLoggingPFTherapistNamesButtonPresses:Int     = 0
-    @State private  var cAppLogPFDataLoggingPFTherapistFileButtonPresses:Int      = 0
-    @State private  var cAppLogPFDataLoggingTherapistXrefButtonPresses:Int        = 0
-    @State private  var cAppLogPFDataLoggingPFPatientNamesButtonPresses:Int       = 0
-    @State private  var cAppLogPFDataLoggingPFPatientFileButtonPresses:Int        = 0
-    @State private  var cAppLogPFDataLoggingPFPatientXrefButtonPresses:Int        = 0
-    @State private  var cAppLogPFDataLoggingPatientXrefButtonPresses:Int          = 0
-    @State private  var cAppLogPFDataLoggingSchedPatLocButtonPresses:Int          = 0
-    @State private  var cAppLogPFDataLoggingExportSchedPatLocButtonPresses:Int    = 0
-    @State private  var cAppLogPFDataLoggingExportBackupFileButtonPresses:Int     = 0
-    @State private  var cAppLogPFDataLoggingExportLastBackupFileButtonPresses:Int = 0
+    @State private  var cAppLogPFDataLoggingRefreshButtonPresses:Int               = 0
+    @State private  var cAppLogPFDataLoggingPFAdminsButtonPresses:Int              = 0
+    @State private  var cAppLogPFDataLoggingPFCscButtonPresses:Int                 = 0
+    @State private  var cAppLogPFDataLoggingPFTherapistNamesButtonPresses:Int      = 0
+    @State private  var cAppLogPFDataLoggingPFTherapistFileButtonPresses:Int       = 0
+    @State private  var cAppLogPFDataLoggingTherapistXrefButtonPresses:Int         = 0
+    @State private  var cAppLogPFDataLoggingPFPatientNamesButtonPresses:Int        = 0
+    @State private  var cAppLogPFDataLoggingPFPatientFileButtonPresses:Int         = 0
+    @State private  var cAppLogPFDataLoggingPFPatientXrefButtonPresses:Int         = 0
+    @State private  var cAppLogPFDataLoggingPatientXrefButtonPresses:Int           = 0
+    @State private  var cAppLogPFDataLoggingSchedPatLocButtonPresses:Int           = 0
+    @State private  var cAppLogPFDataLoggingExportSchedPatLocButtonPresses:Int     = 0
+    @State private  var cAppLogPFDataLoggingExportBackupFileButtonPresses:Int      = 0
+    @State private  var cAppLogPFDataLoggingExportLastBackupFileButtonPresses:Int  = 0
 
-    @StateObject    var progressTrigger1:ProgressOverlayTrigger                   = ProgressOverlayTrigger()
-    @StateObject    var progressTrigger2:ProgressOverlayTrigger                   = ProgressOverlayTrigger()
+    @StateObject    var progressTriggerPFAdmins:ProgressOverlayTrigger             = ProgressOverlayTrigger()
+    @StateObject    var progressTriggerPFCsc:ProgressOverlayTrigger                = ProgressOverlayTrigger()
+    @StateObject    var progressTriggerPFTherapistFile:ProgressOverlayTrigger      = ProgressOverlayTrigger()
+    @StateObject    var progressTriggerPFPatientFile:ProgressOverlayTrigger        = ProgressOverlayTrigger()
+    @StateObject    var progressTriggerSchedPatLoc:ProgressOverlayTrigger          = ProgressOverlayTrigger()
+    @StateObject    var progressTriggerExportSchedPatLoc:ProgressOverlayTrigger    = ProgressOverlayTrigger()
+    @StateObject    var progressTriggerExportBackupFile:ProgressOverlayTrigger     = ProgressOverlayTrigger()
+    @StateObject    var progressTriggerExportLastBackupFile:ProgressOverlayTrigger = ProgressOverlayTrigger()
 
-    @State private  var cAppLogPFDataReloadPFAdminsButtonPresses:Int              = 0
-    @State private  var cAppLogPFDataReloadPFCscButtonPresses:Int                 = 0
-    @State private  var cAppLogPFDataReloadPFTherapistFileButtonPresses:Int       = 0
-    @State private  var cAppLogPFDataReloadPFPatientFileButtonPresses:Int         = 0
-    @State private  var cAppLogPFDataReloadSchedPatLocButtonPresses:Int           = 0
-    @State private  var cAppLogPFDataReloadExportSchedPatLocButtonPresses:Int     = 0
-    @State private  var cAppLogPFDataReloadExportBackupFileButtonPresses:Int      = 0
-    @State private  var cAppLogPFDataReloadExportLastBackupFileButtonPresses:Int  = 0
+    @State private  var cAppLogPFDataReloadPFAdminsButtonPresses:Int               = 0
+    @State private  var cAppLogPFDataReloadPFCscButtonPresses:Int                  = 0
+    @State private  var cAppLogPFDataReloadPFTherapistFileButtonPresses:Int        = 0
+    @State private  var cAppLogPFDataReloadPFPatientFileButtonPresses:Int          = 0
+    @State private  var cAppLogPFDataReloadSchedPatLocButtonPresses:Int            = 0
+    @State private  var cAppLogPFDataReloadExportSchedPatLocButtonPresses:Int      = 0
+    @State private  var cAppLogPFDataReloadExportBackupFileButtonPresses:Int       = 0
+    @State private  var cAppLogPFDataReloadExportLastBackupFileButtonPresses:Int   = 0
 
-                    var jmAppDelegateVisitor:JmAppDelegateVisitor                 = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
-    @ObservedObject var jmAppParseCoreManager:JmAppParseCoreManager               = JmAppParseCoreManager.ClassSingleton.appParseCodeManager
-                    var jmAppParseCoreBkgdDataRepo:JmAppParseCoreBkgdDataRepo     = JmAppParseCoreBkgdDataRepo.ClassSingleton.appParseCodeBkgdDataRepo
+                    var jmAppDelegateVisitor:JmAppDelegateVisitor                  = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
+    @ObservedObject var jmAppParseCoreManager:JmAppParseCoreManager                = JmAppParseCoreManager.ClassSingleton.appParseCodeManager
+                    var jmAppParseCoreBkgdDataRepo:JmAppParseCoreBkgdDataRepo      = JmAppParseCoreBkgdDataRepo.ClassSingleton.appParseCodeBkgdDataRepo
     
     init()
     {
@@ -276,6 +284,69 @@ struct AppLogPFDataView: View
                     {
 
                         AppWorkRouteView()
+
+                    }
+                #endif
+                #if os(macOS)
+                    .buttonStyle(.borderedProminent)
+                    .padding()
+                //  .background(???.isPressed ? .blue : .gray)
+                    .cornerRadius(10)
+                    .foregroundColor(Color.primary)
+                #endif
+
+                    Spacer()
+
+                    Button
+                    {
+
+                        self.cAppSchedPatLocButtonPresses += 1
+
+                        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):ContentView.Button(Xcode).'App SchedPatLoc'.#(\(self.cAppSchedPatLocButtonPresses))...")
+
+                        self.isAppSchedPatLocViewModal.toggle()
+
+                //  #if os(macOS)
+                //
+                //      // Using -> @Environment(\.openWindow)var openWindow and 'openWindow(id:"...")' on MacOS...
+                //      openWindow(id:"AppSchedPatLocView", value:self.getAppParseCoreManagerInstance())
+                //
+                //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Encodable'
+                //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Decodable'
+                //
+                //  #endif
+                //
+                    }
+                    label:
+                    {
+
+                        VStack(alignment:.center)
+                        {
+
+                            Label("", systemImage: "list.bullet.rectangle")
+                                .help(Text("App SchedPatLoc (Location) Information"))
+                                .imageScale(.large)
+
+                            Text("SchedPatLoc")
+                                .font(.caption)
+
+                        }
+
+                    }
+                #if os(macOS)
+                    .sheet(isPresented:$isAppSchedPatLocViewModal, content:
+                        {
+
+                            AppSchedPatLocView()
+
+                        }
+                    )
+                #endif
+                #if os(iOS)
+                    .fullScreenCover(isPresented:$isAppSchedPatLocViewModal)
+                    {
+
+                        AppSchedPatLocView()
 
                     }
                 #endif
@@ -916,7 +987,20 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFAdmins'.#(\(self.cAppLogPFDataReloadPFAdminsButtonPresses))...")
 
-                                self.reloadPFAdminsDataItems()
+                                self.progressTriggerPFAdmins.setProgressOverlay(isProgressOverlayOn:true)
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFAdmins'.#(\(self.cAppLogPFDataReloadPFAdminsButtonPresses)) - 'self.progressTriggerPFAdmins.isProgressOverlayOn' is [\(self.progressTriggerPFAdmins.isProgressOverlayOn)] <should be 'true'>...")
+
+                                DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                                {
+
+                                    self.reloadPFAdminsDataItems()
+
+                                    self.progressTriggerPFAdmins.setProgressOverlay(isProgressOverlayOn:false)
+
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFAdmins'.#(\(self.cAppLogPFDataReloadPFAdminsButtonPresses)) - 'self.progressTriggerPFAdmins.isProgressOverlayOn' is [\(self.progressTriggerPFAdmins.isProgressOverlayOn)] <should be 'false'>...")
+
+                                }
 
                             }
                             label:
@@ -937,6 +1021,7 @@ struct AppLogPFDataView: View
                                     Spacer()
 
                                 }
+                                .progressOverlay(trigger:self.progressTriggerPFAdmins)
 
                             }
                         #if os(macOS)
@@ -963,7 +1048,20 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFCsc'.#(\(self.cAppLogPFDataReloadPFCscButtonPresses))...")
 
-                                self.reloadPFCscDataItems()
+                                self.progressTriggerPFCsc.setProgressOverlay(isProgressOverlayOn:true)
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFCsc'.#(\(self.cAppLogPFDataReloadPFCscButtonPresses)) - 'self.progressTriggerPFCsc.isProgressOverlayOn' is [\(self.progressTriggerPFCsc.isProgressOverlayOn)] <should be 'true'>...")
+
+                                DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                                {
+
+                                    self.reloadPFCscDataItems()
+
+                                    self.progressTriggerPFCsc.setProgressOverlay(isProgressOverlayOn:false)
+
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFCsc'.#(\(self.cAppLogPFDataReloadPFCscButtonPresses)) - 'self.progressTriggerPFCsc.isProgressOverlayOn' is [\(self.progressTriggerPFCsc.isProgressOverlayOn)] <should be 'false'>...")
+
+                                }
 
                             }
                             label:
@@ -984,6 +1082,7 @@ struct AppLogPFDataView: View
                                     Spacer()
 
                                 }
+                                .progressOverlay(trigger:self.progressTriggerPFCsc)
 
                             }
                         #if os(macOS)
@@ -1010,18 +1109,18 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses))...")
 
-                                self.progressTrigger1.setProgressOverlay(isProgressOverlayOn:true)
+                                self.progressTriggerPFTherapistFile.setProgressOverlay(isProgressOverlayOn:true)
 
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTrigger1.isProgressOverlayOn' is [\(self.progressTrigger1.isProgressOverlayOn)] <should be 'true'>...")
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTriggerPFTherapistFile.isProgressOverlayOn' is [\(self.progressTriggerPFTherapistFile.isProgressOverlayOn)] <should be 'true'>...")
 
                                 DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
                                 {
 
                                     self.reloadTherapistFileItems()
 
-                                    self.progressTrigger1.setProgressOverlay(isProgressOverlayOn:false)
+                                    self.progressTriggerPFTherapistFile.setProgressOverlay(isProgressOverlayOn:false)
 
-                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTrigger1.isProgressOverlayOn' is [\(self.progressTrigger1.isProgressOverlayOn)] <should be 'false'>...")
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTriggerPFTherapistFile.isProgressOverlayOn' is [\(self.progressTriggerPFTherapistFile.isProgressOverlayOn)] <should be 'false'>...")
 
                                 }
 
@@ -1044,7 +1143,7 @@ struct AppLogPFDataView: View
                                     Spacer()
 
                                 }
-                                .progressOverlay(trigger:self.progressTrigger1)
+                                .progressOverlay(trigger:self.progressTriggerPFTherapistFile)
 
                             }
                         #if os(macOS)
@@ -1071,18 +1170,18 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses))...")
 
-                                self.progressTrigger2.setProgressOverlay(isProgressOverlayOn:true)
+                                self.progressTriggerPFPatientFile.setProgressOverlay(isProgressOverlayOn:true)
 
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses)) - 'self.progressTrigger2.isProgressOverlayOn' is [\(self.progressTrigger2.isProgressOverlayOn)] <should be 'true'>...")
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses)) - 'self.progressTriggerPFPatientFile.isProgressOverlayOn' is [\(self.progressTriggerPFPatientFile.isProgressOverlayOn)] <should be 'true'>...")
 
                                 DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
                                 {
 
                                     self.reloadPatientFileItems()
 
-                                    self.progressTrigger2.setProgressOverlay(isProgressOverlayOn:false)
+                                    self.progressTriggerPFPatientFile.setProgressOverlay(isProgressOverlayOn:false)
 
-                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses)) - 'self.progressTrigger2.isProgressOverlayOn' is [\(self.progressTrigger2.isProgressOverlayOn)] <should be 'false'>...")
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses)) - 'self.progressTriggerPFPatientFile.isProgressOverlayOn' is [\(self.progressTriggerPFPatientFile.isProgressOverlayOn)] <should be 'false'>...")
 
                                 }
 
@@ -1105,7 +1204,7 @@ struct AppLogPFDataView: View
                                     Spacer()
 
                                 }
-                                .progressOverlay(trigger:self.progressTrigger2)
+                                .progressOverlay(trigger:self.progressTriggerPFPatientFile)
 
                             }
                         #if os(macOS)
@@ -1132,7 +1231,20 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for SchedPatLoc'.#(\(self.cAppLogPFDataReloadSchedPatLocButtonPresses))...")
 
-                                self.reloadDictSchedPatientLocItems()
+                                self.progressTriggerSchedPatLoc.setProgressOverlay(isProgressOverlayOn:true)
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for SchedPatLoc'.#(\(self.cAppLogPFDataReloadSchedPatLocButtonPresses)) - 'self.progressTriggerSchedPatLoc.isProgressOverlayOn' is [\(self.progressTriggerSchedPatLoc.isProgressOverlayOn)] <should be 'true'>...")
+
+                                DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                                {
+
+                                    self.reloadDictSchedPatientLocItems()
+
+                                    self.progressTriggerSchedPatLoc.setProgressOverlay(isProgressOverlayOn:false)
+
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for SchedPatLoc'.#(\(self.cAppLogPFDataReloadSchedPatLocButtonPresses)) - 'self.progressTriggerSchedPatLoc.isProgressOverlayOn' is [\(self.progressTriggerSchedPatLoc.isProgressOverlayOn)] <should be 'false'>...")
+
+                                }
 
                             }
                             label:
@@ -1153,6 +1265,7 @@ struct AppLogPFDataView: View
                                     Spacer()
 
                                 }
+                                .progressOverlay(trigger:self.progressTriggerSchedPatLoc)
 
                             }
                         #if os(macOS)
@@ -1179,7 +1292,20 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for 'export' SchedPatLoc'.#(\(self.cAppLogPFDataReloadExportSchedPatLocButtonPresses))...")
 
-                                self.reloadDictExportSchedPatientLocItems()
+                                self.progressTriggerExportSchedPatLoc.setProgressOverlay(isProgressOverlayOn:true)
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for 'export' SchedPatLoc'.#(\(self.cAppLogPFDataReloadExportSchedPatLocButtonPresses)) - 'self.progressTriggerExportSchedPatLoc.isProgressOverlayOn' is [\(self.progressTriggerExportSchedPatLoc.isProgressOverlayOn)] <should be 'true'>...")
+
+                                DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                                {
+
+                                    self.reloadDictExportSchedPatientLocItems()
+
+                                    self.progressTriggerExportSchedPatLoc.setProgressOverlay(isProgressOverlayOn:false)
+
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for 'export' SchedPatLoc'.#(\(self.cAppLogPFDataReloadExportSchedPatLocButtonPresses)) - 'self.progressTriggerExportSchedPatLoc.isProgressOverlayOn' is [\(self.progressTriggerExportSchedPatLoc.isProgressOverlayOn)] <should be 'false'>...")
+
+                                }
 
                             }
                             label:
@@ -1200,6 +1326,7 @@ struct AppLogPFDataView: View
                                     Spacer()
 
                                 }
+                                .progressOverlay(trigger:self.progressTriggerExportSchedPatLoc)
 
                             }
                         #if os(macOS)
@@ -1226,7 +1353,20 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for 'export' BackupFIle item(s)'.#(\(self.cAppLogPFDataLoggingExportBackupFileButtonPresses))...")
 
-                                self.reloadDictExportBackupFileItems()
+                                self.progressTriggerExportBackupFile.setProgressOverlay(isProgressOverlayOn:true)
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for 'export' BackupFIle item(s)'.#(\(self.cAppLogPFDataLoggingExportBackupFileButtonPresses)) - 'self.progressTriggerExportBackupFile.isProgressOverlayOn' is [\(self.progressTriggerExportBackupFile.isProgressOverlayOn)] <should be 'true'>...")
+
+                                DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                                {
+
+                                    self.reloadDictExportBackupFileItems()
+
+                                    self.progressTriggerExportBackupFile.setProgressOverlay(isProgressOverlayOn:false)
+
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for 'export' BackupFIle item(s)'.#(\(self.cAppLogPFDataLoggingExportBackupFileButtonPresses)) - 'self.progressTriggerExportBackupFile.isProgressOverlayOn' is [\(self.progressTriggerExportBackupFile.isProgressOverlayOn)] <should be 'false'>...")
+
+                                }
 
                             }
                             label:
@@ -1247,6 +1387,7 @@ struct AppLogPFDataView: View
                                     Spacer()
 
                                 }
+                                .progressOverlay(trigger:self.progressTriggerExportBackupFile)
 
                             }
                         #if os(macOS)
@@ -1273,7 +1414,20 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for 'export' LAST BackupFIle item(s)'.#(\(self.cAppLogPFDataLoggingExportLastBackupFileButtonPresses))...")
 
-                                self.reloadDictExportBackupFileItems()
+                                self.progressTriggerExportLastBackupFile.setProgressOverlay(isProgressOverlayOn:true)
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for 'export' LAST BackupFIle item(s)'.#(\(self.cAppLogPFDataLoggingExportLastBackupFileButtonPresses)) - 'self.progressTriggerExportLastBackupFile.isProgressOverlayOn' is [\(self.progressTriggerExportLastBackupFile.isProgressOverlayOn)] <should be 'true'>...")
+
+                                DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                                {
+
+                                    self.reloadDictExportLastBackupFileItems()
+
+                                    self.progressTriggerExportLastBackupFile.setProgressOverlay(isProgressOverlayOn:false)
+
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for 'export' LAST BackupFIle item(s)'.#(\(self.cAppLogPFDataLoggingExportLastBackupFileButtonPresses)) - 'self.progressTriggerExportLastBackupFile.isProgressOverlayOn' is [\(self.progressTriggerExportLastBackupFile.isProgressOverlayOn)] <should be 'false'>...")
+
+                                }
 
                             }
                             label:
@@ -1294,6 +1448,7 @@ struct AppLogPFDataView: View
                                     Spacer()
 
                                 }
+                                .progressOverlay(trigger:self.progressTriggerExportLastBackupFile)
 
                             }
                         #if os(macOS)
