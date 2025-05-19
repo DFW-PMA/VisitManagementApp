@@ -16,7 +16,7 @@ struct AppSchedPatLocView: View
     {
         
         static let sClsId        = "AppSchedPatLocView"
-        static let sClsVers      = "v1.1210"
+        static let sClsVers      = "v1.1401"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -230,13 +230,13 @@ struct AppSchedPatLocView: View
                             Label("", systemImage: "arrow.down.app")
                                 .help(Text("'Rebuild' App SchedPatLoc Screen..."))
                                 .imageScale(.medium)
-                                .progressOverlay(trigger:self.progressTrigger)
+                            //  .progressOverlay(trigger:self.progressTrigger)
 
                             Text("Rebuild - #(\(self.cAppSchedPatLocViewRebuildButtonPresses))")
                                 .font(.footnote)
 
                         }
-                    //  .progressOverlay(trigger:self.progressTrigger)
+                        .progressOverlay(trigger:self.progressTrigger)
 
                     }
                 #if os(macOS)

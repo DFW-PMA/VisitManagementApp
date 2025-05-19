@@ -16,7 +16,7 @@ struct AppLogPFDataView: View
     {
         
         static let sClsId        = "AppLogPFDataView"
-        static let sClsVers      = "v1.1701"
+        static let sClsVers      = "v1.1801"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -51,7 +51,8 @@ struct AppLogPFDataView: View
     @State private  var cAppLogPFDataLoggingExportBackupFileButtonPresses:Int     = 0
     @State private  var cAppLogPFDataLoggingExportLastBackupFileButtonPresses:Int = 0
 
-    @StateObject    var progressTrigger:ProgressOverlayTrigger                    = ProgressOverlayTrigger()
+    @StateObject    var progressTrigger1:ProgressOverlayTrigger                   = ProgressOverlayTrigger()
+    @StateObject    var progressTrigger2:ProgressOverlayTrigger                   = ProgressOverlayTrigger()
 
     @State private  var cAppLogPFDataReloadPFAdminsButtonPresses:Int              = 0
     @State private  var cAppLogPFDataReloadPFCscButtonPresses:Int                 = 0
@@ -1009,18 +1010,18 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses))...")
 
-                                self.progressTrigger.setProgressOverlay(isProgressOverlayOn:true)
+                                self.progressTrigger1.setProgressOverlay(isProgressOverlayOn:true)
 
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'true'>...")
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTrigger1.isProgressOverlayOn' is [\(self.progressTrigger1.isProgressOverlayOn)] <should be 'true'>...")
 
                                 DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
                                 {
 
                                     self.reloadTherapistFileItems()
 
-                                    self.progressTrigger.setProgressOverlay(isProgressOverlayOn:false)
+                                    self.progressTrigger1.setProgressOverlay(isProgressOverlayOn:false)
 
-                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'false'>...")
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFTherapistFile'.#(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses)) - 'self.progressTrigger1.isProgressOverlayOn' is [\(self.progressTrigger1.isProgressOverlayOn)] <should be 'false'>...")
 
                                 }
 
@@ -1043,7 +1044,7 @@ struct AppLogPFDataView: View
                                     Spacer()
 
                                 }
-                                .progressOverlay(trigger:self.progressTrigger)
+                                .progressOverlay(trigger:self.progressTrigger1)
 
                             }
                         #if os(macOS)
@@ -1070,18 +1071,18 @@ struct AppLogPFDataView: View
 
                                 let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses))...")
 
-                                self.progressTrigger.setProgressOverlay(isProgressOverlayOn:true)
+                                self.progressTrigger2.setProgressOverlay(isProgressOverlayOn:true)
 
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'true'>...")
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses)) - 'self.progressTrigger2.isProgressOverlayOn' is [\(self.progressTrigger2.isProgressOverlayOn)] <should be 'true'>...")
 
                                 DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
                                 {
 
                                     self.reloadPatientFileItems()
 
-                                    self.progressTrigger.setProgressOverlay(isProgressOverlayOn:false)
+                                    self.progressTrigger2.setProgressOverlay(isProgressOverlayOn:false)
 
-                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses)) - 'self.progressTrigger.isProgressOverlayOn' is [\(self.progressTrigger.isProgressOverlayOn)] <should be 'false'>...")
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Reload PFData for PFPatientFile'.#(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses)) - 'self.progressTrigger2.isProgressOverlayOn' is [\(self.progressTrigger2.isProgressOverlayOn)] <should be 'false'>...")
 
                                 }
 
@@ -1104,6 +1105,7 @@ struct AppLogPFDataView: View
                                     Spacer()
 
                                 }
+                                .progressOverlay(trigger:self.progressTrigger2)
 
                             }
                         #if os(macOS)
