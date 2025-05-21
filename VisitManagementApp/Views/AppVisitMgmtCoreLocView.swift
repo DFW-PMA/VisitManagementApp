@@ -18,7 +18,7 @@ struct AppVisitMgmtCoreLocView:View
     {
         
         static let sClsId        = "AppVisitMgmtCoreLocView"
-        static let sClsVers      = "v1.0226"
+        static let sClsVers      = "v1.0315"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -49,9 +49,13 @@ struct AppVisitMgmtCoreLocView:View
     
     @FocusState  private var focusedField:FocusedFields?
 
-    @State       private var sLocationLatitude:String                      = ""
-    @State       private var sLocationLongitude:String                     = ""
-    @State       private var sLocationAddress:String                       = ""
+    @AppStorage("CoreLocLocationLatitude")
+                 private var sLocationLatitude:String                      = ""
+    @AppStorage("CoreLocLocationLongitude")
+                 private var sLocationLongitude:String                     = ""
+    @AppStorage("CoreLocLocationAddress")
+                 private var sLocationAddress:String                       = ""
+
     @StateObject         var progressTriggerLatLong:ProgressOverlayTrigger = ProgressOverlayTrigger()
     @StateObject         var progressTriggerAddress:ProgressOverlayTrigger = ProgressOverlayTrigger()
     
@@ -152,553 +156,752 @@ struct AppVisitMgmtCoreLocView:View
 
                 Text("")
 
-                HStack()
+                VStack
                 {
 
-                    Text("=> Enter the Latitude: ")
-                        .font(.caption) 
-                        .contextMenu
+                    HStack()
+                    {
+
+                        Text("=> Enter the Latitude: ")
+                            .font(.caption) 
+                            .contextMenu
+                            {
+                                Button
+                                {
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #1...")
+
+                                    copyLocationLatitudeToClipboard()
+                                }
+                                label:
+                                {
+                                    Text("Copy Latitude to Clipboard")
+                                }
+                            }
+                            .foregroundColor(.red)
+
+                        TextField("Latitude...", text:$sLocationLatitude)
+                            .font(.caption) 
+                        #if os(iOS)
+                            .keyboardType(.numberPad)
+                        #endif
+                            .onAppear
+                            {
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onAppear #1 - 'self.sLocationLatitude' is [\(self.sLocationLatitude)]...")
+
+                                if (self.sLocationLatitude.count < 1)
+                                {
+                                    self.sLocationLongitude = ""
+                                }
+
+                                focusedField = .locationNil
+                            }
+                            .onChange(of:self.sLocationLongitude)
+                            {
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onChange #1 - 'self.sLocationLongitude' is [\(self.sLocationLongitude)]...")
+                            }
+                            .onSubmit
+                            {
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onSubmit #1 - 'self.sLocationLatitude'  is [\(self.sLocationLatitude)]...")
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onSubmit #1 - 'self.sLocationLongitude' is [\(self.sLocationLongitude)]...")
+                        
+                                focusedField = .locationLatitude
+                            }
+                            .onReceive(Just(sLocationLatitude))
+                            { newValue in
+                                let filteredValue  = newValue.filter { "-.0123456789".contains($0) }
+                                if (filteredValue != newValue)
+                                {
+                                    self.sLocationLatitude = filteredValue
+                                }
+                            }
+                            .focused($focusedField, equals:.locationLatitude)
+
+                        Spacer()
+
+                    }
+
+                    HStack()
+                    {
+
+                        Spacer()
+
+                        Text("   ")
+                            .font(.caption2)
+
+                        Spacer()
+
+                        Button
                         {
-                            Button
-                            {
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #1...")
+                            let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #4...")
 
-                                copyLocationLatitudeToClipboard()
-                            }
-                            label:
-                            {
-                                Text("Copy Latitude to Clipboard")
-                            }
+                            copyLocationLatitudeToClipboard()
+
+                            focusedField = .locationNil
                         }
-                        .foregroundColor(.red)
+                        label:
+                        {
 
-                    TextField("Latitude...", text:$sLocationLatitude)
-                        .font(.caption) 
-                    #if os(iOS)
-                        .keyboardType(.numberPad)
+                            VStack(alignment:.center)
+                            {
+
+                                Label("", systemImage: "list.clipboard")
+                                    .help(Text("Copy Latitude to Clipboard..."))
+                                    .imageScale(.small)
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Text("Copy Latitude")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+
+                        }
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
                     #endif
-                        .onAppear
-                        {
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onAppear #1 - 'self.sLocationLatitude' is [\(self.sLocationLatitude)]...")
-
-                            if (self.sLocationLatitude.count < 1)
-                            {
-                                self.sLocationLongitude = ""
-                            }
-
-                            focusedField = .locationNil
-                        }
-                        .onChange(of:self.sLocationLongitude)
-                        {
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onChange #1 - 'self.sLocationLongitude' is [\(self.sLocationLongitude)]...")
-                        }
-                        .onSubmit
-                        {
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onSubmit #1 - 'self.sLocationLatitude'  is [\(self.sLocationLatitude)]...")
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onSubmit #1 - 'self.sLocationLongitude' is [\(self.sLocationLongitude)]...")
-                    
-                            focusedField = .locationLatitude
-                        }
-                        .onReceive(Just(sLocationLatitude))
-                        { newValue in
-                            let filteredValue  = newValue.filter { "-.0123456789".contains($0) }
-                            if (filteredValue != newValue)
-                            {
-                                self.sLocationLatitude = filteredValue
-                            }
-                        }
-                        .focused($focusedField, equals:.locationLatitude)
-
-                    Spacer()
-
-                    Button
-                    {
-                        let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #4...")
-
-                        copyLocationLatitudeToClipboard()
-
-                        focusedField = .locationNil
-                    }
-                    label:
-                    {
-
-                        VStack(alignment:.center)
-                        {
-
-                            Label("", systemImage: "list.clipboard")
-                                .help(Text("Copy Latitude to Clipboard..."))
-                                .imageScale(.medium)
-
-                            HStack(alignment:.center)
-                            {
-
-                                Spacer()
-
-                                Text("Copy Latitude")
-                                    .font(.caption2)
-
-                                Spacer()
-
-                            }
-
-                        }
-
-                    }
-                #if os(macOS)
-                    .buttonStyle(.borderedProminent)
-                    .padding()
-                //  .background(???.isPressed ? .blue : .gray)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.primary)
-                #endif
-                #if os(iOS)
-                    .padding()
-                #endif
-
-                    Spacer()
-
-                    Button
-                    {
-                        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Latitude delete'...")
-
-                        self.sLocationLatitude = ""
-                        focusedField           = .locationLatitude
-                    }
-                    label:
-                    {
-
-                        VStack(alignment:.center)
-                        {
-
-                            Label("", systemImage: "delete.left")
-                                .help(Text("Delete the Latitude..."))
-                                .imageScale(.medium)
-
-                            HStack(alignment:.center)
-                            {
-
-                                Spacer()
-
-                                Text("Delete Latitude")
-                                    .font(.caption2)
-
-                                Spacer()
-
-                            }
-
-                        }
-
-                    }
-                #if os(macOS)
-                    .buttonStyle(.borderedProminent)
-                    .padding()
-                //  .background(???.isPressed ? .blue : .gray)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.primary)
-                #endif
-                #if os(iOS)
-                    .padding()
-                #endif
-
-                }
-
-                HStack()
-                {
-
-                    Text("=> Enter the Longitude: ")
-                        .font(.caption) 
-                        .contextMenu
-                        {
-                            Button
-                            {
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #2...")
-
-                                copyLocationLongitudeToClipboard()
-                            }
-                            label:
-                            {
-                                Text("Copy Longitude to Clipboard")
-                            }
-                        }
-                        .foregroundColor(.red)
-
-                    TextField("Longitude...", text:$sLocationLongitude)
-                        .font(.caption) 
                     #if os(iOS)
-                        .keyboardType(.numberPad)
+                        .padding()
                     #endif
-                        .onAppear
-                        {
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onAppear #2 - 'self.sLocationLongitude' is [\(self.sLocationLongitude)]...")
 
-                            if (self.sLocationLatitude.count < 1)
-                            {
-                                self.sLocationLongitude = ""
-                            }
+                        Spacer()
+
+                        Button
+                        {
+                            let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'paste' button #7...")
+
+                            pasteLocationLatitudeFromClipboard()
 
                             focusedField = .locationNil
                         }
-                        .onChange(of:self.sLocationLatitude)
-                        {
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onChange #2 - 'self.sLocationLatitude' is [\(self.sLocationLatitude)]...")
-                        }
-                        .onSubmit
-                        {
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onSubmit #2 - 'self.sLocationLatitude'  is [\(self.sLocationLatitude)]...")
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onSubmit #2 - 'self.sLocationLongitude' is [\(self.sLocationLongitude)]...")
-                    
-                            focusedField = .locationLongitude
-                        }
-                        .onReceive(Just(sLocationLongitude))
-                        { newValue in
-                            let filteredValue  = newValue.filter { "-.0123456789".contains($0) }
-                            if (filteredValue != newValue)
-                            {
-                                self.sLocationLongitude = filteredValue
-                            }
-                        }
-                        .focused($focusedField, equals:.locationLongitude)
-
-                    Spacer()
-
-                    Button
-                    {
-                        let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #5...")
-
-                        copyLocationLongitudeToClipboard()
-
-                        focusedField = .locationNil
-                    }
-                    label:
-                    {
-
-                        VStack(alignment:.center)
+                        label:
                         {
 
-                            Label("", systemImage: "list.clipboard")
-                                .help(Text("Copy Longitude to Clipboard..."))
-                                .imageScale(.medium)
-
-                            HStack(alignment:.center)
+                            VStack(alignment:.center)
                             {
 
-                                Spacer()
+                                Label("", systemImage: "list.clipboard")
+                                    .help(Text("Paste Latitude from Clipboard..."))
+                                    .imageScale(.small)
 
-                                Text("Copy Longitude")
-                                    .font(.caption2)
+                                HStack(alignment:.center)
+                                {
 
-                                Spacer()
+                                    Spacer()
+
+                                    Text("Paste Latitude")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
 
                             }
 
                         }
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                    #if os(iOS)
+                        .padding()
+                    #endif
 
-                    }
-                #if os(macOS)
-                    .buttonStyle(.borderedProminent)
-                    .padding()
-                //  .background(???.isPressed ? .blue : .gray)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.primary)
-                #endif
-                #if os(iOS)
-                    .padding()
-                #endif
+                        Spacer()
 
-                    Spacer()
+                        Button
+                        {
+                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Latitude delete'...")
 
-                    Button
-                    {
-                        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Longitude delete'...")
-
-                        self.sLocationLongitude = ""
-                        focusedField            = .locationLongitude
-                    }
-                    label:
-                    {
-
-                        VStack(alignment:.center)
+                            self.sLocationLatitude = ""
+                            focusedField           = .locationNil
+                        //  focusedField           = .locationLatitude
+                        }
+                        label:
                         {
 
-                            Label("", systemImage: "delete.left")
-                                .help(Text("Delete the Longitude..."))
-                                .imageScale(.medium)
-
-                            HStack(alignment:.center)
+                            VStack(alignment:.center)
                             {
 
-                                Spacer()
+                                Label("", systemImage: "delete.left")
+                                    .help(Text("Delete the Latitude..."))
+                                    .imageScale(.small)
 
-                                Text("Delete Longitude")
-                                    .font(.caption2)
+                                HStack(alignment:.center)
+                                {
 
-                                Spacer()
+                                    Spacer()
+
+                                    Text("Delete Latitude")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
 
                             }
 
                         }
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                    #if os(iOS)
+                        .padding()
+                    #endif
 
                     }
-                #if os(macOS)
-                    .buttonStyle(.borderedProminent)
-                    .padding()
-                //  .background(???.isPressed ? .blue : .gray)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.primary)
-                #endif
-                #if os(iOS)
-                    .padding()
-                #endif
 
                 }
 
-                HStack
+                VStack
                 {
 
-                    Text("=> Located Address: ")
-                        .font(.caption) 
-                        .contextMenu
+                    HStack()
+                    {
+
+                        Text("=> Enter the Longitude: ")
+                            .font(.caption) 
+                            .contextMenu
+                            {
+                                Button
+                                {
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #2...")
+
+                                    copyLocationLongitudeToClipboard()
+                                }
+                                label:
+                                {
+                                    Text("Copy Longitude to Clipboard")
+                                }
+                            }
+                            .foregroundColor(.red)
+
+                        TextField("Longitude...", text:$sLocationLongitude)
+                            .font(.caption) 
+                        #if os(iOS)
+                            .keyboardType(.numberPad)
+                        #endif
+                            .onAppear
+                            {
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onAppear #2 - 'self.sLocationLongitude' is [\(self.sLocationLongitude)]...")
+
+                                if (self.sLocationLatitude.count < 1)
+                                {
+                                    self.sLocationLongitude = ""
+                                }
+
+                                focusedField = .locationNil
+                            }
+                            .onChange(of:self.sLocationLatitude)
+                            {
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onChange #2 - 'self.sLocationLatitude' is [\(self.sLocationLatitude)]...")
+                            }
+                            .onSubmit
+                            {
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onSubmit #2 - 'self.sLocationLatitude'  is [\(self.sLocationLatitude)]...")
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onSubmit #2 - 'self.sLocationLongitude' is [\(self.sLocationLongitude)]...")
+                        
+                                focusedField = .locationLongitude
+                            }
+                            .onReceive(Just(sLocationLongitude))
+                            { newValue in
+                                let filteredValue  = newValue.filter { "-.0123456789".contains($0) }
+                                if (filteredValue != newValue)
+                                {
+                                    self.sLocationLongitude = filteredValue
+                                }
+                            }
+                            .focused($focusedField, equals:.locationLongitude)
+
+                        Spacer()
+
+                    }
+
+                    HStack()
+                    {
+
+                        Spacer()
+
+                        Text("   ")
+                            .font(.caption2)
+
+                        Spacer()
+
+                        Button
                         {
-                            Button
-                            {
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #3...")
+                            let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #5...")
 
-                                copyLocationAddressToClipboard()
-                            }
-                            label:
-                            {
-                                Text("Copy Address to Clipboard")
-                            }
-                        }
-                        .foregroundColor(.red)
-
-                    TextField("Address...", text:$sLocationAddress)
-                        .font(.caption) 
-                        .onAppear
-                        {
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onAppear #3 - 'self.sLocationAddress' is [\(self.sLocationAddress)]...")
-
-                            if (self.sLocationAddress.count < 1)
-                            {
-                                self.sLocationAddress = ""
-                            }
+                            copyLocationLongitudeToClipboard()
 
                             focusedField = .locationNil
                         }
-                        .onChange(of:self.sLocationAddress)
-                        {
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onChange #3 - 'self.sLocationAddress' is [\(self.sLocationAddress)]...")
-                        }
-                        .onSubmit
-                        {
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onSubmit #3 - 'self.sLocationAddress'  is [\(self.sLocationAddress)]...")
-                    
-                            focusedField = .locationAddress
-                        }
-                        .focused($focusedField, equals:.locationAddress)
-
-                    Spacer()
-
-                    Button
-                    {
-                        let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #6...")
-
-                        copyLocationAddressToClipboard()
-
-                        focusedField = .locationNil
-                    }
-                    label:
-                    {
-
-                        VStack(alignment:.center)
+                        label:
                         {
 
-                            Label("", systemImage: "list.clipboard")
-                                .help(Text("Copy Address to Clipboard..."))
-                                .imageScale(.medium)
-
-                            HStack(alignment:.center)
+                            VStack(alignment:.center)
                             {
 
-                                Spacer()
+                                Label("", systemImage: "list.clipboard")
+                                    .help(Text("Copy Longitude to Clipboard..."))
+                                    .imageScale(.small)
 
-                                Text("Copy Address")
-                                    .font(.caption2)
+                                HStack(alignment:.center)
+                                {
 
-                                Spacer()
+                                    Spacer()
+
+                                    Text("Copy Longitude")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
 
                             }
 
                         }
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                    #if os(iOS)
+                        .padding()
+                    #endif
 
-                    }
-                #if os(macOS)
-                    .buttonStyle(.borderedProminent)
-                    .padding()
-                //  .background(???.isPressed ? .blue : .gray)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.primary)
-                #endif
-                #if os(iOS)
-                    .padding()
-                #endif
+                        Spacer()
 
-                Spacer()
+                        Button
+                        {
+                            let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'paste' button #8...")
 
-                Button
-                {
-                    let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Address delete'...")
+                            pasteLocationLongitudeFromClipboard()
 
-                    self.sLocationAddress = ""
-                    focusedField          = .locationAddress
-                }
-                label:
-                {
-
-                    VStack(alignment:.center)
-                    {
-
-                        Label("", systemImage: "delete.left")
-                            .help(Text("Delete the Address..."))
-                            .imageScale(.medium)
-
-                        HStack(alignment:.center)
+                            focusedField = .locationNil
+                        }
+                        label:
                         {
 
-                            Spacer()
+                            VStack(alignment:.center)
+                            {
 
-                            Text("Delete Address")
-                                .font(.caption2)
+                                Label("", systemImage: "list.clipboard")
+                                    .help(Text("Paste Longitude from Clipboard..."))
+                                    .imageScale(.small)
 
-                            Spacer()
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Text("Paste Longitude")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
 
                         }
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                    #if os(iOS)
+                        .padding()
+                    #endif
+
+                        Spacer()
+
+                        Button
+                        {
+                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Longitude delete'...")
+
+                            self.sLocationLongitude = ""
+                            focusedField            = .locationNil
+                        //  focusedField            = .locationLongitude
+                        }
+                        label:
+                        {
+
+                            VStack(alignment:.center)
+                            {
+
+                                Label("", systemImage: "delete.left")
+                                    .help(Text("Delete the Longitude..."))
+                                    .imageScale(.small)
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Text("Delete Longitude")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+
+                        }
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                    #if os(iOS)
+                        .padding()
+                    #endif
 
                     }
 
                 }
-            #if os(macOS)
-                .buttonStyle(.borderedProminent)
-                .padding()
-            //  .background(???.isPressed ? .blue : .gray)
-                .cornerRadius(10)
-                .foregroundColor(Color.primary)
-            #endif
-            #if os(iOS)
-                .padding()
-            #endif
 
-                }
-
-                HStack
+                VStack
                 {
 
-                    Spacer()
-
-                    Button
+                    HStack
                     {
 
-                        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate an Address by Latitude/Longitude'...")
+                        Text("=> Located Address: ")
+                            .font(.caption) 
+                            .contextMenu
+                            {
+                                Button
+                                {
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #3...")
 
-                        self.progressTriggerLatLong.setProgressOverlay(isProgressOverlayOn:true)
+                                    copyLocationAddressToClipboard()
+                                }
+                                label:
+                                {
+                                    Text("Copy Address to Clipboard")
+                                }
+                            }
+                            .foregroundColor(.red)
 
-                        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate an Address by Latitude/Longitude' - 'self.progressTriggerLatLong.isProgressOverlayOn' is [\(self.progressTriggerLatLong.isProgressOverlayOn)] <should be 'true'>...")
+                        TextField("Address...", text:$sLocationAddress)
+                            .lineLimit(2)
+                            .font(.caption) 
+                            .onAppear
+                            {
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onAppear #3 - 'self.sLocationAddress' is [\(self.sLocationAddress)]...")
 
-                        DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                                if (self.sLocationAddress.count < 1)
+                                {
+                                    self.sLocationAddress = ""
+                                }
+
+                                focusedField = .locationNil
+                            }
+                            .onChange(of:self.sLocationAddress)
+                            {
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onChange #3 - 'self.sLocationAddress' is [\(self.sLocationAddress)]...")
+                            }
+                            .onSubmit
+                            {
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onSubmit #3 - 'self.sLocationAddress'  is [\(self.sLocationAddress)]...")
+                        
+                                focusedField = .locationAddress
+                            }
+                            .focused($focusedField, equals:.locationAddress)
+                        //  .frame(maxWidth:600)
+
+                        Spacer()
+
+                    }
+
+                    HStack
+                    {
+
+                        Spacer()
+
+                        Text("   ")
+                            .font(.caption2)
+
+                        Spacer()
+
+                        Button
+                        {
+                            let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #6...")
+
+                            copyLocationAddressToClipboard()
+
+                            focusedField = .locationNil
+                        }
+                        label:
                         {
 
-                            self.sLocationAddress = self.locateAddressByLatitudeLongitude()
+                            VStack(alignment:.center)
+                            {
+
+                                Label("", systemImage: "list.clipboard")
+                                    .help(Text("Copy Address to Clipboard..."))
+                                    .imageScale(.small)
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Text("Copy Address")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+
+                        }
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                    #if os(iOS)
+                        .padding()
+                    #endif
+
+                        Spacer()
+
+                        Button
+                        {
+                            let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'paste' button #9...")
+
+                            pasteLocationAddressFromClipboard()
+
+                            focusedField = .locationNil
+                        }
+                        label:
+                        {
+
+                            VStack(alignment:.center)
+                            {
+
+                                Label("", systemImage: "list.clipboard")
+                                    .help(Text("Paste Address from Clipboard..."))
+                                    .imageScale(.small)
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Text("Paste Address")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+
+                        }
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                    #if os(iOS)
+                        .padding()
+                    #endif
+
+                        Spacer()
+
+                        Button
+                        {
+                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Address delete'...")
+
+                            self.sLocationAddress = ""
                             focusedField          = .locationNil
                         //  focusedField          = .locationAddress
-
-                            self.progressTriggerLatLong.setProgressOverlay(isProgressOverlayOn:false)
-
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate an Address by Latitude/Longitude' - 'self.progressTriggerLatLong.isProgressOverlayOn' is [\(self.progressTriggerLatLong.isProgressOverlayOn)] <should be 'false'>...")
-
                         }
-
-                    }
-                    label:
-                    {
-
-                        VStack(alignment:.center)
+                        label:
                         {
 
-                        //  Label("", systemImage: "figure.run.circle")
-                            Label("", systemImage: "pencil.tip.crop.circle.badge.plus")
-                                .help(Text("Locate an Address by Latitude/Longitude..."))
-                                .imageScale(.small)
+                            VStack(alignment:.center)
+                            {
 
-                            Text("Locate Address")
-                                .bold()
-                                .font(.caption2)
+                                Label("", systemImage: "delete.left")
+                                    .help(Text("Delete the Address..."))
+                                    .imageScale(.small)
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Text("Delete Address")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
 
                         }
-                        .progressOverlay(trigger:self.progressTriggerLatLong)
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                    #if os(iOS)
+                        .padding()
+                    #endif
 
                     }
-                #if os(macOS)
-                    .buttonStyle(.borderedProminent)
-                    .padding()
-                //  .background(???.isPressed ? .blue : .gray)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.primary)
-                #endif
-                    .padding()
 
-                    Spacer()
+                }
 
-                    Button
+                VStack
+                {
+
+                    HStack
                     {
 
-                        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate Latitude/Longitude by Address'...")
+                        Spacer()
 
-                        self.progressTriggerAddress.setProgressOverlay(isProgressOverlayOn:true)
-
-                        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate Latitude/Longitude by Address' - 'self.progressTriggerAddress.isProgressOverlayOn' is [\(self.progressTriggerAddress.isProgressOverlayOn)] <should be 'true'>...")
-
-                        DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                        Button
                         {
 
-                            (self.sLocationLatitude, self.sLocationLongitude) = self.locateLatitudeLongitudeByAddress()
-                            focusedField                                      = .locationNil
-                        //  focusedField                                      = .locationLatitude
+                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate an Address by Latitude/Longitude'...")
 
-                            self.progressTriggerAddress.setProgressOverlay(isProgressOverlayOn:false)
+                            self.progressTriggerLatLong.setProgressOverlay(isProgressOverlayOn:true)
 
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate Latitude/Longitude by Address' - 'self.progressTriggerAddress.isProgressOverlayOn' is [\(self.progressTriggerAddress.isProgressOverlayOn)] <should be 'false'>...")
+                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate an Address by Latitude/Longitude' - 'self.progressTriggerLatLong.isProgressOverlayOn' is [\(self.progressTriggerLatLong.isProgressOverlayOn)] <should be 'true'>...")
+
+                            DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                            {
+
+                                self.sLocationAddress = self.locateAddressByLatitudeLongitude()
+                                focusedField          = .locationNil
+                            //  focusedField          = .locationAddress
+
+                                self.progressTriggerLatLong.setProgressOverlay(isProgressOverlayOn:false)
+
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate an Address by Latitude/Longitude' - 'self.progressTriggerLatLong.isProgressOverlayOn' is [\(self.progressTriggerLatLong.isProgressOverlayOn)] <should be 'false'>...")
+
+                            }
 
                         }
-
-                    }
-                    label:
-                    {
-
-                        VStack(alignment:.center)
+                        label:
                         {
 
-                            Label("", systemImage: "pencil.tip.crop.circle.badge.arrow.forward")
-                                .help(Text("Locate Latitude/Longitude by Address..."))
-                                .imageScale(.small)
+                            VStack(alignment:.center)
+                            {
 
-                            Text("Locate Lat/Long")
-                                .bold()
-                                .font(.caption2)
+                            //  Label("", systemImage: "figure.run.circle")
+                                Label("", systemImage: "pencil.tip.crop.circle.badge.plus")
+                                    .help(Text("Locate an Address by Latitude/Longitude..."))
+                                    .imageScale(.small)
+
+                                Text("Locate Address")
+                                    .bold()
+                                    .font(.caption2)
+
+                            }
+                            .progressOverlay(trigger:self.progressTriggerLatLong)
 
                         }
-                        .progressOverlay(trigger:self.progressTriggerAddress)
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                        .padding()
+
+                        Spacer()
+
+                        Button
+                        {
+
+                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate Latitude/Longitude by Address'...")
+
+                            self.progressTriggerAddress.setProgressOverlay(isProgressOverlayOn:true)
+
+                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate Latitude/Longitude by Address' - 'self.progressTriggerAddress.isProgressOverlayOn' is [\(self.progressTriggerAddress.isProgressOverlayOn)] <should be 'true'>...")
+
+                            DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                            {
+
+                                (self.sLocationLatitude, self.sLocationLongitude) = self.locateLatitudeLongitudeByAddress()
+                                focusedField                                      = .locationNil
+                            //  focusedField                                      = .locationLatitude
+
+                                self.progressTriggerAddress.setProgressOverlay(isProgressOverlayOn:false)
+
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate Latitude/Longitude by Address' - 'self.progressTriggerAddress.isProgressOverlayOn' is [\(self.progressTriggerAddress.isProgressOverlayOn)] <should be 'false'>...")
+
+                            }
+
+                        }
+                        label:
+                        {
+
+                            VStack(alignment:.center)
+                            {
+
+                                Label("", systemImage: "pencil.tip.crop.circle.badge.arrow.forward")
+                                    .help(Text("Locate Latitude/Longitude by Address..."))
+                                    .imageScale(.small)
+
+                                Text("Locate Lat/Long")
+                                    .bold()
+                                    .font(.caption2)
+
+                            }
+                            .progressOverlay(trigger:self.progressTriggerAddress)
+
+                        }
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                        .padding()
+
+                        Spacer()
 
                     }
-                #if os(macOS)
-                    .buttonStyle(.borderedProminent)
-                    .padding()
-                //  .background(???.isPressed ? .blue : .gray)
-                    .cornerRadius(10)
-                    .foregroundColor(Color.primary)
-                #endif
-                    .padding()
-
-                    Spacer()
 
                 }
 
@@ -766,7 +969,7 @@ struct AppVisitMgmtCoreLocView:View
         
             // Exit...
 
-            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sLocatedAddress' is [\(sLocatedAddress)]...")
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - latitude and/or longitude were NOT provided - 'sLocatedAddress' is [\(sLocatedAddress)]...")
 
             return sLocatedAddress
 
@@ -786,9 +989,9 @@ struct AppVisitMgmtCoreLocView:View
             {
                 self.xcgLogMsg("\(sCurrMethodDisp) <closure> Calling 'updateGeocoderLocation()' for Latitude/Longitude of [\(dblLocationLatitude)/\(dblLocationLongitude)]...")
 
-                let _ = clModelObservable2.updateGeocoderLocations(requestID: iRequestID, 
-                                                                   latitude:  dblLocationLatitude, 
-                                                                   longitude: dblLocationLongitude, 
+                let _ = clModelObservable2.updateGeocoderLocations(requestID:iRequestID, 
+                                                                   latitude: dblLocationLatitude, 
+                                                                   longitude:dblLocationLongitude, 
                                                                    withCompletionHandler:
                                                                        { (requestID:Int, dictCurrentLocation:[String:Any]) in
                                                                            self.handleLocationAndAddressClosureEvent(bIsDownstreamObject:false, requestID:requestID, dictCurrentLocation:dictCurrentLocation)
@@ -812,6 +1015,67 @@ struct AppVisitMgmtCoreLocView:View
 
     } // End of private func locateAddressByLatitudeLongitude()->String.
     
+    private func locateLatitudeLongitudeByAddress()->(String,String)
+    {
+
+        let sCurrMethod:String = #function;
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked - parameter is 'self.sLocationAddress' is [\(self.sLocationAddress)]...")
+
+        // Locate the Latitude/Longitude coordinates from an Address...
+
+        let sLocatedLatitude:String  = "0.0000"
+        let sLocatedLongitude:String = "0.0000"
+
+        if (self.sLocationAddress.count < 1)
+        {
+        
+            // Exit...
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - address was NOT provided - 'sLocatedLatitude' is [\(sLocatedLatitude)] - 'sLocatedLongitude' is [\(sLocatedLongitude)]...")
+
+            return (sLocatedLatitude, sLocatedLongitude)
+
+        }
+
+        // Use the Latitude/Longitude values to resolve address...
+
+        if (self.jmAppDelegateVisitor.jmAppCLModelObservable2 != nil)
+        {
+
+            let clModelObservable2:CoreLocationModelObservable2 = self.jmAppDelegateVisitor.jmAppCLModelObservable2!
+            let iRequestID:Int                                  = 1
+
+            DispatchQueue.main.async
+            {
+                self.xcgLogMsg("\(sCurrMethodDisp) <closure> Calling 'updateGeocoderFromAddress()' for an Address of [\(self.sLocationAddress)]...")
+
+                let _ = clModelObservable2.updateGeocoderFromAddress(requestID:iRequestID, 
+                                                                     address:  self.sLocationAddress,
+                                                                     withCompletionHandler:
+                                                                         { (requestID:Int, dictCurrentLocation:[String:Any]) in
+                                                                             self.handleLocationAndAddressClosureEvent(bIsDownstreamObject:false, requestID:requestID, dictCurrentLocation:dictCurrentLocation)
+                                                                         }
+                                                                    )
+            }
+
+        }
+        else
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) CoreLocation (service) is NOT available...")
+
+        }
+
+        // Exit...
+  
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sLocatedLatitude' is (\(sLocatedLatitude)) - 'sLocatedLongitude' is (\(sLocatedLongitude))...")
+  
+        return (sLocatedLatitude, sLocatedLongitude)
+
+    } // End of private func locateLatitudeLongitudeByAddress()->(String,String).
+    
     public func handleLocationAndAddressClosureEvent(bIsDownstreamObject:Bool = false, requestID:Int, dictCurrentLocation:[String:Any])
     {
 
@@ -827,26 +1091,11 @@ struct AppVisitMgmtCoreLocView:View
         
             self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Called  'updateGeocoderLocation()' a 'location' of [\(String(describing: dictCurrentLocation))]...")
 
-            let sStreetAddress:String = String(describing: (dictCurrentLocation["sCurrentLocationName"]       ?? ""))
-            let sCity:String          = String(describing: (dictCurrentLocation["sCurrentCity"]               ?? ""))
-            let sState:String         = String(describing: (dictCurrentLocation["sCurrentAdministrativeArea"] ?? ""))
-            let sZipCode:String       = String(describing: (dictCurrentLocation["sCurrentPostalCode"]         ?? ""))
+            self.sLocationLatitude  = String(describing: (dictCurrentLocation["dblLatitude"]             ?? "0.000000"))
+            self.sLocationLongitude = String(describing: (dictCurrentLocation["dblLongitude"]            ?? "0.000000"))
+            self.sLocationAddress   = String(describing: (dictCurrentLocation["sCurrentLocationAddress"] ?? "-N/A-"))
 
-            if (sStreetAddress.count < 1 ||
-                sCity.count          < 1)
-            {
-
-                self.sLocationAddress = "-N/A-"
-
-            }
-            else
-            {
-
-                self.sLocationAddress = "\(sStreetAddress), \(sCity), \(sState), \(sZipCode)"
-
-            }
-
-            self.xcgLogMsg("\(sCurrMethodDisp) Updated 'self.sLocationAddress' for an address of [\(self.sLocationAddress)]...")
+            self.xcgLogMsg("\(sCurrMethodDisp) Updated - 'self.sLocationLatitude' is [\(self.sLocationLatitude)] - 'self.sLocationLongitude' is [\(self.sLocationLongitude)] - 'self.sLocationAddress' is [\(self.sLocationAddress)] ...")
         
         }
         else
@@ -864,27 +1113,6 @@ struct AppVisitMgmtCoreLocView:View
 
     }   // End of public func handleLocationAndAddressClosureEvent(bIsDownstreamObject:Bool, requestID:Int, dictCurrentLocation:[String:Any]).
 
-    private func locateLatitudeLongitudeByAddress()->(String,String)
-    {
-
-        let sCurrMethod:String = #function;
-        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
-
-        self.xcgLogMsg("\(sCurrMethodDisp) Invoked - parameter is 'self.sLocationAddress' is [\(self.sLocationAddress)]...")
-
-        // Locate an Address from the Latitude/Longitude coordinates...
-
-        let sLocatedLatitude:String  = "0.0000"
-        let sLocatedLongitude:String = "0.0000"
-      
-        // Exit...
-  
-        self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sLocatedLatitude' is (\(sLocatedLatitude)) - 'sLocatedLongitude' is (\(sLocatedLongitude))...")
-  
-        return (sLocatedLatitude, sLocatedLongitude)
-
-    } // End of private func locateLatitudeLongitudeByAddress()->(String,String).
-    
     private func copyLocationLatitudeToClipboard()
     {
         
@@ -986,6 +1214,117 @@ struct AppVisitMgmtCoreLocView:View
         return
         
     }   // End of private func copyLocationAddressToClipboard().
+    
+    private func pasteLocationLatitudeFromClipboard()
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+          
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked ...")
+
+        var sPasteboardText:String = ""
+
+        #if os(macOS)
+            sPasteboardText = pasteboard.string(forType: .string) ?? ""
+        #elseif os(iOS)
+            sPasteboardText = pasteboard.string ?? ""
+        #endif
+
+        if (sPasteboardText.count < 1)
+        {
+        
+            // Exit...
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+
+            return
+        
+        }
+
+        self.sLocationLatitude = sPasteboardText
+        
+        // Exit...
+    
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting- for text 'self.sLocationLatitude' of [\(self.sLocationLatitude)]...")
+    
+        return
+        
+    }   // End of private func pasteLocationLatitudeFromClipboard().
+    
+    private func pasteLocationLongitudeFromClipboard()
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+          
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+
+        var sPasteboardText:String = ""
+
+        #if os(macOS)
+            sPasteboardText = pasteboard.string(forType: .string) ?? ""
+        #elseif os(iOS)
+            sPasteboardText = pasteboard.string ?? ""
+        #endif
+
+        if (sPasteboardText.count < 1)
+        {
+        
+            // Exit...
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+
+            return
+        
+        }
+
+        self.sLocationLongitude = sPasteboardText
+
+        // Exit...
+    
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'self.sLocationLongitude' of [\(self.sLocationLongitude)]...")
+    
+        return
+        
+    }   // End of private func pasteLocationLongitudeFromClipboard().
+    
+    private func pasteLocationAddressFromClipboard()
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+          
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+
+        var sPasteboardText:String = ""
+
+        #if os(macOS)
+            sPasteboardText = pasteboard.string(forType: .string) ?? ""
+        #elseif os(iOS)
+            sPasteboardText = pasteboard.string ?? ""
+        #endif
+
+        if (sPasteboardText.count < 1)
+        {
+        
+            // Exit...
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+
+            return
+        
+        }
+
+        self.sLocationAddress = sPasteboardText
+
+        // Exit...
+    
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'self.sLocationAddress' of [\(self.sLocationAddress)]...")
+    
+        return
+        
+    }   // End of private func pasteLocationAddressFromClipboard().
     
 }   // End of struct AppVisitMgmtCoreLocView:View. 
 

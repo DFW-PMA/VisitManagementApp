@@ -26,7 +26,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
     {
         
         static let sClsId        = "CoreLocationModelObservable2"
-        static let sClsVers      = "v1.0901"
+        static let sClsVers      = "v1.1103"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -39,51 +39,52 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
     struct ClassSingleton
     {
         static var appCoreLocationModel:CoreLocationModelObservable2
-                                                              = CoreLocationModelObservable2()
+                                                                = CoreLocationModelObservable2()
     }
 
     // 'Internal' Trace flag:
 
     private 
-    var bInternalTraceFlag:Bool                               = false
+    var bInternalTraceFlag:Bool                                 = false
 
     // App Data field(s):
 
-               var cCoreLocationReverseLookupsPrimary:Int     = 0
-               var cCoreLocationReverseLookupsSecondary:Int   = 0
-               var cCoreLocationReverseLookupsTertiary:Int    = 0
+               var cCoreLocationReverseLookupsPrimary:Int       = 0
+               var cCoreLocationReverseLookupsSecondary:Int     = 0
+               var cCoreLocationReverseLookupsTertiary:Int      = 0
     
-               var locationManager:CLLocationManager?         = nil
-    @Published var bCLManagerHeadingAvailable:Bool            = false
-    @Published var clCurrentHeading:CLHeading?                = nil
-    @Published var clCurrentLocation:CLLocation?              = nil       // Contains: Latitude, Longitude...
+               var locationManager:CLLocationManager?           = nil
+    @Published var bCLManagerHeadingAvailable:Bool              = false
+    @Published var clCurrentHeading:CLHeading?                  = nil
+    @Published var clCurrentHeadingAccuracy:CLLocationDirection = -1
+    @Published var clCurrentLocation:CLLocation?                = nil       // Contains: Latitude, Longitude...
 
-    @Published var sCurrentLocationName:String                = "-N/A-"   // This is actually the Street Address (Line #1) <# Street> (i.e. 8908 Michelle Ln)...
-    @Published var sCurrentCity:String                        = "-N/A-"   // City (i.e. North Richland Hills)...
-    @Published var sCurrentCountry:String                     = "-N/A-"   // Country (i.e. United States)...
-    @Published var sCurrentPostalCode:String                  = "-N/A-"   // Zip Code (i.e. 76182) (Zip-5)...
-    @Published var tzCurrentTimeZone:TimeZone?                = nil       // This is TimeZone in English (i.e. 'America/Chicago')...
-    @Published var clCurrentRegion:CLRegion?                  = nil       // ???
-    @Published var sCurrentSubLocality:String                 = "-N/A-"   // ??? 
-    @Published var sCurrentThoroughfare:String                = "-N/A-"   // Street Name (Michelle Ln)...
-    @Published var sCurrentSubThoroughfare:String             = "-N/A-"   // Address (Building) # (i.e. 8908)...
-    @Published var sCurrentAdministrativeArea:String          = "-N/A-"   // State  (i.e. TX)...
-    @Published var sCurrentSubAdministrativeArea:String       = "-N/A-"   // County (i.e. Tarrant County)
+    @Published var sCurrentLocationName:String                  = "-N/A-"   // This is actually the Street Address (Line #1) <# Street> (i.e. 8908 Michelle Ln)...
+    @Published var sCurrentCity:String                          = "-N/A-"   // City (i.e. North Richland Hills)...
+    @Published var sCurrentCountry:String                       = "-N/A-"   // Country (i.e. United States)...
+    @Published var sCurrentPostalCode:String                    = "-N/A-"   // Zip Code (i.e. 76182) (Zip-5)...
+    @Published var tzCurrentTimeZone:TimeZone?                  = nil       // This is TimeZone in English (i.e. 'America/Chicago')...
+    @Published var clCurrentRegion:CLRegion?                    = nil       // ???
+    @Published var sCurrentSubLocality:String                   = "-N/A-"   // ??? 
+    @Published var sCurrentThoroughfare:String                  = "-N/A-"   // Street Name (Michelle Ln)...
+    @Published var sCurrentSubThoroughfare:String               = "-N/A-"   // Address (Building) # (i.e. 8908)...
+    @Published var sCurrentAdministrativeArea:String            = "-N/A-"   // State  (i.e. TX)...
+    @Published var sCurrentSubAdministrativeArea:String         = "-N/A-"   // County (i.e. Tarrant County)
 
     @Published var listCoreLocationSiteItems:[CoreLocationSiteItem]
-                                                              = [CoreLocationSiteItem]()
-                                                                          // List of the 'current' Location Site Item(s)
-                                                                          //      as CoreLocationSiteItem(s)...
+                                                                = [CoreLocationSiteItem]()
+                                                                            // List of the 'current' Location Site Item(s)
+                                                                            //      as CoreLocationSiteItem(s)...
     
-               var jmAppDelegateVisitor:JmAppDelegateVisitor? = nil
-                                                                          // 'jmAppDelegateVisitor' MUST remain declared this way
-                                                                          // as having it reference the 'shared' instance of 
-                                                                          // JmAppDelegateVisitor causes a circular reference
-                                                                          // between the 'init()' methods of the 2 classes...
+               var jmAppDelegateVisitor:JmAppDelegateVisitor?   = nil
+                                                                            // 'jmAppDelegateVisitor' MUST remain declared this way
+                                                                            // as having it reference the 'shared' instance of 
+                                                                            // JmAppDelegateVisitor causes a circular reference
+                                                                            // between the 'init()' methods of the 2 classes...
 
     // App <global> Message(s) 'stack' cached before XCGLogger is available:
 
-               var listPreXCGLoggerMessages:[String]          = Array()
+               var listPreXCGLoggerMessages:[String]            = Array()
 
     private override init()
     {
@@ -138,7 +139,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
         return
 
-    }   // End of private func xcgLogMsg().
+    }   // End of private func xcgLogMsg(_ sMessage:String).
 
     public func toString()->String
     {
@@ -166,6 +167,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         asToString.append("'locationManager': [\(String(describing: self.locationManager))],")
         asToString.append("'bCLManagerHeadingAvailable': [\(String(describing: self.bCLManagerHeadingAvailable))],")
         asToString.append("'clCurrentHeading': [\(String(describing: self.clCurrentHeading))],")
+        asToString.append("'clCurrentHeadingAccuracy': [\(String(describing: self.clCurrentHeadingAccuracy))],")
         asToString.append("'clCurrentLocation': [\(String(describing: self.clCurrentLocation))]")
         asToString.append("],")
         asToString.append("[")
@@ -189,7 +191,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
         return sContents
 
-    }   // End of public func toString().
+    }   // End of public func toString()->String.
 
     // (Call-back) Method to set the jmAppDelegateVisitor instance...
 
@@ -236,7 +238,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
     
         return
 
-    } // End of public func setJmAppDelegateVisitorInstance().
+    } // End of public func setJmAppDelegateVisitorInstance(jmAppDelegateVisitor:JmAppDelegateVisitor).
 
     private func runPostInitializationTasks()
     {
@@ -248,18 +250,19 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
         // Finish performing any setup with the CoreLocationModel...
 
-        self.locationManager = CLLocationManager()
+        self.locationManager                  = CLLocationManager()
         
-        self.locationManager?.delegate = self
-        
+        self.locationManager?.delegate        = self
         self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager?.headingFilter   = 0.250000                // Update when 'heading' changes by 1/4th of a degree...
+    //  self.locationManager?.headingFilter   = kCLHeadingFilterNone
         
     //  self.locationManager?.requestWhenInUseAuthorization()
         self.locationManager?.requestAlwaysAuthorization()
         
         self.requestLocationUpdate()
 
-        self.bCLManagerHeadingAvailable = CLLocationManager.headingAvailable()
+        self.bCLManagerHeadingAvailable       = CLLocationManager.headingAvailable()
         
         if (self.bCLManagerHeadingAvailable == true)
         {
@@ -282,7 +285,6 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         let sCurrMethod:String = #function
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
         
-    //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
         if (self.bInternalTraceFlag == true)
         {
 
@@ -296,6 +298,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         {
 
             self.clCurrentHeading              = nil
+            self.clCurrentHeadingAccuracy      = -1
             self.clCurrentLocation             = nil
 
             self.sCurrentLocationName          = "-N/A-"
@@ -316,7 +319,6 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
         // Exit:
 
-    //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
         if (self.bInternalTraceFlag == true)
         {
 
@@ -429,7 +431,8 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
             self.locationManager?.requestLocation()
 
-            self.clCurrentHeading = self.locationManager?.heading
+            self.clCurrentHeading         = self.locationManager?.heading
+            self.clCurrentHeadingAccuracy = self.clCurrentHeading?.headingAccuracy ?? 0.000000
             
         //  self.locationManager?.startUpdatingLocation()
 
@@ -482,14 +485,13 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         let sCurrMethod:String = #function
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
 
-    //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
         if (self.bInternalTraceFlag == true)
         {
 
-            self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - 'latitude' is (\(latitude)) - 'longitude' is (\(longitude))...")
 
         }
-    
+
         // Instantiate a CLGeocoder and attempt to convert latitude/longitude into an address...
 
         self.clearLastCLLocationSettings()
@@ -506,21 +508,21 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
                     let firstLocation                  = placemarks?[0]
 
                     self.clCurrentLocation             = firstLocation?.location
-                    self.sCurrentLocationName          = firstLocation?.name                  ?? "-N/A-"
-                    self.sCurrentCity                  = firstLocation?.locality              ?? "-N/A-"
-                    self.sCurrentCountry               = firstLocation?.country               ?? "-N/A-"
-                    self.sCurrentPostalCode            = firstLocation?.postalCode            ?? "-N/A-"
+                    self.clCurrentHeadingAccuracy      = self.clCurrentHeading?.headingAccuracy ?? 0.000000
+                    self.sCurrentLocationName          = firstLocation?.name                    ?? "-N/A-"
+                    self.sCurrentCity                  = firstLocation?.locality                ?? "-N/A-"
+                    self.sCurrentCountry               = firstLocation?.country                 ?? "-N/A-"
+                    self.sCurrentPostalCode            = firstLocation?.postalCode              ?? "-N/A-"
                     self.tzCurrentTimeZone             = firstLocation?.timeZone
                     self.clCurrentRegion               = firstLocation?.region
-                    self.sCurrentSubLocality           = firstLocation?.subLocality           ?? "-N/A-"
-                    self.sCurrentThoroughfare          = firstLocation?.thoroughfare          ?? "-N/A-"
-                    self.sCurrentSubThoroughfare       = firstLocation?.subThoroughfare       ?? "-N/A-"
-                    self.sCurrentAdministrativeArea    = firstLocation?.administrativeArea    ?? "-N/A-"
-                    self.sCurrentSubAdministrativeArea = firstLocation?.subAdministrativeArea ?? "-N/A-"
+                    self.sCurrentSubLocality           = firstLocation?.subLocality             ?? "-N/A-"
+                    self.sCurrentThoroughfare          = firstLocation?.thoroughfare            ?? "-N/A-"
+                    self.sCurrentSubThoroughfare       = firstLocation?.subThoroughfare         ?? "-N/A-"
+                    self.sCurrentAdministrativeArea    = firstLocation?.administrativeArea      ?? "-N/A-"
+                    self.sCurrentSubAdministrativeArea = firstLocation?.subAdministrativeArea   ?? "-N/A-"
 
                     let _ = self.updateCoreLocationSiteItemList()
 
-                //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
                     if (self.bInternalTraceFlag == true)
                     {
 
@@ -540,8 +542,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
                 // Exit...
 
-            //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
-            if (self.bInternalTraceFlag == true)
+                if (self.bInternalTraceFlag == true)
                 {
 
                     self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
@@ -556,11 +557,10 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
         // Exit...
 
-    //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
         if (self.bInternalTraceFlag == true)
         {
 
-            self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - returning 'true'...")
 
         }
     
@@ -574,14 +574,15 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         let sCurrMethod:String = #function
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
 
-    //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
         if (self.bInternalTraceFlag == true)
         {
 
-            self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - 'requestID' is (\(requestID)) - 'latitude' is (\(latitude)) - 'longitude' is (\(longitude))...")
 
         }
     
+        var bGeocoderSuccessful:Bool   = false
+
         // Instantiate a CLGeocoder and attempt to convert latitude/longitude into an address...
 
         self.clearLastCLLocationSettings()
@@ -592,7 +593,13 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         clGeocoder.reverseGeocodeLocation(currentLocation, completionHandler: 
             { (placemarks, error) in
 
-                var dictCurrentLocation:[String:Any] = [:]
+                var dictCurrentLocation:[String:Any]   = [:]
+
+                dictCurrentLocation["iRequestID"]      = "\(requestID)"
+                dictCurrentLocation["sRequestError"]   = ""
+                dictCurrentLocation["sRequestAddress"] = ""
+                dictCurrentLocation["dblLatitude"]     = "\(latitude)"
+                dictCurrentLocation["dblLongitude"]    = "\(longitude)"
 
                 if error == nil 
                 {
@@ -600,25 +607,24 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
                     let firstLocation                  = placemarks?[0]
 
                     self.clCurrentLocation             = firstLocation?.location
-                    self.sCurrentLocationName          = firstLocation?.name                  ?? "-N/A-"
-                    self.sCurrentCity                  = firstLocation?.locality              ?? "-N/A-"
-                    self.sCurrentCountry               = firstLocation?.country               ?? "-N/A-"
-                    self.sCurrentPostalCode            = firstLocation?.postalCode            ?? "-N/A-"
+                    self.clCurrentHeadingAccuracy      = self.clCurrentHeading?.headingAccuracy ?? 0.000000
+                    self.sCurrentLocationName          = firstLocation?.name                    ?? "-N/A-"
+                    self.sCurrentCity                  = firstLocation?.locality                ?? "-N/A-"
+                    self.sCurrentCountry               = firstLocation?.country                 ?? "-N/A-"
+                    self.sCurrentPostalCode            = firstLocation?.postalCode              ?? "-N/A-"
                     self.tzCurrentTimeZone             = firstLocation?.timeZone
                     self.clCurrentRegion               = firstLocation?.region
-                    self.sCurrentSubLocality           = firstLocation?.subLocality           ?? "-N/A-"
-                    self.sCurrentThoroughfare          = firstLocation?.thoroughfare          ?? "-N/A-"
-                    self.sCurrentSubThoroughfare       = firstLocation?.subThoroughfare       ?? "-N/A-"
-                    self.sCurrentAdministrativeArea    = firstLocation?.administrativeArea    ?? "-N/A-"
-                    self.sCurrentSubAdministrativeArea = firstLocation?.subAdministrativeArea ?? "-N/A-"
+                    self.sCurrentSubLocality           = firstLocation?.subLocality             ?? "-N/A-"
+                    self.sCurrentThoroughfare          = firstLocation?.thoroughfare            ?? "-N/A-"
+                    self.sCurrentSubThoroughfare       = firstLocation?.subThoroughfare         ?? "-N/A-"
+                    self.sCurrentAdministrativeArea    = firstLocation?.administrativeArea      ?? "-N/A-"
+                    self.sCurrentSubAdministrativeArea = firstLocation?.subAdministrativeArea   ?? "-N/A-"
 
                     let _ = self.updateCoreLocationSiteItemList()
 
-                    dictCurrentLocation["iRequestID"]                    = "\(requestID)"
-                    dictCurrentLocation["dblLatitude"]                   = "\(latitude)"
-                    dictCurrentLocation["dblLongitude"]                  = "\(longitude)"
+                    dictCurrentLocation["clCurrentLocation"]             = self.clCurrentLocation
+                    dictCurrentLocation["clCurrentHeadingAccuracy"]      = self.clCurrentHeadingAccuracy
 
-                    dictCurrentLocation["clCurrentLocation"]             = self.clCurrentLocation            
                     dictCurrentLocation["sCurrentLocationName"]          = self.sCurrentLocationName         
                     dictCurrentLocation["sCurrentCity"]                  = self.sCurrentCity                 
                     dictCurrentLocation["sCurrentCountry"]               = self.sCurrentCountry              
@@ -631,13 +637,36 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
                     dictCurrentLocation["sCurrentAdministrativeArea"]    = self.sCurrentAdministrativeArea   
                     dictCurrentLocation["sCurrentSubAdministrativeArea"] = self.sCurrentSubAdministrativeArea
 
-                //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
+                    var sLocationAddress:String = ""
+                    let sStreetAddress:String   = String(describing: (dictCurrentLocation["sCurrentLocationName"]       ?? ""))
+                    let sCity:String            = String(describing: (dictCurrentLocation["sCurrentCity"]               ?? ""))
+                    let sState:String           = String(describing: (dictCurrentLocation["sCurrentAdministrativeArea"] ?? ""))
+                    let sZipCode:String         = String(describing: (dictCurrentLocation["sCurrentPostalCode"]         ?? ""))
+
+                    if (sStreetAddress.count < 1 ||
+                        sCity.count          < 1)
+                    {
+
+                        sLocationAddress = "-N/A-"
+
+                    }
+                    else
+                    {
+
+                        sLocationAddress = "\(sStreetAddress), \(sCity), \(sState), \(sZipCode)"
+
+                    }
+
+                    dictCurrentLocation["sCurrentLocationAddress"] = sLocationAddress         
+
                     if (self.bInternalTraceFlag == true)
                     {
 
                         self.xcgLogMsg("\(sCurrMethodDisp) CLGeocoder 'reverseGeocodeLocation()' returned a 'location' of [\(self.sCurrentLocationName)]/[\(self.sCurrentCity)]...")
 
                     }
+
+                    bGeocoderSuccessful = true
 
                 }
                 else 
@@ -647,19 +676,22 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
                     self.clearLastCLLocationSettings()
 
+                    dictCurrentLocation["sRequestError"] = "CLGeocoder 'reverseGeocodeLocation()' failed to return a 'location' - Details: [\(String(describing: error))] - Error!"
+
+                    bGeocoderSuccessful = false
+
                 }
 
                 // Exit...
 
-            //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
+                completionHandler(requestID, dictCurrentLocation)
+
                 if (self.bInternalTraceFlag == true)
                 {
 
-                    self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+                    self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'bGeocoderSuccessful' is [\(bGeocoderSuccessful)]...")
 
                 }
-
-                completionHandler(requestID, dictCurrentLocation)
 
                 return
 
@@ -669,25 +701,191 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
         // Exit...
 
-    //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
         if (self.bInternalTraceFlag == true)
         {
 
-            self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - returning 'true'...")
 
         }
     
         return true
         
-    }   // End of public func updateGeocoderLocations(requestID:Int, latitude:Double, longitude:Double, withCompletionHandler completionHandler:@escaping(_ requestID:Int, _ dictCurrentLocation:[String:Any])->Void) -> Bool
+    }   // End of public func updateGeocoderLocations(requestID:Int, latitude:Double, longitude:Double, withCompletionHandler completionHandler:@escaping(_ requestID:Int, _ dictCurrentLocation:[String:Any])->Void)->Bool
 
-    public func updateCoreLocationSiteItemList() -> Bool
+    public func updateGeocoderFromAddress(requestID:Int = 1, address:String = "", withCompletionHandler completionHandler:@escaping(_ requestID:Int, _ dictCurrentLocation:[String:Any])->Void)->Bool
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+
+        if (self.bInternalTraceFlag == true)
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - 'requestID' is (\(requestID)) - 'address' is [\(address)]...")
+
+        }
+    
+        var bGeocoderSuccessful:Bool   = false
+
+        // If we don't have an actual address, then just return...
+
+        if (address.count < 1)
+        {
+        
+            var dictCurrentLocation:[String:Any] = [:]
+
+            completionHandler(requestID, dictCurrentLocation)
+
+            if (self.bInternalTraceFlag == true)
+            {
+
+                self.xcgLogMsg("\(sCurrMethodDisp) Exiting - supplied 'address' is [\(address)] is an empty string - 'bGeocoderSuccessful' is [\(bGeocoderSuccessful)]...")
+
+            }
+
+            return bGeocoderSuccessful
+        
+        }
+
+        // Instantiate a CLGeocoder and attempt to convert latitude/longitude into an address...
+
+        self.clearLastCLLocationSettings()
+        
+        let clGeocoder:CLGeocoder      = CLGeocoder()
+    //  let currentLocation:CLLocation = CLLocation(latitude:latitude, longitude:longitude)
+        
+    //  clGeocoder.reverseGeocodeLocation(currentLocation, completionHandler: 
+        clGeocoder.geocodeAddressString(address) 
+            { (placemarks, error) in
+
+                var dictCurrentLocation:[String:Any]   = [:]
+
+                dictCurrentLocation["iRequestID"]      = "\(requestID)"
+                dictCurrentLocation["sRequestError"]   = ""
+                dictCurrentLocation["sRequestAddress"] = "\(address)"
+
+                if error == nil 
+                {
+
+                    let firstLocation                  = placemarks?[0]
+
+                    self.clCurrentLocation             = firstLocation?.location
+                    self.clCurrentHeadingAccuracy      = self.clCurrentHeading?.headingAccuracy       ?? 0.000000
+
+                    let latitude:Double                = self.clCurrentLocation?.coordinate.latitude  ?? 0.000000
+                    let longitude:Double               = self.clCurrentLocation?.coordinate.longitude ?? 0.000000
+
+                    self.sCurrentLocationName          = firstLocation?.name                    ?? "-N/A-"
+                    self.sCurrentCity                  = firstLocation?.locality                ?? "-N/A-"
+                    self.sCurrentCountry               = firstLocation?.country                 ?? "-N/A-"
+                    self.sCurrentPostalCode            = firstLocation?.postalCode              ?? "-N/A-"
+                    self.tzCurrentTimeZone             = firstLocation?.timeZone
+                    self.clCurrentRegion               = firstLocation?.region
+                    self.sCurrentSubLocality           = firstLocation?.subLocality             ?? "-N/A-"
+                    self.sCurrentThoroughfare          = firstLocation?.thoroughfare            ?? "-N/A-"
+                    self.sCurrentSubThoroughfare       = firstLocation?.subThoroughfare         ?? "-N/A-"
+                    self.sCurrentAdministrativeArea    = firstLocation?.administrativeArea      ?? "-N/A-"
+                    self.sCurrentSubAdministrativeArea = firstLocation?.subAdministrativeArea   ?? "-N/A-"
+
+                    let _ = self.updateCoreLocationSiteItemList()
+
+                    dictCurrentLocation["dblLatitude"]                   = "\(latitude)"
+                    dictCurrentLocation["dblLongitude"]                  = "\(longitude)"
+
+                    dictCurrentLocation["clCurrentLocation"]             = self.clCurrentLocation
+                    dictCurrentLocation["clCurrentHeadingAccuracy"]      = self.clCurrentHeadingAccuracy
+
+                    dictCurrentLocation["sCurrentLocationName"]          = self.sCurrentLocationName         
+                    dictCurrentLocation["sCurrentCity"]                  = self.sCurrentCity                 
+                    dictCurrentLocation["sCurrentCountry"]               = self.sCurrentCountry              
+                    dictCurrentLocation["sCurrentPostalCode"]            = self.sCurrentPostalCode           
+                    dictCurrentLocation["tzCurrentTimeZone"]             = self.tzCurrentTimeZone            
+                    dictCurrentLocation["clCurrentRegion"]               = self.clCurrentRegion              
+                    dictCurrentLocation["sCurrentSubLocality"]           = self.sCurrentSubLocality          
+                    dictCurrentLocation["sCurrentThoroughfare"]          = self.sCurrentThoroughfare         
+                    dictCurrentLocation["sCurrentSubThoroughfare"]       = self.sCurrentSubThoroughfare      
+                    dictCurrentLocation["sCurrentAdministrativeArea"]    = self.sCurrentAdministrativeArea   
+                    dictCurrentLocation["sCurrentSubAdministrativeArea"] = self.sCurrentSubAdministrativeArea
+
+                    var sLocationAddress:String = ""
+                    let sStreetAddress:String   = String(describing: (dictCurrentLocation["sCurrentLocationName"]       ?? ""))
+                    let sCity:String            = String(describing: (dictCurrentLocation["sCurrentCity"]               ?? ""))
+                    let sState:String           = String(describing: (dictCurrentLocation["sCurrentAdministrativeArea"] ?? ""))
+                    let sZipCode:String         = String(describing: (dictCurrentLocation["sCurrentPostalCode"]         ?? ""))
+
+                    if (sStreetAddress.count < 1 ||
+                        sCity.count          < 1)
+                    {
+
+                        sLocationAddress = "-N/A-"
+
+                    }
+                    else
+                    {
+
+                        sLocationAddress = "\(sStreetAddress), \(sCity), \(sState), \(sZipCode)"
+
+                    }
+
+                    dictCurrentLocation["sCurrentLocationAddress"] = sLocationAddress         
+
+                    if (self.bInternalTraceFlag == true)
+                    {
+
+                        self.xcgLogMsg("\(sCurrMethodDisp) CLGeocoder 'reverseGeocodeLocation()' returned a 'location' of [\(self.sCurrentLocationName)]/[\(self.sCurrentCity)]...")
+
+                    }
+
+                    bGeocoderSuccessful = true
+
+                }
+                else 
+                {
+
+                    self.xcgLogMsg("\(sCurrMethodDisp) CLGeocoder 'reverseGeocodeLocation()' failed to return a 'location' - Details: [\(String(describing: error))] - Error!")
+
+                    self.clearLastCLLocationSettings()
+
+                    dictCurrentLocation["sRequestError"] = "CLGeocoder 'reverseGeocodeLocation()' failed to return a 'location' - Details: [\(String(describing: error))] - Error!"
+
+                    bGeocoderSuccessful = false
+
+                }
+
+                // Exit...
+
+                completionHandler(requestID, dictCurrentLocation)
+
+                if (self.bInternalTraceFlag == true)
+                {
+
+                    self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'bGeocoderSuccessful' is [\(bGeocoderSuccessful)]...")
+
+                }
+
+                return
+
+            }
+
+        // Exit...
+
+        if (self.bInternalTraceFlag == true)
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - returning 'true'...")
+
+        }
+    
+        return true
+        
+    }   // End of public func public func updateGeocoderFromAddress(requestID:Int = 1, address:String = "", withCompletionHandler completionHandler:@escaping(_ requestID:Int, _ dictCurrentLocation:[String:Any])->Void)->Bool.
+
+    public func updateCoreLocationSiteItemList()->Bool
     {
         
         let sCurrMethod:String = #function
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
         
-    //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
         if (self.bInternalTraceFlag == true)
         {
 
@@ -699,51 +897,57 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
         self.listCoreLocationSiteItems = []
         
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "Location",
-                                                                   sCLSiteItemDesc:    "(Latitude,Longitude)",
-                                                                   sCLSiteItemValue:   "\(String(describing:self.clCurrentLocation))",
-                                                                   objCLSiteItemValue: self.clCurrentLocation))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "Location",
+                                                               //  sCLSiteItemDesc:   "(Latitude,Longitude)",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.clCurrentLocation))",
+                                                                   sCLSiteItemValue:  "\(String(describing:self.clCurrentLocation))",
+                                                                   objCLSiteItemValue:self.clCurrentLocation))
 
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "Street Address",
-                                                                   sCLSiteItemDesc:    "\(String(describing:self.sCurrentLocationName))"))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "Location Accuracy",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.clCurrentHeadingAccuracy))",
+                                                                   sCLSiteItemValue:  "\(String(describing:self.clCurrentHeadingAccuracy))",
+                                                                   objCLSiteItemValue:self.clCurrentHeadingAccuracy))
 
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "City",
-                                                                   sCLSiteItemDesc:    "\(String(describing:self.sCurrentCity))"))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "Street Address",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.sCurrentLocationName))"))
 
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "Zip Code",
-                                                                   sCLSiteItemDesc:    "\(String(describing:self.sCurrentPostalCode))"))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "City",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.sCurrentCity))"))
 
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "County",
-                                                                   sCLSiteItemDesc:    "\(String(describing:self.sCurrentSubAdministrativeArea))"))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "Zip Code",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.sCurrentPostalCode))"))
 
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "State",
-                                                                   sCLSiteItemDesc:    "\(String(describing:self.sCurrentAdministrativeArea))"))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "County",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.sCurrentSubAdministrativeArea))"))
 
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "TimeZone",
-                                                                   sCLSiteItemDesc:    "\(String(describing:(self.tzCurrentTimeZone ?? TimeZone(abbreviation:"CST"))))",
-                                                                   sCLSiteItemValue:   "\(String(describing:(self.tzCurrentTimeZone ?? TimeZone(abbreviation:"CST"))))",
-                                                                   objCLSiteItemValue: self.tzCurrentTimeZone))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "State",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.sCurrentAdministrativeArea))"))
 
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "Country",
-                                                                   sCLSiteItemDesc:    "\(String(describing:self.sCurrentCountry))"))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "TimeZone",
+                                                                   sCLSiteItemDesc:   "\(String(describing:(self.tzCurrentTimeZone ?? TimeZone(abbreviation:"CST"))))",
+                                                                   sCLSiteItemValue:  "\(String(describing:(self.tzCurrentTimeZone ?? TimeZone(abbreviation:"CST"))))",
+                                                                   objCLSiteItemValue:self.tzCurrentTimeZone))
 
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "Street Name",
-                                                                   sCLSiteItemDesc:    "\(String(describing:self.sCurrentThoroughfare))"))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "Country",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.sCurrentCountry))"))
 
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "Building #",
-                                                                   sCLSiteItemDesc:    "\(String(describing:self.sCurrentSubThoroughfare))"))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "Street Name",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.sCurrentThoroughfare))"))
 
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "Sub Locality",
-                                                                   sCLSiteItemDesc:    "\(String(describing:self.sCurrentSubLocality))"))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "Building #",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.sCurrentSubThoroughfare))"))
 
-        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:    "Region",
-                                                                   sCLSiteItemDesc:    "-N/A-",
-                                                                   sCLSiteItemValue:   "\(String(describing:self.clCurrentRegion))",
-                                                                   objCLSiteItemValue: self.clCurrentRegion))
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "Sub Locality",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.sCurrentSubLocality))"))
+
+        self.listCoreLocationSiteItems.append(CoreLocationSiteItem(sCLSiteItemName:   "Region",
+                                                               //  sCLSiteItemDesc:   "-N/A-",
+                                                                   sCLSiteItemDesc:   "\(String(describing:self.clCurrentRegion))",
+                                                                   sCLSiteItemValue:  "\(String(describing:self.clCurrentRegion))",
+                                                                   objCLSiteItemValue:self.clCurrentRegion))
 
         // Exit...
 
-    //  if (AppGlobalInfo.bPerformAppCoreLocationTesting == true)
         if (self.bInternalTraceFlag == true)
         {
 
@@ -753,9 +957,9 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
     
         return true
 
-    }   // End of public func updateCoreLocationSiteItemList().
+    }   // End of public func updateCoreLocationSiteItemList()->Bool.
     
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading heading: CLHeading)
+    func locationManager(_ manager:CLLocationManager, didUpdateHeading heading:CLHeading)
     {
         
         let sCurrMethod:String = #function
@@ -768,15 +972,13 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
         }
         
-    //  guard let clHeading = heading
-    //  else { return }
-
-        self.clCurrentHeading = heading
+        self.clCurrentHeading         = heading
+        self.clCurrentHeadingAccuracy = self.clCurrentHeading?.headingAccuracy ?? 0.000000
         
         if (self.bInternalTraceFlag == true)
         {
 
-            self.xcgLogMsg("magneticHeading: [[\(self.clCurrentHeading!.magneticHeading)], trueHeading: [\(self.clCurrentHeading!.trueHeading)], timestamp: [\(self.clCurrentHeading!.timestamp)]...")
+            self.xcgLogMsg("headingAccuracy: [\(self.clCurrentHeadingAccuracy)], magneticHeading: [[\(self.clCurrentHeading!.magneticHeading)], trueHeading: [\(self.clCurrentHeading!.trueHeading)], timestamp: [\(self.clCurrentHeading!.timestamp)]...")
 
         }
         
@@ -791,9 +993,9 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
         return
         
-    }   // End of func locationManager().
+    }   // End of func locationManager(_ manager:CLLocationManager, didUpdateHeading heading:CLHeading).
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    func locationManager(_ manager:CLLocationManager, didUpdateLocations locations:[CLLocation])
     {
         
         let sCurrMethod:String = #function
@@ -827,20 +1029,15 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
     
         return
         
-    }   // End of func locationManager().
+    }   // End of func locationManager(_ manager:CLLocationManager, didUpdateLocations locations:[CLLocation]).
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    func locationManager(_ manager:CLLocationManager, didFailWithError error:Error)
     {
         
         let sCurrMethod:String = #function
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
 
-        if (self.bInternalTraceFlag == true)
-        {
-
-            self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
-
-        }
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
         
         self.locationManager?.stopUpdatingLocation()
         
@@ -882,29 +1079,19 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         
         // Exit...
 
-        if (self.bInternalTraceFlag == true)
-        {
-
-            self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
-
-        }
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
 
         return
         
-    }   // End of func locationManager().
+    }   // End of func locationManager(_ manager:CLLocationManager, didFailWithError error:Error).
     
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager)
+    func locationManagerDidChangeAuthorization(_ manager:CLLocationManager)
     {
         
         let sCurrMethod:String = #function
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
 
-        if (self.bInternalTraceFlag == true)
-        {
-
-            self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
-
-        }
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
         
         switch manager.authorizationStatus
         {
@@ -939,16 +1126,27 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         
         // Exit...
 
-        if (self.bInternalTraceFlag == true)
-        {
-
-            self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
-
-        }
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
 
         return
         
-    }   // End of func locationManagerDidChangeAuthorization().
+    }   // End of func locationManagerDidChangeAuthorization(_ manager:CLLocationManager).
 
-}   // End of class CoreLocationModelObservable2(NSObject, CLLocationManagerDelegate, ObservableObject).
+    func locationManagerShouldDisplayHeadingCalibration(_ manager:CLLocationManager)->Bool
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+        
+        // Exit - returning 'true' to show the 'heading' Calibration when needed...
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+
+        return true
+        
+    }   // End of func locationManagerShouldDisplayHeadingCalibration(_ manager:CLLocationManager)->Bool.
+
+}   // End of class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, ObservableObject.
 
