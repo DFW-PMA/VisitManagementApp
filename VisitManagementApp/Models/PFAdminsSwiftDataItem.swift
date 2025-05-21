@@ -20,7 +20,7 @@ public final class PFAdminsSwiftDataItem: Identifiable
     {
         
         static let sClsId        = "PFAdminsSwiftDataItem"
-        static let sClsVers      = "v1.0701"
+        static let sClsVers      = "v1.0802"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -32,6 +32,7 @@ public final class PFAdminsSwiftDataItem: Identifiable
     var id:UUID                                   = UUID()
     var idPFAdminsObject:Int                      = 0
     var timestamp:Date                            = Date()
+    var pfObjectUpdatedAt:Date                    = Date()
     var sCreatedBy:String                         = ""
     
     // Item 'keyed' field(s):
@@ -65,6 +66,7 @@ public final class PFAdminsSwiftDataItem: Identifiable
         self.id                     = UUID()
         self.idPFAdminsObject       = idPFAdminsObject
         self.timestamp              = timestamp
+        self.pfObjectUpdatedAt      = timestamp
         self.sCreatedBy             = sCreatedBy
         
         self.sPFAdminsParseName     = "-N/A-"
@@ -96,6 +98,7 @@ public final class PFAdminsSwiftDataItem: Identifiable
         // Finish the 'convenience' setup of field(s)...
         
         self.idPFAdminsObject       = pfAdminsItem.idPFAdminsObject
+        self.pfObjectUpdatedAt      = pfAdminsItem.datePFAdminsParseUpdatedAt ?? timestamp
         self.sPFAdminsParseName     = pfAdminsItem.sPFAdminsParseName
         self.sPFAdminsParseNameNoWS = pfAdminsItem.sPFAdminsParseNameNoWS
         self.sPFAdminsParseTID      = pfAdminsItem.sPFAdminsParseTID
@@ -152,6 +155,7 @@ public final class PFAdminsSwiftDataItem: Identifiable
         asToString.append("'id': [\(String(describing: self.id))],")
         asToString.append("'idPFAdminsObject': [\(String(describing: self.idPFAdminsObject))],")
         asToString.append("'timestamp': [\(String(describing: self.timestamp))],")
+        asToString.append("'pfObjectUpdatedAt': [\(String(describing: self.pfObjectUpdatedAt))],")
         asToString.append("'sCreatedBy': [\(String(describing: self.sCreatedBy))],")
         asToString.append("],")
         asToString.append("[")
@@ -184,6 +188,8 @@ public final class PFAdminsSwiftDataItem: Identifiable
         self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'id'                     is [\(String(describing: self.id))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'idPFAdminsObject'       is [\(String(describing: self.idPFAdminsObject))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'timestamp'              is [\(String(describing: self.timestamp))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'pfObjectUpdatedAt'      is [\(String(describing: self.pfObjectUpdatedAt))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'sCreatedBy'             is [\(String(describing: self.sCreatedBy))]...")
 
         self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'sPFAdminsParseName'     is [\(String(describing: self.sPFAdminsParseName))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'sPFAdminsParseNameNoWS' is [\(String(describing: self.sPFAdminsParseNameNoWS))]...")
