@@ -18,7 +18,7 @@ struct AppVisitMgmtCoreLocView:View
     {
         
         static let sClsId        = "AppVisitMgmtCoreLocView"
-        static let sClsVers      = "v1.0315"
+        static let sClsVers      = "v1.0326"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -153,6 +153,12 @@ struct AppVisitMgmtCoreLocView:View
                     .padding()
 
                 }
+
+                Text("CoreLocation - Latitude/Longitude/Address Lookup")
+                    .font(.footnote) 
+
+                Divider()
+                Divider()
 
                 Text("")
 
@@ -584,6 +590,8 @@ struct AppVisitMgmtCoreLocView:View
 
                 }
 
+                Divider()
+
                 VStack
                 {
 
@@ -637,159 +645,167 @@ struct AppVisitMgmtCoreLocView:View
                         Spacer()
 
                     }
-
-                    HStack
+                    
+                    VStack(alignment:.trailing)
                     {
-
-                        Spacer()
-
-                        Text("   ")
-                            .font(.caption2)
-
-                        Spacer()
-
-                        Button
-                        {
-                            let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #6...")
-
-                            copyLocationAddressToClipboard()
-
-                            focusedField = .locationNil
-                        }
-                        label:
+                        
+                        HStack(spacing:1)
                         {
 
-                            VStack(alignment:.center)
+                            Spacer()
+                            
+                            Text("   ")
+                                .font(.caption2)
+
+                            Spacer()
+
+                            Button
+                            {
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'copy' button #6...")
+
+                                copyLocationAddressToClipboard()
+
+                                focusedField = .locationNil
+                            }
+                            label:
                             {
 
-                                Label("", systemImage: "list.clipboard")
-                                    .help(Text("Copy Address to Clipboard..."))
-                                    .imageScale(.small)
-
-                                HStack(alignment:.center)
+                                VStack(alignment:.center)
                                 {
 
-                                    Spacer()
+                                    Label("", systemImage: "list.clipboard")
+                                        .help(Text("Copy Address to Clipboard..."))
+                                        .imageScale(.small)
 
-                                    Text("Copy Address")
-                                        .font(.caption2)
+                                    HStack(alignment:.center)
+                                    {
 
-                                    Spacer()
+                                        Spacer()
+
+                                        Text("Copy Address")
+                                            .font(.caption2)
+
+                                        Spacer()
+
+                                    }
 
                                 }
 
                             }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+                        #if os(iOS)
+                            .padding()
+                        #endif
 
-                        }
-                    #if os(macOS)
-                        .buttonStyle(.borderedProminent)
-                        .padding()
-                    //  .background(???.isPressed ? .blue : .gray)
-                        .cornerRadius(10)
-                        .foregroundColor(Color.primary)
-                    #endif
-                    #if os(iOS)
-                        .padding()
-                    #endif
+                        //  Spacer()
 
-                        Spacer()
+                            Button
+                            {
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'paste' button #9...")
 
-                        Button
-                        {
-                            let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView in Text.contextMenu.'paste' button #9...")
+                                pasteLocationAddressFromClipboard()
 
-                            pasteLocationAddressFromClipboard()
-
-                            focusedField = .locationNil
-                        }
-                        label:
-                        {
-
-                            VStack(alignment:.center)
+                                focusedField = .locationNil
+                            }
+                            label:
                             {
 
-                                Label("", systemImage: "list.clipboard")
-                                    .help(Text("Paste Address from Clipboard..."))
-                                    .imageScale(.small)
-
-                                HStack(alignment:.center)
+                                VStack(alignment:.center)
                                 {
 
-                                    Spacer()
+                                    Label("", systemImage: "list.clipboard")
+                                        .help(Text("Paste Address from Clipboard..."))
+                                        .imageScale(.small)
 
-                                    Text("Paste Address")
-                                        .font(.caption2)
+                                    HStack(alignment:.center)
+                                    {
 
-                                    Spacer()
+                                        Spacer()
+
+                                        Text("Paste Address")
+                                            .font(.caption2)
+
+                                        Spacer()
+
+                                    }
 
                                 }
 
                             }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+                        #if os(iOS)
+                            .padding()
+                        #endif
 
-                        }
-                    #if os(macOS)
-                        .buttonStyle(.borderedProminent)
-                        .padding()
-                    //  .background(???.isPressed ? .blue : .gray)
-                        .cornerRadius(10)
-                        .foregroundColor(Color.primary)
-                    #endif
-                    #if os(iOS)
-                        .padding()
-                    #endif
+                        //  Spacer()
 
-                        Spacer()
+                            Button
+                            {
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Address delete'...")
 
-                        Button
-                        {
-                            let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Address delete'...")
-
-                            self.sLocationAddress = ""
-                            focusedField          = .locationNil
-                        //  focusedField          = .locationAddress
-                        }
-                        label:
-                        {
-
-                            VStack(alignment:.center)
+                                self.sLocationAddress = ""
+                                focusedField          = .locationNil
+                            //  focusedField          = .locationAddress
+                            }
+                            label:
                             {
 
-                                Label("", systemImage: "delete.left")
-                                    .help(Text("Delete the Address..."))
-                                    .imageScale(.small)
-
-                                HStack(alignment:.center)
+                                VStack(alignment:.center)
                                 {
 
-                                    Spacer()
+                                    Label("", systemImage: "delete.left")
+                                        .help(Text("Delete the Address..."))
+                                        .imageScale(.small)
 
-                                    Text("Delete Address")
-                                        .font(.caption2)
+                                    HStack(alignment:.center)
+                                    {
 
-                                    Spacer()
+                                        Spacer()
+
+                                        Text("Delete Address")
+                                            .font(.caption2)
+
+                                        Spacer()
+
+                                    }
 
                                 }
 
                             }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+                        #if os(iOS)
+                            .padding()
+                        #endif
 
                         }
-                    #if os(macOS)
-                        .buttonStyle(.borderedProminent)
-                        .padding()
-                    //  .background(???.isPressed ? .blue : .gray)
-                        .cornerRadius(10)
-                        .foregroundColor(Color.primary)
-                    #endif
-                    #if os(iOS)
-                        .padding()
-                    #endif
-
+                        
                     }
 
                 }
 
                 VStack
                 {
+
+                    Divider()
+                    Divider()
 
                     HStack
                     {
@@ -902,6 +918,9 @@ struct AppVisitMgmtCoreLocView:View
                         Spacer()
 
                     }
+
+                    Divider()
+                    Divider()
 
                 }
 

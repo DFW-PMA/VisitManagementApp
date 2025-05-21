@@ -11,7 +11,8 @@
                     <key>kind</key>
                     <string>software-package</string>
                     <key>url</key>
-                    <string>https://github.com/DFW-PMA/VisitManagementApp/releases/download/VMA-001.1/VisitManagementApp_iOS.1.01.01.07.25C127.ipa</string>
+                    <string>https://github.com/DFW-PMA/VisitManagementApp/releases/download/VMA-001.2/VisitManagementApp_iOS.1.01.06.23.25C141.ipa</string>
+                <!--<string>https://github.com/DFW-PMA/VisitManagementApp/releases/download/VMA-001.1/VisitManagementApp_iOS.1.01.01.07.25C127.ipa</string> -->
                 </dict>
             </array>
             <key>metadata</key>
