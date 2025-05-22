@@ -27,7 +27,7 @@ enum StringCleaning
     
 }
 
-// Extension class to add extra method(s) to String - v8.0503.
+// Extension class to add extra method(s) to String - v8.0504.
 
 extension String
 {
@@ -442,6 +442,35 @@ extension String
         return String(self[indexOptionalStart...])
 
     }   // End of func stripStringLeadingPrefix(sWrapperCharacters:String)->String.
+
+    func stripStringTrailingSuffix(sSuffixCharacters:String = "")->String
+    {
+
+        if (self.count < 1)
+        {
+            return self
+        }
+
+        if (sSuffixCharacters.count < 1)
+        {
+            return self
+        }
+
+        let sOptionalStringSuffix:String = sSuffixCharacters
+
+        guard self.hasSuffix(sOptionalStringSuffix)
+        else
+        {
+            return self
+        }
+
+        // Remove 'sWrapperCharacters' from the end...
+
+        let indexOptionalEnd = self.index(self.endIndex, offsetBy:-(sOptionalStringSuffix.count))
+
+        return String(self[..<indexOptionalEnd])
+
+    }   // End of func stripStringTrailingSuffix(sSuffixCharacters:String = "")->String.
 
     func extractEmbeddedContent(from firstPattern:String = "", after lastPattern:String = "")->String
     {

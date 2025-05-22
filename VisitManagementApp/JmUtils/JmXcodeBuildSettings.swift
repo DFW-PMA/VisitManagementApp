@@ -110,7 +110,7 @@ public class JmXcodeBuildSettings
 
         return
 
-    }   // End of private func xcgLogMsg().
+    }   // End of class private func xcgLogMsg().
 
 //  class private func xcgLogMsg(_ sMessage:String)
 //  {
