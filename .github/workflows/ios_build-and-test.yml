@@ -2,9 +2,9 @@ name: iOS starter workflow
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "xxx" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "xxx" ]
 
 jobs:
   build:
