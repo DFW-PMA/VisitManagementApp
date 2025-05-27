@@ -17,8 +17,10 @@ jobs:
         run: |
           # scheme_list=$(xcodebuild -list -json | tr -d "\n")
           # default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
+          scheme="VisitManaagementApp_iOS"
           default="VisitManaagementApp_iOS"
           echo $default | cat >default
+          echo Using scheme: $scheme
           echo Using default scheme: $default
       - name: Build
         env:
