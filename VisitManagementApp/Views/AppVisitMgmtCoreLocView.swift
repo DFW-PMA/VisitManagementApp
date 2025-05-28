@@ -18,7 +18,7 @@ struct AppVisitMgmtCoreLocView:View
     {
         
         static let sClsId        = "AppVisitMgmtCoreLocView"
-        static let sClsVers      = "v1.0417"
+        static let sClsVers      = "v1.0418"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -940,8 +940,8 @@ struct AppVisitMgmtCoreLocView:View
                     #if os(macOS)
                         Button
                         {
-                            AppVisitMgmtCoreLocMapData.shared.updateLocation(sCoreLocLatLong: self.sCoreLocLatLong,
-                                                                              sCoreLocAddress:self.sLocationAddress)
+                            AppVisitMgmtCoreLocMapData.shared.updateLocation(sCoreLocLatLong:self.sCoreLocLatLong,
+                                                                             sCoreLocAddress:self.sLocationAddress)
 
                             // Using -> @Environment(\.openWindow)var openWindow and 'openWindow(id:"...")' on MacOS...
                             openWindow(id:"AppVisitMgmtCoreLocMapView")

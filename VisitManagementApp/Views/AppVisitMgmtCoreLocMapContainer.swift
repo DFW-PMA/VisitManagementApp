@@ -37,12 +37,19 @@ class AppVisitMgmtCoreLocMapData:ObservableObject
 struct AppVisitMgmtCoreLocMapContainer:View 
 {
 
-    @StateObject private var appVisitMgmtCoreLocMapData:AppVisitMgmtCoreLocMapData = AppVisitMgmtCoreLocMapData.shared
+    @ObservedObject private var appVisitMgmtCoreLocMapData:AppVisitMgmtCoreLocMapData = AppVisitMgmtCoreLocMapData.shared
     
     var body:some View 
     {
-        AppVisitMgmtCoreLocMapView(sCoreLocLatLong:appVisitMgmtCoreLocMapData.sCoreLocLatLong,
-                                   sCoreLocAddress:appVisitMgmtCoreLocMapData.sCoreLocAddress)
+
+        let sCoreLocLatLong:String = appVisitMgmtCoreLocMapData.sCoreLocLatLong
+        let sCoreLocAddress:String = appVisitMgmtCoreLocMapData.sCoreLocAddress
+
+        AppVisitMgmtCoreLocMapView(sCoreLocLatLong:sCoreLocLatLong,
+                                   sCoreLocAddress:sCoreLocAddress)
+    //  AppVisitMgmtCoreLocMapView(sCoreLocLatLong:appVisitMgmtCoreLocMapData.sCoreLocLatLong,
+    //                             sCoreLocAddress:appVisitMgmtCoreLocMapData.sCoreLocAddress)
+
     }
 
 }   // End of struct AppVisitMgmtCoreLocMapContainer:View.
