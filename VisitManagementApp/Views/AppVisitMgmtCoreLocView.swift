@@ -18,7 +18,7 @@ struct AppVisitMgmtCoreLocView:View
     {
         
         static let sClsId        = "AppVisitMgmtCoreLocView"
-        static let sClsVers      = "v1.0326"
+        static let sClsVers      = "v1.0417"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -28,10 +28,11 @@ struct AppVisitMgmtCoreLocView:View
     
     // App Data field(s):
     
-//  @Environment(\.dismiss) var dismiss
-    @Environment(\.presentationMode) var presentationMode
-    @Environment(\.openURL)          var openURL
-    @Environment(\.openWindow)       var openWindow
+//  @Environment(\.dismiss)             var dismiss
+    @Environment(\.presentationMode)    var presentationMode
+    @Environment(\.openURL)             var openURL
+    @Environment(\.openWindow)          var openWindow
+    @Environment(\.appGlobalDeviceType) var appGlobalDeviceType
 
 #if os(macOS)
     private let pasteboard                                                 = NSPasteboard.general
@@ -55,6 +56,10 @@ struct AppVisitMgmtCoreLocView:View
                  private var sLocationLongitude:String                     = ""
     @AppStorage("CoreLocLocationAddress")
                  private var sLocationAddress:String                       = ""
+
+    @State       private var sCoreLocLatLong:String                        = ""
+
+    @State       private var bIsMapViewEnabled:Bool                        = false
 
     @StateObject         var progressTriggerLatLong:ProgressOverlayTrigger = ProgressOverlayTrigger()
     @StateObject         var progressTriggerAddress:ProgressOverlayTrigger = ProgressOverlayTrigger()
@@ -204,6 +209,8 @@ struct AppVisitMgmtCoreLocView:View
                             .onChange(of:self.sLocationLongitude)
                             {
                                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onChange #1 - 'self.sLocationLongitude' is [\(self.sLocationLongitude)]...")
+
+                                self.sCoreLocLatLong = "\(self.sLocationLatitude),\(self.sLocationLongitude)"
                             }
                             .onSubmit
                             {
@@ -335,6 +342,8 @@ struct AppVisitMgmtCoreLocView:View
                             self.sLocationLatitude = ""
                             focusedField           = .locationNil
                         //  focusedField           = .locationLatitude
+                            self.bIsMapViewEnabled = false
+
                         }
                         label:
                         {
@@ -418,6 +427,8 @@ struct AppVisitMgmtCoreLocView:View
                             .onChange(of:self.sLocationLatitude)
                             {
                                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onChange #2 - 'self.sLocationLatitude' is [\(self.sLocationLatitude)]...")
+
+                                self.sCoreLocLatLong = "\(self.sLocationLatitude),\(self.sLocationLongitude)"
                             }
                             .onSubmit
                             {
@@ -549,6 +560,8 @@ struct AppVisitMgmtCoreLocView:View
                             self.sLocationLongitude = ""
                             focusedField            = .locationNil
                         //  focusedField            = .locationLongitude
+                            self.bIsMapViewEnabled  = false
+
                         }
                         label:
                         {
@@ -595,7 +608,7 @@ struct AppVisitMgmtCoreLocView:View
                 VStack
                 {
 
-                    HStack
+                    HStack()
                     {
 
                         Text("=> Located Address: ")
@@ -649,7 +662,7 @@ struct AppVisitMgmtCoreLocView:View
                     VStack(alignment:.trailing)
                     {
                         
-                        HStack(spacing:1)
+                        HStack()
                         {
 
                             Spacer()
@@ -703,7 +716,7 @@ struct AppVisitMgmtCoreLocView:View
                             .padding()
                         #endif
 
-                        //  Spacer()
+                            Spacer()
 
                             Button
                             {
@@ -749,15 +762,16 @@ struct AppVisitMgmtCoreLocView:View
                             .padding()
                         #endif
 
-                        //  Spacer()
+                            Spacer()
 
                             Button
                             {
                                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Address delete'...")
 
-                                self.sLocationAddress = ""
-                                focusedField          = .locationNil
-                            //  focusedField          = .locationAddress
+                                self.sLocationAddress  = ""
+                                focusedField           = .locationNil
+                            //  focusedField           = .locationAddress
+                                self.bIsMapViewEnabled = false
                             }
                             label:
                             {
@@ -801,13 +815,13 @@ struct AppVisitMgmtCoreLocView:View
 
                 }
 
-                VStack
+                VStack(alignment:.trailing)
                 {
 
                     Divider()
                     Divider()
 
-                    HStack
+                    HStack()
                     {
 
                         Spacer()
@@ -825,12 +839,15 @@ struct AppVisitMgmtCoreLocView:View
                             {
 
                                 self.sLocationAddress = self.locateAddressByLatitudeLongitude()
+                                self.sCoreLocLatLong  = "\(self.sLocationLatitude),\(self.sLocationLongitude)"
                                 focusedField          = .locationNil
                             //  focusedField          = .locationAddress
 
                                 self.progressTriggerLatLong.setProgressOverlay(isProgressOverlayOn:false)
 
                                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate an Address by Latitude/Longitude' - 'self.progressTriggerLatLong.isProgressOverlayOn' is [\(self.progressTriggerLatLong.isProgressOverlayOn)] <should be 'false'>...")
+
+                                self.bIsMapViewEnabled = true
 
                             }
 
@@ -878,12 +895,15 @@ struct AppVisitMgmtCoreLocView:View
                             {
 
                                 (self.sLocationLatitude, self.sLocationLongitude) = self.locateLatitudeLongitudeByAddress()
+                                self.sCoreLocLatLong                              = "\(self.sLocationLatitude),\(self.sLocationLongitude)"
                                 focusedField                                      = .locationNil
                             //  focusedField                                      = .locationLatitude
 
                                 self.progressTriggerAddress.setProgressOverlay(isProgressOverlayOn:false)
 
                                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtCoreLocView.Button(Xcode).'Locate Latitude/Longitude by Address' - 'self.progressTriggerAddress.isProgressOverlayOn' is [\(self.progressTriggerAddress.isProgressOverlayOn)] <should be 'false'>...")
+
+                                self.bIsMapViewEnabled = true
 
                             }
 
@@ -917,6 +937,85 @@ struct AppVisitMgmtCoreLocView:View
 
                         Spacer()
 
+                    #if os(macOS)
+                        Button
+                        {
+                            AppVisitMgmtCoreLocMapData.shared.updateLocation(sCoreLocLatLong: self.sCoreLocLatLong,
+                                                                              sCoreLocAddress:self.sLocationAddress)
+
+                            // Using -> @Environment(\.openWindow)var openWindow and 'openWindow(id:"...")' on MacOS...
+                            openWindow(id:"AppVisitMgmtCoreLocMapView")
+                        //  openWindow(id:"AppVisitMgmtCoreLocMapView", value:["sCoreLocLatLong":self.sCoreLocLatLong, "sCoreLocAddress":self.sLocationAddress])
+                        }
+                        label:
+                        {
+                  
+                            HStack(alignment:.center)
+                            {
+                  
+                                Label("", systemImage: "mappin.and.ellipse")
+                                    .help(Text("'Map' the App CoreLocation/Address..."))
+                                    .imageScale(.medium)
+                                #if os(macOS)
+                                    .onTapGesture(count:1)
+                                    {
+                                        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView.NavigationLink.'.onTapGesture()' received - Map for CoreLocation of (\(self.sCoreLocLatLong)) and Address of [\(self.sLocationAddress)]...")
+
+                                        let _ = AppVisitMgmtCoreLocMapView(sCoreLocLatLong:self.sCoreLocLatLong, sCoreLocAddress:self.sLocationAddress)
+                                    }
+                                #endif
+                  
+                                Text("Map Location")
+                                    .font(.caption)
+                  
+                            }
+                  
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                    #if os(iOS)
+                        NavigationLink
+                        {
+                            let _ = self.sCoreLocLatLong = "\(self.sLocationLatitude),\(self.sLocationLongitude)"
+
+                            let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView.NavigationLink received - Map for CoreLocation of (\(self.sCoreLocLatLong)) and Address of [\(self.sLocationAddress)]...")
+
+                            AppVisitMgmtCoreLocMapView(sCoreLocLatLong:self.sCoreLocLatLong, sCoreLocAddress:self.sLocationAddress)
+                                .navigationBarBackButtonHidden(true)
+                        }
+                        label:
+                        {
+
+                            VStack(alignment:.center)
+                            {
+
+                                Label("", systemImage: "mappin.and.ellipse")
+                                    .help(Text("'Map' the App CoreLocation/Address..."))
+                                    .imageScale(.small)
+                                #if os(macOS)
+                                    .onTapGesture(count:1)
+                                    {
+                                        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppVisitMgmtCoreLocView.NavigationLink.'.onTapGesture()' received - Map for CoreLocation of (\(self.sCoreLocLatLong)) and Address of [\(self.sLocationAddress)]...")
+
+                                        let _ = AppVisitMgmtCoreLocMapView(sCoreLocLatLong:self.sCoreLocLatLong, sCoreLocAddress:self.sLocationAddress)
+                                    }
+                                #endif
+
+                                Text("Map Location")
+                                    .font(.caption2)
+
+                            }
+
+                        }
+                        .disabled(!self.bIsMapViewEnabled)
+                    #endif
+
+                        Spacer()
+
                     }
 
                     Divider()
@@ -934,6 +1033,8 @@ struct AppVisitMgmtCoreLocView:View
                 .onAppear(
                     perform:
                     {
+                        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onAppear #4 - 'appGlobalDeviceType' is (\(String(describing:appGlobalDeviceType)))...")
+
                         // Finish App 'initialization'...
 
                         let _ = self.finishAppInitialization()

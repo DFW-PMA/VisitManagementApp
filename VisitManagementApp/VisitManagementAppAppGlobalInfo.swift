@@ -16,6 +16,41 @@ import IOKit
 import UIKit
 #endif
 
+// App 'global' Device TYPE:
+
+enum AppGlobalDeviceType:Int, CaseIterable
+{
+    
+    case appGlobalDeviceUndefined  = 0
+    case appGlobalDeviceMac        = 1
+    case appGlobalDeviceIPad       = 2
+    case appGlobalDeviceIPhone     = 3
+    case appGlobalDeviceAppleWatch = 4
+    
+}   // End of AppGlobalDeviceType:Int, CaseIterable.
+
+// App 'global' Device TYPE Environment 'key':
+
+struct AppGlobalDeviceTypeEnvironmentKey:EnvironmentKey
+{
+
+    static let defaultValue:AppGlobalDeviceType = AppGlobalDeviceType.appGlobalDeviceUndefined
+
+}   // End of struct AppGlobalDeviceTypeEnvironmentKey:EnvironmentKey.
+
+// Extend EnvironmentValues to include AppGlobalDeviceType:
+
+extension EnvironmentValues 
+{
+
+    var appGlobalDeviceType:AppGlobalDeviceType 
+    {
+        get { self[AppGlobalDeviceTypeEnvironmentKey.self] }
+        set { self[AppGlobalDeviceTypeEnvironmentKey.self] = newValue }
+    }
+
+}   // End of extension EnvironmentValues.
+
 public class AppGlobalInfo: NSObject
 {
     
@@ -28,7 +63,7 @@ public class AppGlobalInfo: NSObject
     }
 
     static let sGlobalInfoAppId:String                                   = "VisitManagementApp"
-    static let sGlobalInfoAppVers:String                                 = "v1.3401"
+    static let sGlobalInfoAppVers:String                                 = "v1.3502"
     static let sGlobalInfoAppDisp:String                                 = sGlobalInfoAppId+".("+sGlobalInfoAppVers+"): "
     static let sGlobalInfoAppCopyRight:String                            = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
     static let sGlobalInfoAppLogFilespecMaxSize:Int64                    = 50000000
@@ -41,7 +76,7 @@ public class AppGlobalInfo: NSObject
 
     static let bUseApplicationShortTitle:Bool                            = true
     static let sApplicationTitle:String                                  = sGlobalInfoAppId
-    static let sApplicationShortTitle:String                             = "VisitManagementApp"
+    static let sApplicationShortTitle:String                             = "VMA"
 
 #if os(macOS)
 
@@ -131,6 +166,7 @@ public class AppGlobalInfo: NSObject
 
     // Various 'device' information:
 
+           var iGlobalDeviceType:AppGlobalDeviceType                     = AppGlobalDeviceType.appGlobalDeviceUndefined
            var sGlobalDeviceType:String                                  = "-unknown-"   // Values: "Mac", "iPad", "iPhone, "AppleWatch"
            var bGlobalDeviceIsMac:Bool                                   = false
            var bGlobalDeviceIsIPad:Bool                                  = false
@@ -220,6 +256,7 @@ public class AppGlobalInfo: NSObject
         self.sGlobalProcessInfoMacOSUserName        = ProcessInfo.processInfo.userName
         self.sGlobalProcessInfoMacOSFullUserName    = ProcessInfo.processInfo.fullUserName
 
+        self.iGlobalDeviceType                      = AppGlobalDeviceType.appGlobalDeviceMac
         self.sGlobalDeviceType                      = "Mac"   // Values: "Mac", "iPad", "iPhone, "AppleWatch"
         self.bGlobalDeviceIsMac                     = true
         self.bGlobalDeviceIsIPad                    = false
@@ -269,9 +306,13 @@ public class AppGlobalInfo: NSObject
         // Get various 'device' setting(s):
         // (Alternate test: if UIDevice.current.userInterfaceIdiom == .pad { ... } ).
 
+        self.iGlobalDeviceType                      = AppGlobalDeviceType.appGlobalDeviceUndefined
+        self.sGlobalDeviceType                      = "-unknown-"
+
         if UIDevice.current.localizedModel == "Mac" 
         {
 
+            self.iGlobalDeviceType                  = AppGlobalDeviceType.appGlobalDeviceMac
             self.sGlobalDeviceType                  = "Mac"
             self.bGlobalDeviceIsMac                 = true
 
@@ -279,6 +320,7 @@ public class AppGlobalInfo: NSObject
         else if UIDevice.current.localizedModel == "iPad" 
         {
 
+            self.iGlobalDeviceType                  = AppGlobalDeviceType.appGlobalDeviceIPad
             self.sGlobalDeviceType                  = "iPad"
             self.bGlobalDeviceIsIPad                = true
 
@@ -286,6 +328,7 @@ public class AppGlobalInfo: NSObject
         else if UIDevice.current.localizedModel == "iPhone" 
         {
 
+            self.iGlobalDeviceType                  = AppGlobalDeviceType.appGlobalDeviceIPhone
             self.sGlobalDeviceType                  = "iPhone"
             self.bGlobalDeviceIsIPhone              = true
 
@@ -293,6 +336,7 @@ public class AppGlobalInfo: NSObject
         else if UIDevice.current.localizedModel == "AppleWatch" 
         {
 
+            self.iGlobalDeviceType                  = AppGlobalDeviceType.appGlobalDeviceAppleWatch
             self.sGlobalDeviceType                  = "AppleWatch"
             self.bGlobalDeviceIsAppleWatch          = true
 
@@ -648,6 +692,7 @@ public class AppGlobalInfo: NSObject
 
     #endif
 
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.iGlobalDeviceType' is [\(String(describing: self.iGlobalDeviceType))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.sGlobalDeviceType' is [\(String(describing: self.sGlobalDeviceType))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bGlobalDeviceIsMac' is [\(String(describing: self.bGlobalDeviceIsMac))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bGlobalDeviceIsIPad' is [\(String(describing: self.bGlobalDeviceIsIPad))]...")

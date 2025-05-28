@@ -19,7 +19,7 @@ struct AppAuthenticateView: View
     {
         
         static let sClsId        = "AppAuthenticateView"
-        static let sClsVers      = "v1.2901"
+        static let sClsVers      = "v1.3001"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -29,7 +29,8 @@ struct AppAuthenticateView: View
 
     // App Data field(s):
 
-//  @Environment(\.modelContext) var modelContext
+//  @Environment(\.modelContext)        var modelContext
+    @Environment(\.appGlobalDeviceType) var appGlobalDeviceType
 
     static              var timerOnDemandThirdOfSec                               = Timer()
     static              var timerOnDemandHalfOfSec                                = Timer()
@@ -168,7 +169,8 @@ struct AppAuthenticateView: View
 
     var body: some View
     {
-        
+
+        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) #1 Toggle 'appGlobalDeviceType' is (\(String(describing:appGlobalDeviceType)))...")
         let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) #1 Toggle 'jmAppSwiftDataManager.pfAdminsSwiftDataItems.count' is (\(self.jmAppSwiftDataManager.pfAdminsSwiftDataItems.count))...")
         let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) #1 Toggle 'jmAppSwiftDataManager.bArePFAdminsSwiftDataItemsAvailable' is [\(self.jmAppSwiftDataManager.bArePFAdminsSwiftDataItemsAvailable)]...")
         let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) #1 Toggle 'isUserAuthenticationAvailable' is [\(isUserAuthenticationAvailable)]...")

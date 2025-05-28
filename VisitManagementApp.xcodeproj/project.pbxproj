@@ -129,6 +129,10 @@
 		F0981DB42C52C5AE0054CE7C /* VisitManagementAppAppGlobalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0981DB32C52C5AD0054CE7C /* VisitManagementAppAppGlobalInfo.swift */; };
 		F0988A142DB2B7F800F8BEDC /* SwiftXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = F0988A132DB2B7F800F8BEDC /* SwiftXLSX */; };
 		F0988A162DB2B81900F8BEDC /* SwiftXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = F0988A152DB2B81900F8BEDC /* SwiftXLSX */; };
+		F09B7EB82DE77AB60031B9E8 /* AppVisitMgmtCoreLocMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B7EB72DE77AB60031B9E8 /* AppVisitMgmtCoreLocMapView.swift */; };
+		F09B7EB92DE77AB60031B9E8 /* AppVisitMgmtCoreLocMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B7EB72DE77AB60031B9E8 /* AppVisitMgmtCoreLocMapView.swift */; };
+		F09B7EBB2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B7EBA2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift */; };
+		F09B7EBC2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09B7EBA2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift */; };
 		F0A443392C498ED6005EEE81 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		F0A59E052C5962E900302BA8 /* JmObjCSwiftEnvBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A59E032C5962E900302BA8 /* JmObjCSwiftEnvBridge.swift */; };
 		F0A8FB3E2D650BBF00ADD658 /* AppSchedPatLocMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A8FB3D2D650BBF00ADD658 /* AppSchedPatLocMapView.swift */; };
@@ -281,6 +285,8 @@
 		F091A2942C8F865700FB85D5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F091A6652D402F9C003C881E /* AppSearchableTherapistName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchableTherapistName.swift; sourceTree = "<group>"; };
 		F0981DB32C52C5AD0054CE7C /* VisitManagementAppAppGlobalInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitManagementAppAppGlobalInfo.swift; sourceTree = "<group>"; };
+		F09B7EB72DE77AB60031B9E8 /* AppVisitMgmtCoreLocMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtCoreLocMapView.swift; sourceTree = "<group>"; };
+		F09B7EBA2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtCoreLocMapContainer.swift; sourceTree = "<group>"; };
 		F0A59E032C5962E900302BA8 /* JmObjCSwiftEnvBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JmObjCSwiftEnvBridge.swift; sourceTree = "<group>"; };
 		F0A59E042C5962E900302BA8 /* JmObjCSwiftEnvBridge-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JmObjCSwiftEnvBridge-Bridging-Header.h"; sourceTree = "<group>"; };
 		F0A8FB3D2D650BBF00ADD658 /* AppSchedPatLocMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSchedPatLocMapView.swift; sourceTree = "<group>"; };
@@ -437,6 +443,8 @@
 		F028C5BF2C486134007C459E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F09B7EBA2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift */,
+				F09B7EB72DE77AB60031B9E8 /* AppVisitMgmtCoreLocMapView.swift */,
 				F0E4C4612DD7D1E4000F79DF /* AppVisitMgmtCoreLocView.swift */,
 				F0BD25042DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift */,
 				F00DC49F2DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift */,
@@ -686,6 +694,7 @@
 				F08C86B02D1DBAEF00D5B19A /* AppVisitMgmtView.swift in Sources */,
 				F05EE1D52D380E4E00ABC0C5 /* JmAppAlarmSoundManager.swift in Sources */,
 				F05EDC312D53FA2F00306C62 /* AppVisitMgmtPatient1DetailsView.swift in Sources */,
+				F09B7EB82DE77AB60031B9E8 /* AppVisitMgmtCoreLocMapView.swift in Sources */,
 				F05EDC322D53FA2F00306C62 /* AppVisitMgmtPatient1View.swift in Sources */,
 				F05EDC332D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift in Sources */,
 				F00619A62C94A8060094614E /* MultipartRequestInfo.swift in Sources */,
@@ -726,6 +735,7 @@
 				F0289D292C53D85B001B19CD /* JmUserDefaults.swift in Sources */,
 				F0DC5D312CDBCE7A009F0090 /* MultipartZipFileService.swift in Sources */,
 				F0D17B8D2C52E572000E5A52 /* AppInfoCommands.swift in Sources */,
+				F09B7EBC2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift in Sources */,
 				F0F717802DAEE43600E7CA2A /* ParsePFBackupFileItem.swift in Sources */,
 				F091A2852C8F6FEF00FB85D5 /* RestURLResponse.swift in Sources */,
 				F028C5B12C48610A007C459E /* VisitManagementAppApp.swift in Sources */,
@@ -757,6 +767,7 @@
 				F00619A72C94A8060094614E /* MultipartRequestInfo.swift in Sources */,
 				F0BCCC572C820EF1007EA382 /* ContentView.swift in Sources */,
 				F0BCCC582C820EF1007EA382 /* HelpBasicMode.swift in Sources */,
+				F09B7EB92DE77AB60031B9E8 /* AppVisitMgmtCoreLocMapView.swift in Sources */,
 				F0BCCC592C820EF1007EA382 /* VisitManagementAppUIAppDelegate.swift in Sources */,
 				F0F7177F2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift in Sources */,
 				F08C86B72D1DF34600D5B19A /* AppVisitMgmtTherapist1DetailsView.swift in Sources */,
@@ -815,6 +826,7 @@
 				F05EDC362D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift in Sources */,
 				F0A8FB3E2D650BBF00ADD658 /* AppSchedPatLocMapView.swift in Sources */,
 				F00DC4A12DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift in Sources */,
+				F09B7EBB2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift in Sources */,
 				F0BCCC682C820EF1007EA382 /* JmStringExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -973,7 +985,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 07.01.25C142;
+				CURRENT_PROJECT_VERSION = 08.17.25C148;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1017,7 +1029,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 07.01.25C142;
+				CURRENT_PROJECT_VERSION = 08.17.25C148;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1060,7 +1072,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 07.01.25C142;
+				CURRENT_PROJECT_VERSION = 08.17.25C148;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1111,7 +1123,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 07.01.25C142;
+				CURRENT_PROJECT_VERSION = 08.17.25C148;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";

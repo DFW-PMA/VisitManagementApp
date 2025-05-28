@@ -18,7 +18,7 @@ struct AppTidScheduleView: View
     {
         
         static let sClsId        = "AppTidScheduleView"
-        static let sClsVers      = "v1.1401"
+        static let sClsVers      = "v1.1501"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright © JustMacApps 2023-2025. All rights reserved."
         static let bClsTrace     = true
