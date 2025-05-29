@@ -985,7 +985,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 08.17.25C148;
+				CURRENT_PROJECT_VERSION = 07.01.25C149;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1029,7 +1029,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 08.17.25C148;
+				CURRENT_PROJECT_VERSION = 07.01.25C149;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1072,7 +1072,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 08.19.25C148;
+				CURRENT_PROJECT_VERSION = 07.01.25C149;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1123,7 +1123,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 08.19.25C148;
+				CURRENT_PROJECT_VERSION = 07.01.25C149;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
