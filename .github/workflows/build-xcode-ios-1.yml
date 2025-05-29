@@ -43,14 +43,16 @@ jobs:
 
       - name: Build
         env:
-          scheme: ${{ 'default' }}
+          scheme: ${{ 'VisitManaagementApp_iOS' }}
         run: |
           # echo BLOCKED - until code can be added to update xcodebuild to a newer version
           # if [ $scheme = default ]; then scheme=$(cat default); fi
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
+          echo "Current Xcode version:"
+          xcodebuild -version
           echo Using scheme: $scheme
           echo Using file_to_build: $file_to_build
-          echo Running: xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
+          # echo Running: xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
           xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
 
