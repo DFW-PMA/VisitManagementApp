@@ -319,6 +319,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F0A75A922DCBEC95004C9BA0 /* Modifiers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modifiers; sourceTree = "<group>"; };
+		F0E855B92DE8E15E002C8D95 /* Local_Packages */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Local_Packages; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -411,6 +412,7 @@
 		F028C5AF2C48610A007C459E /* VisitManagementApp */ = {
 			isa = PBXGroup;
 			children = (
+				F0E855B92DE8E15E002C8D95 /* Local_Packages */,
 				F028C5B42C48610B007C459E /* Assets.xcassets */,
 				F0D17B8B2C52E4BD000E5A52 /* Commands */,
 				F0D17B862C52E3D5000E5A52 /* JmUtils */,
@@ -552,6 +554,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				F0A75A922DCBEC95004C9BA0 /* Modifiers */,
+				F0E855B92DE8E15E002C8D95 /* Local_Packages */,
 			);
 			name = VisitManagementApp_Mac;
 			packageProductDependencies = (
@@ -579,6 +582,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				F0A75A922DCBEC95004C9BA0 /* Modifiers */,
+				F0E855B92DE8E15E002C8D95 /* Local_Packages */,
 			);
 			name = VisitManagementApp_iOS;
 			packageProductDependencies = (
@@ -624,7 +628,7 @@
 			packageReferences = (
 				F0C6A8FD2C4AA2A40004606A /* XCRemoteSwiftPackageReference "XCGLogger" */,
 				F08C00C92CE537420045A5CD /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */,
-				F0988A122DB2B7F800F8BEDC /* XCLocalSwiftPackageReference "../../../JWeb_MacOSx_apps/SwiftUI_GUI_tools/3973770_SwiftXLSX/SwiftXLSX" */,
+				F0988A122DB2B7F800F8BEDC /* XCLocalSwiftPackageReference "VisitManagementApp/Local_Packages/SwiftXLSX" */,
 			);
 			productRefGroup = F028C5AE2C48610A007C459E /* Products */;
 			projectDirPath = "";
@@ -1072,7 +1076,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 07.03.25C149;
+				CURRENT_PROJECT_VERSION = 07.07.25C149;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1123,7 +1127,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 07.03.25C149;
+				CURRENT_PROJECT_VERSION = 07.07.25C149;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1238,9 +1242,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		F0988A122DB2B7F800F8BEDC /* XCLocalSwiftPackageReference "../../../JWeb_MacOSx_apps/SwiftUI_GUI_tools/3973770_SwiftXLSX/SwiftXLSX" */ = {
+		F0988A122DB2B7F800F8BEDC /* XCLocalSwiftPackageReference "VisitManagementApp/Local_Packages/SwiftXLSX" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../../JWeb_MacOSx_apps/SwiftUI_GUI_tools/3973770_SwiftXLSX/SwiftXLSX;
+			relativePath = VisitManagementApp/Local_Packages/SwiftXLSX;
 		};
 /* End XCLocalSwiftPackageReference section */
 

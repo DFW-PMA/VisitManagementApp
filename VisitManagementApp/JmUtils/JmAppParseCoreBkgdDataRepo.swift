@@ -21,7 +21,7 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
     {
 
         static let sClsId        = "JmAppParseCoreBkgdDataRepo"
-        static let sClsVers      = "v1.2115"
+        static let sClsVers      = "v1.2202"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = false
@@ -3186,6 +3186,11 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
         xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
 
         xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:1, col:10))
+        xlsxCurrentCell.value               = .text("Secondary Ins")
+        xlsxCurrentCell.alignmentHorizontal = .center
+        xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+        xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:1, col:11))
         xlsxCurrentCell.value               = .text("emm_acc")
         xlsxCurrentCell.alignmentHorizontal = .center
         xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
@@ -3227,6 +3232,15 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
                 cTotalExportScheduledPatientLocationItems += 1
                 cXLSXWorksheetRow                         += 1
 
+                if (scheduledPatientLocationItem.iPid < 0)
+                {
+                
+                    self.xcgLogMsg("\(sCurrMethodDisp) Skipping object #(\(cExportPFTherapistParseTIDs)) 'sPFTherapistParseTID' of [\(sPFTherapistParseTID)] - the 'scheduledPatientLocationItem.iPid' field of [\(scheduledPatientLocationItem.iPid)] is negative - filtering past this - Warning!")
+
+                    continue
+                
+                }
+
                 var xlsxCurrentCell:XCell           = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:1))
                 xlsxCurrentCell.value               = .text(scheduledPatientLocationItem.sTherapistName)
                 xlsxCurrentCell.alignmentHorizontal = .left
@@ -3267,13 +3281,46 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
                 xlsxCurrentCell.alignmentHorizontal = .center
                 xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
 
-                xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:9))
-            //  xlsxCurrentCell.value               = .text("\(scheduledPatientLocationItem.iPatientPrimaryIns)")
-                xlsxCurrentCell.value               = .text(InsuranceType.allCases[scheduledPatientLocationItem.iPatientPrimaryIns].rawValue)
-                xlsxCurrentCell.alignmentHorizontal = .center
-                xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+                if (scheduledPatientLocationItem.iPatientPrimaryIns < 0)
+                {
+                
+                    xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:9))
+                    xlsxCurrentCell.value               = .text("-none-")
+                    xlsxCurrentCell.alignmentHorizontal = .center
+                    xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+                
+                }
+                else
+                {
+                
+                    xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:9))
+                //  xlsxCurrentCell.value               = .text("\(scheduledPatientLocationItem.iPatientPrimaryIns)")
+                    xlsxCurrentCell.value               = .text(InsuranceType.allCases[scheduledPatientLocationItem.iPatientPrimaryIns].rawValue)
+                    xlsxCurrentCell.alignmentHorizontal = .center
+                    xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+                
+                }
 
-                xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:10))
+                if (scheduledPatientLocationItem.iPatientSecondaryIns < 0)
+                {
+                
+                    xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:10))
+                    xlsxCurrentCell.value               = .text("-none-")
+                    xlsxCurrentCell.alignmentHorizontal = .center
+                    xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+                
+                }
+                else
+                {
+                
+                    xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:10))
+                    xlsxCurrentCell.value               = .text(InsuranceType.allCases[scheduledPatientLocationItem.iPatientSecondaryIns].rawValue)
+                    xlsxCurrentCell.alignmentHorizontal = .center
+                    xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+                
+                }
+
+                xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:11))
                 xlsxCurrentCell.value               = .text("ROOFTOP")
                 xlsxCurrentCell.alignmentHorizontal = .center
                 xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
