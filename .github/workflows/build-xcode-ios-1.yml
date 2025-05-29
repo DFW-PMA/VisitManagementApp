@@ -10,7 +10,8 @@ on:
 jobs:
   build:
     name: Build and analyse default scheme using xcodebuild command
-    runs-on: macos-latest
+    # runs-on: macos-latest
+    runs-on: macos-15
     steps:
 
       - name: Checkout
@@ -30,6 +31,7 @@ jobs:
         run: |
           echo "Current Xcode version:"
           xcodebuild -version
+          echo "- - - - - - - - - - - - -"
           echo "Available Xcode versions:"
           ls /Applications/ | grep Xcode
 
