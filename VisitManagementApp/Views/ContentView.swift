@@ -17,7 +17,7 @@ struct ContentView: View
     {
         
         static let sClsId        = "ContentView"
-        static let sClsVers      = "v1.3801"
+        static let sClsVers      = "v1.3901"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -581,16 +581,17 @@ struct ContentView: View
 
                     self.isAppSchedPatLocViewModal.toggle()
 
-            //  #if os(macOS)
-            //
-            //      // Using -> @Environment(\.openWindow)var openWindow and 'openWindow(id:"...")' on MacOS...
-            //      openWindow(id:"AppSchedPatLocView", value:self.getAppParseCoreManagerInstance())
-            //
-            //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Encodable'
-            //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Decodable'
-            //
-            //  #endif
-            //
+                #if os(macOS)
+              
+                    // Using -> @Environment(\.openWindow)var openWindow and 'openWindow(id:"...")' on MacOS...
+                //  openWindow(id:"AppSchedPatLocView", value:self.getAppParseCoreManagerInstance())
+                    openWindow(id:"AppSchedPatLocView")
+              
+                    //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Encodable'
+                    //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Decodable'
+              
+                #endif
+              
                 }
                 label:
                 {
@@ -608,15 +609,15 @@ struct ContentView: View
                     }
 
                 }
-            #if os(macOS)
-                .sheet(isPresented:$isAppSchedPatLocViewModal, content:
-                    {
-          
-                        AppSchedPatLocView()
-          
-                    }
-                )
-            #endif
+        //  #if os(macOS)
+        //      .sheet(isPresented:$isAppSchedPatLocViewModal, content:
+        //          {
+        //
+        //              AppSchedPatLocView()
+        //
+        //          }
+        //      )
+        //  #endif
             #if os(iOS)
                 .fullScreenCover(isPresented:$isAppSchedPatLocViewModal)
                 {
