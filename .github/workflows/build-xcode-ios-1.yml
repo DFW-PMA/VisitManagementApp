@@ -12,8 +12,10 @@ jobs:
     name: Build and analyse default scheme using xcodebuild command
     runs-on: macos-latest
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set Default Scheme
         run: |
           # scheme_list=$(xcodebuild -list -json | tr -d "\n")
@@ -23,6 +25,14 @@ jobs:
           echo $default | cat >default
           echo Using scheme: $scheme
           echo Using default scheme: $default
+
+      - name: Check current Xcode version
+        run: |
+          echo "Current Xcode version:"
+          xcodebuild -version
+          echo "Available Xcode versions:"
+          ls /Applications/ | grep Xcode
+
       - name: Build
         env:
           scheme: ${{ 'default' }}

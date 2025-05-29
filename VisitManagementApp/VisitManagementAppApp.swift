@@ -18,7 +18,7 @@ struct VisitManagementAppApp: App
     {
         
         static let sClsId        = "VisitManagementAppApp"
-        static let sClsVers      = "v1.2306"
+        static let sClsVers      = "v1.2307"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -40,7 +40,7 @@ struct VisitManagementAppApp: App
 
     // App Data field(s):
 
-    let sAppBundlePath:String                                       = Bundle.main.bundlePath
+                    let sAppBundlePath:String                       = Bundle.main.bundlePath
 
     @State          var uuid4ForcingViewRefresh:UUID                = UUID()
 
@@ -56,7 +56,7 @@ struct VisitManagementAppApp: App
         let sCurrMethod:String = #function
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
         
-        _appGlobalDeviceType = State(initialValue:appGlobalInfo.iGlobalDeviceType)
+        _appGlobalDeviceType   = State(initialValue:appGlobalInfo.iGlobalDeviceType)
         
         self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
 
