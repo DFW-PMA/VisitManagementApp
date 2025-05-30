@@ -52,6 +52,7 @@ jobs:
           echo "Current Xcode version:"
           xcodebuild -version
           echo Using scheme: $scheme
+          echo Using filetype_parameter: $filetype_parameter
           echo Using file_to_build: $file_to_build
           # echo Running: xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
           xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
