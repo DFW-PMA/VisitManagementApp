@@ -17,7 +17,7 @@ struct AppVisitMgmtSchedule1DetailsView: View
     {
         
         static let sClsId        = "AppVisitMgmtSchedule1DetailsView"
-        static let sClsVers      = "v1.0501"
+        static let sClsVers      = "v1.0601"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -159,8 +159,8 @@ struct AppVisitMgmtSchedule1DetailsView: View
                         .font(.caption2) 
                         .frame(maxWidth:.infinity, alignment:.center)
 
-                //  Text("DATA Gatherer - Schedule Details by TID/Scheduled Item ID")
-                    Text("DATA Gatherer - Schedule Details by TID/PID")
+                //  Text("VMA - Schedule Details by TID/Scheduled Item ID")
+                    Text("VMA - Schedule Details by TID/PID")
                         .bold()
                         .font(.caption2) 
                         .frame(maxWidth:.infinity, alignment:.center)

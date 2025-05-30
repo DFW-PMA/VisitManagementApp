@@ -17,7 +17,7 @@ struct AppVisitMgmtTherapist1View: View
     {
         
         static let sClsId        = "AppVisitMgmtTherapist1View"
-        static let sClsVers      = "v1.0901"
+        static let sClsVers      = "v1.1001"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -178,7 +178,7 @@ struct AppVisitMgmtTherapist1View: View
                         {
 
                             Label("", systemImage: "arrow.clockwise")
-                                .help(Text("'Refresh' App Data Gatherer Therapist by TID Screen..."))
+                                .help(Text("'Refresh' App VMA Therapist by TID Screen..."))
                                 .imageScale(.large)
 
                             Text("Refresh - #(\(self.cAppVisitMgmtTherapist1ViewRefreshButtonPresses))...")

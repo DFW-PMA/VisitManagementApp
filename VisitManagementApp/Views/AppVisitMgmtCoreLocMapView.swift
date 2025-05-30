@@ -16,7 +16,7 @@ struct AppVisitMgmtCoreLocMapView:View
     {
         
         static let sClsId        = "AppVisitMgmtCoreLocMapView"
-        static let sClsVers      = "v1.0110"
+        static let sClsVers      = "v1.0201"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -483,7 +483,7 @@ struct AppVisitMgmtCoreLocMapView:View
             self.sLocationLongitude = String(describing: (dictCurrentLocation["dblLongitude"]            ?? "0.000000"))
             self.sLocationAddress   = String(describing: (dictCurrentLocation["sCurrentLocationAddress"] ?? "-N/A-"))
 
-            self.xcgLogMsg("\(sCurrMethodDisp) Updated - 'dictCurrentLocation[\"dblLatitude\"]' is [\(dictCurrentLocation["dblLatitude"])] - 'dictCurrentLocation[\"dblLongitude\"]' is [\(dictCurrentLocation["dblLongitude"])] - 'dictCurrentLocation[\"sCurrentLocationAddress\"]' is [\(dictCurrentLocation["sCurrentLocationAddress"])] ...")
+            self.xcgLogMsg("\(sCurrMethodDisp) Updated - 'dictCurrentLocation[\"dblLatitude\"]' is [\(String(describing: dictCurrentLocation["dblLatitude"]))] - 'dictCurrentLocation[\"dblLongitude\"]' is [\(String(describing: dictCurrentLocation["dblLongitude"]))] - 'dictCurrentLocation[\"sCurrentLocationAddress\"]' is [\(String(describing: dictCurrentLocation["sCurrentLocationAddress"]))] ...")
             self.xcgLogMsg("\(sCurrMethodDisp) Updated - 'self.sLocationLatitude' is [\(self.sLocationLatitude)] - 'self.sLocationLongitude' is [\(self.sLocationLongitude)] - 'self.sLocationAddress' is [\(self.sLocationAddress)] ...")
         
         }

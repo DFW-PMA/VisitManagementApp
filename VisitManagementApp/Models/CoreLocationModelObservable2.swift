@@ -26,7 +26,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
     {
         
         static let sClsId        = "CoreLocationModelObservable2"
-        static let sClsVers      = "v1.1103"
+        static let sClsVers      = "v1.1201"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -732,7 +732,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         if (address.count < 1)
         {
         
-            var dictCurrentLocation:[String:Any] = [:]
+            let dictCurrentLocation:[String:Any] = [:]
 
             completionHandler(requestID, dictCurrentLocation)
 

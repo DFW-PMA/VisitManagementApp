@@ -39,7 +39,7 @@ struct AppVisitMgmtSchedule1ExportView: View
     {
         
         static let sClsId        = "AppVisitMgmtSchedule1ExportView"
-        static let sClsVers      = "v1.0401"
+        static let sClsVers      = "v1.0509"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -47,6 +47,11 @@ struct AppVisitMgmtSchedule1ExportView: View
         
     }
     
+    // 'Internal' Trace flag:
+
+    private 
+    var bInternalTraceFlag:Bool                                                        = false
+
     // App Data field(s):
 
 //  @Environment(\.dismiss) var dismiss
@@ -56,35 +61,40 @@ struct AppVisitMgmtSchedule1ExportView: View
     
     enum FocusedFields
     {
-       case TherapistTID
+       case therapistTID
+       case therapistName
     }
 
     @FocusState  private var focusedField:FocusedFields?
     
 //  @Binding     private var sTherapistTID:String
     @State       private var sTherapistTID:String
+    @State       private var sTherapistName:String                                     = ""
 
-    @State       private var isAppScheduleExportAlertShowing:Bool                  = false
-    @State       private var isAppScheduleExportErrorShowing:Bool                  = false
+    @State       private var listSelectableTherapistNames:[AppSearchableTherapistName] = [AppSearchableTherapistName]()
 
-    @State       private var sAppScheduleExportErrorReason:String                  = ""
+//  @State       private var isAppRunTherapistLocateByTNameShowing:Bool                = false
+    @State       private var isAppScheduleExportAlertShowing:Bool                      = false
+    @State       private var isAppScheduleExportErrorShowing:Bool                      = false
+
+    @State       private var sAppScheduleExportErrorReason:String                      = ""
   
-    @State       private var bSelectReportDates:Bool                               = false
-    @State       private var dateOfReportStart:Date                                = Calendar.current.date(byAdding:.day, value:-9, to:.now)!
-    @State       private var dateOfReportEnd:Date                                  = Calendar.current.date(byAdding:.day, value: 0, to:.now)!
+    @State       private var bSelectReportDates:Bool                                   = false
+    @State       private var dateOfReportStart:Date                                    = Calendar.current.date(byAdding:.day, value:-9, to:.now)!
+    @State       private var dateOfReportEnd:Date                                      = Calendar.current.date(byAdding:.day, value: 0, to:.now)!
 
-    @State       private var selectedReportValues:SelectedReportValues             = SelectedReportValues(sTherapistTID:               "-1",
-                                                                                                          iTherapistTID:               -1,
-                                                                                                      //  bRunFullBigTest:             false,
-                                                                                                          bSelectReportDates:          false,
-                                                                                                          dateOfReportStart:           Date.now,
-                                                                                                          dateOfReportEnd:             Date.now,
-                                                                                                          sSelectedReportAlertTitle:   "This may take some time. Are you sure?",
-                                                                                                          sSelectedReportAlertMessage: "-N/A-")
+    @State       private var selectedReportValues:SelectedReportValues                 = SelectedReportValues(sTherapistTID:               "-1",
+                                                                                                              iTherapistTID:               -1,
+                                                                                                          //  bRunFullBigTest:             false,
+                                                                                                              bSelectReportDates:          false,
+                                                                                                              dateOfReportStart:           Date.now,
+                                                                                                              dateOfReportEnd:             Date.now,
+                                                                                                              sSelectedReportAlertTitle:   "This may take some time. Are you sure?",
+                                                                                                              sSelectedReportAlertMessage: "-N/A-")
 
-                         var jmAppDelegateVisitor:JmAppDelegateVisitor             = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
-                         var jmAppParseCoreManager:JmAppParseCoreManager           = JmAppParseCoreManager.ClassSingleton.appParseCodeManager
-                         var jmAppParseCoreBkgdDataRepo:JmAppParseCoreBkgdDataRepo = JmAppParseCoreBkgdDataRepo.ClassSingleton.appParseCodeBkgdDataRepo
+                         var jmAppDelegateVisitor:JmAppDelegateVisitor                 = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
+                         var jmAppParseCoreManager:JmAppParseCoreManager               = JmAppParseCoreManager.ClassSingleton.appParseCodeManager
+                         var jmAppParseCoreBkgdDataRepo:JmAppParseCoreBkgdDataRepo     = JmAppParseCoreBkgdDataRepo.ClassSingleton.appParseCodeBkgdDataRepo
     
     init(sTherapistTID:String)
     {
@@ -190,7 +200,7 @@ struct AppVisitMgmtSchedule1ExportView: View
                         .font(.caption2) 
                         .frame(maxWidth:.infinity, alignment:.center)
 
-                    Text("DATA Gatherer - Schedule Export by TID")
+                    Text("VMA - Schedule Export by TID")
                         .bold()
                         .font(.caption2) 
                         .frame(maxWidth:.infinity, alignment:.center)
@@ -207,63 +217,6 @@ struct AppVisitMgmtSchedule1ExportView: View
                         .frame(maxWidth:.infinity, alignment:.center)
 
                 }
-
-                HStack()
-                {
-
-                    Text("::: Therapist: TID #")
-                        .font(.caption) 
-
-                    Text("\(self.sTherapistTID)")
-                        .italic()
-                        .font(.caption) 
-                        .foregroundColor(.red)
-
-                    Spacer()
-
-                    if (self.sTherapistTID.count  > 0 &&
-                        self.sTherapistTID       != "-1")
-                    {
-                    
-                        Button
-                        {
-
-                            let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppVisitMgmtSchedule1ExportView.Button(Xcode).'ALL Therapist(s)' pressed...")
-
-                            self.sTherapistTID = "-1"
-
-                        }
-                        label:
-                        {
-
-                            VStack(alignment:.center)
-                            {
-
-                                Label("", systemImage: "t.circle")
-                                    .help(Text("Select ALL Therapist(s)..."))
-                                    .imageScale(.medium)
-
-                                Text("ALL Therapists")
-                                    .font(.caption2)
-
-                            }
-
-                        }
-                    #if os(macOS)
-                        .buttonStyle(.borderedProminent)
-                        .padding()
-                    //  .background(???.isPressed ? .blue : .gray)
-                        .cornerRadius(10)
-                        .foregroundColor(Color.primary)
-                    #endif
-                        .padding()
-                    
-                    }
-
-                }
-
-        //  if (self.sTherapistTID.count > 0)
-        //  {
 
                 let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) <Diagnostic #2> - 'self.sTherapistTID' is [\(self.sTherapistTID)]...")
 
@@ -348,64 +301,152 @@ struct AppVisitMgmtSchedule1ExportView: View
 
                 }
 
-            //  Spacer()
+                HStack()
+                {
+
+                    Text("::: Therapist: TID #")
+                        .font(.caption2) 
+
+                    Text("\(self.sTherapistTID)")
+                        .italic()
+                        .font(.caption2) 
+                        .foregroundColor(.red)
+
+                    Spacer()
+
+                    if (self.sTherapistTID.count  > 0 &&
+                        self.sTherapistTID       != "-1")
+                    {
+                    
+                        Button
+                        {
+
+                            let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppVisitMgmtSchedule1ExportView.Button(Xcode).'ALL Therapist(s)' pressed...")
+
+                            self.sTherapistTID  = "-1"
+                            self.sTherapistName = ""
+                            focusedField        = nil
+                        //  focusedField        = .therapistTID
+
+                        }
+                        label:
+                        {
+
+                            VStack(alignment:.center)
+                            {
+
+                                Label("", systemImage: "t.circle")
+                                    .help(Text("Set ALL Therapist(s)..."))
+                                    .imageScale(.small)
+
+                                Text("ALL Therapists")
+                                    .font(.caption2)
+
+                            }
+
+                        }
+                    #if os(macOS)
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                    //  .background(???.isPressed ? .blue : .gray)
+                        .cornerRadius(10)
+                        .foregroundColor(Color.primary)
+                    #endif
+                        .padding()
+                    
+                    }
+
+                }
+
+                HStack()
+                {
+
+                    Text("::: Therapist: Name ")
+                        .font(.caption2) 
+
+                    Text("\(self.sTherapistName)")
+                        .italic()
+                        .font(.caption2) 
+                        .foregroundColor(.red)
+
+                    Spacer()
+
+                }
 
                 ScrollView
                 {
 
-                //  Spacer()
-
                     VStack(alignment:.leading)
                     {
 
-                    //  Text(" - - - - - - - - - - - - - - - - - - - - ")
-                    //      .frame(maxWidth:.infinity, alignment:.center)
-                    //
-                    //  Text("Therapist 'Schedule' Export:")
-                    //      .bold()
-                    //      .frame(maxWidth:.infinity, alignment:.center)
-                    //
-                    //  Text(" - - - - - - - - - - - - - - - - - - - - ")
-                    //      .frame(maxWidth:.infinity, alignment:.center)
+                        HStack()
+                        {
 
-                    //  Spacer()
+                            Text("=> Current Report Date(s): ")
+                                .foregroundColor(.red)
+                                .italic()
 
-                    //  HStack()
-                    //  {
-                    //
-                    //      VStack(alignment:.leading)
-                    //      {
-                    //
-                    //          Text("=> Run ALL the BigTest Step(s)? ")
-                    //              .foregroundColor(.red)
-                    //
-                    //          if (bRunFullBigTest)
-                    //          {
-                    //
-                    //              Text("     (BigTest, Supervision, and Facilitated)")
-                    //                  .bold()
-                    //                  .italic()
-                    //                  .foregroundColor(.blue)
-                    //                  .font(.footnote)
-                    //
-                    //          }
-                    //          else
-                    //          {
-                    //
-                    //              Text("     (BigTest ONLY...)")
-                    //                  .bold()
-                    //                  .italic()
-                    //                  .foregroundColor(.blue)
-                    //                  .font(.footnote)
-                    //
-                    //          }
-                    //
-                    //      }
-                    //
-                    //      Toggle("", isOn:$bRunFullBigTest)
-                    //
-                    //  }
-                    //  .toggleStyle(SwitchToggleStyle())
+                            Text("'Start' [\(generateAppTidSchedulesExportSelectedStartDate())]/'End' [\(generateAppTidSchedulesExportSelectedEndDate())]")
+
+                        }
+                        .font(.footnote)
+
+                        HStack()
+                        {
+
+                            Text("=> Enable the 'selection' of Report 'Start'/'End' Date(s)? ")
+                                .foregroundColor(.red)
+
+                            Toggle("", isOn:$bSelectReportDates)
+
+                        }
+                        .font(.footnote)
+                        .toggleStyle(SwitchToggleStyle())
+
+                    if (bSelectReportDates)
+                    {
+
+                    //  Text("")
+                        Text("=> Select the Report 'Start' Date: ")
+                            .foregroundColor(.red)
+                            .disabled(!bSelectReportDates)
+                            .font(.footnote)
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            DatePicker("", selection:$dateOfReportStart, displayedComponents:[.date])
+                                .datePickerStyle(.graphical)
+                                .disabled(!bSelectReportDates)
+
+                            Spacer()
+
+                        }
+                        .font(.footnote)
+
+                    //  Text("")
+                        Text("=> Select the Report 'End'   Date: ")
+                            .foregroundColor(.red)
+                            .disabled(!bSelectReportDates)
+                            .font(.footnote)
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            DatePicker("", selection:$dateOfReportEnd, displayedComponents:[.date])
+                                .datePickerStyle(.graphical)
+                                .disabled(!bSelectReportDates)
+
+                            Spacer()
+
+                        }
+                        .font(.footnote)
+
+                    }
 
                         HStack()
                         {
@@ -436,12 +477,12 @@ struct AppVisitMgmtSchedule1ExportView: View
                                         self.sTherapistTID = filteredValue
                                     }
                                 }
-                                .focused($focusedField, equals:.TherapistTID)
+                                .focused($focusedField, equals:.therapistTID)
                                 .onAppear
                                 {
                                     let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).AppVisitMgmtSchedule1ExportView.TextField #1 - Received an .onAppear() #1...")
 
-                                //  focusedField = .TherapistTID
+                                //  focusedField = .therapistTID
                                     focusedField = nil
                                 }
 
@@ -452,8 +493,9 @@ struct AppVisitMgmtSchedule1ExportView: View
 
                                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtSchedule1ExportView.Button(Xcode).'Therapist TID delete'...")
 
-                                self.sTherapistTID = ""
-                                focusedField       = .TherapistTID
+                                self.sTherapistTID  = ""
+                                self.sTherapistName = ""
+                                focusedField        = .therapistTID
 
                             }
                             label:
@@ -498,71 +540,178 @@ struct AppVisitMgmtSchedule1ExportView: View
                         HStack()
                         {
 
-                            Text("=> Current Report Date(s): ")
+                            Text("=> Enter the Therapists' Name: ")
+                                .font(.caption) 
                                 .foregroundColor(.red)
+
+                            TextField("Therapist tName...", text:$sTherapistName)
                                 .italic()
+                                .font(.caption) 
+                                .disableAutocorrection(true)
+                                .focused($focusedField, equals:.therapistName)
+                                .onAppear
+                                {
+                                    let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onAppear #2 - 'self.sTherapistTID' is [\(self.sTherapistTID)] - 'self.sTherapistName' is [\(self.sTherapistName)]...")
 
-                            Text("'Start' [\(generateAppTidSchedulesExportSelectedStartDate())]/'End' [\(generateAppTidSchedulesExportSelectedEndDate())]")
+                                //  self.sTherapistName = ""
+                                //  self.sTherapistTID  = ""
+                                    focusedField        = nil
+                                //  focusedField        = .therapistName
+                                }
+                                .onChange(of: self.sTherapistName)
+                                {
+                                    let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onChange #2 - 'self.sTherapistTID' is [\(self.sTherapistTID)] - 'self.sTherapistName' is [\(self.sTherapistName)]...")
+
+                                    self.updateSelectableTherapistNamesList(sSearchValue:self.sTherapistName)
+
+                                    if (self.sTherapistName.count < 1)
+                                    {
+                                        self.sTherapistName = ""
+
+                                        if (self.sTherapistTID != "-1")
+                                        {
+                                            self.sTherapistTID  = ""
+                                        }
+                                    }
+
+                                    focusedField        = .therapistName
+                                }
+                                .onSubmit
+                                {
+                                    let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onSubmit #2 - 'self.sTherapistName' is [\(self.sTherapistName)] - locating the 'sTherapistTID' field...")
+
+                                    self.sTherapistTID  = self.locateAppTherapistTIDByTName(sTherapistName:self.sTherapistName)
+                                    focusedField        = nil
+                                //  focusedField        = .therapistName
+                                }
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtTherapist3View.Button(Xcode).'Locate the Therapist by TID or tName'...")
+
+                                if (self.sTherapistTID.count > 0)
+                                {
+                                    self.sTherapistName = self.locateAppTherapistNamebyTid(sTherapistTID:sTherapistTID)
+                                }
+                                else
+                                {
+                                    if (self.sTherapistName.count > 0)
+                                    {
+                                        self.sTherapistTID = self.locateAppTherapistTIDByTName(sTherapistName:self.sTherapistName)
+                                    }
+                                }
+
+                            //  self.isAppRunTherapistLocateByTNameShowing.toggle()
+
+                            }
+                            label:
+                            {
+
+                                VStack(alignment:.center)
+                                {
+
+                                    Label("", systemImage: "figure.run.circle")
+                                        .help(Text("Locate the Therapist by TID or tName..."))
+                                        .imageScale(.small)
+
+                                    Text("Locate")
+                                        .bold()
+                                        .font(.caption2)
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+                        #if os(iOS)
+                            .padding()
+                        #endif
+
+                            Button
+                            {
+
+                                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp)AppVisitMgmtTherapist3View.Button(Xcode).'Therapist tName delete'...")
+
+                                self.sTherapistName = ""
+                                self.sTherapistTID  = ""
+                                focusedField        = .therapistName
+
+                            //  self.appScheduleLoadingAssistant.clearScheduledPatientLocationItems()
+
+                            }
+                            label:
+                            {
+
+                                VStack(alignment:.center)
+                                {
+
+                                    Label("", systemImage: "delete.left")
+                                        .help(Text("Delete the Therapist tName..."))
+                                        .imageScale(.medium)
+
+                                    HStack(alignment:.center)
+                                    {
+
+                                        Spacer()
+
+                                        Text("Delete Name")
+                                            .font(.caption2)
+
+                                        Spacer()
+
+                                    }
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+                        #if os(iOS)
+                            .padding()
+                        #endif
 
                         }
-                        .font(.footnote)
-
-                        HStack()
-                        {
-
-                            Text("=> Enable the 'selection' of Report 'Start'/'End' Date(s)? ")
-                                .foregroundColor(.red)
-
-                            Toggle("", isOn:$bSelectReportDates)
-
-                        }
-                        .font(.footnote)
-                        .toggleStyle(SwitchToggleStyle())
-
-                    if (bSelectReportDates)
-                    {
 
                         Text("")
-                        Text("=> Select the Report 'Start' Date: ")
-                            .foregroundColor(.red)
-                            .disabled(!bSelectReportDates)
-                            .font(.footnote)
+                            .font(.caption2)
+                            .onAppear
+                            {
 
-                        HStack(alignment:.center)
-                        {
+                                listSelectableTherapistNames = [AppSearchableTherapistName]()
 
-                            Spacer()
+                                listSelectableTherapistNames.append(AppSearchableTherapistName(sTherapistTName:"...placeholder...", sTherapistTID:"-1"))
 
-                            DatePicker("", selection:$dateOfReportStart, displayedComponents:[.date])
-                                .datePickerStyle(.graphical)
-                                .disabled(!bSelectReportDates)
+                            }
 
-                            Spacer()
+                        List(listSelectableTherapistNames, id:\.id)
+                        { appSearchableTherapistName in
 
-                        }
-                        .font(.footnote)
-
-                        Text("")
-                        Text("=> Select the Report 'End'   Date: ")
-                            .foregroundColor(.red)
-                            .disabled(!bSelectReportDates)
-                            .font(.footnote)
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            DatePicker("", selection:$dateOfReportEnd, displayedComponents:[.date])
-                                .datePickerStyle(.graphical)
-                                .disabled(!bSelectReportDates)
-
-                            Spacer()
+                            Text("\(appSearchableTherapistName.sTherapistTName) - \(appSearchableTherapistName.sTherapistTID)")
+                                .onTapGesture
+                                {
+                                    self.sTherapistName = appSearchableTherapistName.sTherapistTName
+                                    self.sTherapistTID  = self.locateAppTherapistTIDByTName(sTherapistName:self.sTherapistName)
+                                    focusedField        = nil
+                                //  focusedField        = .therapistName
+                                }
 
                         }
-                        .font(.footnote)
-
-                    }
+                        .scaledToFill()
+                        .font(.caption) 
+                    //  .frame(maxHeight:250)
 
                     }
 
@@ -652,6 +801,207 @@ struct AppVisitMgmtSchedule1ExportView: View
         return
 
     } // End of private func finishAppInitialization().
+
+    private func locateAppTherapistNamebyTid(sTherapistTID:String = "")->String
+    {
+
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+
+        if (self.bInternalTraceFlag == true)
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - parameter 'sTherapistTID' is [\(sTherapistTID)]...")
+
+        }
+
+        // Locate the Therapist 'name' by TID...
+
+        var sTherapistName:String = self.jmAppParseCoreBkgdDataRepo.convertTidToTherapistName(sPFTherapistParseTID:sTherapistTID)
+
+        if (sTherapistName.count < 1)
+        {
+        
+            sTherapistName = "-N/A-"
+        
+        }
+
+        // Exit...
+
+        if (self.bInternalTraceFlag == true)
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sTherapistName' is [\(sTherapistName)] - 'sTherapistTID' is [\(sTherapistTID)]...")
+
+        }
+  
+        return sTherapistName
+  
+    }   // End of private func locateAppTherapistNamebyTid(sTherapistTID:String)->String.
+
+    private func locateAppTherapistTIDByTName(sTherapistName:String = "")->String
+    {
+
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+
+        if (self.bInternalTraceFlag == true)
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - parameter 'sTherapistName' is [\(sTherapistName)]...")
+
+        }
+
+        // Locate the Therapist TID by 'name'...
+
+        var sTherapistTID:String = self.jmAppParseCoreManager.convertTherapistNameToTid(sPFTherapistParseName:sTherapistName)
+
+        if (sTherapistTID.count < 1)
+        {
+        
+            sTherapistTID = ""
+        //  sTherapistTID = "-1"
+        
+        }
+
+        // Exit...
+
+        if (self.bInternalTraceFlag == true)
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'sTherapistName' is [\(sTherapistName)] - 'sTherapistTID' is [\(sTherapistTID)]...")
+
+        }
+  
+        return sTherapistTID
+  
+    }   // End of private func locateAppTherapistTIDByTName(sTherapistName:String)->String.
+
+    private func updateSelectableTherapistNamesList(sSearchValue:String = "")
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+
+        if (self.bInternalTraceFlag == true)
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - parameter 'sSearchValue' is [\(sSearchValue)]...")
+
+        }
+
+        // Update the 'selectable' Therapist 'name(s)' list from the 'sSearchValue' criteria...
+
+        if (sSearchValue.isEmpty)
+        {
+        
+            self.xcgLogMsg("\(sCurrMethodDisp) Intermediate #1 - parameter 'sSearchValue' is an empty 'string' - unable to update the 'selectable' item(s) - Warning!")
+            
+            // Exit:
+
+            if (self.bInternalTraceFlag == true)
+            {
+
+                self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+
+            }
+
+            return
+        
+        }
+
+        // var dictPFTherapistFileItems:[Int:ParsePFTherapistFileItem] = [Int:ParsePFTherapistFileItem]()
+
+        if (self.jmAppParseCoreManager.dictPFTherapistFileItems.count < 1)
+        {
+        
+            self.xcgLogMsg("\(sCurrMethodDisp) Intermediate #2 - 'self.jmAppParseCoreManager.dictPFTherapistFileItems' is an empty 'dictionary' - unable to update the 'selectable' item(s) - Warning!")
+            
+            // Exit:
+
+            if (self.bInternalTraceFlag == true)
+            {
+
+                self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+
+            }
+
+            return
+        
+        }
+
+        if (self.bInternalTraceFlag == true)
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Intermediate #3 - 'sSearchValue' is [\(sSearchValue)] - 'self.jmAppParseCoreManager.dictPFTherapistFileItems' contains (\(self.jmAppParseCoreManager.dictPFTherapistFileItems.count)) item(s)...")
+
+        }
+
+        self.listSelectableTherapistNames = [AppSearchableTherapistName]()
+
+        var cTherapistNames:Int           = 0
+        var cSelectableTherapistNames:Int = 0
+        let sSearchValueLow:String        = sSearchValue.lowercased()
+        
+        // var dictPFTherapistFileItems:[Int:ParsePFTherapistFileItem] = [Int:ParsePFTherapistFileItem]()
+
+        for (iPFTherapistParseTID, pfTherapistFileItem) in self.jmAppParseCoreManager.dictPFTherapistFileItems
+        {
+
+            cTherapistNames += 1
+
+            if (iPFTherapistParseTID < 0)
+            {
+
+                self.xcgLogMsg("\(sCurrMethodDisp) Skipping object #(\(cTherapistNames)) 'iPFTherapistParseTID' - the 'tid' field is less than 0 - Warning!")
+
+                continue
+
+            }
+
+            let sTherapistTID:String       = ("\(pfTherapistFileItem.iPFTherapistFileTID)")
+            let sTherapistTName:String     = pfTherapistFileItem.sPFTherapistFileName
+            let sTherapistTNameLow:String  = sTherapistTName.lowercased()
+            let sTherapistTNameNoWS:String = pfTherapistFileItem.sPFTherapistFileNameNoWS
+
+            if (sTherapistTNameLow.contains(sSearchValueLow)  == true ||
+                sTherapistTNameNoWS.contains(sSearchValueLow) == true)
+            {
+            
+                self.listSelectableTherapistNames.append(AppSearchableTherapistName(sTherapistTName:sTherapistTName, sTherapistTID:sTherapistTID))
+
+                cSelectableTherapistNames += 1
+
+                if (self.bInternalTraceFlag == true)
+                {
+
+                    self.xcgLogMsg("\(sCurrMethodDisp) #(\(cTherapistNames)): 'sTherapistTName' of [\(sTherapistTName)] - 'sTherapistTID' is [\(sTherapistTID)] contains the 'sSearchValue' of [\(sSearchValue)] - adding to the 'selectable' list...")
+
+                }
+
+            }
+
+        }
+
+        if (self.bInternalTraceFlag == true)
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Intermediate #3 - added (\(cSelectableTherapistNames)) names(s) to the 'selectable' list of (\(self.listSelectableTherapistNames.count)) item(s)...")
+
+        }
+
+        // Exit:
+
+        if (self.bInternalTraceFlag == true)
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+
+        }
+
+        return
+
+    }   // End of private func updateSelectableTherapistNamesList(sSearchValue:String).
 
     func generateAppTidSchedulesExportSelectedDetails()
     {

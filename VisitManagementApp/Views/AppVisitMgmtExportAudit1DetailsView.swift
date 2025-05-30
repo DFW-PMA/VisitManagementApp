@@ -17,7 +17,7 @@ struct AppVisitMgmtExportAudit1DetailsView: View
     {
         
         static let sClsId        = "AppVisitMgmtExportAudit1DetailsView"
-        static let sClsVers      = "v1.0109"
+        static let sClsVers      = "v1.0201"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -137,7 +137,7 @@ struct AppVisitMgmtExportAudit1DetailsView: View
                         .font(.caption2) 
                         .frame(maxWidth:.infinity, alignment:.center)
 
-                    Text("DATA Gatherer - 'Audit' Export Schedule")
+                    Text("VMA - 'Audit' Export Schedule")
                         .bold()
                         .font(.caption2) 
                         .frame(maxWidth:.infinity, alignment:.center)

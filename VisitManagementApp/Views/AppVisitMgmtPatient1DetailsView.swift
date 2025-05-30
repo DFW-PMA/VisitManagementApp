@@ -26,7 +26,7 @@ struct AppVisitMgmtPatient1DetailsView: View
     {
         
         static let sClsId        = "AppVisitMgmtPatient1DetailsView"
-        static let sClsVers      = "v1.1201"
+        static let sClsVers      = "v1.1401"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -240,7 +240,7 @@ struct AppVisitMgmtPatient1DetailsView: View
                         .font(.caption2) 
                         .frame(maxWidth:.infinity, alignment:.center)
 
-                    Text("DATA Gatherer - Patient Details by PID/Name")
+                    Text("VMA - Patient Details by PID/Name")
                         .bold()
                         .font(.caption2) 
                         .frame(maxWidth:.infinity, alignment:.center)
