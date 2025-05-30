@@ -17,7 +17,7 @@ struct AppVisitMgmtTherapist3View: View
     {
         
         static let sClsId        = "AppVisitMgmtTherapist3View"
-        static let sClsVers      = "v1.0603"
+        static let sClsVers      = "v1.0701"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -52,7 +52,7 @@ struct AppVisitMgmtTherapist3View: View
 
     @State       private var cAppLogPFDataButtonPresses:Int                            = 0
     @State       private var cAppTidScheduleViewButtonPresses:Int                      = 0
-    @State       private var cAppVisitMgmtTherapist3ViewRefreshButtonPresses:Int    = 0
+    @State       private var cAppVisitMgmtTherapist3ViewRefreshButtonPresses:Int       = 0
 
     @State       private var isAppLogPFDataViewModal:Bool                              = false
     @State       private var isAppTidScheduleViewModal:Bool                            = false
@@ -276,7 +276,7 @@ struct AppVisitMgmtTherapist3View: View
                         {
 
                             Label("", systemImage: "arrow.clockwise")
-                                .help(Text("'Refresh' App Data Gatherer Therapist Screen..."))
+                                .help(Text("'Refresh' App VMA Therapist Screen..."))
                                 .imageScale(.large)
 
                             Text("Refresh - #(\(self.cAppVisitMgmtTherapist3ViewRefreshButtonPresses))...")

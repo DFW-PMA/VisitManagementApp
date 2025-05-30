@@ -21,7 +21,7 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
     {
 
         static let sClsId        = "JmAppParseCoreBkgdDataRepo"
-        static let sClsVers      = "v1.2202"
+        static let sClsVers      = "v1.2301"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = false
@@ -3138,7 +3138,7 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
         // Set the SwiftXLSX WorkBook/WorkSheet 'title' line...
 
         let xlsxWorkBook:XWorkBook          = XWorkBook()
-        var xlsxWorkSheet:XSheet            = xlsxWorkBook.NewSheet("ScheduleLocations")
+        let xlsxWorkSheet:XSheet            = xlsxWorkBook.NewSheet("ScheduleLocations")
 
         var xlsxCurrentCell:XCell           = xlsxWorkSheet.AddCell(XCoords(row:1, col:1))
         xlsxCurrentCell.value               = .text("Therapist")
@@ -3197,7 +3197,7 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
 
         // Loop to build the SwiftXLSX WorkBook/WorkSheet 'data' line(s)...
 
-        let cExportPFTherapistTotalTIDs:Int               = self.dictExportSchedPatientLocItems.count
+    //  let cExportPFTherapistTotalTIDs:Int               = self.dictExportSchedPatientLocItems.count
         var cExportPFTherapistParseTIDs:Int               = 0
         var cTotalExportScheduledPatientLocationItems:Int = 0
         var cXLSXWorksheetRow:Int                         = 1

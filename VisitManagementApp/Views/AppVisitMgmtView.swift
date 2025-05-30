@@ -16,7 +16,7 @@ struct AppVisitMgmtView: View
     {
         
         static let sClsId        = "AppVisitMgmtView"
-        static let sClsVers      = "v1.1101"
+        static let sClsVers      = "v1.1201"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -182,7 +182,7 @@ struct AppVisitMgmtView: View
                         {
 
                             Label("", systemImage: "arrow.clockwise")
-                                .help(Text("'Refresh' App Data Gatherer Screen..."))
+                                .help(Text("'Refresh' App VMA Screen..."))
                                 .imageScale(.large)
 
                             Text("Refresh - #(\(self.cAppVisitMgmtViewRefreshButtonPresses))...")
@@ -397,10 +397,10 @@ struct AppVisitMgmtView: View
                     //          {
                     //
                     //              Label("", systemImage: "bed.double")
-                    //                  .help(Text("Therapist Data Gatherer #1 by TID Screen..."))
+                    //                  .help(Text("Therapist VMA #1 by TID Screen..."))
                     //                  .imageScale(.medium)
                     //
-                    //              Text("Therapist - Data Gatherer by TID - #(\(self.cAppVisitMgmtViewTherapistButtonPresses))...")
+                    //              Text("Therapist - VMA by TID - #(\(self.cAppVisitMgmtViewTherapistButtonPresses))...")
                     //                  .font(.caption2)
                     //
                     //          }
@@ -457,10 +457,10 @@ struct AppVisitMgmtView: View
                     //          {
                     //
                     //              Label("", systemImage: "bed.double")
-                    //                  .help(Text("Therapist Data Gatherer #2 by tName Screen..."))
+                    //                  .help(Text("Therapist VMA #2 by tName Screen..."))
                     //                  .imageScale(.medium)
                     //
-                    //              Text("Therapist - Data Gatherer by tName - #(\(self.cAppVisitMgmtViewTherapistButtonPresses))...")
+                    //              Text("Therapist - VMA by tName - #(\(self.cAppVisitMgmtViewTherapistButtonPresses))...")
                     //                  .font(.caption2)
                     //
                     //          }
@@ -517,10 +517,10 @@ struct AppVisitMgmtView: View
                                 {
 
                                     Label("", systemImage: "bed.double")
-                                        .help(Text("Therapist Data Gatherer #3 by TID or tName Screen..."))
+                                        .help(Text("Therapist VMA #3 by TID or tName Screen..."))
                                         .imageScale(.medium)
 
-                                    Text("Therapist - Data Gatherer by TID or tName - #(\(self.cAppVisitMgmtViewTherapistButtonPresses))...")
+                                    Text("Therapist - VMA by TID or tName - #(\(self.cAppVisitMgmtViewTherapistButtonPresses))...")
                                         .font(.caption2)
 
                                 }
@@ -592,10 +592,10 @@ struct AppVisitMgmtView: View
                     //          {
                     //
                     //              Label("", systemImage: "person.text.rectangle")
-                    //                  .help(Text("Patient Data Gatherer #1 by PID Screen..."))
+                    //                  .help(Text("Patient VMA #1 by PID Screen..."))
                     //                  .imageScale(.medium)
                     //
-                    //              Text("Patient - Data Gatherer by PID - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
+                    //              Text("Patient - VMA by PID - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
                     //                  .font(.caption2)
                     //
                     //          }
@@ -652,10 +652,10 @@ struct AppVisitMgmtView: View
                     //          {
                     //
                     //              Label("", systemImage: "person.text.rectangle")
-                    //                  .help(Text("Patient Data Gatherer #2 by Name Screen..."))
+                    //                  .help(Text("Patient VMA #2 by Name Screen..."))
                     //                  .imageScale(.medium)
                     //
-                    //              Text("Patient - Data Gatherer by Name - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
+                    //              Text("Patient - VMA by Name - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
                     //                  .font(.caption2)
                     //
                     //          }
@@ -712,10 +712,10 @@ struct AppVisitMgmtView: View
                                 {
 
                                     Label("", systemImage: "person.text.rectangle")
-                                        .help(Text("Patient Data Gatherer #3 by PID or Name Screen..."))
+                                        .help(Text("Patient VMA #3 by PID or Name Screen..."))
                                         .imageScale(.medium)
 
-                                    Text("Patient - Data Gatherer by PID or Name - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
+                                    Text("Patient - VMA by PID or Name - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
                                         .font(.caption2)
 
                                 }
@@ -775,7 +775,7 @@ struct AppVisitMgmtView: View
                                 .italic()
                                 .underline()
                                 .font(.caption)
-                            Text(" => DATA Gatherer #3...")
+                            Text(" => VMA #3...")
                                 .font(.caption)
 
                             Spacer()
@@ -819,10 +819,10 @@ struct AppVisitMgmtView: View
                     //          {
                     //
                     //              Label("", systemImage: "person.text.rectangle")
-                    //                  .help(Text("Patient Data Gatherer #1 by PID Screen..."))
+                    //                  .help(Text("Patient VMA #1 by PID Screen..."))
                     //                  .imageScale(.medium)
                     //
-                    //              Text("Patient - Data Gatherer by PID - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
+                    //              Text("Patient - VMA by PID - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
                     //                  .font(.caption2)
                     //
                     //          }
@@ -879,10 +879,10 @@ struct AppVisitMgmtView: View
                     //          {
                     //
                     //              Label("", systemImage: "person.text.rectangle")
-                    //                  .help(Text("Patient Data Gatherer #2 by Name Screen..."))
+                    //                  .help(Text("Patient VMA #2 by Name Screen..."))
                     //                  .imageScale(.medium)
                     //
-                    //              Text("Patient - Data Gatherer by Name - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
+                    //              Text("Patient - VMA by Name - #(\(self.cAppVisitMgmtViewPatientButtonPresses))...")
                     //                  .font(.caption2)
                     //
                     //          }
