@@ -1,11 +1,11 @@
 name: Xcode - Build and Analyze
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:                            # Allow manual triggering of the workflow
   #  push:
-  #    branches: [ "main" ]
+  #    branches: [ "main" ]                     # Trigger the workflow on pushes to the main branch
   #  pull_request:
-  #    branches: [ "main" ]
+  #    branches: [ "main" ]                     # Trigger the workflow on pulles to the main branch
     
 jobs:
   build:
@@ -86,10 +86,20 @@ jobs:
           echo Using filetype_parameter: $filetype_parameter
           echo Using file_to_build: $file_to_build
 
+          xcodebuild clean archive \
+          -workspace project.xcworkspace  \
+          -scheme "VisitManaagementApp_iOS" \
+          -configuration Debug \
+          -destination generic/platform=iOS \
+          -archivePath build/project.xcarchive \
+          CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
+          PROVISIONING_PROFILE_SPECIFIER="YourProvisioningProfileName" \
+          DEVELOPMENT_TEAM="6CVN7U97NK"
+
           # echo Running: xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
           # xcodebuild clean build analyze -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
           # xcodebuild clean build analyze -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" >> $GITHUB_OUTPUT | exit ${PIPESTATUS[0]}
-          xcodebuild clean build -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | exit ${PIPESTATUS[0]}
+          # xcodebuild clean build -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | exit ${PIPESTATUS[0]}
 
           # xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -scheme ${{ env.XCODE_PROJECT }}
           #            clean archive -archivePath "Actions" -configuration Release -arch arm64
