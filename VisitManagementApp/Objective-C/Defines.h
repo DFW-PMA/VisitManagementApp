@@ -82,10 +82,12 @@
 //#define HIDE_PUSHES
 //////////
 //  RequestSync
-#define UPDATE_NUMBER   279.152
-#define UPDATE_STRING   @"279.152"
+#define UPDATE_NUMBER   279.163
+#define UPDATE_STRING   @"279.163"
 
-//#define   DISPLAY_PATIENTS_DATABASE
+//#define BUILD_FOR_VV
+
+//#define DISPLAY_PATIENTS_DATABASE
 
 //#define IGNORE_SCHEDULE_EMAIL
 //#define TESTING_LIMITS

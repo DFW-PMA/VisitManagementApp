@@ -21,7 +21,7 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
     {
 
         static let sClsId        = "JmAppParseCoreBkgdDataRepo"
-        static let sClsVers      = "v1.2301"
+        static let sClsVers      = "v1.2401"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = false
@@ -319,6 +319,24 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
         //     Parse.initialize(with: parseConfig)
         // --------------------------------------------------------------------------------------------------
 
+        // Initialize and call the class DefinesObjCOverrides...
+
+        let definesObjCModule = DefinesObjCOverrides()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Objective-C call #1 - calling 'definesObjCModule.initInstance()' with NO parameter(s)...")
+
+        definesObjCModule.initInstance()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Objective-C call #1 - called  'definesObjCModule.initInstance()' with NO parameter(s)...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Objective-C call #2 - calling 'definesObjCModule.customLoggerTest1()' with 1 parameter(s)...")
+
+        let sHelloMessage1:String = "Message from 'JmAppDelegateVisitor' to 'definesObjCModule.customLoggerTest1(sHelloMessage1)'..."
+
+        definesObjCModule.customLoggerTest1(sHelloMessage1)
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Objective-C call #2 - called  'definesObjCModule.customLoggerTest1()' with a parameter of [\(String(describing: sHelloMessage1))]...")
+
         self.xcgLogMsg("\(sCurrMethodDisp) Creating the ParseCore (Client) 'configuration'...")
 
         self.parseConfig = ParseClientConfiguration
@@ -330,7 +348,16 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
 
         self.xcgLogMsg("\(sCurrMethodDisp) Passing the ParseCore (Client) 'configuration' on to ParseCore...")
 
-        Parse.initialize(with:self.parseConfig!)
+        let nsError:NSError = NSError(domain:"GenericExceptionDomain", code:0)
+        let success         = definesObjCModule.performBlockCatchingException(
+            {
+                Parse.initialize(with:self.parseConfig!)
+            }, error:nsError)
+        
+        if !success
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) Objective-C exception caught - Parse has already been initialized - Exception was: \(nsError.localizedDescription)...")
+        }
 
         self.xcgLogMsg("\(sCurrMethodDisp) Passed  the ParseCore (Client) 'configuration' on to ParseCore...")
 

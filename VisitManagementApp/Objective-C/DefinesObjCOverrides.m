@@ -44,5 +44,25 @@
 
 }
 
+// - (BOOL)performBlockCatchingException:(void (^)(void))block error:(NSError **)error 
+- (BOOL)performBlockCatchingException:(void (^ _Nonnull)(void))block error:(NSError * _Nonnull)error
+{
+
+    @try {
+        block();
+        return YES;
+    }
+    @catch (NSException *exception) 
+    {
+        if (error) {
+            error = [NSError errorWithDomain:@"GenericExceptionDomain"
+                                        code:1001
+                                    userInfo:@{NSLocalizedDescriptionKey:exception.reason ?: @"Unknown exception"}];
+        }
+        return NO;
+    }
+
+}
+
 @end
 

@@ -13,12 +13,23 @@
 @interface DefinesObjCOverrides : NSObject
 - (void)initInstance;
 - (void)customLoggerTest1:(NSString * _Nullable)message;
+// - (BOOL)performBlockCatchingException:(void (^)(void))block error:(NSError **)error;
+- (BOOL)performBlockCatchingException:(void (^ _Nonnull)(void))block error:(NSError * _Nonnull)error;
 @end
 
-#define NSLog(...) CustomLoggerTest3(__VA_ARGS__);
+#define NSLog(...) XCGCustomLogger(__VA_ARGS__);
 
-static void CustomLoggerTest3(NSString * _Nonnull format, ...)
+static void XCGCustomLogger(NSString * _Nonnull format, ...)
 {
+    
+    if (!format)
+    {
+        
+        // NO arguments to process...
+        
+        return;
+        
+    }
     
     va_list argumentList;
     
