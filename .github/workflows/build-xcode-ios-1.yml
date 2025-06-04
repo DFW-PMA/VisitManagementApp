@@ -14,9 +14,9 @@ jobs:
     runs-on: macos-15
     steps:
 
-      - name: Select Xcode 16.3
+      - name: Select Xcode 16.4
         run: |
-          sudo xcode-select -s /Applications/Xcode_16.3.app/Contents/Developer
+          sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
           echo "Current Xcode version:"
           xcodebuild -version
 
@@ -89,7 +89,7 @@ jobs:
           # echo Running: xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
           # xcodebuild clean build analyze -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
           # xcodebuild clean build analyze -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" >> $GITHUB_OUTPUT | exit ${PIPESTATUS[0]}
-          xcodebuild clean build -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" >> $GITHUB_OUTPUT | exit ${PIPESTATUS[0]}
+          xcodebuild clean build -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | exit ${PIPESTATUS[0]}
 
           # xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -scheme ${{ env.XCODE_PROJECT }}
           #            clean archive -archivePath "Actions" -configuration Release -arch arm64
