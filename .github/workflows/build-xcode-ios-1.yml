@@ -88,7 +88,8 @@ jobs:
 
           # echo Running: xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
           # xcodebuild clean build analyze -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
-          xcodebuild clean build analyze -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" >> $GITHUB_OUTPUT | exit ${PIPESTATUS[0]}
+          # xcodebuild clean build analyze -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" >> $GITHUB_OUTPUT | exit ${PIPESTATUS[0]}
+          xcodebuild clean build -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" >> $GITHUB_OUTPUT | exit ${PIPESTATUS[0]}
 
           # xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -scheme ${{ env.XCODE_PROJECT }}
           #            clean archive -archivePath "Actions" -configuration Release -arch arm64
