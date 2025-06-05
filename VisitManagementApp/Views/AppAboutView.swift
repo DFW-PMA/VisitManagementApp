@@ -10,14 +10,14 @@ import Foundation
 import SwiftUI
 
 @available(iOS 14.0, *)
-struct AppAboutView: View 
+struct AppAboutView:View
 {
     
     struct ClassInfo
     {
         
         static let sClsId        = "AppAboutView"
-        static let sClsVers      = "v1.1203"
+        static let sClsVers      = "v1.1707"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright © JustMacApps 2023-2025. All rights reserved."
         static let bClsTrace     = true
@@ -27,8 +27,10 @@ struct AppAboutView: View
 
     // App Data field(s):
 
-//  @Environment(\.dismiss) var dismiss
-    @Environment(\.presentationMode) var presentationMode
+//  @Environment(\.dismiss)             var dismiss
+    @Environment(\.presentationMode)    var presentationMode
+    @Environment(\.openURL)             var openURL
+    @Environment(\.appGlobalDeviceType) var appGlobalDeviceType
 
 #if os(macOS)
     private let pasteboard                                = NSPasteboard.general
@@ -80,10 +82,13 @@ struct AppAboutView: View
     var body: some View 
     {
         
-        let _ = self.xcgLogMsg("...'AppAboutView(.swift):body' \(JmXcodeBuildSettings.jmAppVersionAndBuildNumber)...")
+        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) \(JmXcodeBuildSettings.jmAppVersionAndBuildNumber)...")
+        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) 'appGlobalDeviceType' is (\(String(describing:appGlobalDeviceType)))...")
 
         VStack
         {
+
+        #if os(iOS)
 
             HStack(alignment:.center)
             {
@@ -126,6 +131,8 @@ struct AppAboutView: View
 
             }
 
+        #endif
+
             if #available(iOS 17.0, *)
             {
 
@@ -134,7 +141,7 @@ struct AppAboutView: View
                     .scaledToFit()
                     .containerRelativeFrame(.horizontal)
                         { size, axis in
-                            size * 0.10
+                            size * 0.125
                         }
 
             }
@@ -148,20 +155,33 @@ struct AppAboutView: View
 
             }
 
+            Text("")
+            Text("App Name: \(JmXcodeBuildSettings.jmAppDisplayName)")
+                .bold()
+                .font(.footnote)
+                .onAppear(
+                    perform:
+                    {
+                        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp).onAppear #1 - 'appGlobalDeviceType' is (\(String(describing:appGlobalDeviceType)))...")
+                    })
+            Text("")
+
             ScrollView
             {
 
-                Text("")
-                Text("Display Name: \(JmXcodeBuildSettings.jmAppDisplayName)")
-                    .bold()
-                Text("")
                 Text("Application Category:")
                     .bold()
                     .italic()
+                    .font(.footnote)
                 Text("\(JmXcodeBuildSettings.jmAppCategory)")
+                    .font(.caption)
                 Text("")
                 Text("\(JmXcodeBuildSettings.jmAppVersionAndBuildNumber)")     // <=== Version...
                     .italic()
+                    .font(.footnote)
+                Text("Device: \(String(describing:appGlobalDeviceType))")      // <=== Device 'type'...
+                    .italic()
+                    .font(.caption2)
 
                 Text("")
                 Text("- - - - - - - - - - - - - - -")
@@ -207,12 +227,14 @@ struct AppAboutView: View
 
                 Text("\(JmXcodeBuildSettings.jmAppCopyright)")
                     .italic()
+                    .font(.caption)
 
             }
 
             Spacer()
 
         }
+        .padding()
         
     }
     

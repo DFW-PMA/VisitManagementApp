@@ -18,7 +18,7 @@ struct VisitManagementAppApp: App
     {
         
         static let sClsId        = "VisitManagementAppApp"
-        static let sClsVers      = "v1.2307"
+        static let sClsVers      = "v1.2308"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -93,8 +93,8 @@ struct VisitManagementAppApp: App
     var body: some Scene 
     {
         
-        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) - 'sAppBundlePath' is [\(sAppBundlePath)]...")
-        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) - 'appGlobalDeviceType' is (\(String(describing:appGlobalDeviceType)))...")
+        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) 'sAppBundlePath' is [\(sAppBundlePath)]...")
+        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) 'appGlobalDeviceType' is (\(String(describing:appGlobalDeviceType)))...")
         
         WindowGroup
         {

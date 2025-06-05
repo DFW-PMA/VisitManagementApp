@@ -63,7 +63,7 @@ public class AppGlobalInfo: NSObject
     }
 
     static let sGlobalInfoAppId:String                                   = "VisitManagementApp"
-    static let sGlobalInfoAppVers:String                                 = "v1.3502"
+    static let sGlobalInfoAppVers:String                                 = "v1.3503"
     static let sGlobalInfoAppDisp:String                                 = sGlobalInfoAppId+".("+sGlobalInfoAppVers+"): "
     static let sGlobalInfoAppCopyRight:String                            = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
     static let sGlobalInfoAppLogFilespecMaxSize:Int64                    = 50000000
