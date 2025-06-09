@@ -16,7 +16,7 @@ struct AppVisitMgmtCoreLocMapView:View
     {
         
         static let sClsId        = "AppVisitMgmtCoreLocMapView"
-        static let sClsVers      = "v1.0201"
+        static let sClsVers      = "v1.0302"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -34,7 +34,7 @@ struct AppVisitMgmtCoreLocMapView:View
 //  @Environment(\.dismiss)             var dismiss
     @Environment(\.presentationMode)    var presentationMode
     @Environment(\.appGlobalDeviceType) var appGlobalDeviceType
-    @Environment(\.colorScheme)         var colorScheme
+//  @Environment(\.colorScheme)         var colorScheme
 
            private  let fMapLatLongTolerance:Double               = 0.0025
 
@@ -48,6 +48,18 @@ struct AppVisitMgmtCoreLocMapView:View
     {
         return CLLocationCoordinate2D(latitude: (Double(String(describing:self.sLocationLatitude))  ?? 0.000000), 
                                       longitude:(Double(String(describing:self.sLocationLongitude)) ?? 0.000000))
+    }
+
+                    var mapCoordinateRegion:MKCoordinateRegion
+    {
+        return MKCoordinateRegion(center:self.clLocationCoordinate2D,               
+                                    span:MKCoordinateSpan(latitudeDelta: 0.001, 
+                                                          longitudeDelta:0.001))
+    }
+
+    var mapPosition:MapCameraPosition
+    {
+        return MapCameraPosition.region(self.mapCoordinateRegion)
     }
 
     @State private  var isAppMapTapAlertShowing:Bool              = false
@@ -105,20 +117,21 @@ struct AppVisitMgmtCoreLocMapView:View
     var body: some View
     {
         
-        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) - Map for CoreLocLatLong (\(self.sCoreLocLatLong)) - 'self.sLocationAddress' is [\(self.sLocationAddress)] - 'colorScheme' is [\(colorScheme)]...")
-
-        if (colorScheme == .dark)
-        {
-        
-            let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) - Map for CoreLocLatLong (\(self.sCoreLocLatLong)) - 'self.sLocationAddress' is [\(self.sLocationAddress)] - 'colorScheme' is running in 'dark' mode...")
-        
-        }
-        else
-        {
-        
-            let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) - Map for CoreLocLatLong (\(self.sCoreLocLatLong)) - 'self.sLocationAddress' is [\(self.sLocationAddress)] - 'colorScheme' is running in 'light' mode...")
-        
-        }
+        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) - Map for CoreLocLatLong (\(self.sCoreLocLatLong)) - 'self.sLocationAddress' is [\(self.sLocationAddress)]...")
+    //  let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) - Map for CoreLocLatLong (\(self.sCoreLocLatLong)) - 'self.sLocationAddress' is [\(self.sLocationAddress)] - 'colorScheme' is [\(colorScheme)]...")
+    //
+    //  if (colorScheme == .dark)
+    //  {
+    //  
+    //      let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) - Map for CoreLocLatLong (\(self.sCoreLocLatLong)) - 'self.sLocationAddress' is [\(self.sLocationAddress)] - 'colorScheme' is running in 'dark' mode...")
+    //  
+    //  }
+    //  else
+    //  {
+    //  
+    //      let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) - Map for CoreLocLatLong (\(self.sCoreLocLatLong)) - 'self.sLocationAddress' is [\(self.sLocationAddress)] - 'colorScheme' is running in 'light' mode...")
+    //  
+    //  }
 
         GeometryReader
         { proxy in
@@ -179,8 +192,10 @@ struct AppVisitMgmtCoreLocMapView:View
                     MapReader
                     { proxy in
 
-                        Map
+                        Map(initialPosition:self.mapPosition)
                         {
+
+                            let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View).VStack.MapReader - Map for - 'clLocationCoordinate2D' is [\(clLocationCoordinate2D)] - 'sLocationLatitude' is [\(sLocationLatitude)] - 'sLocationLongitude' is [\(sLocationLongitude)] - 'self.sLocationAddress' is [\(self.sLocationAddress)]...")
 
                             Annotation("+", 
                                        coordinate:self.clLocationCoordinate2D)
@@ -193,7 +208,7 @@ struct AppVisitMgmtCoreLocMapView:View
                                     .onTapGesture
                                     { position in
                             
-                                        let sMapTapLogMsg:String = "Map 'tap' CoreLoc Lat/Long [\(self.sCoreLocLatLong)] at [\(self.sLocationAddress)]"
+                                        let sMapTapLogMsg:String = "Map 'tap' CoreLoc Lat/Long [\(self.sCoreLocLatLong)] - 'clLocationCoordinate2D' is [\(clLocationCoordinate2D)] - 'sLocationLatitude' is [\(sLocationLatitude)] - 'sLocationLongitude' is [\(sLocationLongitude)] - 'self.sLocationAddress' is [\(self.sLocationAddress)] at [\(self.sLocationAddress)]"
                                         self.sMapTapMsg          = "Lat/Long [\(self.sCoreLocLatLong)] at [\(self.sLocationAddress)]"
                             
                                         let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View).MapReader.Map.onTapGesture - <Marker> - \(sMapTapLogMsg)...")
@@ -230,7 +245,8 @@ struct AppVisitMgmtCoreLocMapView:View
                     }
 
                 }
-                .frame(width: proxy.size.width, height: proxy.size.height, alignment:.center)
+                .frame(minWidth:300, minHeight:300)     // Add minimum size...
+                .frame(width:proxy.size.width, height:proxy.size.height, alignment:.center)
                 .ignoresSafeArea()
 
             }
@@ -391,6 +407,12 @@ struct AppVisitMgmtCoreLocMapView:View
         
         sCoreLocLatitude  = listCoreLocPartitions![0]
         sCoreLocLongitude = listCoreLocPartitions![2]
+
+        sCoreLocLatitude  = sCoreLocLatitude.stripStringLeadingPrefix(sPrefixCharacters:  " ")
+        sCoreLocLatitude  = sCoreLocLatitude.stripStringTrailingSuffix(sSuffixCharacters: " ")
+
+        sCoreLocLongitude = sCoreLocLongitude.stripStringLeadingPrefix(sPrefixCharacters: " ")
+        sCoreLocLongitude = sCoreLocLongitude.stripStringTrailingSuffix(sSuffixCharacters:" ")
 
         // Exit...
   
