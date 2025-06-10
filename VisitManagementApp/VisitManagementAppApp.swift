@@ -11,14 +11,14 @@ import SwiftUI
 import SwiftData
 
 @main
-struct VisitManagementAppApp: App 
+struct VisitManagementAppApp:App 
 {
     
     struct ClassInfo
     {
         
         static let sClsId        = "VisitManagementAppApp"
-        static let sClsVers      = "v1.2308"
+        static let sClsVers      = "v1.2401"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -90,7 +90,7 @@ struct VisitManagementAppApp: App
 
     }   // End of private func xcgLogMsg().
 
-    var body: some Scene 
+    var body:some Scene 
     {
         
         let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) 'sAppBundlePath' is [\(sAppBundlePath)]...")
@@ -170,7 +170,7 @@ struct VisitManagementAppApp: App
         Window("AppTidSchedule", id:"AppTidScheduleView")
         {
 
-            AppTidScheduleView(listScheduledPatientLocationItems: [])
+            AppTidScheduleView(listScheduledPatientLocationItems:[])
 
         }
 

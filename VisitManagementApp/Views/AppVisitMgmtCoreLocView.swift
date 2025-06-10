@@ -18,7 +18,7 @@ struct AppVisitMgmtCoreLocView:View
     {
         
         static let sClsId        = "AppVisitMgmtCoreLocView"
-        static let sClsVers      = "v1.0418"
+        static let sClsVers      = "v1.0501"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -1366,7 +1366,7 @@ struct AppVisitMgmtCoreLocView:View
         
         // Exit...
     
-        self.xcgLogMsg("\(sCurrMethodDisp) Exiting- for text 'self.sLocationLatitude' of [\(self.sLocationLatitude)]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting - for text 'self.sLocationLatitude' of [\(self.sLocationLatitude)]...")
     
         return
         
