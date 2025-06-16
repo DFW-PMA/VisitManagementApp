@@ -137,7 +137,7 @@ jobs:
           -project VisitManagementApp.xcodeproj  \
           -scheme "VisitManaagementApp_iOS" \
           -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
-          -configuration Debug \
+          -configuration Release \
           -verbose \
           CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
           CODE_SIGNING_REQUIRED=YES \
@@ -174,7 +174,7 @@ jobs:
           # Works on mini at command line (terminal):
           # xcodebuild clean build analyze -verbose -scheme "VisitManaagementApp_iOS" -"project" "VisitManagementApp.xcodeproj"
 
-      - name: Archive iOS app (Debug)
+      - name: Archive iOS app (Release)
         if: github.ref == 'refs/heads/main'
         env:
           scheme: ${{ 'VisitManaagementApp_iOS' }}
@@ -192,7 +192,7 @@ jobs:
           #   -scheme "VisitManaagementApp_iOS" \
           #   -destination 'generic/platform=iOS' \
           #   -archivePath build/VisitManagementApp.xcarchive \
-          #   -configuration Debug \
+          #   -configuration Release \
           #   -verbose \
           #   CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
           #   CODE_SIGNING_REQUIRED=YES \
@@ -225,7 +225,7 @@ jobs:
             -scheme "VisitManaagementApp_iOS" \
             -destination 'generic/platform=iOS' \
             -archivePath build/VisitManagementApp.xcarchive \
-            -configuration Debug \
+            -configuration Release \
             -verbose \
             -allowProvisioningUpdates \
             -allowProvisioningDeviceRegistration \
