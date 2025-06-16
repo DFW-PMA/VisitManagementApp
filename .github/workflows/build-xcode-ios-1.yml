@@ -132,13 +132,12 @@ jobs:
           -verbose \
           CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
           CODE_SIGNING_REQUIRED=YES \
-          PROVISIONING_PROFILE_SPECIFIER="YourProvisioningProfileName" \
-          DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 | tee build_output.txt
+          DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 | tee build_output.log
 
           echo "=== Build Command Exit Code: $? ==="
           if [ $? -ne 0 ]; then
             echo "=== BUILD FAILED - Full Output Below ==="
-            cat build_output.txt
+            cat build_output.log
             exit 1
           fi
 
@@ -153,3 +152,34 @@ jobs:
           # Works on mini at command line (terminal):
           # xcodebuild clean build analyze -verbose -scheme "VisitManaagementApp_iOS" -"project" "VisitManagementApp.xcodeproj"
 
+      - name: Upload build logs
+        # if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            build.log
+            build/reports/
+          retention-days: 30
+
+      - name: Archive iOS app (Release)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          xcodebuild archive \
+            -project VisitManagementApp.xcodeproj \
+            -scheme VisitManagementApp \
+            -destination 'generic/platform=iOS' \
+            -archivePath build/VisitManagementApp.xcarchive \
+            -configuration Debug \
+            -verbose \
+            CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
+            CODE_SIGNING_REQUIRED=YES \
+            DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 | tee archive_output.log
+      
+      - name: Export IPA
+        if: github.ref == 'refs/heads/main'
+        run: |
+          xcodebuild -exportArchive \
+            -archivePath build/VisitManagementApp.xcarchive \
+            -exportPath build/ \
+            -exportOptionsPlist ExportOptions.plist
