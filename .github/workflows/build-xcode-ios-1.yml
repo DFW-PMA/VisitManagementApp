@@ -72,12 +72,38 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
+      - name: Debug - List project contents
+        run: |
+          echo "=== Project Directory Contents ==="
+          ls -la
+          echo "=== Xcode Project Contents ==="
+          if [ -d "VisitManagementApp.xcodeproj" ]; then
+            ls -la VisitManagementApp.xcodeproj/
+            echo "=== Project.pbxproj exists? ==="
+            ls -la VisitManagementApp.xcodeproj/project.pbxproj
+          else
+            echo "ERROR: VisitManagementApp.xcodeproj not found!"
+          fi
+          echo "=== Available Schemes ==="
+          xcodebuild -list -project VisitManagementApp.xcodeproj || echo "Failed to list schemes"
+          echo "=== Available Simulators ==="
+          xcrun simctl list devices available
+        run: |
+          # Install CocoaPods if you're using it
+          # sudo gem install cocoapods
+          # pod install
+          
+          # Install Swift Package Manager dependencies (if needed)
+          # xcodebuild -resolvePackageDependencies
+
       - name: Build
         env:
           scheme: ${{ 'VisitManaagementApp_iOS' }}
         run: |
           # echo BLOCKED - until code can be added to update xcodebuild to a newer version
           # if [ $scheme = default ]; then scheme=$(cat default); fi
+
+          echo "=== Build Setup ==="
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
           echo "Current Xcode version:"
@@ -86,15 +112,35 @@ jobs:
           echo Using filetype_parameter: $filetype_parameter
           echo Using file_to_build: $file_to_build
 
-          xcodebuild clean archive \
-          -workspace project.xcworkspace  \
+          # echo "=== Running Build ==="
+          # xcodebuild clean archive \
+          # -workspace project.xcworkspace  \
+          # -scheme "VisitManaagementApp_iOS" \
+          # -configuration Debug \
+          # -destination generic/platform=iOS \
+          # -archivePath build/project.xcarchive \
+          # CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
+          # PROVISIONING_PROFILE_SPECIFIER="YourProvisioningProfileName" \
+          # DEVELOPMENT_TEAM="6CVN7U97NK"
+
+          echo "=== Running Build ==="
+          xcodebuild clean build \
+          -project VisitManagementApp.xcodeproj  \
           -scheme "VisitManaagementApp_iOS" \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
           -configuration Debug \
-          -destination generic/platform=iOS \
-          -archivePath build/project.xcarchive \
+          -verbose \
           CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
+          CODE_SIGNING_REQUIRED=YES \
           PROVISIONING_PROFILE_SPECIFIER="YourProvisioningProfileName" \
-          DEVELOPMENT_TEAM="6CVN7U97NK"
+          DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 | tee build_output.txt
+
+          echo "=== Build Command Exit Code: $? ==="
+          if [ $? -ne 0 ]; then
+            echo "=== BUILD FAILED - Full Output Below ==="
+            cat build_output.txt
+            exit 1
+          fi
 
           # echo Running: xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
           # xcodebuild clean build analyze -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
