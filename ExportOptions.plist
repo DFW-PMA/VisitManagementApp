@@ -7,7 +7,12 @@
 	<key>method</key>
 	<string>enterprise</string>
 	<key>signingStyle</key>
-	<string>automatic</string>
+	<string>manual</string>
+    <key>provisioningProfiles</key>
+    <dict>
+        <key>com.yourcompany.visitmanagementapp</key>
+        <string>${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}</string>
+    </dict>
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>teamID</key>

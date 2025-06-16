@@ -88,6 +88,13 @@ jobs:
           xcodebuild -list -project VisitManagementApp.xcodeproj || echo "Failed to list schemes"
           echo "=== Available Simulators ==="
           xcrun simctl list devices available
+          echo "=== Installed Certificates ==="
+          security find-identity -v -p codesigning
+          echo "=== Provisioning Profiles ==="
+          ls -la ~/Library/MobileDevice/Provisioning\ Profiles/ || echo "No provisioning profiles found"
+
+          # Create build directory for reports
+          mkdir -p build/reports
       
           # Install CocoaPods if you're using it
           # sudo gem install cocoapods
@@ -96,10 +103,12 @@ jobs:
           # Install Swift Package Manager dependencies (if needed)
           # xcodebuild -resolvePackageDependencies
 
-      - name: Build
+      - name: Build iOS App
         env:
           scheme: ${{ 'VisitManaagementApp_iOS' }}
         run: |
+          set -o pipefail
+
           # echo BLOCKED - until code can be added to update xcodebuild to a newer version
           # if [ $scheme = default ]; then scheme=$(cat default); fi
 
@@ -132,7 +141,20 @@ jobs:
           -verbose \
           CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
           CODE_SIGNING_REQUIRED=YES \
-          DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 | tee build_output.log
+          CODE_SIGN_STYLE="Manual" \
+          PROVISIONING_PROFILE_SPECIFIER=${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }} \
+          DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 \
+          | tee build_output.log \
+          | xcpretty --report html --output build/reports/tests.html || {
+            echo "Build failed. Here's the raw xcodebuild output:"
+            cat build_output.log
+            echo "=== CODE SIGNING DEBUG INFO ==="
+            security find-identity -v -p codesigning
+            echo "=== PROVISIONING PROFILES ==="
+            ls -la ~/Library/MobileDevice/Provisioning\ Profiles/
+            echo "=== BUILD FAILED ==="
+            exit 1
+          }
 
           echo "=== Build Command Exit Code: $? ==="
           if [ $? -ne 0 ]; then
@@ -152,21 +174,19 @@ jobs:
           # Works on mini at command line (terminal):
           # xcodebuild clean build analyze -verbose -scheme "VisitManaagementApp_iOS" -"project" "VisitManagementApp.xcodeproj"
 
-      - name: Upload build logs
-        # if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-logs
-          path: |
-            build.log
-            build/reports/
-          retention-days: 30
-
       - name: Archive iOS app (Release)
         if: github.ref == 'refs/heads/main'
         env:
           scheme: ${{ 'VisitManaagementApp_iOS' }}
         run: |
+          set -o pipefail
+
+          # Verify code signing setup before archiving
+          echo "=== VERIFYING CODE SIGNING SETUP ==="
+          security find-identity -v -p codesigning
+          echo "=== AVAILABLE PROVISIONING PROFILES ==="
+          ls -la ~/Library/MobileDevice/Provisioning\ Profiles/
+
           xcodebuild archive \
             -project VisitManagementApp.xcodeproj \
             -scheme "VisitManaagementApp_iOS" \
@@ -176,12 +196,80 @@ jobs:
             -verbose \
             CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
             CODE_SIGNING_REQUIRED=YES \
-            DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 | tee archive_output.log
+            CODE_SIGN_STYLE="Manual" \
+            PROVISIONING_PROFILE_SPECIFIER=${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }} \
+            DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 \
+            OTHER_CODE_SIGN_FLAGS="--timestamp" \
+            | tee archive_output.log || {
+              echo "=== ARCHIVE FAILED - DETAILED DEBUG INFO ==="
+              echo "Archive log output:"
+              cat archive_output.log
+              echo ""
+              echo "=== CODE SIGNING IDENTITIES ==="
+              security find-identity -v -p codesigning
+              echo ""
+              echo "=== PROVISIONING PROFILES ==="
+              find ~/Library/MobileDevice/Provisioning\ Profiles/ -name "*.mobileprovision" -exec sh -c 'echo "=== {} ==="; security cms -D -i "{}" | plutil -p -' \; 2>/dev/null || echo "Could not read provisioning profiles"
+              echo ""
+              echo "=== KEYCHAIN LIST ==="
+              security list-keychains
+              echo ""
+              echo "=== ARCHIVE DIRECTORY ==="
+              ls -la build/ || echo "Build directory not found"
+              echo "=== ARCHIVE FAILED ==="
+              exit 1
+            }
+        
+          echo "=== ARCHIVE SUCCESSFUL ==="
+          echo "Archive contents:"
+          ls -la build/VisitManagementApp.xcarchive/
       
       - name: Export IPA
         if: github.ref == 'refs/heads/main'
-        run: |
+          run: |
+          echo "=== EXPORT OPTIONS PLIST CONTENT ==="
+          cat ExportOptions.plist
+        
+          # Export the archive
           xcodebuild -exportArchive \
             -archivePath build/VisitManagementApp.xcarchive \
             -exportPath build/ \
-            -exportOptionsPlist ExportOptions.plist
+            -exportOptionsPlist ExportOptions.plist \
+            -verbose \
+            -allowProvisioningUpdates \
+            | tee export_output.log || {
+              echo "=== EXPORT FAILED - DEBUG INFO ==="
+              cat export_output.log
+              echo ""
+              echo "=== EXPORT OPTIONS USED ==="
+              cat ExportOptions.plist
+              echo ""
+              echo "=== ARCHIVE CONTENTS ==="
+              find build/VisitManagementApp.xcarchive -type f -name "*.plist" -exec sh -c 'echo "=== {} ==="; cat "{}"' \;
+              echo "=== EXPORT FAILED ==="
+              exit 1
+            }
+        
+          echo "=== EXPORT SUCCESSFUL ==="
+          echo "Generated files:"
+          ls -la build/
+
+      - name: Upload build logs
+        # if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            build_output.log
+            archive_output.log
+            export_output.log
+            build/reports/
+          retention-days: 30
+
+      - name: Upload IPA
+           if: success() && github.ref == 'refs/heads/main'
+           uses: actions/upload-artifact@v4
+           with:
+             name: VisitManagementApp_iOS
+             path: build/*.ipa
+             retention-days: 30
