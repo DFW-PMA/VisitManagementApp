@@ -197,7 +197,7 @@ jobs:
             CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
             CODE_SIGNING_REQUIRED=YES \
             CODE_SIGN_STYLE="Manual" \
-            PROVISIONING_PROFILE_SPECIFIER=${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }} \
+            PROVISIONING_PROFILE_SPECIFIER="54a3609d-f80b-4201-9d7a-3ce3d4349421" \
             DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 \
             OTHER_CODE_SIGN_FLAGS="--timestamp" \
             | tee archive_output.log || {
