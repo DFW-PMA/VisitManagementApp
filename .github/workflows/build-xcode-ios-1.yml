@@ -1,4 +1,4 @@
-name: Xcode - Build and Analyze
+name: Build Xcode for iOS #1
 
 on:
   workflow_dispatch:                            # Allow manual triggering of the workflow
