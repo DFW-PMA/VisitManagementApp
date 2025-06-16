@@ -141,8 +141,8 @@ jobs:
           -verbose \
           CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
           CODE_SIGNING_REQUIRED=YES \
-          CODE_SIGN_STYLE="Manual" \
-          PROVISIONING_PROFILE_SPECIFIER=${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }} \
+          CODE_SIGN_STYLE="Automatic" \
+          PROVISIONING_PROFILE_SPECIFIER="54a3609d-f80b-4201-9d7a-3ce3d4349421" \
           DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 \
           | tee build_output.log \
           | xcpretty --report html --output build/reports/tests.html || {
@@ -187,6 +187,39 @@ jobs:
           echo "=== AVAILABLE PROVISIONING PROFILES ==="
           ls -la ~/Library/MobileDevice/Provisioning\ Profiles/
 
+          # xcodebuild archive \
+          #   -project VisitManagementApp.xcodeproj \
+          #   -scheme "VisitManaagementApp_iOS" \
+          #   -destination 'generic/platform=iOS' \
+          #   -archivePath build/VisitManagementApp.xcarchive \
+          #   -configuration Debug \
+          #   -verbose \
+          #   CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
+          #   CODE_SIGNING_REQUIRED=YES \
+          #   CODE_SIGN_STYLE="Automatic" \
+          #   PROVISIONING_PROFILE_SPECIFIER="54a3609d-f80b-4201-9d7a-3ce3d4349421" \
+          #   DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 \
+          #   OTHER_CODE_SIGN_FLAGS="--timestamp" \
+          #   | tee archive_output.log || {
+          #     echo "=== ARCHIVE FAILED - DETAILED DEBUG INFO ==="
+          #     echo "Archive log output:"
+          #     cat archive_output.log
+          #     echo ""
+          #     echo "=== CODE SIGNING IDENTITIES ==="
+          #     security find-identity -v -p codesigning
+          #     echo ""
+          #     echo "=== PROVISIONING PROFILES ==="
+          #     find ~/Library/MobileDevice/Provisioning\ Profiles/ -name "*.mobileprovision" -exec sh -c 'echo "=== {} ==="; security cms -D -i "{}" | plutil -p -' \; 2>/dev/null || echo "Could not read provisioning profiles"
+          #     echo ""
+          #     echo "=== KEYCHAIN LIST ==="
+          #     security list-keychains
+          #     echo ""
+          #     echo "=== ARCHIVE DIRECTORY ==="
+          #     ls -la build/ || echo "Build directory not found"
+          #     echo "=== ARCHIVE FAILED ==="
+          #     exit 1
+          #   }
+          
           xcodebuild archive \
             -project VisitManagementApp.xcodeproj \
             -scheme "VisitManaagementApp_iOS" \
@@ -194,12 +227,12 @@ jobs:
             -archivePath build/VisitManagementApp.xcarchive \
             -configuration Debug \
             -verbose \
-            CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
+            -allowProvisioningUpdates \
+            -allowProvisioningDeviceRegistration \
             CODE_SIGNING_REQUIRED=YES \
             CODE_SIGN_STYLE="Automatic" \
-            PROVISIONING_PROFILE_SPECIFIER="54a3609d-f80b-4201-9d7a-3ce3d4349421" \
-            DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 \
-            OTHER_CODE_SIGN_FLAGS="--timestamp" \
+            DEVELOPMENT_TEAM="6CVN7U97NK" \
+            OTHER_CODE_SIGN_FLAGS="--timestamp" 2>&1 \
             | tee archive_output.log || {
               echo "=== ARCHIVE FAILED - DETAILED DEBUG INFO ==="
               echo "Archive log output:"
@@ -219,7 +252,7 @@ jobs:
               echo "=== ARCHIVE FAILED ==="
               exit 1
             }
-        
+          
           echo "=== ARCHIVE SUCCESSFUL ==="
           echo "Archive contents:"
           ls -la build/VisitManagementApp.xcarchive/
@@ -241,7 +274,7 @@ jobs:
             -exportPath build/ \
             -exportOptionsPlist ExportOptions.plist \
             -verbose \
-            -allowProvisioningUpdates \
+            -allowProvisioningUpdates 2>&1 \
             | tee export_output.log || {
               echo "=== EXPORT FAILED - DEBUG INFO ==="
               cat export_output.log
