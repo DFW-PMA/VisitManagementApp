@@ -259,7 +259,7 @@ jobs:
           echo "Generated files:"
           ls -la build/
 
-      - name: Archive contents
+      - name: build/reports/ contents
         run: |
           echo "=== Build/Reports CONTENTS ==="
           ls -la build/reports/
