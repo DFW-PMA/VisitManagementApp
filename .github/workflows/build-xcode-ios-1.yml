@@ -174,7 +174,7 @@ jobs:
           # Works on mini at command line (terminal):
           # xcodebuild clean build analyze -verbose -scheme "VisitManaagementApp_iOS" -"project" "VisitManagementApp.xcodeproj"
 
-      - name: Archive iOS app (Release)
+      - name: Archive iOS app (Debug)
         if: github.ref == 'refs/heads/main'
         env:
           scheme: ${{ 'VisitManaagementApp_iOS' }}
@@ -224,9 +224,14 @@ jobs:
           echo "Archive contents:"
           ls -la build/VisitManagementApp.xcarchive/
       
+      - name: Archive contents
+        run: |
+          echo "=== ARCHIVE CONTENTS ==="
+          ls -la build/VisitManagementApp.xcarchive/
+      
       - name: Export IPA
         if: github.ref == 'refs/heads/main'
-          run: |
+        run: |
           echo "=== EXPORT OPTIONS PLIST CONTENT ==="
           cat ExportOptions.plist
         
@@ -254,6 +259,11 @@ jobs:
           echo "Generated files:"
           ls -la build/
 
+      - name: Archive contents
+        run: |
+          echo "=== Build/Reports CONTENTS ==="
+          ls -la build/reports/
+      
       - name: Upload build logs
         # if: failure()
         uses: actions/upload-artifact@v4
@@ -267,9 +277,9 @@ jobs:
           retention-days: 30
 
       - name: Upload IPA
-           if: success() && github.ref == 'refs/heads/main'
-           uses: actions/upload-artifact@v4
-           with:
-             name: VisitManagementApp_iOS
-             path: build/*.ipa
-             retention-days: 30
+        if: success() && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: VisitManagementApp_iOS
+          path: build/*.ipa
+          retention-days: 30
