@@ -29,7 +29,7 @@ jobs:
           # default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
           scheme="VisitManaagementApp_iOS"
           default="VisitManaagementApp_iOS"
-          echo $default | cat >default
+          # echo $default | cat >default
           echo Using scheme: $scheme
           echo Using default scheme: $default
 
@@ -121,17 +121,6 @@ jobs:
           echo Using filetype_parameter: $filetype_parameter
           echo Using file_to_build: $file_to_build
 
-          # echo "=== Running Build ==="
-          # xcodebuild clean archive \
-          # -workspace project.xcworkspace  \
-          # -scheme "VisitManaagementApp_iOS" \
-          # -configuration Debug \
-          # -destination generic/platform=iOS \
-          # -archivePath build/project.xcarchive \
-          # CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
-          # PROVISIONING_PROFILE_SPECIFIER="YourProvisioningProfileName" \
-          # DEVELOPMENT_TEAM="6CVN7U97NK"
-
           echo "=== Running Build ==="
           xcodebuild clean build \
           -project VisitManagementApp.xcodeproj  \
@@ -146,13 +135,14 @@ jobs:
           DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 \
           | tee build_output.log \
           | xcpretty --report html --output build/reports/tests.html || {
-            echo "Build failed. Here's the raw xcodebuild output:"
+            echo "=== Xcodebuild 'Build' FAILED - DETAILED DEBUG INFO ==="
+            echo "Build log output:"
             cat build_output.log
             echo "=== CODE SIGNING DEBUG INFO ==="
             security find-identity -v -p codesigning
             echo "=== PROVISIONING PROFILES ==="
             ls -la ~/Library/MobileDevice/Provisioning\ Profiles/
-            echo "=== BUILD FAILED ==="
+            echo "=== Xcodebuild 'Build' FAILED ==="
             exit 1
           }
 
@@ -162,14 +152,6 @@ jobs:
             cat build_output.log
             exit 1
           fi
-
-          # echo Running: xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
-          # xcodebuild clean build analyze -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | xcpretty && exit ${PIPESTATUS[0]}
-          # xcodebuild clean build analyze -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" >> $GITHUB_OUTPUT | exit ${PIPESTATUS[0]}
-          # xcodebuild clean build -verbose -scheme "$scheme" -"$filetype_parameter" "$file_to_build" | exit ${PIPESTATUS[0]}
-
-          # xcodebuild PROVISIONING_PROFILE=${{ steps.profile.outputs.uuid }} -scheme ${{ env.XCODE_PROJECT }}
-          #            clean archive -archivePath "Actions" -configuration Release -arch arm64
 
           # Works on mini at command line (terminal):
           # xcodebuild clean build analyze -verbose -scheme "VisitManaagementApp_iOS" -"project" "VisitManagementApp.xcodeproj"
@@ -182,44 +164,11 @@ jobs:
           set -o pipefail
 
           # Verify code signing setup before archiving
-          echo "=== VERIFYING CODE SIGNING SETUP ==="
+          echo "=== Installed Certificates / Code-Signing ==="
           security find-identity -v -p codesigning
-          echo "=== AVAILABLE PROVISIONING PROFILES ==="
-          ls -la ~/Library/MobileDevice/Provisioning\ Profiles/
+          echo "=== Available Provisioning Profiles ==="
+          ls -la ~/Library/MobileDevice/Provisioning\ Profiles/ || echo "No provisioning profiles found"
 
-          # xcodebuild archive \
-          #   -project VisitManagementApp.xcodeproj \
-          #   -scheme "VisitManaagementApp_iOS" \
-          #   -destination 'generic/platform=iOS' \
-          #   -archivePath build/VisitManagementApp.xcarchive \
-          #   -configuration Release \
-          #   -verbose \
-          #   CODE_SIGN_IDENTITY="Apple Distribution: Daryl Cox (6CVN7U97NK)" \
-          #   CODE_SIGNING_REQUIRED=YES \
-          #   CODE_SIGN_STYLE="Automatic" \
-          #   PROVISIONING_PROFILE_SPECIFIER="54a3609d-f80b-4201-9d7a-3ce3d4349421" \
-          #   DEVELOPMENT_TEAM="6CVN7U97NK" 2>&1 \
-          #   OTHER_CODE_SIGN_FLAGS="--timestamp" \
-          #   | tee archive_output.log || {
-          #     echo "=== ARCHIVE FAILED - DETAILED DEBUG INFO ==="
-          #     echo "Archive log output:"
-          #     cat archive_output.log
-          #     echo ""
-          #     echo "=== CODE SIGNING IDENTITIES ==="
-          #     security find-identity -v -p codesigning
-          #     echo ""
-          #     echo "=== PROVISIONING PROFILES ==="
-          #     find ~/Library/MobileDevice/Provisioning\ Profiles/ -name "*.mobileprovision" -exec sh -c 'echo "=== {} ==="; security cms -D -i "{}" | plutil -p -' \; 2>/dev/null || echo "Could not read provisioning profiles"
-          #     echo ""
-          #     echo "=== KEYCHAIN LIST ==="
-          #     security list-keychains
-          #     echo ""
-          #     echo "=== ARCHIVE DIRECTORY ==="
-          #     ls -la build/ || echo "Build directory not found"
-          #     echo "=== ARCHIVE FAILED ==="
-          #     exit 1
-          #   }
-          
           xcodebuild archive \
             -project VisitManagementApp.xcodeproj \
             -scheme "VisitManaagementApp_iOS" \
@@ -234,7 +183,7 @@ jobs:
             DEVELOPMENT_TEAM="6CVN7U97NK" \
             OTHER_CODE_SIGN_FLAGS="--timestamp" 2>&1 \
             | tee archive_output.log || {
-              echo "=== ARCHIVE FAILED - DETAILED DEBUG INFO ==="
+              echo "=== xcodebuild 'Archive' FAILED - DETAILED DEBUG INFO ==="
               echo "Archive log output:"
               cat archive_output.log
               echo ""
@@ -252,10 +201,13 @@ jobs:
               echo "=== ARCHIVE FAILED ==="
               exit 1
             }
-          
-          echo "=== ARCHIVE SUCCESSFUL ==="
-          echo "Archive contents:"
-          ls -la build/VisitManagementApp.xcarchive/
+
+          echo "=== Archive Command Exit Code: $? ==="
+          if [ $? -ne 0 ]; then
+            echo "=== Archive FAILED - Full Output Below ==="
+            cat archive_output.log
+            exit 1
+          fi
       
       - name: Archive contents
         run: |
@@ -268,7 +220,6 @@ jobs:
           echo "=== EXPORT OPTIONS PLIST CONTENT ==="
           cat ExportOptions.plist
         
-          # Export the archive
           xcodebuild -exportArchive \
             -archivePath build/VisitManagementApp.xcarchive \
             -exportPath build/ \
