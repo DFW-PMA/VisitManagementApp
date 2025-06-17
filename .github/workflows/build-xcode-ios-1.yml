@@ -59,7 +59,8 @@ jobs:
           echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
 
           # Check certificate purposes
-          # openssl pkcs12 -in "$CERTIFICATE_PATH" -nokeys -clcerts | openssl x509 -noout -purpose
+          echo "=== Certificate Purposes ==="
+          openssl pkcs12 -in "$CERTIFICATE_PATH" -nokeys -clcerts -passin pass:"$P12_PASSWORD" | openssl x509 -noout -purpose
 
           # create temporary keychain
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
@@ -72,12 +73,14 @@ jobs:
           security list-keychain -d user -s $KEYCHAIN_PATH
 
           # List all certificates
+          echo "=== All Certificates ==="
           security find-certificate -a -p "$KEYCHAIN_PATH"
 
           # List all identities (cert + private key pairs)
+          echo "=== Installed CodeSigning w/ KEYCHAIN_PATH ==="
           security find-identity -v -p codesigning "$KEYCHAIN_PATH"
 
-          echo "=== Installed Certificates ==="
+          echo "=== Installed CodeSigning ==="
           security find-identity -v -p codesigning
 
           # apply provisioning profile
