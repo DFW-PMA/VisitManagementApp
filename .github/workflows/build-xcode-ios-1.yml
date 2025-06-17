@@ -58,15 +58,27 @@ jobs:
           echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
           echo -n "$BUILD_PROVISION_PROFILE_BASE64" | base64 --decode -o $PP_PATH
 
+          # Check certificate purposes
+          openssl pkcs12 -in "$CERTIFICATE_PATH" -nokeys -clcerts | openssl x509 -noout -purpose
+
           # create temporary keychain
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
 
           # import certificate to keychain
           security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
+
+          # List all certificates
+          security find-certificate -a -p "$KEYCHAIN_PATH"
+
+          # List all identities (cert + private key pairs)
+          security find-identity -v -p codesigning "$KEYCHAIN_PATH"
+
+          echo "=== Installed Certificates ==="
+          security find-identity -v -p codesigning
 
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
@@ -166,6 +178,8 @@ jobs:
           # Verify code signing setup before archiving
           echo "=== Installed Certificates / Code-Signing ==="
           security find-identity -v -p codesigning
+          echo "=== Installed Certificates / Code-Signing / KEYCHAIN_PATH ==="
+          security find-identity -v -p codesigning "$KEYCHAIN_PATH"
           echo "=== Available Provisioning Profiles ==="
           ls -la ~/Library/MobileDevice/Provisioning\ Profiles/ || echo "No provisioning profiles found"
 
@@ -219,10 +233,12 @@ jobs:
         run: |
           echo "=== EXPORT OPTIONS PLIST CONTENT ==="
           cat ExportOptions.plist
+          # Create build directory for reports
+          mkdir -p build/distribution
         
           xcodebuild -exportArchive \
             -archivePath build/VisitManagementApp.xcarchive \
-            -exportPath build/ \
+            -exportPath build/distribution \
             -exportOptionsPlist ExportOptions.plist \
             -verbose \
             -allowProvisioningUpdates 2>&1 \
@@ -235,6 +251,8 @@ jobs:
               echo ""
               echo "=== ARCHIVE CONTENTS ==="
               find build/VisitManagementApp.xcarchive -type f -name "*.plist" -exec sh -c 'echo "=== {} ==="; cat "{}"' \;
+              echo "=== EXPORT DIRECTORY ==="
+              ls -la build/distribution || echo "Build/distribution directory not found"
               echo "=== EXPORT FAILED ==="
               exit 1
             }
@@ -242,6 +260,8 @@ jobs:
           echo "=== EXPORT SUCCESSFUL ==="
           echo "Generated files:"
           ls -la build/
+          echo "=== EXPORT DIRECTORY ==="
+          ls -la build/distribution || echo "Build/distribution directory not found"
 
       - name: build/reports/ contents
         run: |
@@ -265,5 +285,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: VisitManagementApp_iOS
-          path: build/*.ipa
+          path: build/distribution/*.ipa
           retention-days: 30
