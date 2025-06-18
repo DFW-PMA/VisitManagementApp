@@ -186,6 +186,10 @@ jobs:
           echo "=== Available Provisioning Profiles ==="
           ls -la ~/Library/MobileDevice/Provisioning\ Profiles/ || echo "No provisioning profiles found"
 
+          # --- Parked Value(s) ---
+          # PROVISIONING_PROFILE="54a3609d-f80b-4201-9d7a-3ce3d4349421" \
+          # PROVISIONING_PROFILE_SPECIFIER="VisitManagementApp1 Distribution" \
+
           xcodebuild archive \
             -project VisitManagementApp.xcodeproj \
             -scheme "VisitManaagementApp_iOS" \
@@ -198,6 +202,7 @@ jobs:
             CODE_SIGNING_REQUIRED=YES \
             CODE_SIGN_STYLE="Automatic" \
             DEVELOPMENT_TEAM="6CVN7U97NK" \
+            PROVISIONING_PROFILE_SPECIFIER="VisitManagementApp1 Distribution" \
             OTHER_CODE_SIGN_FLAGS="--timestamp" 2>&1 \
             | tee archive_output.log || {
               echo "=== xcodebuild 'Archive' FAILED - DETAILED DEBUG INFO ==="
