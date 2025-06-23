@@ -21,7 +21,7 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
     {
 
         static let sClsId        = "JmAppParseCoreBkgdDataRepo"
-        static let sClsVers      = "v1.2401"
+        static let sClsVers      = "v1.2404"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = false
@@ -795,6 +795,8 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
                 }
 
             }
+
+            let _ = self.deepCopyDictPFTherapistFileItemsToSwiftData()
 
         }
 
@@ -4737,6 +4739,69 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
         return
 
     } // End of func displayDictPatientPidXfef().
+    
+    public func deepCopyDictPFTherapistFileItemsToSwiftData()->Int
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+        
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+
+        // Deep copy the dictionary 'dictPFTherapistFileItems' from here to the 'jmAppSwiftDataManager'...
+        
+        self.xcgLogMsg("\(sCurrMethodDisp) 'deep copy'ing the dictionary 'dictPFTherapistFileItems' of (\(self.dictPFTherapistFileItems.count)) 'TherapistFile' item(s) to the SwiftDataManager...")
+
+        var cDeepCopyPFTherapistFileItems:Int                           = 0 
+        var listDeepCopyPFTherapistFileItems:[ParsePFTherapistFileItem] = [ParsePFTherapistFileItem]()
+
+        for (iPFTherapistFileTID, pfTherapistFileItem) in self.dictPFTherapistFileItems
+        {
+            cDeepCopyPFTherapistFileItems                       += 1
+            let iNewPFTherapistFileTID:Int                       = iPFTherapistFileTID
+            let newPFTherapistFileItem:ParsePFTherapistFileItem  = ParsePFTherapistFileItem(pfTherapistFileItem:pfTherapistFileItem)
+
+            listDeepCopyPFTherapistFileItems.append(newPFTherapistFileItem)
+
+            self.xcgLogMsg("\(sCurrMethodDisp) 'deep copy' Added object #(\(cDeepCopyPFTherapistFileItems)) 'newPFTherapistFileItem' to the 'deep copy' list of 'TherapistFile' item(s)...")
+
+            // Add the PFTherapistFileItem to the ModelContext...
+
+            if (self.jmAppSwiftDataManager.modelContext != nil) 
+            {
+                self.jmAppSwiftDataManager.modelContext!.insert(newPFTherapistFileItem)
+
+                self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Add> - Added a 'newPFTherapistFileItem' of [\(String(describing: newPFTherapistFileItem.toString()))] to the SwiftData 'model' Context for a 'TherapistFile' item...")
+            }
+            else
+            {
+                self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Add> - has operation failed - 'self.modelContext' is nil - Error!")
+            }
+        }
+
+        DispatchQueue.main.async
+        {
+            self.jmAppSwiftDataManager.pfTherapistFileSwiftDataItems = listDeepCopyPFTherapistFileItems
+
+            if (listDeepCopyPFTherapistFileItems.count > 0)
+            {
+                self.xcgLogMsg("\(sCurrMethodDisp) 'deep copy' replaced #(\(listDeepCopyPFTherapistFileItems.count)) item(s) in the SwiftDataManager 'TherapistFile' item(s)...")
+            }
+            else
+            {
+                self.xcgLogMsg("\(sCurrMethodDisp) 'deep copy' replaced the SwiftDataManager 'TherapistFile' item(s) with an 'empty' list - NO item(s) were available...")
+            }
+
+            self.jmAppSwiftDataManager.saveAppTherapistFileSwiftData()
+        }
+
+        // Exit...
+  
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'listDeepCopyPFTherapistFileItems.count' is (\(listDeepCopyPFTherapistFileItems.count)) of 'TherapistFile' item(s)...")
+  
+        return listDeepCopyPFTherapistFileItems.count
+
+    } // End of func deepCopyDictPFTherapistFileItemsToSwiftData()->Int.
     
 }   // End of public class JmAppParseCoreBkgdDataRepo.
 

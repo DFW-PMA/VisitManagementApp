@@ -10,14 +10,14 @@ import Foundation
 import SwiftUI
 import SwiftData
 
-public class JmAppSwiftDataManager: NSObject, ObservableObject
+public class JmAppSwiftDataManager:NSObject, ObservableObject
 {
     
     struct ClassInfo
     {
         
         static let sClsId        = "JmAppSwiftDataManager"
-        static let sClsVers      = "v1.0709"
+        static let sClsVers      = "v1.0803"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2024-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -85,6 +85,23 @@ public class JmAppSwiftDataManager: NSObject, ObservableObject
         }
     }
     @Published      var bArePFAdminsSwiftDataItemsAvailable:Bool       = false
+    {
+        didSet
+        {
+            objectWillChange.send()
+        }
+    }
+    
+    @Published      var pfTherapistFileSwiftDataItems:[ParsePFTherapistFileItem]
+                                                                       = [ParsePFTherapistFileItem]()
+    {
+        didSet
+        {
+            objectWillChange.send()
+        }
+    }
+    @Published      var bArePFTherapistFileSwiftDataItemsAvailable:Bool
+                                                                       = false
     {
         didSet
         {
@@ -196,6 +213,10 @@ public class JmAppSwiftDataManager: NSObject, ObservableObject
         asToString.append("SwiftData 'pfAdminsSwiftDataItems': [\(String(describing: self.pfAdminsSwiftDataItems))[,")
         asToString.append("SwiftData 'bArePFAdminsSwiftDataItemsAvailable': [\(String(describing: self.bArePFAdminsSwiftDataItemsAvailable)))]")
         asToString.append("],")
+        asToString.append("[")
+        asToString.append("SwiftData 'pfTherapistFileSwiftDataItems': [\(String(describing: self.pfTherapistFileSwiftDataItems))[,")
+        asToString.append("SwiftData 'bArePFTherapistFileSwiftDataItemsAvailable': [\(String(describing: self.bArePFTherapistFileSwiftDataItemsAvailable)))]")
+        asToString.append("],")
         asToString.append("]")
 
         let sContents:String = "{"+(asToString.joined(separator: ""))+"}"
@@ -270,9 +291,10 @@ public class JmAppSwiftDataManager: NSObject, ObservableObject
         //                return try ModelContainer(for:schema, configurations:[modelConfiguration])
         // --------------------------------------------------------------------------------------------------
 
-            self.schema = Schema([PFAdminsSwiftDataItem.self])
+        //  self.schema = Schema([PFAdminsSwiftDataItem.self])
+            self.schema = Schema([PFAdminsSwiftDataItem.self, ParsePFTherapistFileItem.self])
 
-            self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager Schema has been constructed for PFAdminsSwiftDataItem (class)...")
+            self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager Schema has been constructed for PFAdminsSwiftDataItem (class) and ParsePFTherapistFileItem (class)...")
 
             self.modelConfiguration = ModelConfiguration(schema:self.schema!, isStoredInMemoryOnly:false, allowsSave:true)
         //  self.modelConfiguration = ModelConfiguration(schema:self.schema!, isStoredInMemoryOnly:false)
@@ -318,6 +340,12 @@ public class JmAppSwiftDataManager: NSObject, ObservableObject
             //  let _ = self.sortAppSwiftDataAlarmItems()
             //
             //  self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager Invoked  'self.sortAppSwiftDataAlarmItems()'...")
+
+                self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager Invoking 'self.fetchAppTherapistFileSwiftData()' to get 'TherapistFile' item(s)...")
+
+                self.fetchAppTherapistFileSwiftData(bShowDetailAfterFetch:true)
+
+                self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager Invoked  'self.fetchAppTherapistFileSwiftData()' to get 'TherapistFile' item(s)...")
           
             }
 
@@ -327,9 +355,10 @@ public class JmAppSwiftDataManager: NSObject, ObservableObject
             
             self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager ModelContainer has failed construction - Details: \(error) - Error!")
 
-            self.bArePFAdminsSwiftDataItemsAvailable = false
-            self.modelContext                     = nil
-            self.modelContainer                   = nil
+            self.bArePFAdminsSwiftDataItemsAvailable        = false
+            self.bArePFTherapistFileSwiftDataItemsAvailable = false
+            self.modelContext                               = nil
+            self.modelContainer                             = nil
 
             self.xcgLogMsg("\(ClassInfo.sClsDisp) SwiftDataManagerManager 'self.pfAdminsSwiftDataItems' has #(\(self.pfAdminsSwiftDataItems.count)) 'alarm' item(s)...")
             self.xcgLogMsg("\(ClassInfo.sClsDisp) SwiftDataManagerManager 'self.bArePFAdminsSwiftDataItemsAvailable' is [\(self.bArePFAdminsSwiftDataItemsAvailable)]...")
@@ -391,10 +420,10 @@ public class JmAppSwiftDataManager: NSObject, ObservableObject
 
                 }
 
+                self.xcgLogMsg("\(ClassInfo.sClsDisp) SwiftDataManager <Add> - 'self.bArePFAdminsSwiftDataItemsAvailable' is [\(self.bArePFAdminsSwiftDataItemsAvailable)]...")
             }
             
             self.xcgLogMsg("\(ClassInfo.sClsDisp) SwiftDataManager <Add> - 'self.pfAdminsSwiftDataItems' has (\(self.pfAdminsSwiftDataItems.count)) 'admin' item(s)...")
-            self.xcgLogMsg("\(ClassInfo.sClsDisp) SwiftDataManager <Add> - 'self.bArePFAdminsSwiftDataItemsAvailable' is [\(self.bArePFAdminsSwiftDataItemsAvailable)]...")
 
         }
         else
@@ -478,8 +507,8 @@ public class JmAppSwiftDataManager: NSObject, ObservableObject
                 self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Fetch> - operation has failed - Details: \(error) - Error!")
 
                 self.bArePFAdminsSwiftDataItemsAvailable = false
-                self.modelContext                        = nil
-                self.modelContainer                      = nil
+            //  self.modelContext                        = nil
+            //  self.modelContainer                      = nil
 
                 self.xcgLogMsg("\(ClassInfo.sClsDisp) #2 SwiftDataManager <Fetch> - 'self.pfAdminsSwiftDataItems' has #(\(self.pfAdminsSwiftDataItems.count)) 'admin' item(s)...")
                 self.xcgLogMsg("\(ClassInfo.sClsDisp) #2 SwiftDataManager <Fetch> - 'self.bArePFAdminsSwiftDataItemsAvailable' is [\(self.bArePFAdminsSwiftDataItemsAvailable)]...")
@@ -495,6 +524,70 @@ public class JmAppSwiftDataManager: NSObject, ObservableObject
         return
 
     }   // End of public func fetchAppSwiftData(bShowDetailAfterFetch:Bool).
+
+    public func fetchAppTherapistFileSwiftData(bShowDetailAfterFetch:Bool = false)
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked - SwiftDataManager <Fetch> - 'bShowDetailAfterFetch' is [\(bShowDetailAfterFetch)]...")
+
+        // Fetch (or re-fetch) the SwiftData 'model' Container's ModelContext...
+        
+        DispatchQueue.main.async
+        {
+            do
+            {
+                if (self.modelContext != nil)
+                {
+                    let pfTherapistFileSwiftDataItemsDescriptor = FetchDescriptor<ParsePFTherapistFileItem>()
+                    self.pfTherapistFileSwiftDataItems          = try self.modelContext!.fetch(pfTherapistFileSwiftDataItemsDescriptor)
+
+                    if (self.pfTherapistFileSwiftDataItems.count > 0)
+                    {
+                        if (bShowDetailAfterFetch == true)
+                        {
+                            self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Fetch> - Invoking 'self.detailAppTherapistFileSwiftDataToLog()'...")
+                            self.detailAppTherapistFileSwiftDataToLog()
+                            self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Fetch> - Invoked  'self.detailAppTherapistFileSwiftDataToLog()'...")
+                        }
+                        
+                        self.bArePFTherapistFileSwiftDataItemsAvailable = true
+                    }
+                    else
+                    {
+                        self.bArePFTherapistFileSwiftDataItemsAvailable = false
+                    }
+
+                    self.xcgLogMsg("\(ClassInfo.sClsDisp) #1 SwiftDataManager <Fetch> - 'self.pfTherapistFileSwiftDataItems' has (\(self.pfTherapistFileSwiftDataItems.count)) 'TherapistFile' item(s)...")
+                    self.xcgLogMsg("\(ClassInfo.sClsDisp) #1 SwiftDataManager <Fetch> - 'self.bArePFTherapistFileSwiftDataItemsAvailable' is [\(self.bArePFTherapistFileSwiftDataItemsAvailable)]...")
+                }
+                else
+                {
+                    self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Fetch> - has failed operation - 'self.modelContext' is nil - Error!")
+                }
+            }
+            catch
+            {
+                self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Fetch> - operation has failed - Details: \(error) - Error!")
+
+                self.bArePFTherapistFileSwiftDataItemsAvailable = false
+            //  self.modelContext                               = nil
+            //  self.modelContainer                             = nil
+
+                self.xcgLogMsg("\(ClassInfo.sClsDisp) #2 SwiftDataManager <Fetch> - 'self.pfTherapistFileSwiftDataItems' has (\(self.pfTherapistFileSwiftDataItems.count)) 'TherapistFile' item(s)...")
+                self.xcgLogMsg("\(ClassInfo.sClsDisp) #2 SwiftDataManager <Fetch> - 'self.bArePFTherapistFileSwiftDataItemsAvailable' is [\(self.bArePFTherapistFileSwiftDataItemsAvailable)]...")
+            }
+        }
+        
+        // Exit:
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting - SwiftDataManager <Fetch> - 'bShowDetailAfterFetch' is [\(bShowDetailAfterFetch)]...")
+
+        return
+
+    }   // End of public func fetchAppTherapistFileSwiftData(bShowDetailAfterFetch:Bool).
 
     public func deleteAppSwiftDataItems(offsets:IndexSet, bShowDetailAfterDeletes:Bool = false)
     {
@@ -1046,6 +1139,66 @@ public class JmAppSwiftDataManager: NSObject, ObservableObject
 
     }   // End of public func saveAppSwiftData().
 
+    public func saveAppTherapistFileSwiftData()
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked - SwiftDataManager <Save> for 'TherapistFile' item(s)...")
+
+        // Save the SwiftData 'TherapistFile' item(s) (if there are any)...
+        
+        if (self.modelContext != nil) 
+        {
+            if (self.pfTherapistFileSwiftDataItems.count > 0)
+            {
+                do
+                {
+                    try self.modelContext!.save()
+
+                    self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Save> for 'TherapistFile' item(s) - operation has been completed - 'self.pfTherapistFileSwiftDataItems' had #(\(self.pfTherapistFileSwiftDataItems.count)) item(s)...")
+                }
+                catch
+                {
+                    self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Save> for 'TherapistFile' item(s) - operation has failed - Details: \(error) - Error!")
+                }
+            }
+            else
+            {
+                self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Save> for 'TherapistFile' item(s) - operation has failed - 'self.pfTherapistFileSwiftDataItems.count' of (\(self.pfTherapistFileSwiftDataItems.count)) is less than 1 - nothing to save - Warning!")
+            }
+            
+            DispatchQueue.main.async
+            {
+                if (self.pfTherapistFileSwiftDataItems.count > 0)
+                {
+                    self.bArePFTherapistFileSwiftDataItemsAvailable = true
+
+                }
+                else
+                {
+                    self.bArePFTherapistFileSwiftDataItemsAvailable = false
+                }
+
+                self.xcgLogMsg("\(ClassInfo.sClsDisp) SwiftDataManager <Save> - 'self.bArePFTherapistFileSwiftDataItemsAvailable' is [\(self.bArePFTherapistFileSwiftDataItemsAvailable)] for 'TherapistFile' item(s)...")
+            }
+            
+            self.xcgLogMsg("\(ClassInfo.sClsDisp) SwiftDataManager <Save> - 'self.pfTherapistFileSwiftDataItems' has #(\(self.pfTherapistFileSwiftDataItems.count)) 'TherapistFile' item(s)...")
+        }
+        else
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Save> for 'TherapistFile' item(s) - operation has failed - 'self.modelContext' is nil - Error!")
+        }
+
+        // Exit:
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting - SwiftDataManager <Save> for 'TherapistFile' item(s)...")
+
+        return
+
+    }   // End of public func saveAppTherapistFileSwiftData().
+
     public func signalAppSwiftDataItemUpdated(alarmSwiftDataItem:AlarmSwiftDataItem, bShowDetailAfterUpdate:Bool = false)
     {
         
@@ -1381,6 +1534,61 @@ public class JmAppSwiftDataManager: NSObject, ObservableObject
         return cAppSwiftDataAlarmsEnabled
   
     }   // End of public func sortAppSwiftDataAlarmItems()->Int.
+
+    public func detailAppTherapistFileSwiftDataToLog()
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked - SwiftDataManager <Detail> for TherapistFile item(s)...")
+
+        // Detail the TherapistFile SwiftData 'model' Container's ModelContext to the Log...
+        
+        if (self.modelContext != nil) 
+        {
+            if (self.pfTherapistFileSwiftDataItems.count > 0)
+            {
+                var idPFTherapistFileSwiftDataItem:Int = 0
+                
+                for currentSwiftDataItem:ParsePFTherapistFileItem in self.pfTherapistFileSwiftDataItems
+                {
+                    idPFTherapistFileSwiftDataItem += 1
+                    
+                    currentSwiftDataItem.displayParsePFTherapistFileItemToLog()
+                }
+            }
+
+            DispatchQueue.main.async
+            {
+                if (self.pfTherapistFileSwiftDataItems.count > 0)
+                {
+                    self.bArePFTherapistFileSwiftDataItemsAvailable = true
+                }
+                else
+                {
+                    self.bArePFTherapistFileSwiftDataItemsAvailable = false
+                }
+            }
+
+            self.xcgLogMsg("\(ClassInfo.sClsDisp) SwiftDataManager <Detail> - 'self.pfTherapistFileSwiftDataItems' has (\(self.pfTherapistFileSwiftDataItems.count)) 'TherapistFile' item(s)...")
+            self.xcgLogMsg("\(ClassInfo.sClsDisp) SwiftDataManager <Detail> - 'self.bArePFTherapistFileSwiftDataItemsAvailable' is [\(self.bArePFTherapistFileSwiftDataItemsAvailable)]...")
+
+        }
+        else
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager <Detail> - operation has failed operation - 'self.modelContext' is nil - Error!")
+
+        }
+
+        // Exit:
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting - SwiftDataManager <Detail> for TherapistFile item(s)...")
+
+        return
+
+    }   // End of public func detailAppTherapistFileSwiftDataToLog().
 
 }   // End of class JmAppSwiftDataManager(NSObject).
 
