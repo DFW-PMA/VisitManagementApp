@@ -8,17 +8,20 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 import MapKit
 import ParseCore
 
-class ParsePFTherapistFileItem: NSObject, Identifiable
+@Model
+class ParsePFTherapistFileItem:Identifiable
 {
 
+    @Transient
     struct ClassInfo
     {
         
         static let sClsId        = "ParsePFTherapistFileItem"
-        static let sClsVers      = "v1.1001"
+        static let sClsVers      = "v1.1103"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -28,12 +31,14 @@ class ParsePFTherapistFileItem: NSObject, Identifiable
 
     // 'Internal' Trace flag:
 
-    private 
+    @Transient private 
     var bInternalTraceFlag:Bool                                   = false
 
     // Item Data field(s):
     
+    @Attribute(.unique) public
     var id                                                        = UUID()
+
     var idPFTherapistFileObject:Int                               = 0
 
     var pfTherapistFileObjectClonedFrom:ParsePFTherapistFileItem? = nil 
@@ -45,6 +50,7 @@ class ParsePFTherapistFileItem: NSObject, Identifiable
     //  }]...
     // ------------------------------------------------------------------------------------------
 
+    @Transient
     var pfTherapistFileObject:PFObject?                           = nil
 
     // ----------------------------------------------------------------------------------------------------------------
@@ -65,7 +71,10 @@ class ParsePFTherapistFileItem: NSObject, Identifiable
     var sPFTherapistFileObjectId:String?                          = nil
     var datePFTherapistFileCreatedAt:Date?                        = nil
     var datePFTherapistFileUpdatedAt:Date?                        = nil
+    
+    @Transient
     var aclPFTherapistFile:PFACL?                                 = nil
+    
     var bPFTherapistFileIsDataAvailable:Bool                      = false
     var bPFTherapistFileIdDirty:Bool                              = false
     var listPFTherapistFileAllKeys:[String]                       = []
@@ -173,16 +182,24 @@ class ParsePFTherapistFileItem: NSObject, Identifiable
 
     // Item 'calculated'/'converted'/'looked'-up/'computed' field(s):
 
+    @Transient
     var pfTherapistFileObjectLatitude:Any?                        = nil
+    @Transient
     var pfTherapistFileObjectLongitude:Any?                       = nil
 
+    @Transient
     var sPFTherapistFileObjectLatitude:String                     = "0.0"
+    @Transient
     var sPFTherapistFileObjectLongitude:String                    = "0.0"
 
+    @Transient
     var dblPFTherapistFileObjectLatitude:Double                   = 0.0
+    @Transient
     var dblPFTherapistFileObjectLongitude:Double                  = 0.0
 
+    @Transient
     var dblConvertedLatitude:Double                               = 0.0
+    @Transient
     var dblConvertedLongitude:Double                              = 0.0
 
     // Item address 'lookup'/'reverseLocation' (address) field(s):
@@ -196,6 +213,7 @@ class ParsePFTherapistFileItem: NSObject, Identifiable
     var sHomeLocPostalCode:String                                 = ""
     var sHomeLocTimeZone:String                                   = ""
 
+    @Transient
     var clLocationCoordinate2D:CLLocationCoordinate2D
     {
 
@@ -203,6 +221,7 @@ class ParsePFTherapistFileItem: NSObject, Identifiable
 
     }
 
+    @Transient
     var mapCoordinateRegion:MKCoordinateRegion
     {
 
@@ -211,6 +230,7 @@ class ParsePFTherapistFileItem: NSObject, Identifiable
 
     }
 
+    @Transient
     var mapPosition:MapCameraPosition
     {
 
@@ -220,15 +240,16 @@ class ParsePFTherapistFileItem: NSObject, Identifiable
 
     // App Data field(s):
 
+    @Transient
     var jmAppDelegateVisitor:JmAppDelegateVisitor                 = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
     
-    override init()
+    init()
     {
         
         let sCurrMethod:String = #function
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
 
-        super.init()
+    //  super.init()
 
         self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
 
@@ -238,7 +259,7 @@ class ParsePFTherapistFileItem: NSObject, Identifiable
 
         return
 
-    }   // End of override init().
+    }   // End of init().
 
     convenience init(pfTherapistFileItem:ParsePFTherapistFileItem)
     {
