@@ -15,7 +15,7 @@ struct SettingsSingleViewCore: View
     {
         
         static let sClsId        = "SettingsSingleViewCore"
-        static let sClsVers      = "v1.2501"
+        static let sClsVers      = "v1.2702"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -44,6 +44,7 @@ struct SettingsSingleViewCore: View
     @State private var cAppAboutButtonPresses:Int                            = 0
     @State private var cAppHelpViewButtonPresses:Int                         = 0
     @State private var cAppLogViewButtonPresses:Int                          = 0
+    @State private var cContentViewAppDetailsButtonPresses:Int               = 0
 
     @State private var cAppViewSuspendButtonPresses:Int                      = 0
 
@@ -53,6 +54,7 @@ struct SettingsSingleViewCore: View
     @State private var isAppAboutViewModal:Bool                              = false
     @State private var isAppHelpViewModal:Bool                               = false
     @State private var isAppLogViewModal:Bool                                = false
+    @State private var isAppDetailsViewModal:Bool                            = false
 
     @State private var isAppSuspendShowing:Bool                              = false
 
@@ -268,6 +270,42 @@ struct SettingsSingleViewCore: View
                 
                 }
       
+                Spacer()
+
+                Button
+                {
+
+                    self.cContentViewAppDetailsButtonPresses += 1
+
+                    let _ = xcgLogMsg("\(ClassInfo.sClsDisp):SettingsSingleViewCore in Button(Xcode).'App Details'.#(\(self.cContentViewAppDetailsButtonPresses))...")
+
+                    self.isAppDetailsViewModal.toggle()
+
+                }
+                label: 
+                {
+
+                    VStack(alignment:.center)
+                    {
+
+                        Label("", systemImage: "doc.questionmark")
+                            .help(Text("App (Dev) Details"))
+                            .imageScale(.large)
+
+                        Text("(Dev) Details")
+                            .font(.caption)
+
+                    }
+
+                } 
+                .fullScreenCover(isPresented:$isAppDetailsViewModal)
+                {
+
+                    AppDetailsView()
+
+                }
+                .padding()
+
                 Spacer()
       
                 Button

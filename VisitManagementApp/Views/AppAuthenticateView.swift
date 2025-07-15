@@ -19,7 +19,7 @@ struct AppAuthenticateView: View
     {
         
         static let sClsId        = "AppAuthenticateView"
-        static let sClsVers      = "v1.3001"
+        static let sClsVers      = "v1.3105"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -64,6 +64,8 @@ struct AppAuthenticateView: View
                 private var sLoginUsername:String                                 = ""
     @AppStorage("VisitManagementApp.LastLoginPassword")
                 private var sLoginPassword:String                                 = ""
+    @AppStorage("VisitManagementApp.LastLoginEmail")
+                private var sLoginEmail:String                                    = ""
 
                 private var isUserAuthorizedAndLoggedIn:Bool
     {
@@ -109,6 +111,8 @@ struct AppAuthenticateView: View
     @ObservedObject     var jmAppParseCoreManager:JmAppParseCoreManager           = JmAppParseCoreManager.ClassSingleton.appParseCodeManager
                         var jmAppParseCoreBkgdDataRepo:JmAppParseCoreBkgdDataRepo = JmAppParseCoreBkgdDataRepo.ClassSingleton.appParseCodeBkgdDataRepo
                         var appGlobalInfo:AppGlobalInfo                           = AppGlobalInfo.ClassSingleton.appGlobalInfo
+    @ObservedObject     var appDevDetailsModelObservable:AppDevDetailsModelObservable
+                                                                                  = AppDevDetailsModelObservable.ClassSingleton.appDevDetailsModelObservable
 
     init(uuid4ForcingViewRefresh:Binding<UUID>)
     {
@@ -754,6 +758,11 @@ struct AppAuthenticateView: View
             else
             {
 
+                let _ = self.appDevDetailsModelObservable.setAppDevDetailsItems(bIsUserBlockedFromFaceId:self.bIsUserBlockedFromFaceId,
+                                                                                sLoginUsername:self.sLoginUsername,
+                                                                                sLoginPassword:self.sLoginPassword,
+                                                                                sLoginEmail:self.sLoginEmail)
+
                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) #4 Toggle 'jmAppSwiftDataManager.pfAdminsSwiftDataItems.count' is (\(self.jmAppSwiftDataManager.pfAdminsSwiftDataItems.count))...")
                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) #4 Toggle 'jmAppSwiftDataManager.bArePFAdminsSwiftDataItemsAvailable' is [\(self.jmAppSwiftDataManager.bArePFAdminsSwiftDataItemsAvailable)]...")
                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) #4 Toggle 'isUserAuthenticationAvailable' is [\(isUserAuthenticationAvailable)]...")
@@ -762,6 +771,8 @@ struct AppAuthenticateView: View
                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) #4 Toggle 'isUserLoggedIn' is [\(isUserLoggedIn)]...")
                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) #4 Toggle 'isUserAuthorizedAndLoggedIn' is [\(isUserAuthorizedAndLoggedIn)]...")
                 let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) #4 Toggle 'bIsUserBlockedFromFaceId' is [\(bIsUserBlockedFromFaceId)]...")
+
+                let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) #4 Toggle 'appDevDetailsModelObservable' is [\(self.appDevDetailsModelObservable.toString())]...")
 
                 ContentView(isUserLoggedIn:$isUserLoggedIn, sLoginUsername:$sLoginUsername, sLoginPassword:$sLoginPassword)
 
@@ -1460,6 +1471,8 @@ struct AppAuthenticateView: View
 
             self.xcgLogMsg("\(sCurrMethodDisp) Supplied credential(s) have been successfully 'validated'- credential(s) are good - reason [\(sCredentialsCheckReason)]...")
 
+            self.sLoginEmail = pfAdminsSwiftDataItem?.sPFAdminsParseEmail ?? ""
+
             self.isUserLoggedIn.toggle()
 
             // Exit...
@@ -1528,6 +1541,8 @@ struct AppAuthenticateView: View
         {
 
             self.xcgLogMsg("\(sCurrMethodDisp) Supplied credential(s) have been successfully 'validated'- credential(s) are good - reason [\(sCredentialsCheckReason)]...")
+
+            self.sLoginEmail = pfAdminsDataItem?.sPFAdminsParseEmail ?? ""
 
             self.isUserLoggedIn.toggle()
 

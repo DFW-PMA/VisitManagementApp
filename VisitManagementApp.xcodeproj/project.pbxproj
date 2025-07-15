@@ -196,6 +196,12 @@
 		F0F1277E2CEB944D00656B7E /* AppWorkRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1277C2CEB944D00656B7E /* AppWorkRouteView.swift */; };
 		F0F7177F2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F7177E2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift */; };
 		F0F717802DAEE43600E7CA2A /* ParsePFBackupFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F7177E2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift */; };
+		F0FA3C632E26992100F1A4E6 /* AppDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA3C622E26992100F1A4E6 /* AppDetailsView.swift */; };
+		F0FA3C642E26992100F1A4E6 /* AppDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA3C622E26992100F1A4E6 /* AppDetailsView.swift */; };
+		F0FA3C672E26993800F1A4E6 /* AppDevDetailsModelObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA3C662E26993800F1A4E6 /* AppDevDetailsModelObservable.swift */; };
+		F0FA3C682E26993800F1A4E6 /* AppDevDetailsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA3C652E26993800F1A4E6 /* AppDevDetailsItem.swift */; };
+		F0FA3C692E26993800F1A4E6 /* AppDevDetailsModelObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA3C662E26993800F1A4E6 /* AppDevDetailsModelObservable.swift */; };
+		F0FA3C6A2E26993800F1A4E6 /* AppDevDetailsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA3C652E26993800F1A4E6 /* AppDevDetailsItem.swift */; };
 		F0FBE7762D63C8A200028CBA /* AppSchedPatLocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBE7752D63C8A200028CBA /* AppSchedPatLocView.swift */; };
 		F0FBE7772D63C8A200028CBA /* AppSchedPatLocView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBE7752D63C8A200028CBA /* AppSchedPatLocView.swift */; };
 /* End PBXBuildFile section */
@@ -314,6 +320,9 @@
 		F0EF628A2C8B70BD00DB79DB /* DeveloperSupportEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperSupportEmail.swift; sourceTree = "<group>"; };
 		F0F1277C2CEB944D00656B7E /* AppWorkRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWorkRouteView.swift; sourceTree = "<group>"; };
 		F0F7177E2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsePFBackupFileItem.swift; sourceTree = "<group>"; };
+		F0FA3C622E26992100F1A4E6 /* AppDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailsView.swift; sourceTree = "<group>"; };
+		F0FA3C652E26993800F1A4E6 /* AppDevDetailsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDevDetailsItem.swift; sourceTree = "<group>"; };
+		F0FA3C662E26993800F1A4E6 /* AppDevDetailsModelObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDevDetailsModelObservable.swift; sourceTree = "<group>"; };
 		F0FBE7752D63C8A200028CBA /* AppSchedPatLocView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSchedPatLocView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -364,6 +373,8 @@
 		F0289D2C2C53D920001B19CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F0FA3C652E26993800F1A4E6 /* AppDevDetailsItem.swift */,
+				F0FA3C662E26993800F1A4E6 /* AppDevDetailsModelObservable.swift */,
 				F05E875A2DB29C1C00C309B7 /* ScheduledPatientLocationItemEnums.swift */,
 				F0F7177E2DAEE43600E7CA2A /* ParsePFBackupFileItem.swift */,
 				F05EDC372D53FB7C00306C62 /* AppSearchablePatientName.swift */,
@@ -445,6 +456,7 @@
 		F028C5BF2C486134007C459E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F0FA3C622E26992100F1A4E6 /* AppDetailsView.swift */,
 				F09B7EBA2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift */,
 				F09B7EB72DE77AB60031B9E8 /* AppVisitMgmtCoreLocMapView.swift */,
 				F0E4C4612DD7D1E4000F79DF /* AppVisitMgmtCoreLocView.swift */,
@@ -612,7 +624,7 @@
 					};
 					F0BCCC772C821E34007EA382 = {
 						CreatedOnToolsVersion = 15.4;
-						LastSwiftMigration = 1630;
+						LastSwiftMigration = 1640;
 					};
 				};
 			};
@@ -679,6 +691,7 @@
 				F069E2AD2CEF8C42001F0A5E /* ParsePFAdminsDataItem.swift in Sources */,
 				F029E0B72C82386D00FC96B9 /* SettingsSingleViewMac.swift in Sources */,
 				F05E47152D5D29150059F4C2 /* AppVisitMgmtPatient3View.swift in Sources */,
+				F0FA3C632E26992100F1A4E6 /* AppDetailsView.swift in Sources */,
 				F0EEDD882CADC38400E437E8 /* JmAppMetricKitManager.swift in Sources */,
 				F0FBE7762D63C8A200028CBA /* AppSchedPatLocView.swift in Sources */,
 				F05E47122D5D0D550059F4C2 /* AppVisitMgmtTherapist3View.swift in Sources */,
@@ -699,6 +712,8 @@
 				F05EE1D52D380E4E00ABC0C5 /* JmAppAlarmSoundManager.swift in Sources */,
 				F05EDC312D53FA2F00306C62 /* AppVisitMgmtPatient1DetailsView.swift in Sources */,
 				F09B7EB82DE77AB60031B9E8 /* AppVisitMgmtCoreLocMapView.swift in Sources */,
+				F0FA3C692E26993800F1A4E6 /* AppDevDetailsModelObservable.swift in Sources */,
+				F0FA3C6A2E26993800F1A4E6 /* AppDevDetailsItem.swift in Sources */,
 				F05EDC322D53FA2F00306C62 /* AppVisitMgmtPatient1View.swift in Sources */,
 				F05EDC332D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift in Sources */,
 				F00619A62C94A8060094614E /* MultipartRequestInfo.swift in Sources */,
@@ -763,6 +778,7 @@
 				F0E4C4622DD7D1E4000F79DF /* AppVisitMgmtCoreLocView.swift in Sources */,
 				F08C00C82CE536430045A5CD /* JmAppParseCoreManager.swift in Sources */,
 				F091A2892C8F73DD00FB85D5 /* RestURLEndpoint.swift in Sources */,
+				F0FA3C642E26992100F1A4E6 /* AppDetailsView.swift in Sources */,
 				F08C86B42D1DD6C100D5B19A /* AppVisitMgmtTherapist1View.swift in Sources */,
 				F091A28A2C8F73DD00FB85D5 /* RestURLProcessor.swift in Sources */,
 				F0D0AD152D5F956B00C34916 /* AppScheduleLoadingAssistant.swift in Sources */,
@@ -790,6 +806,8 @@
 				F0EF628C2C8B70BE00DB79DB /* DeveloperSupportEmail.swift in Sources */,
 				F08C86B12D1DBAEF00D5B19A /* AppVisitMgmtView.swift in Sources */,
 				F0CBE9002CEBDD6E00B0625E /* AppWorkRouteMapView.swift in Sources */,
+				F0FA3C672E26993800F1A4E6 /* AppDevDetailsModelObservable.swift in Sources */,
+				F0FA3C682E26993800F1A4E6 /* AppDevDetailsItem.swift in Sources */,
 				F0F1277D2CEB944D00656B7E /* AppWorkRouteView.swift in Sources */,
 				F0474E5B2CDAA54A0079B1E0 /* JmAppUserNotificationManager.swift in Sources */,
 				F05EE1D32D380E3700ABC0C5 /* AlarmSwiftDataItem.swift in Sources */,
@@ -989,7 +1007,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14.01.25C167;
+				CURRENT_PROJECT_VERSION = 15.01.25C174;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1033,7 +1051,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14.01.25C167;
+				CURRENT_PROJECT_VERSION = 15.01.25C174;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1077,7 +1095,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14.01.25C167;
+				CURRENT_PROJECT_VERSION = 16.05.25C196;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1130,7 +1148,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14.01.25C167;
+				CURRENT_PROJECT_VERSION = 16.05.25C196;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
