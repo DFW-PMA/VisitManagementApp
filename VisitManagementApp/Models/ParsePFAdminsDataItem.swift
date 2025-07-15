@@ -17,7 +17,7 @@ class ParsePFAdminsDataItem: NSObject, Identifiable
     {
         
         static let sClsId        = "ParsePFAdminsDataItem"
-        static let sClsVers      = "v1.0602"
+        static let sClsVers      = "v1.0702"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -78,6 +78,8 @@ class ParsePFAdminsDataItem: NSObject, Identifiable
 
     var sPFAdminsParseName:String                 = "-N/A-"  // This will come from 'tid' lookup in 'TherapistFile'...
     var sPFAdminsParseNameNoWS:String             = ""       // 'sPFAdminsParseName' (lowercased - no whitespace/newline/illegal/punc).
+    var sPFAdminsParsePhone:String                = ""       // This will come from 'tid' lookup in 'TherapistFile'...
+    var sPFAdminsParseEmail:String                = ""       // This will come from 'tid' lookup in 'TherapistFile'...
     var sPFAdminsParseTID:String                  = "-N/A-"
     var sPFAdminsParsePassword:String             = ""
     var sPFAdminsParseNewLvl:String               = "-N/A-"
@@ -132,6 +134,8 @@ class ParsePFAdminsDataItem: NSObject, Identifiable
         
         self.sPFAdminsParseName            = pfAdminsDataItem.sPFAdminsParseName           
         self.sPFAdminsParseNameNoWS        = pfAdminsDataItem.sPFAdminsParseNameNoWS           
+        self.sPFAdminsParsePhone           = pfAdminsDataItem.sPFAdminsParsePhone
+        self.sPFAdminsParseEmail           = pfAdminsDataItem.sPFAdminsParseEmail
         self.sPFAdminsParseTID             = pfAdminsDataItem.sPFAdminsParseTID            
         self.sPFAdminsParsePassword        = pfAdminsDataItem.sPFAdminsParsePassword       
         self.sPFAdminsParseNewLvl          = pfAdminsDataItem.sPFAdminsParseNewLvl         
@@ -200,6 +204,8 @@ class ParsePFAdminsDataItem: NSObject, Identifiable
         asToString.append("[")
         asToString.append("'sPFAdminsParseName': [\(String(describing: self.sPFAdminsParseName))],")
         asToString.append("'sPFAdminsParseNameNoWS': [\(String(describing: self.sPFAdminsParseNameNoWS))],")
+        asToString.append("'sPFAdminsParsePhone': [\(String(describing: self.sPFAdminsParsePhone))],")
+        asToString.append("'sPFAdminsParseEmail': [\(String(describing: self.sPFAdminsParseEmail))],")
         asToString.append("'sPFAdminsParseTID': [\(String(describing: self.sPFAdminsParseTID))],")
         asToString.append("'sPFAdminsParsePassword': [\(String(describing: self.sPFAdminsParsePassword))],")
         asToString.append("],")
@@ -245,6 +251,8 @@ class ParsePFAdminsDataItem: NSObject, Identifiable
 
         self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'sPFAdminsParseName'            is [\(String(describing: self.sPFAdminsParseName))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'sPFAdminsParseNameNoWS'        is [\(String(describing: self.sPFAdminsParseNameNoWS))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'sPFAdminsParsePhone'           is [\(String(describing: self.sPFAdminsParsePhone))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'sPFAdminsParseEmail'           is [\(String(describing: self.sPFAdminsParseEmail))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'sPFAdminsParseTID'             is [\(String(describing: self.sPFAdminsParseTID))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'sPFAdminsParsePassword'        is [\(String(describing: self.sPFAdminsParsePassword))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFAdminsObject)): 'sPFAdminsParseNewLvl'          is [\(String(describing: self.sPFAdminsParseNewLvl))]...")
@@ -284,6 +292,8 @@ class ParsePFAdminsDataItem: NSObject, Identifiable
 
         self.sPFAdminsParseName            = "-N/A-"
         self.sPFAdminsParseNameNoWS        = ""
+        self.sPFAdminsParsePhone           = ""
+        self.sPFAdminsParseEmail           = ""
         self.sPFAdminsParseTID             = String(describing: (pfAdminsObject.object(forKey:"tid")      ?? "-N/A-"))
         self.sPFAdminsParsePassword        = String(describing: (pfAdminsObject.object(forKey:"password") ?? ""))
         self.sPFAdminsParseNewLvl          = String(describing: (pfAdminsObject.object(forKey:"newLvl")   ?? "-N/A-"))

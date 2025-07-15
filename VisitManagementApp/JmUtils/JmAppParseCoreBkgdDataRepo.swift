@@ -21,7 +21,7 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
     {
 
         static let sClsId        = "JmAppParseCoreBkgdDataRepo"
-        static let sClsVers      = "v1.2404"
+        static let sClsVers      = "v1.2501"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = false
@@ -676,8 +676,10 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
 
                         parsePFAdminsDataItem.sPFAdminsParseName     = sPFTherapistParseName
                         parsePFAdminsDataItem.sPFAdminsParseNameNoWS = sPFTherapistParseName.removeUnwantedCharacters(charsetToRemove:[StringCleaning.removeAll], bResultIsLowerCased:true)
+                        parsePFAdminsDataItem.sPFAdminsParsePhone    = pfTherapistFileItem.sPFTherapistFilePhone
+                        parsePFAdminsDataItem.sPFAdminsParseEmail    = pfTherapistFileItem.sPFTherapistFileEmail
 
-                        self.xcgLogMsg("\(sCurrMethodDisp) Using object #(\(cPFTherapistObjects)) 'pfTherapistObject' - to set the 'name' field of [\(sPFTherapistParseName)] in the dictionary of 'parsePFAdminsDataItem' item(s)...")
+                        self.xcgLogMsg("\(sCurrMethodDisp) Using object #(\(cPFTherapistObjects)) 'pfTherapistObject' - to set the 'name' field of [\(sPFTherapistParseName)] (plus Phone/Email) in the dictionary of 'parsePFAdminsDataItem' item(s)...")
 
                     }
                     else
