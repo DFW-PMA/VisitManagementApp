@@ -17,7 +17,7 @@ class AppDevDetailsModelObservable:NSObject, ObservableObject
     {
         
         static let sClsId        = "AppDevDetailsModelObservable"
-        static let sClsVers      = "v1.0805"
+        static let sClsVers      = "v1.0901"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) DFW-PMA 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -41,10 +41,10 @@ class AppDevDetailsModelObservable:NSObject, ObservableObject
                                                                       //     as AppDevDetailsItem(s)...
     @Published         var listAppDevDetailsItems:[AppDevDetailsItem] = []
 
-               private var bIsUserBlockedFromFaceId:Bool              = false
-               private var sLoginUsername:String                      = ""
-               private var sLoginPassword:String                      = ""
-               private var sLoginEmail:String                         = ""
+                       var bIsUserBlockedFromFaceId:Bool              = false
+                       var sLoginUsername:String                      = ""
+                       var sLoginPassword:String                      = ""
+                       var sLoginEmail:String                         = ""
     
                        var appGlobalInfo:AppGlobalInfo                = AppGlobalInfo.ClassSingleton.appGlobalInfo
                        var jmAppDelegateVisitor:JmAppDelegateVisitor  = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
