@@ -21,7 +21,7 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
     {
 
         static let sClsId        = "JmAppParseCoreBkgdDataRepo"
-        static let sClsVers      = "v1.2601"
+        static let sClsVers      = "v1.2701"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = false
@@ -3407,6 +3407,8 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
 
         multipartRequestInfo.bAppZipSourceToUpload    = false
         multipartRequestInfo.sAppUploadURL            = ""          // "" takes the Upload URL 'default'...
+
+        multipartRequestInfo.sAppUploadNotifyFrom     = appDevDetailsModelObservable.sLoginEmail
                                                                     // This is email notification - "" defaults to all Dev(s)...
         multipartRequestInfo.sAppUploadNotifyTo       = appDevDetailsModelObservable.sLoginEmail
         multipartRequestInfo.sAppUploadNotifyCc       = ""          // This is email notification - "" defaults to 'none'...
