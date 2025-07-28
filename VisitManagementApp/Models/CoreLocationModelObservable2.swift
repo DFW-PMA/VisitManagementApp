@@ -26,7 +26,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
     {
         
         static let sClsId        = "CoreLocationModelObservable2"
-        static let sClsVers      = "v1.1403"
+        static let sClsVers      = "v1.1503"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -38,61 +38,63 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
     struct ClassSingleton
     {
-        static var appCoreLocationModel:CoreLocationModelObservable2
-                                                                = CoreLocationModelObservable2()
+        static var appCoreLocationModel:CoreLocationModelObservable2 = CoreLocationModelObservable2()
     }
 
     // 'Internal' Trace flag:
 
     private 
-    var bInternalTraceFlag:Bool                                 = false
+    var bInternalTraceFlag:Bool                                      = false
 
     // App Data field(s):
 
-               var cCoreLocationReverseLookupsPrimary:Int       = 0
-               var cCoreLocationReverseLookupsSecondary:Int     = 0
-               var cCoreLocationReverseLookupsTertiary:Int      = 0
+               var cCoreLocationReverseLookupsPrimary:Int            = 0
+               var cCoreLocationReverseLookupsSecondary:Int          = 0
+               var cCoreLocationReverseLookupsTertiary:Int           = 0
     
-               var locationManager:CLLocationManager?           = nil
-    @Published var clCurrentLocation:CLLocation?                = nil       // Contains: Latitude, Longitude...
+               var locationManager:CLLocationManager?                = nil
+    @Published var clCurrentLocation:CLLocation?                     = nil       // Contains: Latitude, Longitude...
 
-    @Published var clAuthorizationStatus:CLAuthorizationStatus  = .notDetermined
-    @Published var clLocationAccuracy:CLLocationAccuracy        = 0.000000
-    @Published var clLocationLastUpdateTimestamp:Date           = Date()
+    @Published var clAuthorizationStatus:CLAuthorizationStatus       = .notDetermined
+    @Published var clLocationAccuracy:CLLocationAccuracy             = 0.000000
+    @Published var clLocationLastUpdateTimestamp:Date                = Date()
 
-    @Published var bCLLocationUpdateIsPossiblyThrottling:Bool   = false
-               var clLocationUpdateTimestamps:[Date]            = [Date]()
+    @Published var bCLLocationUpdateIsPossiblyThrottling:Bool        = false
+               var clLocationPendingRequestsTimestamps:[UUID:Date]   = [UUID:Date]()
+               var clLocationRequestsResponseTimes:[TimeInterval]    = [TimeInterval]()
+               let clLocationMaxResponseTimeHistory:Int              = 20
+               let clLocationMaxRequestIsStale:TimeInterval          = 20.0000
+    @Published var clLocationRequestAverageResponseTime:TimeInterval = 0.0000
 
-    @Published var bCLManagerHeadingAvailable:Bool              = false
-    @Published var clCurrentHeading:CLHeading?                  = nil
-    @Published var clCurrentHeadingAccuracy:CLLocationDirection = -1
+    @Published var bCLManagerHeadingAvailable:Bool                   = false
+    @Published var clCurrentHeading:CLHeading?                       = nil
+    @Published var clCurrentHeadingAccuracy:CLLocationDirection      = -1
 
-    @Published var sCurrentLocationName:String                  = "-N/A-"   // This is actually the Street Address (Line #1) <# Street> (i.e. 8908 Michelle Ln)...
-    @Published var sCurrentCity:String                          = "-N/A-"   // City (i.e. North Richland Hills)...
-    @Published var sCurrentCountry:String                       = "-N/A-"   // Country (i.e. United States)...
-    @Published var sCurrentPostalCode:String                    = "-N/A-"   // Zip Code (i.e. 76182) (Zip-5)...
-    @Published var tzCurrentTimeZone:TimeZone?                  = nil       // This is TimeZone in English (i.e. 'America/Chicago')...
-    @Published var clCurrentRegion:CLRegion?                    = nil       // ???
-    @Published var sCurrentSubLocality:String                   = "-N/A-"   // ??? 
-    @Published var sCurrentThoroughfare:String                  = "-N/A-"   // Street Name (Michelle Ln)...
-    @Published var sCurrentSubThoroughfare:String               = "-N/A-"   // Address (Building) # (i.e. 8908)...
-    @Published var sCurrentAdministrativeArea:String            = "-N/A-"   // State  (i.e. TX)...
-    @Published var sCurrentSubAdministrativeArea:String         = "-N/A-"   // County (i.e. Tarrant County)
+    @Published var sCurrentLocationName:String                       = "-N/A-"   // This is actually the Street Address (Line #1) <# Street> (i.e. 8908 Michelle Ln)...
+    @Published var sCurrentCity:String                               = "-N/A-"   // City (i.e. North Richland Hills)...
+    @Published var sCurrentCountry:String                            = "-N/A-"   // Country (i.e. United States)...
+    @Published var sCurrentPostalCode:String                         = "-N/A-"   // Zip Code (i.e. 76182) (Zip-5)...
+    @Published var tzCurrentTimeZone:TimeZone?                       = nil       // This is TimeZone in English (i.e. 'America/Chicago')...
+    @Published var clCurrentRegion:CLRegion?                         = nil       // ???
+    @Published var sCurrentSubLocality:String                        = "-N/A-"   // ??? 
+    @Published var sCurrentThoroughfare:String                       = "-N/A-"   // Street Name (Michelle Ln)...
+    @Published var sCurrentSubThoroughfare:String                    = "-N/A-"   // Address (Building) # (i.e. 8908)...
+    @Published var sCurrentAdministrativeArea:String                 = "-N/A-"   // State  (i.e. TX)...
+    @Published var sCurrentSubAdministrativeArea:String              = "-N/A-"   // County (i.e. Tarrant County)
 
-    @Published var listCoreLocationSiteItems:[CoreLocationSiteItem]
-                                                                = [CoreLocationSiteItem]()
-                                                                            // List of the 'current' Location Site Item(s)
-                                                                            //      as CoreLocationSiteItem(s)...
+    @Published var listCoreLocationSiteItems:[CoreLocationSiteItem]  = [CoreLocationSiteItem]()
+                                                                                 // List of the 'current' Location Site Item(s)
+                                                                                 //      as CoreLocationSiteItem(s)...
     
-               var jmAppDelegateVisitor:JmAppDelegateVisitor?   = nil
-                                                                            // 'jmAppDelegateVisitor' MUST remain declared this way
-                                                                            // as having it reference the 'shared' instance of 
-                                                                            // JmAppDelegateVisitor causes a circular reference
-                                                                            // between the 'init()' methods of the 2 classes...
+               var jmAppDelegateVisitor:JmAppDelegateVisitor?        = nil
+                                                                                 // 'jmAppDelegateVisitor' MUST remain declared this way
+                                                                                 // as having it reference the 'shared' instance of 
+                                                                                 // JmAppDelegateVisitor causes a circular reference
+                                                                                 // between the 'init()' methods of the 2 classes...
 
     // App <global> Message(s) 'stack' cached before XCGLogger is available:
 
-               var listPreXCGLoggerMessages:[String]            = Array()
+               var listPreXCGLoggerMessages:[String]                 = Array()
 
     private override init()
     {
@@ -174,7 +176,11 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         asToString.append("],")
         asToString.append("[")
         asToString.append("'bCLLocationUpdateIsPossiblyThrottling': [\(String(describing: self.bCLLocationUpdateIsPossiblyThrottling))],")
-        asToString.append("'clLocationUpdateTimestamps': [\(String(describing: self.clLocationUpdateTimestamps))],")
+        asToString.append("'clLocationPendingRequestsTimestamps': [\(String(describing: self.clLocationPendingRequestsTimestamps))],")
+        asToString.append("'clLocationRequestsResponseTimes': [\(String(describing: self.clLocationRequestsResponseTimes))],")
+        asToString.append("'clLocationMaxResponseTimeHistory': (\(String(describing: self.clLocationMaxResponseTimeHistory))),")
+        asToString.append("'clLocationMaxRequestIsStale': (\(String(describing: self.clLocationMaxRequestIsStale))),")
+        asToString.append("'clLocationRequestAverageResponseTime': (\(String(describing: self.clLocationRequestAverageResponseTime))),")
         asToString.append("],")
         asToString.append("[")
         asToString.append("'bCLManagerHeadingAvailable': [\(String(describing: self.bCLManagerHeadingAvailable))],")
@@ -286,9 +292,9 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
     }   // End of private func runPostInitializationTasks().
 
-    public func recordLastCLLocationUpdate()
+    public func startCLLocationUpdateRequest()->UUID
     {
-        
+
         let sCurrMethod:String = #function
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
         
@@ -297,44 +303,188 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
             self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
         }
 
-        // Record the 'last' CLLocation update...
+        // Record the start of a CLLocation update request...
 
-        let dateNow:Date = Date()
+        let uuidCLLocationRequest:UUID = UUID()
+        let dateNow:Date               = Date()
 
-        self.clLocationUpdateTimestamps.append(dateNow)
+        self.clLocationPendingRequestsTimestamps[uuidCLLocationRequest] = dateNow
 
-        // Keep ONLY the last 10 'update' timestamps...
+        // Check for and clean-up any 'stale' CLLocation 'pending' request(s)...
 
-        if (self.clLocationUpdateTimestamps.count > 10)
+        self.clLocationPendingRequestsTimestamps = 
+            self.clLocationPendingRequestsTimestamps.filter
+            { _, dateClLocationRequestStart in
+
+                dateNow.timeIntervalSince(dateClLocationRequestStart) < self.clLocationMaxRequestIsStale
+
+            }
+ 
+        // Exit:
+
+        if (self.bInternalTraceFlag == true)
         {
-            self.clLocationUpdateTimestamps.removeFirst()
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'uuidCLLocationRequest' is [\(uuidCLLocationRequest)] - starting 'dateNow' is [\(dateNow)]...")
+        }
+    
+        return uuidCLLocationRequest
+
+    }   // End of public func startCLLocationUpdateRequest()->UUID.
+
+    public func stopCLLocationUpdateRequest(uuidCLLocationRequest:UUID)->TimeInterval
+    {
+
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+        
+        if (self.bInternalTraceFlag == true)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - 'uuidCLLocationRequest' is [\(uuidCLLocationRequest)]...")
         }
 
-        // If we have enough 'update' timestamps, check for 'possible' throttling...
+        // Record the stop of a CLLocation update request...
 
-        guard self.clLocationUpdateTimestamps.count >= 3
-        else { return }
-
-        let intervals       = zip(self.clLocationUpdateTimestamps,
-                                  self.clLocationUpdateTimestamps.dropFirst()).map { $1.timeIntervalSince($0) }
-        let averageInterval = (intervals.reduce(0, +) / Double(intervals.count))
+        guard let dateClLocationRequestStart = self.clLocationPendingRequestsTimestamps.removeValue(forKey:uuidCLLocationRequest)
+        else { return 0.0000 }
         
-        // If average interval is much longer than requested interval (10.0), CLLocation 'updates' might be throttled...
+        let tiClLocationRequest = Date().timeIntervalSince(dateClLocationRequestStart)
 
-        self.bCLLocationUpdateIsPossiblyThrottling = (averageInterval > 10.0)       // Adjust threshold as needed...
-
-        self.xcgLogMsg("\(sCurrMethodDisp) Intermediate <CLThrottling> 'self.bCLLocationUpdateIsPossiblyThrottling' is [\(self.bCLLocationUpdateIsPossiblyThrottling)]...")
+        self.recordCLLocationUpdateResponseTime(tiClLocationRequest:tiClLocationRequest)
 
         // Exit:
 
         if (self.bInternalTraceFlag == true)
         {
-            self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'uuidCLLocationRequest' is [\(uuidCLLocationRequest)] - response time 'tiClLocationRequest' is [\(tiClLocationRequest)]...")
+        }
+    
+        return tiClLocationRequest
+
+    }   // End of public func stopCLLocationUpdateRequest(uuidCLLocationRequest:UUID)->TimeInterval.
+
+    private func recordCLLocationUpdateResponseTime(tiClLocationRequest:TimeInterval)
+    {
+
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+        
+        if (self.bInternalTraceFlag == true)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - 'tiClLocationRequest' is [\(tiClLocationRequest)]...")
+        }
+
+        // Record the CLLocation update request 'response' time (interval)...
+
+        self.clLocationRequestsResponseTimes.append(tiClLocationRequest)
+
+        // Keep only a Max # of 'response' times...
+
+        if (self.clLocationRequestsResponseTimes.count > self.clLocationMaxResponseTimeHistory)
+        {
+            self.clLocationRequestsResponseTimes.removeFirst()
+        }
+
+        // If we have any 'response' times, calculate the average 'response' time...
+
+        guard !self.clLocationRequestsResponseTimes.isEmpty 
+        else { return }
+
+        self.clLocationRequestAverageResponseTime = 
+            (self.clLocationRequestsResponseTimes.reduce(0, +) / Double(self.clLocationRequestsResponseTimes.count))
+                
+        self.xcgLogMsg("\(sCurrMethodDisp) Intermediate <CLRequest> 'self.clLocationRequestAverageResponseTime' is (\(self.clLocationRequestAverageResponseTime))...")
+
+        // We don't check for 'throttling' unless we have enough 'response' times...
+
+        guard self.clLocationRequestsResponseTimes.count >= 5
+        else { return }
+        
+        // Normal location 'responses' should be < 1 second,
+        //     if average 'response' time > 2 seconds, likely throttled...
+
+        self.bCLLocationUpdateIsPossiblyThrottling = self.clLocationRequestAverageResponseTime > 2.0
+        
+        self.xcgLogMsg("\(sCurrMethodDisp) Intermediate <CLThrottling> #1 'self.bCLLocationUpdateIsPossiblyThrottling' is [\(self.bCLLocationUpdateIsPossiblyThrottling)]...")
+        
+        // Alternative: Check if recent 'responses' are significantly slower
+        //     than earlier ones (indicating progressive throttling)...
+
+        if (self.clLocationRequestsResponseTimes.count >= 10)
+        {
+            let recentAverage  = (Array(self.clLocationRequestsResponseTimes.suffix(5)).reduce(0, +) / 5.0)
+            let earlierAverage = (Array(self.clLocationRequestsResponseTimes.prefix(5)).reduce(0, +) / 5.0)
+            
+            // If recent responses are 3x slower than earlier ones...
+
+            if (recentAverage > (earlierAverage * 3.0) &&
+                recentAverage > 1.0000)
+            {
+                self.bCLLocationUpdateIsPossiblyThrottling = true
+
+                self.xcgLogMsg("\(sCurrMethodDisp) Intermediate <CLThrottling> #2 'self.bCLLocationUpdateIsPossiblyThrottling' is [\(self.bCLLocationUpdateIsPossiblyThrottling)]...")
+            }
+        }
+
+        // Exit:
+
+        if (self.bInternalTraceFlag == true)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting <CLRequest> - recorded response time 'tiClLocationRequest' was [\(tiClLocationRequest)]...")
         }
     
         return
 
-    } // End of public func recordLastCLLocationUpdate().
+    }   // End of private func recordCLLocationUpdateResponseTime(tiClLocationRequest:TimeInterval).
+
+//  public func recordLastCLLocationUpdate()
+//  {
+//      
+//      let sCurrMethod:String = #function
+//      let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+//      
+//      if (self.bInternalTraceFlag == true)
+//      {
+//          self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+//      }
+//
+//      // Record the 'last' CLLocation update...
+//
+//      let dateNow:Date = Date()
+//
+//      self.clLocationUpdateTimestamps.append(dateNow)
+//
+//      // Keep ONLY the last 10 'update' timestamps...
+//
+//      if (self.clLocationUpdateTimestamps.count > 10)
+//      {
+//          self.clLocationUpdateTimestamps.removeFirst()
+//      }
+//
+//      // If we have enough 'update' timestamps, check for 'possible' throttling...
+//
+//      guard self.clLocationUpdateTimestamps.count >= 3
+//      else { return }
+//
+//      let intervals       = zip(self.clLocationUpdateTimestamps,
+//                                self.clLocationUpdateTimestamps.dropFirst()).map { $1.timeIntervalSince($0) }
+//      let averageInterval = (intervals.reduce(0, +) / Double(intervals.count))
+//      
+//      // If average interval is much longer than requested interval (10.0), CLLocation 'updates' might be throttled...
+//
+//      self.bCLLocationUpdateIsPossiblyThrottling = (averageInterval > 10.0)       // Adjust threshold as needed...
+//
+//      self.xcgLogMsg("\(sCurrMethodDisp) Intermediate <CLThrottling> 'self.bCLLocationUpdateIsPossiblyThrottling' is [\(self.bCLLocationUpdateIsPossiblyThrottling)]...")
+//
+//      // Exit:
+//
+//      if (self.bInternalTraceFlag == true)
+//      {
+//          self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+//      }
+//  
+//      return
+//
+//  } // End of public func recordLastCLLocationUpdate().
 
     public func clearLastCLLocationSettings()
     {
@@ -530,10 +680,12 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         let clGeocoder:CLGeocoder      = CLGeocoder()
         let currentLocation:CLLocation = CLLocation(latitude:latitude, longitude:longitude)
 
-        self.recordLastCLLocationUpdate()
+        let uuidCLLocationRequest:UUID = self.startCLLocationUpdateRequest()
         
         clGeocoder.reverseGeocodeLocation(currentLocation, completionHandler: 
             { (placemarks, error) in
+
+                let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest)
 
                 if error == nil 
                 {
@@ -609,10 +761,12 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         let clGeocoder:CLGeocoder      = CLGeocoder()
         let currentLocation:CLLocation = CLLocation(latitude:latitude, longitude:longitude)
 
-        self.recordLastCLLocationUpdate()
+        let uuidCLLocationRequest:UUID = self.startCLLocationUpdateRequest()
         
         clGeocoder.reverseGeocodeLocation(currentLocation, completionHandler: 
             { (placemarks, error) in
+
+                let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest)
 
                 var dictCurrentLocation:[String:Any]   = [String:Any]()
 
@@ -752,11 +906,13 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         let clGeocoder:CLGeocoder      = CLGeocoder()
     //  let currentLocation:CLLocation = CLLocation(latitude:latitude, longitude:longitude)
 
-        self.recordLastCLLocationUpdate()
+        let uuidCLLocationRequest:UUID = self.startCLLocationUpdateRequest()
         
     //  clGeocoder.reverseGeocodeLocation(currentLocation, completionHandler: 
         clGeocoder.geocodeAddressString(address) 
             { (placemarks, error) in
+
+                let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest)
 
                 var dictCurrentLocation:[String:Any]   = [String:Any]()
 
