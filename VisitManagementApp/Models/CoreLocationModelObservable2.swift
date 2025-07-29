@@ -26,7 +26,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
     {
         
         static let sClsId        = "CoreLocationModelObservable2"
-        static let sClsVers      = "v1.1503"
+        static let sClsVers      = "v1.1601"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -692,24 +692,28 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
                     let firstLocation                  = placemarks?[0]
 
                     self.clCurrentLocation             = firstLocation?.location
-                    self.clCurrentHeadingAccuracy      = self.clCurrentHeading?.headingAccuracy ?? 0.000000
-                    self.sCurrentLocationName          = firstLocation?.name                    ?? "-N/A-"
-                    self.sCurrentCity                  = firstLocation?.locality                ?? "-N/A-"
-                    self.sCurrentCountry               = firstLocation?.country                 ?? "-N/A-"
-                    self.sCurrentPostalCode            = firstLocation?.postalCode              ?? "-N/A-"
+                    self.clCurrentHeadingAccuracy      = self.clCurrentHeading?.headingAccuracy       ?? 0.000000
+
+                    let latitude:Double                = self.clCurrentLocation?.coordinate.latitude  ?? 0.000000
+                    let longitude:Double               = self.clCurrentLocation?.coordinate.longitude ?? 0.000000
+
+                    self.sCurrentLocationName          = firstLocation?.name                          ?? "-N/A-"
+                    self.sCurrentCity                  = firstLocation?.locality                      ?? "-N/A-"
+                    self.sCurrentCountry               = firstLocation?.country                       ?? "-N/A-"
+                    self.sCurrentPostalCode            = firstLocation?.postalCode                    ?? "-N/A-"
                     self.tzCurrentTimeZone             = firstLocation?.timeZone
                     self.clCurrentRegion               = firstLocation?.region
-                    self.sCurrentSubLocality           = firstLocation?.subLocality             ?? "-N/A-"
-                    self.sCurrentThoroughfare          = firstLocation?.thoroughfare            ?? "-N/A-"
-                    self.sCurrentSubThoroughfare       = firstLocation?.subThoroughfare         ?? "-N/A-"
-                    self.sCurrentAdministrativeArea    = firstLocation?.administrativeArea      ?? "-N/A-"
-                    self.sCurrentSubAdministrativeArea = firstLocation?.subAdministrativeArea   ?? "-N/A-"
+                    self.sCurrentSubLocality           = firstLocation?.subLocality                   ?? "-N/A-"
+                    self.sCurrentThoroughfare          = firstLocation?.thoroughfare                  ?? "-N/A-"
+                    self.sCurrentSubThoroughfare       = firstLocation?.subThoroughfare               ?? "-N/A-"
+                    self.sCurrentAdministrativeArea    = firstLocation?.administrativeArea            ?? "-N/A-"
+                    self.sCurrentSubAdministrativeArea = firstLocation?.subAdministrativeArea         ?? "-N/A-"
 
                     let _ = self.updateCoreLocationSiteItemList()
 
                 //  if (self.bInternalTraceFlag == true)
                 //  {
-                        self.xcgLogMsg("\(sCurrMethodDisp) <CLRequestGood> CLGeocoder 'reverseGeocodeLocation()' returned a 'location' of [\(self.sCurrentLocationName)]/[\(self.sCurrentCity)]...")
+                        self.xcgLogMsg("\(sCurrMethodDisp) <CLRequestGood> CLGeocoder 'reverseGeocodeLocation()' returned a 'location' of [\(self.sCurrentLocationName)]/[\(self.sCurrentCity)] for 'latitude'/'longitude' of (\(latitude):\(longitude))...")
                 //  }
                 }
                 else 
@@ -831,7 +835,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
                 //  if (self.bInternalTraceFlag == true)
                 //  {
-                        self.xcgLogMsg("\(sCurrMethodDisp) <CLRequestGood> CLGeocoder 'reverseGeocodeLocation()' returned a 'location' of [\(self.sCurrentLocationName)]/[\(self.sCurrentCity)]...")
+                        self.xcgLogMsg("\(sCurrMethodDisp) <CLRequestGood> CLGeocoder 'reverseGeocodeLocation()' returned a 'location' of [\(self.sCurrentLocationName)]/[\(self.sCurrentCity)] for 'latitude'/'longitude' of (\(latitude):\(longitude))...")
                 //  }
 
                     bGeocoderSuccessful = true
@@ -930,17 +934,17 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
                     let latitude:Double                = self.clCurrentLocation?.coordinate.latitude  ?? 0.000000
                     let longitude:Double               = self.clCurrentLocation?.coordinate.longitude ?? 0.000000
 
-                    self.sCurrentLocationName          = firstLocation?.name                    ?? "-N/A-"
-                    self.sCurrentCity                  = firstLocation?.locality                ?? "-N/A-"
-                    self.sCurrentCountry               = firstLocation?.country                 ?? "-N/A-"
-                    self.sCurrentPostalCode            = firstLocation?.postalCode              ?? "-N/A-"
+                    self.sCurrentLocationName          = firstLocation?.name                          ?? "-N/A-"
+                    self.sCurrentCity                  = firstLocation?.locality                      ?? "-N/A-"
+                    self.sCurrentCountry               = firstLocation?.country                       ?? "-N/A-"
+                    self.sCurrentPostalCode            = firstLocation?.postalCode                    ?? "-N/A-"
                     self.tzCurrentTimeZone             = firstLocation?.timeZone
                     self.clCurrentRegion               = firstLocation?.region
-                    self.sCurrentSubLocality           = firstLocation?.subLocality             ?? "-N/A-"
-                    self.sCurrentThoroughfare          = firstLocation?.thoroughfare            ?? "-N/A-"
-                    self.sCurrentSubThoroughfare       = firstLocation?.subThoroughfare         ?? "-N/A-"
-                    self.sCurrentAdministrativeArea    = firstLocation?.administrativeArea      ?? "-N/A-"
-                    self.sCurrentSubAdministrativeArea = firstLocation?.subAdministrativeArea   ?? "-N/A-"
+                    self.sCurrentSubLocality           = firstLocation?.subLocality                   ?? "-N/A-"
+                    self.sCurrentThoroughfare          = firstLocation?.thoroughfare                  ?? "-N/A-"
+                    self.sCurrentSubThoroughfare       = firstLocation?.subThoroughfare               ?? "-N/A-"
+                    self.sCurrentAdministrativeArea    = firstLocation?.administrativeArea            ?? "-N/A-"
+                    self.sCurrentSubAdministrativeArea = firstLocation?.subAdministrativeArea         ?? "-N/A-"
 
                     let _ = self.updateCoreLocationSiteItemList()
 
@@ -982,7 +986,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
                 //  if (self.bInternalTraceFlag == true)
                 //  {
-                        self.xcgLogMsg("\(sCurrMethodDisp) <CLRequestGood> CLGeocoder 'reverseGeocodeLocation()' returned a 'location' of [\(self.sCurrentLocationName)]/[\(self.sCurrentCity)]...")
+                        self.xcgLogMsg("\(sCurrMethodDisp) <CLRequestGood> CLGeocoder 'reverseGeocodeLocation()' returned a 'location' of [\(self.sCurrentLocationName)]/[\(self.sCurrentCity)] for 'latitude'/'longitude' of (\(latitude):\(longitude))...")
                 //  }
 
                     bGeocoderSuccessful = true
