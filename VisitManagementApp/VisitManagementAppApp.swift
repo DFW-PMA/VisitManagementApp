@@ -16,14 +16,12 @@ struct VisitManagementAppApp:App
     
     struct ClassInfo
     {
-        
         static let sClsId        = "VisitManagementAppApp"
-        static let sClsVers      = "v1.2401"
+        static let sClsVers      = "v1.2503"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
         static let bClsFileLog   = true
-        
     }
 
     // AppDelegate:
@@ -73,15 +71,11 @@ struct VisitManagementAppApp:App
 
         if (self.jmAppDelegateVisitor.bAppDelegateVisitorLogFilespecIsUsable == true)
         {
-      
             self.jmAppDelegateVisitor.xcgLogMsg(sMessage)
-      
         }
         else
         {
-      
             print("\(sMessage)")
-      
         }
 
         // Exit:
@@ -113,47 +107,50 @@ struct VisitManagementAppApp:App
 #if os(macOS)
         .commands
         {
-            
             AppInfoCommands()
-            
             HelpCommands()
-            
         }
 #endif
         
 #if os(macOS)
         Settings
         {
-            
             SettingsSingleView()
-            
+                .environment(\.appGlobalDeviceType, appGlobalDeviceType)
         }
 #endif
         
 #if os(macOS)
         // This is the Window to diaplay the AppWorkRouteView...this works from MacOS...
         
-        Window("AppWorkRoute", id:"AppWorkRouteView")
+        Window("AppLogPFData", id:"AppLogPFDataView")
         {
-            
-            AppWorkRouteView()
-            
+            AppLogPFDataView()
+                .environment(\.appGlobalDeviceType, appGlobalDeviceType)
         }
         
+        // This is the Window to diaplay the AppWorkRouteView...this works from MacOS...
+
+        Window("AppWorkRoute", id:"AppWorkRouteView")
+        {
+            AppWorkRouteView()
+                .environment(\.appGlobalDeviceType, appGlobalDeviceType)
+        }
+
         // This is the Window to diaplay the AppWorkRouteMapView...this works from MacOS...
         
         WindowGroup("AppWorkRouteMap", id:"AppWorkRouteMapView", for: UUID.self)
         { $uuid in
             
             AppWorkRouteMapView(parsePFCscDataItem:jmAppParseCoreManager.locatePFCscDataItemByID(id:uuid ?? UUID()))
+                .environment(\.appGlobalDeviceType, appGlobalDeviceType)
             
         }
 
         Window("AppSchedPatLoc", id:"AppSchedPatLocView")
         {
-            
             AppSchedPatLocView()
-            
+                .environment(\.appGlobalDeviceType, appGlobalDeviceType)
         }
         
     //  // This is the Window to diaplay the AppSchedPatLocMapView...this works from MacOS...
@@ -162,6 +159,7 @@ struct VisitManagementAppApp:App
     //  { $uuid in
     //      
     //      AppSchedPatLocMapView(parsePFCscDataItem:jmAppParseCoreManager.locatePFCscDataItemByID(id:uuid ?? UUID()))
+    //          .environment(\.appGlobalDeviceType, appGlobalDeviceType)
     //      
     //  }
 
@@ -169,18 +167,16 @@ struct VisitManagementAppApp:App
 
         Window("AppTidSchedule", id:"AppTidScheduleView")
         {
-
             AppTidScheduleView(listScheduledPatientLocationItems:[])
-
+                .environment(\.appGlobalDeviceType, appGlobalDeviceType)
         }
 
         // This is the Window to diaplay the AppWorkRouteView...this works from MacOS...
 
         Window("AppVisitMgmt", id:"AppVisitMgmtView")
         {
-
             AppVisitMgmtView()
-
+                .environment(\.appGlobalDeviceType, appGlobalDeviceType)
         }
 
         // This is the Window to diaplay the AppVisitMgmtCoreLocMapView...this works from MacOS...
@@ -188,12 +184,14 @@ struct VisitManagementAppApp:App
         Window("AppVisitMgmtCoreLocMap", id: "AppVisitMgmtCoreLocMapView")
         {
             AppVisitMgmtCoreLocMapContainer()
+                .environment(\.appGlobalDeviceType, appGlobalDeviceType)
         }
         
     //  Window("AppVisitMgmtCoreLocMap", id: "AppVisitMgmtCoreLocMapView", for: [String: String].self)
     //  { dictBinding in
-    //          AppVisitMgmtCoreLocMapView(sCoreLocLatLong:dictBinding.wrappedValue["sCoreLocLatLong"] ?? "0.000000,0.000000",
-    //                                     sCoreLocAddress:dictBinding.wrappedValue["sCoreLocAddress"] ?? "-N/A-")
+    //      AppVisitMgmtCoreLocMapView(sCoreLocLatLong:dictBinding.wrappedValue["sCoreLocLatLong"] ?? "0.000000,0.000000",
+    //                                 sCoreLocAddress:dictBinding.wrappedValue["sCoreLocAddress"] ?? "-N/A-")
+    //          .environment(\.appGlobalDeviceType, appGlobalDeviceType)
     //  }
 #endif
         

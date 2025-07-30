@@ -17,7 +17,7 @@ struct ContentView: View
     {
         
         static let sClsId        = "ContentView"
-        static let sClsVers      = "v1.4001"
+        static let sClsVers      = "v1.4101"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -25,8 +25,10 @@ struct ContentView: View
         
     }
 
-    @Environment(\.openWindow)   var openWindow
-    @Environment(\.openURL)      var openURL
+//  @Environment(\.dismiss)              var dismiss
+    @Environment(\.presentationMode)     var presentationMode
+    @Environment(\.openURL)              var openURL
+    @Environment(\.openWindow)           var openWindow
 
     // App Data field(s):
 
@@ -393,8 +395,12 @@ struct ContentView: View
 
                     let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):ContentView.Button(Xcode).'Log/Reload Data'.#(\(self.cAppLogPFDataButtonPresses)) pressed...")
 
+                #if os(iOS)
                     self.isAppLogPFDataViewModal.toggle()
-
+                #endif
+                #if os(macOS)
+                    openWindow(id:"AppLogPFDataView")
+                #endif
                 }
                 label:
                 {
@@ -412,15 +418,15 @@ struct ContentView: View
                     }
 
                 }
-            #if os(macOS)
-                .sheet(isPresented:$isAppLogPFDataViewModal, content:
-                    {
-
-                        AppLogPFDataView()
-
-                    }
-                )
-            #endif
+        //  #if os(macOS)
+        //      .sheet(isPresented:$isAppLogPFDataViewModal, content:
+        //          {
+        //
+        //              AppLogPFDataView()
+        //
+        //          }
+        //      )
+        //  #endif
             #if os(iOS)
                 .fullScreenCover(isPresented:$isAppLogPFDataViewModal)
                 {

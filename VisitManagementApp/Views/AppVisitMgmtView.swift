@@ -16,7 +16,7 @@ struct AppVisitMgmtView: View
     {
         
         static let sClsId        = "AppVisitMgmtView"
-        static let sClsVers      = "v1.1201"
+        static let sClsVers      = "v1.1401"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -26,8 +26,10 @@ struct AppVisitMgmtView: View
     
     // App Data field(s):
 
-//  @Environment(\.dismiss) var dismiss
-    @Environment(\.presentationMode) var presentationMode
+//  @Environment(\.dismiss)              var dismiss
+    @Environment(\.presentationMode)     var presentationMode
+    @Environment(\.openURL)              var openURL
+    @Environment(\.openWindow)           var openWindow
     
 //  @StateObject    var jmAppParseCoreManager:JmAppParseCoreManager
     
@@ -117,10 +119,12 @@ struct AppVisitMgmtView: View
 
                             let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):AppVisitMgmtView.Button(Xcode).'Log/Reload Data'.#(\(self.cAppLogPFDataButtonPresses)) pressed...")
 
+                        #if os(iOS)
                             self.isAppLogPFDataViewModal.toggle()
-
-                        //  self.detailPFCscDataItems()
-
+                        #endif
+                        #if os(macOS)
+                            openWindow(id:"AppLogPFDataView")
+                        #endif
                         }
                         label:
                         {
@@ -138,15 +142,15 @@ struct AppVisitMgmtView: View
                             }
 
                         }
-                    #if os(macOS)
-                        .sheet(isPresented:$isAppLogPFDataViewModal, content:
-                            {
-
-                                AppLogPFDataView()
-
-                            }
-                        )
-                    #endif
+                //  #if os(macOS)
+                //      .sheet(isPresented:$isAppLogPFDataViewModal, content:
+                //          {
+                //
+                //              AppLogPFDataView()
+                //
+                //          }
+                //      )
+                //  #endif
                     #if os(iOS)
                         .fullScreenCover(isPresented:$isAppLogPFDataViewModal)
                         {

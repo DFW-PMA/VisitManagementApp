@@ -15,7 +15,7 @@ struct AppWorkRouteView: View
     {
         
         static let sClsId        = "AppWorkRouteView"
-        static let sClsVers      = "v1.2001"
+        static let sClsVers      = "v1.2101"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -25,9 +25,10 @@ struct AppWorkRouteView: View
     
     // App Data field(s):
 
-//  @Environment(\.dismiss)          var dismiss
-    @Environment(\.presentationMode) var presentationMode
-    @Environment(\.openWindow)       var openWindow
+//  @Environment(\.dismiss)              var dismiss
+    @Environment(\.presentationMode)     var presentationMode
+    @Environment(\.openURL)              var openURL
+    @Environment(\.openWindow)           var openWindow
 
     static          var timerOnDemand90Sec                                      = Timer()
     static          var timerOnDemand3Sec                                       = Timer()
@@ -114,10 +115,12 @@ struct AppWorkRouteView: View
 
                             let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):AppWorkRouteView.Button(Xcode).'Log/Reload Data'.#(\(self.cAppLogPFDataButtonPresses)) pressed...")
 
+                        #if os(iOS)
                             self.isAppLogPFDataViewModal.toggle()
-
-                        //  self.detailPFCscDataItems()
-
+                        #endif
+                        #if os(macOS)
+                            openWindow(id:"AppLogPFDataView")
+                        #endif
                         }
                         label:
                         {
@@ -135,15 +138,15 @@ struct AppWorkRouteView: View
                             }
 
                         }
-                    #if os(macOS)
-                        .sheet(isPresented:$isAppLogPFDataViewModal, content:
-                            {
-
-                                AppLogPFDataView()
-
-                            }
-                        )
-                    #endif
+                //  #if os(macOS)
+                //      .sheet(isPresented:$isAppLogPFDataViewModal, content:
+                //          {
+                //
+                //              AppLogPFDataView()
+                //
+                //          }
+                //      )
+                //  #endif
                     #if os(iOS)
                         .fullScreenCover(isPresented:$isAppLogPFDataViewModal)
                         {

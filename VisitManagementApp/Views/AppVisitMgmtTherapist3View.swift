@@ -17,7 +17,7 @@ struct AppVisitMgmtTherapist3View: View
     {
         
         static let sClsId        = "AppVisitMgmtTherapist3View"
-        static let sClsVers      = "v1.0701"
+        static let sClsVers      = "v1.0801"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -143,10 +143,12 @@ struct AppVisitMgmtTherapist3View: View
 
                             let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):AppVisitMgmtTherapist3View.Button(Xcode).'Log/Reload Data'.#(\(self.cAppLogPFDataButtonPresses)) pressed...")
 
+                        #if os(iOS)
                             self.isAppLogPFDataViewModal.toggle()
-
-                        //  self.detailPFCscDataItems()
-
+                        #endif
+                        #if os(macOS)
+                            openWindow(id:"AppLogPFDataView")
+                        #endif
                         }
                         label:
                         {
@@ -164,15 +166,15 @@ struct AppVisitMgmtTherapist3View: View
                             }
 
                         }
-                    #if os(macOS)
-                        .sheet(isPresented:$isAppLogPFDataViewModal, content:
-                            {
-
-                                AppLogPFDataView()
-
-                            }
-                        )
-                    #endif
+                //  #if os(macOS)
+                //      .sheet(isPresented:$isAppLogPFDataViewModal, content:
+                //          {
+                //
+                //              AppLogPFDataView()
+                //
+                //          }
+                //      )
+                //  #endif
                     #if os(iOS)
                         .fullScreenCover(isPresented:$isAppLogPFDataViewModal)
                         {
