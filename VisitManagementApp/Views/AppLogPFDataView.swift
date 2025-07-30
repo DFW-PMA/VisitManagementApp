@@ -9,14 +9,14 @@
 import Foundation
 import SwiftUI
 
-struct AppLogPFDataView: View 
+struct AppLogPFDataView:View 
 {
     
     struct ClassInfo
     {
         
         static let sClsId        = "AppLogPFDataView"
-        static let sClsVers      = "v1.1901"
+        static let sClsVers      = "v1.2005"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -26,9 +26,10 @@ struct AppLogPFDataView: View
     
     // App Data field(s):
 
-//  @Environment(\.dismiss) var dismiss
-    @Environment(\.presentationMode) var presentationMode
-    @Environment(\.openWindow)       var openWindow
+//  @Environment(\.dismiss)             var dismiss
+    @Environment(\.presentationMode)    var presentationMode
+    @Environment(\.openWindow)          var openWindow
+    @Environment(\.appGlobalDeviceType) var appGlobalDeviceType
 
     @State private  var cAppDataButtonPresses:Int                                  = 0
     @State private  var cAppWorkRouteButtonPresses:Int                             = 0
@@ -37,21 +38,6 @@ struct AppLogPFDataView: View
     @State private  var isAppDataViewModal:Bool                                    = false
     @State private  var isAppWorkRouteViewModal:Bool                               = false
     @State private  var isAppSchedPatLocViewModal:Bool                             = false
-
-    @State private  var cAppLogPFDataLoggingRefreshButtonPresses:Int               = 0
-    @State private  var cAppLogPFDataLoggingPFAdminsButtonPresses:Int              = 0
-    @State private  var cAppLogPFDataLoggingPFCscButtonPresses:Int                 = 0
-    @State private  var cAppLogPFDataLoggingPFTherapistNamesButtonPresses:Int      = 0
-    @State private  var cAppLogPFDataLoggingPFTherapistFileButtonPresses:Int       = 0
-    @State private  var cAppLogPFDataLoggingTherapistXrefButtonPresses:Int         = 0
-    @State private  var cAppLogPFDataLoggingPFPatientNamesButtonPresses:Int        = 0
-    @State private  var cAppLogPFDataLoggingPFPatientFileButtonPresses:Int         = 0
-    @State private  var cAppLogPFDataLoggingPFPatientXrefButtonPresses:Int         = 0
-    @State private  var cAppLogPFDataLoggingPatientXrefButtonPresses:Int           = 0
-    @State private  var cAppLogPFDataLoggingSchedPatLocButtonPresses:Int           = 0
-    @State private  var cAppLogPFDataLoggingExportSchedPatLocButtonPresses:Int     = 0
-    @State private  var cAppLogPFDataLoggingExportBackupFileButtonPresses:Int      = 0
-    @State private  var cAppLogPFDataLoggingExportLastBackupFileButtonPresses:Int  = 0
 
     @StateObject    var progressTriggerPFAdmins:ProgressOverlayTrigger             = ProgressOverlayTrigger()
     @StateObject    var progressTriggerPFCsc:ProgressOverlayTrigger                = ProgressOverlayTrigger()
@@ -71,9 +57,34 @@ struct AppLogPFDataView: View
     @State private  var cAppLogPFDataReloadExportBackupFileButtonPresses:Int       = 0
     @State private  var cAppLogPFDataReloadExportLastBackupFileButtonPresses:Int   = 0
 
+    @StateObject    var progressTriggerSwiftDataClearPFAdmins:ProgressOverlayTrigger 
+                                                                                   = ProgressOverlayTrigger()
+    @StateObject    var progressTriggerSwiftDataClearPFTherapistFile:ProgressOverlayTrigger 
+                                                                                   = ProgressOverlayTrigger()
+
+    @State private  var cAppLogSwiftDataClearPFAdminsButtonPresses:Int             = 0
+    @State private  var cAppLogSwiftDataClearPFTherapistFileButtonPresses:Int      = 0
+
+    @State private  var cAppLogPFDataLoggingRefreshButtonPresses:Int               = 0
+    @State private  var cAppLogPFDataLoggingPFAdminsButtonPresses:Int              = 0
+    @State private  var cAppLogPFDataLoggingPFCscButtonPresses:Int                 = 0
+    @State private  var cAppLogPFDataLoggingPFTherapistNamesButtonPresses:Int      = 0
+    @State private  var cAppLogPFDataLoggingPFTherapistFileButtonPresses:Int       = 0
+    @State private  var cAppLogPFDataLoggingTherapistXrefButtonPresses:Int         = 0
+    @State private  var cAppLogPFDataLoggingPFPatientNamesButtonPresses:Int        = 0
+    @State private  var cAppLogPFDataLoggingPFPatientFileButtonPresses:Int         = 0
+    @State private  var cAppLogPFDataLoggingPFPatientXrefButtonPresses:Int         = 0
+    @State private  var cAppLogPFDataLoggingPatientXrefButtonPresses:Int           = 0
+    @State private  var cAppLogPFDataLoggingSchedPatLocButtonPresses:Int           = 0
+    @State private  var cAppLogPFDataLoggingExportSchedPatLocButtonPresses:Int     = 0
+    @State private  var cAppLogPFDataLoggingExportBackupFileButtonPresses:Int      = 0
+    @State private  var cAppLogPFDataLoggingExportLastBackupFileButtonPresses:Int  = 0
+
                     var jmAppDelegateVisitor:JmAppDelegateVisitor                  = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
+    @ObservedObject var jmAppSwiftDataManager:JmAppSwiftDataManager                = JmAppSwiftDataManager.ClassSingleton.appSwiftDataManager
     @ObservedObject var jmAppParseCoreManager:JmAppParseCoreManager                = JmAppParseCoreManager.ClassSingleton.appParseCodeManager
                     var jmAppParseCoreBkgdDataRepo:JmAppParseCoreBkgdDataRepo      = JmAppParseCoreBkgdDataRepo.ClassSingleton.appParseCodeBkgdDataRepo
+                    var appGlobalInfo:AppGlobalInfo                                = AppGlobalInfo.ClassSingleton.appGlobalInfo
     
     init()
     {
@@ -82,6 +93,20 @@ struct AppLogPFDataView: View
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
         
         self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+
+        // Check if we have SwiftData 'PFAdmins' item(s)...
+        
+        if (self.jmAppSwiftDataManager.pfAdminsSwiftDataItems.count > 0)
+        {
+            self.xcgLogMsg("\(ClassInfo.sClsDisp) Intermediate - SwiftData has (\(self.jmAppSwiftDataManager.pfAdminsSwiftDataItems.count)) 'PFAdmins' item(s)...")
+        }
+
+        // Check if we have SwiftData 'PFTherapistFile' item(s)...
+        
+        if (self.jmAppSwiftDataManager.pfTherapistFileSwiftDataItems.count > 0)
+        {
+            self.xcgLogMsg("\(ClassInfo.sClsDisp) Intermediate - SwiftData has (\(self.jmAppSwiftDataManager.pfTherapistFileSwiftDataItems.count)) 'PFTherapistFile' item(s)...")
+        }
 
         // Exit...
 
@@ -96,15 +121,11 @@ struct AppLogPFDataView: View
 
         if (self.jmAppDelegateVisitor.bAppDelegateVisitorLogFilespecIsUsable == true)
         {
-        
             self.jmAppDelegateVisitor.xcgLogMsg(sMessage)
-        
         }
         else
         {
-        
             print("\(sMessage)")
-        
         }
 
         // Exit:
@@ -113,10 +134,11 @@ struct AppLogPFDataView: View
 
     }   // End of private func xcgLogMsg().
 
-    var body: some View
+    var body:some View
     {
         
-        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) \(ClassInfo.sClsCopyRight)...")
+    //  let _ = xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) \(ClassInfo.sClsCopyRight)...")
+        let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some View) - 'appGlobalDeviceType' is (\(String(describing:appGlobalDeviceType)))...")
         
         NavigationStack
         {
@@ -166,62 +188,32 @@ struct AppLogPFDataView: View
 
                     Button
                     {
-
                         self.cAppDataButtonPresses += 1
 
                         let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):AppLogPFDataView.Button(Xcode).'App Data...'.#(\(self.cAppDataButtonPresses))...")
 
+                    #if os(iOS)
                         self.isAppDataViewModal.toggle()
-
-                    #if os(macOS)
-                  
-                        // Using -> @Environment(\.openWindow)var openWindow and 'openWindow(id:"...")' on MacOS...
-                        openWindow(id:"AppVisitMgmtView")
-                  
                     #endif
-
-                //  #if os(macOS)
-                //
-                //      // Using -> @Environment(\.openWindow)var openWindow and 'openWindow(id:"...")' on MacOS...
-                //      openWindow(id:"AppWorkRouteView", value:self.getAppParseCoreManagerInstance())
-                //
-                //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Encodable'
-                //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Decodable'
-                //
-                //  #endif
-                
+                    #if os(macOS)
+                        openWindow(id:"AppVisitMgmtView")
+                    #endif
                     }
                     label:
                     {
-
                         VStack(alignment:.center)
                         {
-
                             Label("", systemImage: "swiftdata")
                                 .help(Text("App Data"))
                                 .imageScale(.large)
-
                             Text("Data")
                                 .font(.caption)
-
                         }
-
                     }
-            //  #if os(macOS)
-            //      .sheet(isPresented:$isAppDataViewModal, content:
-            //          {
-            //
-            //              AppVisitMgmtView()
-            //
-            //          }
-            //      )
-            //  #endif
                 #if os(iOS)
                     .fullScreenCover(isPresented:$isAppDataViewModal)
                     {
-
                         AppVisitMgmtView()
-
                     }
                 #endif
                 #if os(macOS)
@@ -236,55 +228,34 @@ struct AppLogPFDataView: View
 
                     Button
                     {
-
                         self.cAppWorkRouteButtonPresses += 1
 
                         let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):AppLogPFDataView.Button(Xcode).'App WorkRoute'.#(\(self.cAppWorkRouteButtonPresses))...")
 
                         self.isAppWorkRouteViewModal.toggle()
-
-                //  #if os(macOS)
-                //
-                //      // Using -> @Environment(\.openWindow)var openWindow and 'openWindow(id:"...")' on MacOS...
-                //      openWindow(id:"AppWorkRouteView", value:self.getAppParseCoreManagerInstance())
-                //
-                //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Encodable'
-                //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Decodable'
-                //
-                //  #endif
-                //
                     }
                     label:
                     {
-
                         VStack(alignment:.center)
                         {
-
                             Label("", systemImage: "wifi.router")
                                 .help(Text("App WorkRoute (Location) Information"))
                                 .imageScale(.large)
-
                             Text("WorkRoute")
                                 .font(.caption)
-
                         }
-
                     }
                 #if os(macOS)
                     .sheet(isPresented:$isAppWorkRouteViewModal, content:
                         {
-              
                             AppWorkRouteView()
-              
                         }
                     )
                 #endif
                 #if os(iOS)
                     .fullScreenCover(isPresented:$isAppWorkRouteViewModal)
                     {
-
                         AppWorkRouteView()
-
                     }
                 #endif
                 #if os(macOS)
@@ -299,55 +270,34 @@ struct AppLogPFDataView: View
 
                     Button
                     {
-
                         self.cAppSchedPatLocButtonPresses += 1
 
                         let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):ContentView.Button(Xcode).'App SchedPatLoc'.#(\(self.cAppSchedPatLocButtonPresses))...")
 
                         self.isAppSchedPatLocViewModal.toggle()
-
-                //  #if os(macOS)
-                //
-                //      // Using -> @Environment(\.openWindow)var openWindow and 'openWindow(id:"...")' on MacOS...
-                //      openWindow(id:"AppSchedPatLocView", value:self.getAppParseCoreManagerInstance())
-                //
-                //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Encodable'
-                //      //  ERROR: Instance method 'callAsFunction(id:value:)' requires that 'JmAppParseCoreManager' conform to 'Decodable'
-                //
-                //  #endif
-                //
                     }
                     label:
                     {
-
                         VStack(alignment:.center)
                         {
-
                             Label("", systemImage: "list.bullet.rectangle")
                                 .help(Text("App SchedPatLoc (Location) Information"))
                                 .imageScale(.large)
-
                             Text("SchedPatLoc")
                                 .font(.caption)
-
                         }
-
                     }
                 #if os(macOS)
                     .sheet(isPresented:$isAppSchedPatLocViewModal, content:
                         {
-
                             AppSchedPatLocView()
-
                         }
                     )
                 #endif
                 #if os(iOS)
                     .fullScreenCover(isPresented:$isAppSchedPatLocViewModal)
                     {
-
                         AppSchedPatLocView()
-
                     }
                 #endif
                 #if os(macOS)
@@ -362,29 +312,22 @@ struct AppLogPFDataView: View
 
                     Button
                     {
-
                         let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppLogPFDataView.Button(Xcode).'Dismiss' pressed...")
 
                         self.presentationMode.wrappedValue.dismiss()
 
                     //  dismiss()
-
                     }
                     label:
                     {
-
                         VStack(alignment:.center)
                         {
-
                             Label("", systemImage: "xmark.circle")
                                 .help(Text("Dismiss this Screen"))
                                 .imageScale(.large)
-
                             Text("Dismiss")
                                 .font(.caption)
-
                         }
-
                     }
                 #if os(macOS)
                     .buttonStyle(.borderedProminent)
@@ -397,580 +340,8 @@ struct AppLogPFDataView: View
 
                 }
 
-            //  ScrollView(.vertical)
-            //  {
-
                 List
                 {
-
-                    Section(header: Text("Data Logging Options:"))
-                    {
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingPFAdminsButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFAdmins'.#(\(self.cAppLogPFDataLoggingPFAdminsButtonPresses))...")
-
-                                self.detailPFAdminsDataItems()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Data for PFAdmins..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Data (PFAdmins) - #(\(self.cAppLogPFDataLoggingPFAdminsButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingPFCscButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFCsc'.#(\(self.cAppLogPFDataLoggingPFCscButtonPresses))...")
-
-                                self.detailPFCscDataItems()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Data for PFCsc..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Data (PFCsc) - #(\(self.cAppLogPFDataLoggingPFCscButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingPFTherapistNamesButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFTherapist (Names)'.#(\(self.cAppLogPFDataLoggingPFTherapistNamesButtonPresses))...")
-
-                                self.detailTherapistNamesList()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Data for PFTherapist (Names)..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Data (PFTherapist) Names - #(\(self.cAppLogPFDataLoggingPFTherapistNamesButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingPFTherapistFileButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFTherapistFile'.#(\(self.cAppLogPFDataLoggingPFTherapistFileButtonPresses))...")
-
-                                self.detailTherapistFileItems()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Data for PFTherapistFile..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Data (PFTherapistFile) - #(\(self.cAppLogPFDataLoggingPFTherapistFileButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingTherapistXrefButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log Dictionary for TherapistXref'.#(\(self.cAppLogPFDataLoggingTherapistXrefButtonPresses))...")
-
-                                self.detailTherapistXrefDict()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Dictionary for TherapistXref..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Dictionary (TherapistXref) - #(\(self.cAppLogPFDataLoggingTherapistXrefButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingPFPatientNamesButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFPatient (Names)'.#(\(self.cAppLogPFDataLoggingPFPatientNamesButtonPresses))...")
-
-                                self.detailPatientNamesList()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Data for PFPatient (Names)..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Data (PFPatient) Names - #(\(self.cAppLogPFDataLoggingPFPatientNamesButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingPFPatientFileButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFPatientFile'.#(\(self.cAppLogPFDataLoggingPFPatientFileButtonPresses))...")
-
-                                self.detailPatientFileItems()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Data for PFPatientFile..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Data (PFPatientFile) - #(\(self.cAppLogPFDataLoggingPFPatientFileButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingPatientXrefButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log Dictionary for PatientXref'.#(\(self.cAppLogPFDataLoggingPatientXrefButtonPresses))...")
-
-                                self.detailPatientXrefDict()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Dictionary for PatientXref..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Dictionary (PatientXref) - #(\(self.cAppLogPFDataLoggingPatientXrefButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingSchedPatLocButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for SchedPatLoc'.#(\(self.cAppLogPFDataLoggingSchedPatLocButtonPresses))...")
-
-                                self.detailDictSchedPatientLocItems()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Data for SchedPatLoc..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Data (SchedPatLoc) - #(\(self.cAppLogPFDataLoggingSchedPatLocButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingExportSchedPatLocButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for 'export' SchedPatLoc'.#(\(self.cAppLogPFDataLoggingExportSchedPatLocButtonPresses))...")
-
-                                self.detailDictExportSchedPatientLocItems()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Data for 'export' SchedPatLoc..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Data 'export' (SchedPatLoc) - #(\(self.cAppLogPFDataLoggingExportSchedPatLocButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingExportBackupFileButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for 'export' BackupFile Item(s)'.#(\(self.cAppLogPFDataLoggingExportBackupFileButtonPresses))...")
-
-                                self.detailDictExportBackupFileItems()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Data for 'export' BackupFile item(s)..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Data 'export' (BackupFile) - #(\(self.cAppLogPFDataLoggingExportBackupFileButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                        HStack(alignment:.center)
-                        {
-
-                            Spacer()
-
-                            Button
-                            {
-
-                                self.cAppLogPFDataLoggingExportLastBackupFileButtonPresses += 1
-
-                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for 'export' LAST BackupFile Item(s)'.#(\(self.cAppLogPFDataLoggingExportLastBackupFileButtonPresses))...")
-
-                                self.detailDictExportLastBackupFileItems()
-
-                            }
-                            label:
-                            {
-
-                                HStack(alignment:.center)
-                                {
-
-                                    Spacer()
-
-                                    Label("", systemImage: "arrow.down.square")
-                                        .help(Text("Log Data for 'export' LAST BackupFile item(s)..."))
-                                        .imageScale(.small)
-
-                                    Text("Log Data 'export' LAST (BackupFile) - #(\(self.cAppLogPFDataLoggingExportLastBackupFileButtonPresses))...")
-                                        .font(.caption2)
-
-                                    Spacer()
-
-                                }
-
-                            }
-                        #if os(macOS)
-                            .buttonStyle(.borderedProminent)
-                            .padding()
-                        //  .background(???.isPressed ? .blue : .gray)
-                            .cornerRadius(10)
-                            .foregroundColor(Color.primary)
-                        #endif
-
-                            Spacer()
-
-                        }
-
-                    }
 
                     Section(header: Text("Data Reloading (Cloud) Options:"))
                     {
@@ -1015,7 +386,7 @@ struct AppLogPFDataView: View
                                         .help(Text("Reload PFData for PFAdmins..."))
                                         .imageScale(.small)
 
-                                    Text("Reload PFData (PFAdmins) - #(\(self.cAppLogPFDataReloadPFAdminsButtonPresses))...")
+                                    Text("Reload PFData (PFAdmins) - #(\(self.jmAppSwiftDataManager.pfAdminsSwiftDataItems.count)) item(s) - #(\(self.cAppLogPFDataReloadPFAdminsButtonPresses))...")
                                         .font(.caption2)
 
                                     Spacer()
@@ -1076,7 +447,7 @@ struct AppLogPFDataView: View
                                         .help(Text("Reload PFData for PFCsc..."))
                                         .imageScale(.small)
 
-                                    Text("Reload PFData (PFCsc) - #(\(self.cAppLogPFDataReloadPFCscButtonPresses))...")
+                                    Text("Reload PFData (PFCsc) - #(\(self.jmAppParseCoreManager.listPFCscDataItems.count)) item(s) - #(\(self.cAppLogPFDataReloadPFCscButtonPresses))...")
                                         .font(.caption2)
 
                                     Spacer()
@@ -1137,7 +508,7 @@ struct AppLogPFDataView: View
                                         .help(Text("Reload PFData for PFTherapistFile..."))
                                         .imageScale(.small)
 
-                                    Text("Reload PFData (PFTherapistFile) - #(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses))...")
+                                    Text("Reload PFData (PFTherapistFile) - #(\(self.jmAppParseCoreBkgdDataRepo.dictPFTherapistFileItems.count)) item(s) - #(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses))...")
                                         .font(.caption2)
 
                                     Spacer()
@@ -1198,7 +569,7 @@ struct AppLogPFDataView: View
                                         .help(Text("Reload PFData for PFPatientFile..."))
                                         .imageScale(.small)
 
-                                    Text("Reload PFData (PFPatientFile) - #(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses))...")
+                                    Text("Reload PFData (PFPatientFile) - #(\(self.jmAppParseCoreBkgdDataRepo.dictPFPatientFileItems.count)) item(s) - #(\(self.cAppLogPFDataReloadPFPatientFileButtonPresses))...")
                                         .font(.caption2)
 
                                     Spacer()
@@ -1259,7 +630,7 @@ struct AppLogPFDataView: View
                                         .help(Text("Reload PFData for SchedPatLoc..."))
                                         .imageScale(.small)
 
-                                    Text("Reload PFData (SchedPatLoc) - #(\(self.cAppLogPFDataReloadSchedPatLocButtonPresses))...")
+                                    Text("Reload PFData (SchedPatLoc) - #(\(self.jmAppParseCoreBkgdDataRepo.dictSchedPatientLocItems.count)) item(s) - #(\(self.cAppLogPFDataReloadSchedPatLocButtonPresses))...")
                                         .font(.caption2)
 
                                     Spacer()
@@ -1320,7 +691,7 @@ struct AppLogPFDataView: View
                                         .help(Text("Reload PFData for 'export' SchedPatLoc..."))
                                         .imageScale(.small)
 
-                                    Text("Reload PFData 'export' (SchedPatLoc) - #(\(self.cAppLogPFDataReloadExportSchedPatLocButtonPresses))...")
+                                    Text("Reload PFData 'export' (SchedPatLoc) - #(\(self.jmAppParseCoreBkgdDataRepo.dictExportSchedPatientLocItems.count)) item(s) - #(\(self.cAppLogPFDataReloadExportSchedPatLocButtonPresses))...")
                                         .font(.caption2)
 
                                     Spacer()
@@ -1381,7 +752,7 @@ struct AppLogPFDataView: View
                                         .help(Text("Reload PFData for 'export' BackupFile item(s)..."))
                                         .imageScale(.small)
 
-                                    Text("Reload PFData 'export' (BackupFile) - #(\(self.cAppLogPFDataLoggingExportBackupFileButtonPresses))...")
+                                    Text("Reload PFData 'export' (BackupFile) - #(\(self.jmAppParseCoreBkgdDataRepo.dictExportBackupFileItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingExportBackupFileButtonPresses))...")
                                         .font(.caption2)
 
                                     Spacer()
@@ -1442,7 +813,7 @@ struct AppLogPFDataView: View
                                         .help(Text("Reload PFData for 'export' LAST BackupFile item(s)..."))
                                         .imageScale(.small)
 
-                                    Text("Reload PFData 'export' LAST (BackupFile) - #(\(self.cAppLogPFDataLoggingExportLastBackupFileButtonPresses))...")
+                                    Text("Reload PFData 'export' LAST (BackupFile) - #(\(self.jmAppParseCoreBkgdDataRepo.dictExportLastBackupFileItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingExportLastBackupFileButtonPresses))...")
                                         .font(.caption2)
 
                                     Spacer()
@@ -1465,9 +836,672 @@ struct AppLogPFDataView: View
 
                     }
 
-                }
+                    Section(header: Text("Data Logging Options:"))
+                    {
 
-            //  }
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingPFAdminsButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFAdmins'.#(\(self.cAppLogPFDataLoggingPFAdminsButtonPresses))...")
+
+                                self.detailPFAdminsDataItems()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Data for PFAdmins..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Data (PFAdmins) - #(\(self.jmAppParseCoreManager.dictPFAdminsDataItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingPFAdminsButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingPFCscButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFCsc'.#(\(self.cAppLogPFDataLoggingPFCscButtonPresses))...")
+
+                                self.detailPFCscDataItems()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Data for PFCsc..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Data (PFCsc) - #(\(self.jmAppParseCoreManager.listPFCscDataItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingPFCscButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingPFTherapistNamesButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFTherapist (Names)'.#(\(self.cAppLogPFDataLoggingPFTherapistNamesButtonPresses))...")
+
+                                self.detailTherapistNamesList()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Data for PFTherapist (Names)..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Data (PFTherapist) Names - #(\(self.jmAppParseCoreManager.dictPFTherapistFileItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingPFTherapistNamesButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingPFTherapistFileButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFTherapistFile'.#(\(self.cAppLogPFDataLoggingPFTherapistFileButtonPresses))...")
+
+                                self.detailTherapistFileItems()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Data for PFTherapistFile..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Data (PFTherapistFile) - #(\(self.jmAppParseCoreManager.dictPFTherapistFileItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingPFTherapistFileButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingTherapistXrefButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log Dictionary for TherapistXref'.#(\(self.cAppLogPFDataLoggingTherapistXrefButtonPresses))...")
+
+                                self.detailTherapistXrefDict()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Dictionary for TherapistXref..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Dictionary (TherapistXref) - #(\(self.jmAppParseCoreManager.dictTherapistTidXref.count)) item(s) - #(\(self.cAppLogPFDataLoggingTherapistXrefButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingPFPatientNamesButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFPatient (Names)'.#(\(self.cAppLogPFDataLoggingPFPatientNamesButtonPresses))...")
+
+                                self.detailPatientNamesList()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Data for PFPatient (Names)..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Data (PFPatient) Names - #(\(self.jmAppParseCoreManager.dictPFPatientFileItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingPFPatientNamesButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingPFPatientFileButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for PFPatientFile'.#(\(self.cAppLogPFDataLoggingPFPatientFileButtonPresses))...")
+
+                                self.detailPatientFileItems()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Data for PFPatientFile..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Data (PFPatientFile) - #(\(self.jmAppParseCoreManager.dictPFPatientFileItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingPFPatientFileButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingPatientXrefButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log Dictionary for PatientXref'.#(\(self.cAppLogPFDataLoggingPatientXrefButtonPresses))...")
+
+                                self.detailPatientXrefDict()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Dictionary for PatientXref..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Dictionary (PatientXref) - #(\(self.jmAppParseCoreManager.dictPatientPidXref.count)) item(s) - #(\(self.cAppLogPFDataLoggingPatientXrefButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingSchedPatLocButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for SchedPatLoc'.#(\(self.cAppLogPFDataLoggingSchedPatLocButtonPresses))...")
+
+                                self.detailDictSchedPatientLocItems()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Data for SchedPatLoc..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Data (SchedPatLoc) - #(\(self.jmAppParseCoreBkgdDataRepo.dictSchedPatientLocItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingSchedPatLocButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingExportSchedPatLocButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for 'export' SchedPatLoc'.#(\(self.cAppLogPFDataLoggingExportSchedPatLocButtonPresses))...")
+
+                                self.detailDictExportSchedPatientLocItems()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Data for 'export' SchedPatLoc..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Data 'export' (SchedPatLoc) - #(\(self.jmAppParseCoreBkgdDataRepo.dictExportSchedPatientLocItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingExportSchedPatLocButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingExportBackupFileButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for 'export' BackupFile Item(s)'.#(\(self.cAppLogPFDataLoggingExportBackupFileButtonPresses))...")
+
+                                self.detailDictExportBackupFileItems()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Data for 'export' BackupFile item(s)..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Data 'export' (BackupFile) - #(\(self.jmAppParseCoreBkgdDataRepo.dictExportBackupFileItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingExportBackupFileButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                        HStack(alignment:.center)
+                        {
+
+                            Spacer()
+
+                            Button
+                            {
+
+                                self.cAppLogPFDataLoggingExportLastBackupFileButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Log/Reload Data for 'export' LAST BackupFile Item(s)'.#(\(self.cAppLogPFDataLoggingExportLastBackupFileButtonPresses))...")
+
+                                self.detailDictExportLastBackupFileItems()
+
+                            }
+                            label:
+                            {
+
+                                HStack(alignment:.center)
+                                {
+
+                                    Spacer()
+
+                                    Label("", systemImage: "arrow.down.square")
+                                        .help(Text("Log Data for 'export' LAST BackupFile item(s)..."))
+                                        .imageScale(.small)
+
+                                    Text("Log Data 'export' LAST (BackupFile) - #(\(self.jmAppParseCoreBkgdDataRepo.dictExportLastBackupFileItems.count)) item(s) - #(\(self.cAppLogPFDataLoggingExportLastBackupFileButtonPresses))...")
+                                        .font(.caption2)
+
+                                    Spacer()
+
+                                }
+
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+
+                            Spacer()
+
+                        }
+
+                    }
+
+                    Section(header: Text("SwiftData Clearing Options (Destructive!):"))
+                    {
+                        HStack(alignment:.center)
+                        {
+                            Spacer()
+                            Button
+                            {
+                                self.cAppLogSwiftDataClearPFAdminsButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Clear SwiftData for PFAdmins'.#(\(self.cAppLogSwiftDataClearPFAdminsButtonPresses))...")
+
+                                self.progressTriggerSwiftDataClearPFAdmins.setProgressOverlay(isProgressOverlayOn:true)
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Clear SwiftData for PFAdmins'.#(\(self.cAppLogSwiftDataClearPFAdminsButtonPresses)) - 'self.progressTriggerSwiftDataClearPFAdmins.isProgressOverlayOn' is [\(self.progressTriggerSwiftDataClearPFAdmins.isProgressOverlayOn)] <should be 'true'>...")
+
+                                DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                                {
+                                    self.clearPFAdminsSwiftDataItems()
+
+                                    self.progressTriggerSwiftDataClearPFAdmins.setProgressOverlay(isProgressOverlayOn:false)
+
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Clear SwiftData for PFAdmins'.#(\(self.cAppLogSwiftDataClearPFAdminsButtonPresses)) - 'self.progressTriggerSwiftDataClearPFAdmins.isProgressOverlayOn' is [\(self.progressTriggerSwiftDataClearPFAdmins.isProgressOverlayOn)] <should be 'false'>...")
+                                }
+                            }
+                            label:
+                            {
+                                HStack(alignment:.center)
+                                {
+                                    Spacer()
+                                //  Label("", systemImage: "burn")
+                                    Label("", systemImage: "trash.slash.fill")
+                                        .help(Text("Clear SwiftData for PFAdmins..."))
+                                        .imageScale(.small)
+                                    Text("Clear SwiftData (PFAdmins) - #(\(self.jmAppSwiftDataManager.pfAdminsSwiftDataItems.count)) item(s) - #(\(self.cAppLogSwiftDataClearPFAdminsButtonPresses))...")
+                                        .font(.caption2)
+                                    Spacer()
+                                }
+                                .progressOverlay(trigger:self.progressTriggerSwiftDataClearPFAdmins)
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+                            Spacer()
+                        }
+                        HStack(alignment:.center)
+                        {
+                            Spacer()
+                            Button
+                            {
+                                self.cAppLogSwiftDataClearPFTherapistFileButtonPresses += 1
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Clear SwiftData for PFTherapistFile'.#(\(self.cAppLogSwiftDataClearPFTherapistFileButtonPresses))...")
+
+                                self.progressTriggerSwiftDataClearPFTherapistFile.setProgressOverlay(isProgressOverlayOn:true)
+
+                                let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Clear SwiftData for PFTherapistFile'.#(\(self.cAppLogSwiftDataClearPFTherapistFileButtonPresses)) - 'self.progressTriggerSwiftDataClearPFTherapistFile.isProgressOverlayOn' is [\(self.progressTriggerSwiftDataClearPFTherapistFile.isProgressOverlayOn)] <should be 'true'>...")
+
+                                DispatchQueue.main.asyncAfter(deadline:(.now() + 0.25)) 
+                                {
+                                    self.clearPFTherapistFileSwiftDataItems()
+
+                                    self.progressTriggerSwiftDataClearPFTherapistFile.setProgressOverlay(isProgressOverlayOn:false)
+
+                                    let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppLogPFDataView.Button(Xcode).'App Clear SwiftData for PFTherapistFile'.#(\(self.cAppLogSwiftDataClearPFTherapistFileButtonPresses)) - 'self.progressTriggerSwiftDataClearPFTherapistFile.isProgressOverlayOn' is [\(self.progressTriggerSwiftDataClearPFTherapistFile.isProgressOverlayOn)] <should be 'false'>...")
+                                }
+                            }
+                            label:
+                            {
+                                HStack(alignment:.center)
+                                {
+                                    Spacer()
+                                //  Label("", systemImage: "burn")
+                                    Label("", systemImage: "trash.slash.fill")
+                                        .help(Text("Clear SwiftData for PFTherapistFile..."))
+                                        .imageScale(.small)
+                                    Text("Clear SwiftData (PFTherapistFile) - #(\(self.jmAppSwiftDataManager.pfTherapistFileSwiftDataItems.count)) item(s) - #(\(self.cAppLogSwiftDataClearPFTherapistFileButtonPresses))...")
+                                        .font(.caption2)
+                                    Spacer()
+                                }
+                                .progressOverlay(trigger:self.progressTriggerSwiftDataClearPFTherapistFile)
+                            }
+                        #if os(macOS)
+                            .buttonStyle(.borderedProminent)
+                            .padding()
+                        //  .background(???.isPressed ? .blue : .gray)
+                            .cornerRadius(10)
+                            .foregroundColor(Color.primary)
+                        #endif
+                            Spacer()
+                        }
+                    }
+
+                }
 
             }
 
@@ -2242,12 +2276,92 @@ struct AppLogPFDataView: View
     
     }   // End of private func reloadDictExportLastBackupFileItems()
 
-}   // End of struct AppLogPFDataView(View).
+    // 'Clear' SwiftData Method(s) - Destructive!:
+
+    private func clearPFAdminsSwiftDataItems()
+    {
+    
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+        
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+    
+        // Clear the SwiftData for PFAdmins item(s)...
+
+        if (self.jmAppSwiftDataManager.modelContext != nil)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> Issuing a 'clear' of the SwiftData for PFAdmins - invoking 'modelContext' delete/save...") 
+
+            try? self.jmAppSwiftDataManager.modelContext?.delete(model:PFAdminsSwiftDataItem.self)
+            try? self.jmAppSwiftDataManager.modelContext?.save()
+        
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> Issued  a 'clear' of the SwiftData for PFAdmins - invoked  'modelContext' delete/save...") 
+
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> Invoking 'self.jmAppSwiftDataManager.fetchAppSwiftData()'...")
+
+            self.jmAppSwiftDataManager.fetchAppSwiftData(bShowDetailAfterFetch:false)
+
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> Invoked  'self.jmAppSwiftDataManager.fetchAppSwiftData()'...")
+        }
+        else
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> Unable to 'clear' the SwiftData for PFAdmins - 'self.jmAppSwiftDataManager.modelContext' is nil - Error!") 
+        }
+
+        self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> SwiftData now has #(\(self.jmAppSwiftDataManager.pfAdminsSwiftDataItems.count)) PFAdmins item(s)...")
+    
+        // Exit...
+    
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+    
+        return
+    
+    }   // End of private func clearPFAdminsSwiftDataItems().
+
+    private func clearPFTherapistFileSwiftDataItems()
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+        
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+    
+        // Clear the SwiftData for PFTherapistFile item(s)...
+
+        if (self.jmAppSwiftDataManager.modelContext != nil)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> Issuing a 'clear' of the SwiftData for PFTherapistFile - invoking 'modelContext' delete/save...") 
+
+            try? self.jmAppSwiftDataManager.modelContext?.delete(model:ParsePFTherapistFileItem.self)
+            try? self.jmAppSwiftDataManager.modelContext?.save()
+        
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> Issued  a 'clear' of the SwiftData for PFTherapistFile - invoked  'modelContext' delete/save...") 
+
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> Invoking 'self.jmAppSwiftDataManager.fetchAppTherapistFileSwiftData()'...")
+
+            self.jmAppSwiftDataManager.fetchAppTherapistFileSwiftData(bShowDetailAfterFetch:false)
+
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> Invoked  'self.jmAppSwiftDataManager.fetchAppTherapistFileSwiftData()'...")
+        }
+        else
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> Unable to 'clear' the SwiftData for PFTherapistFile - 'self.jmAppSwiftDataManager.modelContext' is nil - Error!") 
+        }
+
+        self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Clear> SwiftData now has #(\(self.jmAppSwiftDataManager.pfTherapistFileSwiftDataItems.count)) PFTherapistFile item(s)...")
+    
+        // Exit...
+    
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+    
+        return
+
+    }   // End of private func clearPFTherapistFileSwiftDataItems().
+
+}   // End of struct AppLogPFDataView:View.
 
 #Preview 
 {
-    
     AppLogPFDataView()
-    
 }
 
