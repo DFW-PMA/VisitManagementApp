@@ -51,7 +51,7 @@ extension EnvironmentValues
 
 }   // End of extension EnvironmentValues.
 
-public class AppGlobalInfo: NSObject
+public class AppGlobalInfo:NSObject
 {
     
     struct ClassSingleton
@@ -63,7 +63,7 @@ public class AppGlobalInfo: NSObject
     }
 
     static let sGlobalInfoAppId:String                                   = "VisitManagementApp"
-    static let sGlobalInfoAppVers:String                                 = "v1.3503"
+    static let sGlobalInfoAppVers:String                                 = "v1.3904"
     static let sGlobalInfoAppDisp:String                                 = sGlobalInfoAppId+".("+sGlobalInfoAppVers+"): "
     static let sGlobalInfoAppCopyRight:String                            = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
     static let sGlobalInfoAppLogFilespecMaxSize:Int64                    = 50000000
@@ -91,6 +91,8 @@ public class AppGlobalInfo: NSObject
 
     // Various 'app' component options:
     
+    static let bAppIsADrcBuildDistribution:Bool                          = false
+    static let bEnableAppDevSwiftDataRecovery:Bool                       = true
     static let bInstantiateAppSwiftDataManager:Bool                      = true
     static let bPerformAppObjCSwiftBridgeTest:Bool                       = true
     static let bInstantiateAppMetricKitManager:Bool                      = true
@@ -106,6 +108,13 @@ public class AppGlobalInfo: NSObject
     static let bInstantiateAppMenuBarStatusBar:Bool                      = false
     static let bPerformAppDevTesting:Bool                                = true
     static let bEnableAppReleaseDownloads:Bool                           = true
+    static let bEnableAppAdsPlaceholder:Bool                             = false
+    static let bEnableAppAdsTesting:Bool                                 = false
+    static let sAdSenseAppAdsTesting:String                              = "ca-app-pub-3940256099942544/2435281174"
+    static let bEnableAppAdsProduction:Bool                              = false
+    static let sAdSenseAppAdsProduction:String                           = "pub-3654761817947063"
+    static let bEnableAppRevenueCatTesting:Bool                          = false
+    static let bEnableAppRevenueCatProduction:Bool                       = false
     static let bInstantiateAppNWSWeatherModelObservable:Bool             = false
     static let bTestStringManipulations:Bool                             = true
     static let bTestAppBigTestTracking1:Bool                             = false
@@ -173,6 +182,7 @@ public class AppGlobalInfo: NSObject
            var bGlobalDeviceIsIPhone:Bool                                = false
            var bGlobalDeviceIsAppleWatch:Bool                            = false
            var bGlobalDeviceIsXcodeSimulator:Bool                        = false
+           var cgfGlobalDeviceImageSizeForQR:CGFloat                     = 64
 
            var sGlobalDeviceName:String                                  = "-unknown-"
            var sGlobalDeviceSystemName:String                            = "-unknown-"
@@ -263,6 +273,7 @@ public class AppGlobalInfo: NSObject
         self.bGlobalDeviceIsIPhone                  = false
         self.bGlobalDeviceIsAppleWatch              = false
         self.bGlobalDeviceIsXcodeSimulator          = false
+        self.cgfGlobalDeviceImageSizeForQR          = 64
 
         let osVersion:OperatingSystemVersion        = ProcessInfo.processInfo.operatingSystemVersion 
 
@@ -342,6 +353,19 @@ public class AppGlobalInfo: NSObject
 
         }
 
+        if (self.iGlobalDeviceType == AppGlobalDeviceType.appGlobalDeviceIPhone)
+        {
+
+            self.cgfGlobalDeviceImageSizeForQR      = 128
+
+        }
+        else
+        {
+
+            self.cgfGlobalDeviceImageSizeForQR      = 196
+
+        }
+
         self.sGlobalProcessInfoSystemName           = "\(self.sGlobalDeviceType) v\(self.sGlobalProcessInfoOSVersion.majorVersion).\(self.sGlobalProcessInfoOSVersion.minorVersion).\(self.sGlobalProcessInfoOSVersion.patchVersion)"
 
         self.sGlobalDeviceName                      = UIDevice.current.name
@@ -382,6 +406,14 @@ public class AppGlobalInfo: NSObject
 
         self.updateUIDeviceOrientation()
 
+        // Finish any 'initialization' work:
+
+        self.xcgLogMsg("\(sCurrMethodDisp) AppGlobalInfo Invoking 'self.runPostInitializationTasks()'...")
+    
+        self.runPostInitializationTasks()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) AppGlobalInfo Invoked  'self.runPostInitializationTasks()'...")
+    
         // Exit:
 
         self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
@@ -426,6 +458,26 @@ public class AppGlobalInfo: NSObject
         return
 
     }   // End of private func xcgLogMsg().
+
+//  private func xcgLogMsg(_ sMessage:String)
+//  {
+//
+//      let dtFormatterDateStamp:DateFormatter = DateFormatter()
+//
+//      dtFormatterDateStamp.locale     = Locale(identifier: "en_US")
+//      dtFormatterDateStamp.timeZone   = TimeZone.current
+//      dtFormatterDateStamp.dateFormat = "yyyy-MM-dd hh:mm:ss.SSS"
+//
+//      let dateStampNow:Date = .now
+//      let sDateStamp:String = ("\(dtFormatterDateStamp.string(from:dateStampNow)) >> ")
+//
+//      print("\(sDateStamp)\(sMessage)")
+//
+//      // Exit:
+//
+//      return
+//
+//  }   // End of private func xcgLogMsg().
 
     public func setJmAppDelegateVisitorInstance(jmAppDelegateVisitor:JmAppDelegateVisitor)
     {
@@ -649,6 +701,8 @@ public class AppGlobalInfo: NSObject
                                                                                                                                                                        
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.sHelpBasicFileExt' is [\(String(describing: AppGlobalInfo.sHelpBasicFileExt))]...")
                                                                                                                                                                        
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bAppIsADrcBuildDistribution' is [\(String(describing: AppGlobalInfo.bAppIsADrcBuildDistribution))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bEnableAppDevSwiftDataRecovery' is [\(String(describing: AppGlobalInfo.bEnableAppDevSwiftDataRecovery))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bInstantiateAppSwiftDataManager' is [\(String(describing: AppGlobalInfo.bInstantiateAppSwiftDataManager))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bPerformAppObjCSwiftBridgeTest' is [\(String(describing: AppGlobalInfo.bPerformAppObjCSwiftBridgeTest))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bInstantiateAppMetricKitManager' is [\(String(describing: AppGlobalInfo.bInstantiateAppMetricKitManager))]...")
@@ -663,6 +717,11 @@ public class AppGlobalInfo: NSObject
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bInstantiateAppMenuBarStatusBar' is [\(String(describing: AppGlobalInfo.bInstantiateAppMenuBarStatusBar))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bPerformAppDevTesting' is [\(String(describing: AppGlobalInfo.bPerformAppDevTesting))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bEnableAppReleaseDownloads' is [\(String(describing: AppGlobalInfo.bEnableAppReleaseDownloads))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bEnableAppAdsPlaceholder' is [\(String(describing: AppGlobalInfo.bEnableAppAdsPlaceholder))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bEnableAppAdsTesting' is [\(String(describing: AppGlobalInfo.bEnableAppAdsTesting))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bEnableAppAdsProduction' is [\(String(describing: AppGlobalInfo.bEnableAppAdsProduction))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bEnableAppRevenueCatTesting' is [\(String(describing: AppGlobalInfo.bEnableAppRevenueCatTesting))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bEnableAppRevenueCatProduction' is [\(String(describing: AppGlobalInfo.bEnableAppRevenueCatProduction))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bInstantiateAppNWSWeatherModelObservable' is [\(String(describing: AppGlobalInfo.bInstantiateAppNWSWeatherModelObservable))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bTestStringManipulations' is [\(String(describing: AppGlobalInfo.bTestStringManipulations))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bTestAppBigTestTracking1' is [\(String(describing: AppGlobalInfo.bTestAppBigTestTracking1))]...")
@@ -699,6 +758,7 @@ public class AppGlobalInfo: NSObject
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bGlobalDeviceIsIPhone' is [\(String(describing: self.bGlobalDeviceIsIPhone))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bGlobalDeviceIsAppleWatch' is [\(String(describing: self.bGlobalDeviceIsAppleWatch))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.bGlobalDeviceIsXcodeSimulator' is [\(String(describing: self.bGlobalDeviceIsXcodeSimulator))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.cgfGlobalDeviceImageSizeForQR' is [\(String(describing: self.cgfGlobalDeviceImageSizeForQR))]...")
         
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.sGlobalDeviceName' is [\(String(describing: self.sGlobalDeviceName))]...")
         self.xcgLogMsg("\(sCurrMethodDisp) 'AppGlobalInfo.sGlobalDeviceSystemName' is [\(String(describing: self.sGlobalDeviceSystemName))]...")
