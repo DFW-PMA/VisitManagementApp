@@ -21,7 +21,7 @@ class ParsePFTherapistFileItem:Identifiable
     {
         
         static let sClsId        = "ParsePFTherapistFileItem"
-        static let sClsVers      = "v1.1203"
+        static let sClsVers      = "v1.1403"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -216,28 +216,28 @@ class ParsePFTherapistFileItem:Identifiable
     var sHomeLocTimeZone:String                                   = ""
 
     @Transient
+    var sHomeLocAddress:String
+    {
+        return "\(self.sHomeLocLocationName), \(self.sHomeLocCity) \(self.sHomeLocPostalCode)"
+    }
+
+    @Transient
     var clLocationCoordinate2D:CLLocationCoordinate2D
     {
-
         return CLLocationCoordinate2D(latitude:self.dblConvertedLatitude, longitude:self.dblConvertedLongitude)
-
     }
 
     @Transient
     var mapCoordinateRegion:MKCoordinateRegion
     {
-
         return MKCoordinateRegion(center:self.clLocationCoordinate2D,               
                                     span:MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta:0.05))
-
     }
 
     @Transient
     var mapPosition:MapCameraPosition
     {
-
         return MapCameraPosition.region(self.mapCoordinateRegion)
-
     }
 
     // App Data field(s):

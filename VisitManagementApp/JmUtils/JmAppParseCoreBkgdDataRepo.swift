@@ -3162,6 +3162,21 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
             return false
         
         }
+
+        // Check that we have Therapist data to 'export'...
+
+        if (self.dictPFTherapistFileItems.count < 1)
+        {
+
+            self.xcgLogMsg("\(sCurrMethodDisp) For 'self.dictPFTherapistFileItems' with #(\(self.dictPFTherapistFileItems.count)) item(s) is an 'empty' dictionary - unable to process the 'export' data - Error!")
+
+            // Exit...
+
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+
+            return false
+
+        }
   
         // Convert the dictionary of 'export' SchedPatientLocItems into an Excel file...
 
@@ -3257,6 +3272,89 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
                 continue
 
             }
+
+            let iPFTherapistParseTID:Int = Int(sPFTherapistParseTID) ?? 0
+
+            if (iPFTherapistParseTID < 2)
+            {
+            
+                self.xcgLogMsg("\(sCurrMethodDisp) Skipping object #(\(cExportPFTherapistParseTIDs)) 'iPFTherapistParseTID' - 'sPFTherapistParseTID' is [\(sPFTherapistParseTID)] - the 'iPFTherapistParseTID' of (\(iPFTherapistParseTID)) converted to less than 2 - unable to locate the TherapistFile item - Warning!")
+
+                continue
+            
+            }
+
+            let pfTherapistFileItem:ParsePFTherapistFileItem? = self.dictPFTherapistFileItems[iPFTherapistParseTID]
+
+            if (pfTherapistFileItem == nil)
+            {
+
+                self.xcgLogMsg("\(sCurrMethodDisp) Skipping object #(\(cExportPFTherapistParseTIDs)) 'pfTherapistFileItem' - 'sPFTherapistParseTID' is [\(sPFTherapistParseTID)] - the 'pfTherapistFileItem' is nil - unable to locate the TherapistFile item - Warning!")
+
+                continue
+
+            }
+
+            // 'Export' the Therapist item...
+
+            cXLSXWorksheetRow += 1
+
+            var xlsxCurrentCell:XCell           = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:1))
+            xlsxCurrentCell.value               = .text(pfTherapistFileItem!.sPFTherapistFileName)
+            xlsxCurrentCell.alignmentHorizontal = .left
+            xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+            xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:2))
+            xlsxCurrentCell.value               = .text("-N/A-")
+            xlsxCurrentCell.alignmentHorizontal = .center
+            xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+            xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:3))
+            xlsxCurrentCell.value               = .text("00:00")
+            xlsxCurrentCell.alignmentHorizontal = .center
+            xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+            xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:4))
+            xlsxCurrentCell.value               = .text(pfTherapistFileItem!.sPFTherapistFileName)
+            xlsxCurrentCell.alignmentHorizontal = .center
+            xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+            xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:5))
+            xlsxCurrentCell.value               = .text("-N/A-")
+            xlsxCurrentCell.alignmentHorizontal = .center
+            xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+            xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:6))
+            xlsxCurrentCell.value               = .text(pfTherapistFileItem!.sHomeLocAddress)
+            xlsxCurrentCell.alignmentHorizontal = .center
+            xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+            xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:7))
+            xlsxCurrentCell.value               = .text(pfTherapistFileItem!.sPFTherapistFileObjectLatitude)
+            xlsxCurrentCell.alignmentHorizontal = .center
+            xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+            xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:8))
+            xlsxCurrentCell.value               = .text(pfTherapistFileItem!.sPFTherapistFileObjectLongitude)
+            xlsxCurrentCell.alignmentHorizontal = .center
+            xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+            xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:9))
+            xlsxCurrentCell.value               = .text("-none-")
+            xlsxCurrentCell.alignmentHorizontal = .center
+            xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+            xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:10))
+            xlsxCurrentCell.value               = .text("-none-")
+            xlsxCurrentCell.alignmentHorizontal = .center
+            xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+            xlsxCurrentCell                     = xlsxWorkSheet.AddCell(XCoords(row:cXLSXWorksheetRow, col:11))
+            xlsxCurrentCell.value               = .text("ROOFTOP")
+            xlsxCurrentCell.alignmentHorizontal = .center
+            xlsxCurrentCell.Font                = XFont(.TrebuchetMS, 18, true)
+
+            // 'Export' the Schedule item(s)...
 
             for scheduledPatientLocationItem in listScheduledPatientLocationItems
             {

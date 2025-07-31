@@ -26,7 +26,7 @@ struct AppVisitMgmtTherapist1DetailsView: View
     {
         
         static let sClsId        = "AppVisitMgmtTherapist1DetailsView"
-        static let sClsVers      = "v1.1701"
+        static let sClsVers      = "v1.1703"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -372,7 +372,8 @@ struct AppVisitMgmtTherapist1DetailsView: View
                         {
 
                             Text("Therapists' Address")
-                            Text("\(self.pfTherapistFileItem!.sHomeLocLocationName), \(self.pfTherapistFileItem!.sHomeLocCity) \(self.pfTherapistFileItem!.sHomeLocPostalCode)")
+                            Text("\(self.pfTherapistFileItem!.sHomeLocAddress)")
+                        //  Text("\(self.pfTherapistFileItem!.sHomeLocLocationName), \(self.pfTherapistFileItem!.sHomeLocCity) \(self.pfTherapistFileItem!.sHomeLocPostalCode)")
 
                         }
                         .font(.caption2) 
