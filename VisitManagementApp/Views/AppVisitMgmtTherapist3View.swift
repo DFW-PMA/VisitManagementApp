@@ -17,7 +17,7 @@ struct AppVisitMgmtTherapist3View: View
     {
         
         static let sClsId        = "AppVisitMgmtTherapist3View"
-        static let sClsVers      = "v1.0801"
+        static let sClsVers      = "v1.0901"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -32,7 +32,7 @@ struct AppVisitMgmtTherapist3View: View
 
     // App Data field(s):
 
-//  @Environment(\.dismiss) var dismiss
+//  @Environment(\.dismiss)              var dismiss
     @Environment(\.presentationMode)     var presentationMode
     @Environment(\.openURL)              var openURL
     @Environment(\.openWindow)           var openWindow
@@ -52,7 +52,7 @@ struct AppVisitMgmtTherapist3View: View
 
     @State       private var cAppLogPFDataButtonPresses:Int                            = 0
     @State       private var cAppTidScheduleViewButtonPresses:Int                      = 0
-    @State       private var cAppVisitMgmtTherapist3ViewRefreshButtonPresses:Int       = 0
+//  @State       private var cAppVisitMgmtTherapist3ViewRefreshButtonPresses:Int       = 0
 
     @State       private var isAppLogPFDataViewModal:Bool                              = false
     @State       private var isAppTidScheduleViewModal:Bool                            = false
@@ -263,33 +263,58 @@ struct AppVisitMgmtTherapist3View: View
 
                     Spacer()
 
+            //      Button
+            //      {
+            //
+            //          self.cAppVisitMgmtTherapist3ViewRefreshButtonPresses += 1
+            //
+            //          let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppVisitMgmtTherapist3View.Button(Xcode).'Refresh'.#(\(self.cAppVisitMgmtTherapist3ViewRefreshButtonPresses))...")
+            //
+            //      }
+            //      label:
+            //      {
+            //
+            //          VStack(alignment:.center)
+            //          {
+            //
+            //              Label("", systemImage: "arrow.clockwise")
+            //                  .help(Text("'Refresh' App VMA Therapist Screen..."))
+            //                  .imageScale(.large)
+            //
+            //              Text("Refresh - #(\(self.cAppVisitMgmtTherapist3ViewRefreshButtonPresses))...")
+            //                  .font(.caption)
+            //
+            //          }
+            //
+            //      }
+            //  #if os(macOS)
+            //      .buttonStyle(.borderedProminent)
+            //      .padding()
+            //  //  .background(???.isPressed ? .blue : .gray)
+            //      .cornerRadius(10)
+            //      .foregroundColor(Color.primary)
+            //  #endif
+
                     Button
                     {
+                        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppVisitMgmtView.Button(Xcode).'Sync Data' pressed...")
 
-                        self.cAppVisitMgmtTherapist3ViewRefreshButtonPresses += 1
-
-                        let _ = self.xcgLogMsg("...\(ClassInfo.sClsDisp)AppVisitMgmtTherapist3View.Button(Xcode).'Refresh'.#(\(self.cAppVisitMgmtTherapist3ViewRefreshButtonPresses))...")
-
+                        self.syncPFDataItems()
                     }
                     label:
                     {
-
                         VStack(alignment:.center)
                         {
-
-                            Label("", systemImage: "arrow.clockwise")
-                                .help(Text("'Refresh' App VMA Therapist Screen..."))
-                                .imageScale(.large)
-
-                            Text("Refresh - #(\(self.cAppVisitMgmtTherapist3ViewRefreshButtonPresses))...")
-                                .font(.caption)
-
+                            Label("", systemImage: "doc.text.magnifyingglass")
+                                .help(Text("Sync PFQuery Data Item(s)..."))
+                                .imageScale(.medium)
+                            Text("Sync Data")
+                                .font(.footnote)
                         }
-
                     }
+                    .padding()
                 #if os(macOS)
                     .buttonStyle(.borderedProminent)
-                    .padding()
                 //  .background(???.isPressed ? .blue : .gray)
                     .cornerRadius(10)
                     .foregroundColor(Color.primary)
@@ -1150,6 +1175,78 @@ struct AppVisitMgmtTherapist3View: View
         return
 
     }   // End of private func updateSelectableTherapistNamesList(sSearchValue:String).
+
+    private func syncPFDataItems()
+    {
+  
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+        
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+
+        // 'sync' (aka, deep copy) the ParseCoreBkgdDataRepo PFCscDataItem(s) to the ParseCoreManager...
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFAdminsDataItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictPFAdminsDataItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFAdminsDataItems()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictTherapistTidXref()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictTherapistTidXref()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictTherapistTidXref()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFTherapistFileItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictPFTherapistFileItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFTherapistFileItems()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPatientPidXref()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictPatientPidXref()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPatientPidXref()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFPatientFileItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictPFPatientFileItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFPatientFileItems()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictSchedPatientLocItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictSchedPatientLocItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictSchedPatientLocItems()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyListPFCscDataItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyListPFCscDataItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyListPFCscDataItems()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyListPFCscNameItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyListPFCscNameItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyListPFCscNameItems()'...")
+
+    //  self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'self.detailPFCscDataItems()'...")
+    //
+    //  self.detailPFCscDataItems()
+    //
+    //  self.xcgLogMsg("\(sCurrMethodDisp) Invoked 'self.detailPFCscDataItems()'...")
+
+        // Exit...
+  
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+  
+        return
+  
+    }   // End of private func syncPFDataItems().
 
 }   // End of struct AppVisitMgmtTherapist3View(View).
 

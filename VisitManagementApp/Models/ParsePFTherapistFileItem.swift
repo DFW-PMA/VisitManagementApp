@@ -21,7 +21,7 @@ class ParsePFTherapistFileItem:Identifiable
     {
         
         static let sClsId        = "ParsePFTherapistFileItem"
-        static let sClsVers      = "v1.1103"
+        static let sClsVers      = "v1.1203"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -29,10 +29,12 @@ class ParsePFTherapistFileItem:Identifiable
         
     }
 
-    // 'Internal' Trace flag:
+    // 'Internal' Trace flag(s):
 
     @Transient private 
     var bInternalTraceFlag:Bool                                   = false
+    @Transient private 
+    var bInternalHomeLocTraceFlag:Bool                            = true
 
     // Item Data field(s):
     
@@ -910,7 +912,7 @@ class ParsePFTherapistFileItem:Identifiable
 
         // Convert the 'HomeLoc' field into Latitude/Longitude...
 
-        asToString.append("\(sCurrMethodDisp) 'self.sPFTherapistFileHomeLoc' is [\(self.sPFTherapistFileHomeLoc)]...")
+        asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'self.sPFTherapistFileHomeLoc' is [\(self.sPFTherapistFileHomeLoc)]...")
 
     //  let listHomeLocNoWS:[String]  = self.sPFTherapistFileHomeLoc.components(separatedBy:CharacterSet.whitespacesAndNewlines)
     //
@@ -931,10 +933,11 @@ class ParsePFTherapistFileItem:Identifiable
     //  let sHomeLocCleaned1:String = listHomeLocCleaned1.joined(separator:"")
     //
     //  asToString.append("\(sCurrMethodDisp) 'sHomeLocCleaned1' is [\(sHomeLocCleaned1)]...")
-
-        let sHomeLocCleaned1:String = self.sPFTherapistFileHomeLoc.removeUnwantedCharacters(charsetToRemove:[StringCleaning.removeWhitespacesAndNewlines], sExtraCharacters:"<>,", bResultIsLowerCased:true)
+    //
+    //  let sHomeLocCleaned1:String = self.sPFTherapistFileHomeLoc.removeUnwantedCharacters(charsetToRemove:[StringCleaning.removeWhitespacesAndNewlines], sExtraCharacters:"<>,", bResultIsLowerCased:true)
+        let sHomeLocCleaned1:String = self.sPFTherapistFileHomeLoc.removeUnwantedCharacters(charsetToRemove:[StringCleaning.removeWhitespacesAndNewlines], sExtraCharacters:"<>", bResultIsLowerCased:true)
         
-        asToString.append("\(sCurrMethodDisp) 'sHomeLocCleaned1' is [\(sHomeLocCleaned1)]...")
+        asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'sHomeLocCleaned1' is [\(sHomeLocCleaned1)]...")
       
         var csHomeLocDelimiters2:CharacterSet = CharacterSet()
       
@@ -942,7 +945,7 @@ class ParsePFTherapistFileItem:Identifiable
 
         let listHomeLocCleaned2:[String] = sHomeLocCleaned1.components(separatedBy:csHomeLocDelimiters2)
 
-        asToString.append("\(sCurrMethodDisp) 'listHomeLocCleaned2' is [\(listHomeLocCleaned2)]...")
+        asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'listHomeLocCleaned2' is [\(listHomeLocCleaned2)]...")
 
         var csHomeLocDelimiters3:CharacterSet = CharacterSet()
 
@@ -951,16 +954,16 @@ class ParsePFTherapistFileItem:Identifiable
         if (listHomeLocCleaned2.count < 1)
         {
             
-            asToString.append("\(sCurrMethodDisp) 'listHomeLocCleaned2' has a count of (\(listHomeLocCleaned2.count)) which is less than 1 - Error!")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'listHomeLocCleaned2' has a count of (\(listHomeLocCleaned2.count)) which is less than 1 - Error!")
             
         }
         else
         {
             
-            asToString.append("\(sCurrMethodDisp) 'listHomeLocCleaned2' has a count of (\(listHomeLocCleaned2.count)) which is equal to or greater than 1 - continuing...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'listHomeLocCleaned2' has a count of (\(listHomeLocCleaned2.count)) which is equal to or greater than 1 - continuing...")
             
             var dictHomeLocCleaned2:[String:String] = [String:String]()
-            var cHomeLocWork:Int                     = 0
+            var cHomeLocWork:Int                    = 0
             
             for sHomeLocWork:String in listHomeLocCleaned2
             {
@@ -974,57 +977,57 @@ class ParsePFTherapistFileItem:Identifiable
                 
                 cHomeLocWork += 1
                 
-                asToString.append("\(sCurrMethodDisp) #(\(cHomeLocWork)): 'sHomeLocWork' is [\(sHomeLocWork)]...")
+                asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> #(\(cHomeLocWork)): 'sHomeLocWork' is [\(sHomeLocWork)]...")
                 
                 let listHomeLocWorkCleaned:[String] = sHomeLocWork.components(separatedBy:csHomeLocDelimiters3)
 
-                asToString.append("\(sCurrMethodDisp) #(\(cHomeLocWork)): 'listHomeLocWorkCleaned' is [\(listHomeLocWorkCleaned)]...")
+                asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> #(\(cHomeLocWork)): 'listHomeLocWorkCleaned' is [\(listHomeLocWorkCleaned)]...")
                 
                 let sHomeLocKey:String   = listHomeLocWorkCleaned[0]
                 let sHomeLocValue:String = listHomeLocWorkCleaned[1]
                 
                 dictHomeLocCleaned2[sHomeLocKey] = sHomeLocValue
                 
-                asToString.append("\(sCurrMethodDisp) #(\(cHomeLocWork)): Added a key 'sHomeLocKey' of [\(sHomeLocKey)] with a value 'sHomeLocValue' of [\(sHomeLocValue)] to the dictionary 'dictHomeLocCleaned2'...")
+                asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> #(\(cHomeLocWork)): Added a key 'sHomeLocKey' of [\(sHomeLocKey)] with a value 'sHomeLocValue' of [\(sHomeLocValue)] to the dictionary 'dictHomeLocCleaned2'...")
                 
             }
                  
-            asToString.append("\(sCurrMethodDisp) The dictionary 'dictHomeLocCleaned2' is [\(dictHomeLocCleaned2)]...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> The dictionary 'dictHomeLocCleaned2' is [\(dictHomeLocCleaned2)]...")
             
             let sHomeLocLatitude:String  = dictHomeLocCleaned2["latitude"]  ?? "0.0000"
             let sHomeLocLongitude:String = dictHomeLocCleaned2["longitude"] ?? "0.0000"
             
-            asToString.append("\(sCurrMethodDisp) 'sHomeLocLatitude'  is [\(sHomeLocLatitude)]...")
-            asToString.append("\(sCurrMethodDisp) 'sHomeLocLongitude' is [\(sHomeLocLongitude)]...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'sHomeLocLatitude'  is [\(sHomeLocLatitude)]...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'sHomeLocLongitude' is [\(sHomeLocLongitude)]...")
 
             self.pfTherapistFileObjectLatitude     = sHomeLocLatitude
             self.pfTherapistFileObjectLongitude    = sHomeLocLongitude
-            self.sPFTherapistFileObjectLatitude    = String(describing: pfTherapistFileObjectLatitude!)
-            self.sPFTherapistFileObjectLongitude   = String(describing: pfTherapistFileObjectLongitude!)
-            self.dblPFTherapistFileObjectLatitude  = Double(sPFTherapistFileObjectLatitude)        ?? 0.0000
-            self.dblPFTherapistFileObjectLongitude = Double(sPFTherapistFileObjectLongitude)       ?? 0.0000
+            self.sPFTherapistFileObjectLatitude    = String(describing: self.pfTherapistFileObjectLatitude!)
+            self.sPFTherapistFileObjectLongitude   = String(describing: self.pfTherapistFileObjectLongitude!)
+            self.dblPFTherapistFileObjectLatitude  = Double(self.sPFTherapistFileObjectLatitude)   ?? 0.0000
+            self.dblPFTherapistFileObjectLongitude = Double(self.sPFTherapistFileObjectLongitude)  ?? 0.0000
             self.dblConvertedLatitude              = Double(String(describing: sHomeLocLatitude))  ?? 0.0000
             self.dblConvertedLongitude             = Double(String(describing: sHomeLocLongitude)) ?? 0.0000
             
-            asToString.append("\(sCurrMethodDisp) 'pfTherapistFileObjectLatitude'     is [\(String(describing: pfTherapistFileObjectLatitude))]...")
-            asToString.append("\(sCurrMethodDisp) 'pfTherapistFileObjectLongitude'    is [\(String(describing: pfTherapistFileObjectLongitude))]...")
-            asToString.append("\(sCurrMethodDisp) 'sPFTherapistFileObjectLatitude'    is [\(sPFTherapistFileObjectLatitude)]...")
-            asToString.append("\(sCurrMethodDisp) 'sPFTherapistFileObjectLongitude'   is [\(sPFTherapistFileObjectLongitude)]...")
-            asToString.append("\(sCurrMethodDisp) 'dblPFTherapistFileObjectLatitude'  is [\(dblPFTherapistFileObjectLatitude)]...")
-            asToString.append("\(sCurrMethodDisp) 'dblPFTherapistFileObjectLongitude' is [\(dblPFTherapistFileObjectLongitude)]...")
-            asToString.append("\(sCurrMethodDisp) 'dblConvertedLatitude'              is [\(dblConvertedLatitude)]...")
-            asToString.append("\(sCurrMethodDisp) 'dblConvertedLongitude'             is [\(dblConvertedLongitude)]...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'pfTherapistFileObjectLatitude'     is [\(String(describing: self.pfTherapistFileObjectLatitude))]...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'pfTherapistFileObjectLongitude'    is [\(String(describing: self.pfTherapistFileObjectLongitude))]...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'sPFTherapistFileObjectLatitude'    is [\(self.sPFTherapistFileObjectLatitude)]...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'sPFTherapistFileObjectLongitude'   is [\(self.sPFTherapistFileObjectLongitude)]...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'dblPFTherapistFileObjectLatitude'  is [\(self.dblPFTherapistFileObjectLatitude)]...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'dblPFTherapistFileObjectLongitude' is [\(self.dblPFTherapistFileObjectLongitude)]...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'dblConvertedLatitude'              is [\(self.dblConvertedLatitude)]...")
+            asToString.append("\(sCurrMethodDisp) <HomeLoc Cleaning> 'dblConvertedLongitude'             is [\(self.dblConvertedLongitude)]...")
             
         }
 
         // If we have an 'Internal' Trace flag, then output all the captured log messages...
 
-        if (bInternalTraceFlag == true)
+        if (bInternalHomeLocTraceFlag == true)
         {
 
             let sContents:String = "{"+(asToString.joined(separator: ""))+"}"
 
-            self.xcgLogMsg("\(sCurrMethodDisp) Accumulated 'sContents' is [\(sContents)]...")
+            self.xcgLogMsg("\(sCurrMethodDisp) <HomeLoc Cleaning> Accumulated 'sContents' is [\(sContents)]...")
 
         }
 
@@ -1086,11 +1089,12 @@ class ParsePFTherapistFileItem:Identifiable
         //  let dblDeadlineInterval:Double     = Double((0.5 * Double(self.idPFTherapistFileObject)))
         //  let dblDeadlineInterval:Double     = Double((1.2 * Double(self.idPFTherapistFileObject)))
         //  let dblDeadlineInterval:Double     = clModelObservable2.requestNextReverseLocationLookupDeadlineInterval()
-            let dblDeadlineInterval:Double     = clModelObservable2.requestNextReverseLocationLookupDeadlineInterval(clRevLocType:CLRevLocType.secondary)
+        //  let dblDeadlineInterval:Double     = clModelObservable2.requestNextReverseLocationLookupDeadlineInterval(clRevLocType:CLRevLocType.secondary)
+            let dblDeadlineInterval:Double     = clModelObservable2.requestNextReverseLocationLookupDeadlineInterval(clRevLocType:CLRevLocType.primary)
 
             DispatchQueue.main.asyncAfter(deadline:(.now() + dblDeadlineInterval))
             {
-            //  self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFTherapistFileObject)): <closure> Calling 'updateGeocoderLocation()' with 'self' of [\(String(describing: self))] for Latitude/Longitude of [\(self.dblConvertedLatitude)/\(self.dblConvertedLongitude)] for Therapist [\(self.sPFTherapistFileName)]...")
+                self.xcgLogMsg("\(sCurrMethodDisp) #(\(self.idPFTherapistFileObject)): <closure> Calling 'updateGeocoderLocation()' with 'self' of [\(String(describing: self))] for Latitude/Longitude of [\(self.dblConvertedLatitude)/\(self.dblConvertedLongitude)] for Therapist #(\(self.iPFTherapistFileTID))/[\(self.sPFTherapistFileName)]...")
 
                 let _ = clModelObservable2.updateGeocoderLocations(requestID: self.idPFTherapistFileObject, 
                                                                    latitude:  self.dblConvertedLatitude, 
@@ -1128,14 +1132,15 @@ class ParsePFTherapistFileItem:Identifiable
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
 
     //  self.xcgLogMsg("\(sCurrMethodDisp) Invoked - 'self' is [\(String(describing: self))] for Therapist [\(self.idPFTherapistFileObject)] - parameter 'bIsDownstreamObject' is [\(bIsDownstreamObject)] - 'requestID' is [\(requestID)] - 'dictCurrentLocation' is [\(String(describing: dictCurrentLocation))]...")
-        self.xcgLogMsg("\(sCurrMethodDisp) Invoked - for Therapist [\(self.idPFTherapistFileObject)] - parameter 'bIsDownstreamObject' is [\(bIsDownstreamObject)]...")
+    //  self.xcgLogMsg("\(sCurrMethodDisp) Invoked - for Therapist [\(self.idPFTherapistFileObject)] - parameter 'bIsDownstreamObject' is [\(bIsDownstreamObject)]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked - for Therapist #(\(self.iPFTherapistFileTID))/[\(self.sPFTherapistFileName)] - 'self.dblConvertedLatitude' is [\(self.dblConvertedLatitude)] and 'self.dblConvertedLongitude' is [\(self.dblConvertedLongitude)] - parameter 'bIsDownstreamObject' is [\(bIsDownstreamObject)] - 'requestID' is [\(requestID)] - 'dictCurrentLocation' is [\(String(describing: dictCurrentLocation))]...")
 
         // Update the address info for BOTH 'self' and (possibly 'from'/'to')...
 
         if (dictCurrentLocation.count > 0)
         {
         
-        //  self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Called  'updateGeocoderLocation()' with 'self' of [\(String(describing: self))] for Latitude/Longitude of [\(self.dblConvertedLatitude)/\(self.dblConvertedLongitude)] for Therapist [\(self.sPFTherapistFileName)] current 'location' [\(String(describing: dictCurrentLocation))]...")
+            self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Called  'updateGeocoderLocation()' for Latitude/Longitude of [\(self.dblConvertedLatitude)/\(self.dblConvertedLongitude)] for Therapist [\(self.sPFTherapistFileName)] current 'location' [\(String(describing: dictCurrentLocation))]...")
 
             self.sHomeLocLocationName = String(describing: (dictCurrentLocation["sCurrentLocationName"] ?? ""))
             self.sHomeLocCity         = String(describing: (dictCurrentLocation["sCurrentCity"]         ?? ""))
@@ -1152,11 +1157,11 @@ class ParsePFTherapistFileItem:Identifiable
                     self.pfTherapistFileObjectClonedFrom != self)
                 {
 
-                //  self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Calling 'self.pfTherapistFileObjectClonedFrom' of [\(String(describing: self.pfTherapistFileObjectClonedFrom))] with 'self' of [\(String(describing: self))] for Therapist [\(self.sPFTherapistFileName)]...")
+                    self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Calling 'self.pfTherapistFileObjectClonedFrom' of [\(String(describing: self.pfTherapistFileObjectClonedFrom))] with 'self' of [\(String(describing: self))] for Therapist [\(self.sPFTherapistFileName)]...")
 
                     self.pfTherapistFileObjectClonedFrom!.handleLocationAndAddressClosureEvent(bIsDownstreamObject:true, requestID:requestID, dictCurrentLocation:dictCurrentLocation)
 
-                //  self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Called  'self.pfTherapistFileObjectClonedFrom' of [\(String(describing: self.pfTherapistFileObjectClonedFrom))] with 'self' of [\(String(describing: self))] for Therapist [\(self.sPFTherapistFileName)]...")
+                    self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Called  'self.pfTherapistFileObjectClonedFrom' of [\(String(describing: self.pfTherapistFileObjectClonedFrom))] with 'self' of [\(String(describing: self))] for Therapist [\(self.sPFTherapistFileName)]...")
 
                 }
 
@@ -1164,11 +1169,11 @@ class ParsePFTherapistFileItem:Identifiable
                     self.pfTherapistFileObjectClonedTo != self)
                 {
 
-                //  self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Calling 'self.pfTherapistFileObjectClonedTo' of [\(String(describing: self.pfTherapistFileObjectClonedTo))] with 'self' of [\(String(describing: self))] for Therapist [\(self.sPFTherapistFileName)]...")
+                    self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Calling 'self.pfTherapistFileObjectClonedTo' of [\(String(describing: self.pfTherapistFileObjectClonedTo))] with 'self' of [\(String(describing: self))] for Therapist [\(self.sPFTherapistFileName)]...")
 
                     self.pfTherapistFileObjectClonedTo!.handleLocationAndAddressClosureEvent(bIsDownstreamObject:true, requestID:requestID, dictCurrentLocation:dictCurrentLocation)
 
-                //  self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Called  'self.pfTherapistFileObjectClonedTo' of [\(String(describing: self.pfTherapistFileObjectClonedTo))] with 'self' of [\(String(describing: self))] for Therapist [\(self.sPFTherapistFileName)]...")
+                    self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Called  'self.pfTherapistFileObjectClonedTo' of [\(String(describing: self.pfTherapistFileObjectClonedTo))] with 'self' of [\(String(describing: self))] for Therapist [\(self.sPFTherapistFileName)]...")
 
                 }
             

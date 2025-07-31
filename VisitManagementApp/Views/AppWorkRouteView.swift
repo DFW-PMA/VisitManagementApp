@@ -15,7 +15,7 @@ struct AppWorkRouteView: View
     {
         
         static let sClsId        = "AppWorkRouteView"
-        static let sClsVers      = "v1.2101"
+        static let sClsVers      = "v1.2201"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -168,7 +168,7 @@ struct AppWorkRouteView: View
                     Button
                     {
 
-                        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppWorkRouteView.Button(Xcode).'Sync PFData' pressed...")
+                        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppWorkRouteView.Button(Xcode).'Sync Data' pressed...")
 
                         self.syncPFDataItems()
 
@@ -183,7 +183,7 @@ struct AppWorkRouteView: View
                                 .help(Text("Sync PFQuery Data Item(s)..."))
                                 .imageScale(.small)
 
-                            Text("Sync PFData")
+                            Text("Sync Data")
                                 .font(.caption2)
 
                         }

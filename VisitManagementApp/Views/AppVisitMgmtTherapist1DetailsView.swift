@@ -26,7 +26,7 @@ struct AppVisitMgmtTherapist1DetailsView: View
     {
         
         static let sClsId        = "AppVisitMgmtTherapist1DetailsView"
-        static let sClsVers      = "v1.1601"
+        static let sClsVers      = "v1.1701"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -36,7 +36,7 @@ struct AppVisitMgmtTherapist1DetailsView: View
     
     // App Data field(s):
 
-//  @Environment(\.dismiss) var dismiss
+//  @Environment(\.dismiss)          var dismiss
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.openURL)          var openURL
     @Environment(\.openWindow)       var openWindow
@@ -56,6 +56,7 @@ struct AppVisitMgmtTherapist1DetailsView: View
 
                          var jmAppDelegateVisitor:JmAppDelegateVisitor               = JmAppDelegateVisitor.ClassSingleton.appDelegateVisitor
     @ObservedObject      var jmAppParseCoreManager:JmAppParseCoreManager             = JmAppParseCoreManager.ClassSingleton.appParseCodeManager
+                         var jmAppParseCoreBkgdDataRepo:JmAppParseCoreBkgdDataRepo   = JmAppParseCoreBkgdDataRepo.ClassSingleton.appParseCodeBkgdDataRepo
                          var appScheduleLoadingAssistant:AppScheduleLoadingAssistant = AppScheduleLoadingAssistant.ClassSingleton.appScheduleLoadingAssistant
     
     init(sTherapistTID:Binding<String>)
@@ -168,6 +169,33 @@ struct AppVisitMgmtTherapist1DetailsView: View
                 #endif
                     .padding()
                     .disabled(!self.appScheduleLoadingAssistant.bScheduledPatientLocationItemsAreAvaiable)
+
+                    Spacer()
+
+                    Button
+                    {
+                        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppVisitMgmtView.Button(Xcode).'Sync Data' pressed...")
+
+                        self.syncPFDataItems()
+                    }
+                    label:
+                    {
+                        VStack(alignment:.center)
+                        {
+                            Label("", systemImage: "doc.text.magnifyingglass")
+                                .help(Text("Sync PFQuery Data Item(s)..."))
+                                .imageScale(.medium)
+                            Text("Sync Data")
+                                .font(.footnote)
+                        }
+                    }
+                    .padding()
+                #if os(macOS)
+                    .buttonStyle(.borderedProminent)
+                //  .background(???.isPressed ? .blue : .gray)
+                    .cornerRadius(10)
+                    .foregroundColor(Color.primary)
+                #endif
 
                     Spacer()
 
@@ -950,5 +978,77 @@ struct AppVisitMgmtTherapist1DetailsView: View
         return bIsOptionalDateOlderThanPrevSat
         
     }   // End of private func isOptionalDateOlderThanPrevSat(dateOptional:Date?)->String.
+
+    private func syncPFDataItems()
+    {
+  
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+        
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+
+        // 'sync' (aka, deep copy) the ParseCoreBkgdDataRepo PFCscDataItem(s) to the ParseCoreManager...
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFAdminsDataItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictPFAdminsDataItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFAdminsDataItems()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictTherapistTidXref()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictTherapistTidXref()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictTherapistTidXref()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFTherapistFileItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictPFTherapistFileItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFTherapistFileItems()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPatientPidXref()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictPatientPidXref()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPatientPidXref()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFPatientFileItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictPFPatientFileItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictPFPatientFileItems()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyDictSchedPatientLocItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyDictSchedPatientLocItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyDictSchedPatientLocItems()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyListPFCscDataItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyListPFCscDataItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyListPFCscDataItems()'...")
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'jmAppParseCoreBkgdDataRepo' 'deepCopyListPFCscNameItems()'...")
+
+        let _ = self.jmAppParseCoreBkgdDataRepo.deepCopyListPFCscNameItems()
+
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked  'jmAppParseCoreBkgdDataRepo' 'deepCopyListPFCscNameItems()'...")
+
+    //  self.xcgLogMsg("\(sCurrMethodDisp) Invoking 'self.detailPFCscDataItems()'...")
+    //
+    //  self.detailPFCscDataItems()
+    //
+    //  self.xcgLogMsg("\(sCurrMethodDisp) Invoked 'self.detailPFCscDataItems()'...")
+
+        // Exit...
+  
+        self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
+  
+        return
+  
+    }   // End of private func syncPFDataItems().
 
 }   // End of struct AppVisitMgmtTherapist1DetailsView(View).

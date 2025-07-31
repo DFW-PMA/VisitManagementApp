@@ -16,7 +16,7 @@ struct AppSchedPatLocView: View
     {
         
         static let sClsId        = "AppSchedPatLocView"
-        static let sClsVers      = "v1.1601"
+        static let sClsVers      = "v1.1701"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -165,27 +165,20 @@ struct AppSchedPatLocView: View
 
                     Button
                     {
-
-                        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppSchedPatLocView.Button(Xcode).'Sync PFData' pressed...")
+                        let _ = xcgLogMsg("\(ClassInfo.sClsDisp):AppSchedPatLocView.Button(Xcode).'Sync Data' pressed...")
 
                         self.syncPFDataItems()
-
                     }
                     label:
                     {
-
                         VStack(alignment:.center)
                         {
-
                             Label("", systemImage: "doc.text.magnifyingglass")
                                 .help(Text("Sync PFQuery Data Item(s)..."))
                                 .imageScale(.medium)
-
                             Text("Sync Data")
                                 .font(.footnote)
-
                         }
-
                     }
                     .padding()
                 #if os(macOS)
