@@ -16,7 +16,7 @@ struct AppLogPFDataView:View
     {
         
         static let sClsId        = "AppLogPFDataView"
-        static let sClsVers      = "v1.2005"
+        static let sClsVers      = "v1.2103"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -386,7 +386,7 @@ struct AppLogPFDataView:View
                                         .help(Text("Reload PFData for PFAdmins..."))
                                         .imageScale(.small)
 
-                                    Text("Reload PFData (PFAdmins) - #(\(self.jmAppSwiftDataManager.pfAdminsSwiftDataItems.count)) item(s) - #(\(self.cAppLogPFDataReloadPFAdminsButtonPresses))...")
+                                    Text("Reload PFData (PFAdmins) - #(\(self.jmAppParseCoreManager.dictPFAdminsDataItems.count)):#(\(self.jmAppParseCoreBkgdDataRepo.dictPFAdminsDataItems.count)):#(\(self.jmAppSwiftDataManager.pfAdminsSwiftDataItems.count)) item(s) - #(\(self.cAppLogPFDataReloadPFAdminsButtonPresses))...")
                                         .font(.caption2)
 
                                     Spacer()
@@ -508,7 +508,7 @@ struct AppLogPFDataView:View
                                         .help(Text("Reload PFData for PFTherapistFile..."))
                                         .imageScale(.small)
 
-                                    Text("Reload PFData (PFTherapistFile) - #(\(self.jmAppParseCoreBkgdDataRepo.dictPFTherapistFileItems.count)) item(s) - #(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses))...")
+                                    Text("Reload PFData (PFTherapistFile) - #(\(self.jmAppParseCoreManager.dictPFTherapistFileItems.count)):#(\(self.jmAppParseCoreBkgdDataRepo.dictPFTherapistFileItems.count)):#(\(self.jmAppSwiftDataManager.pfTherapistFileSwiftDataItems.count)) item(s) - #(\(self.cAppLogPFDataReloadPFTherapistFileButtonPresses))...")
                                         .font(.caption2)
 
                                     Spacer()
@@ -1714,6 +1714,23 @@ struct AppLogPFDataView:View
 
         }
 
+        // Fetch the SwiftData for PFTherapistFile item(s)...
+
+        if (self.jmAppSwiftDataManager.modelContext != nil)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Fetch> Invoking 'self.jmAppSwiftDataManager.fetchAppTherapistFileSwiftData()'...")
+
+            self.jmAppSwiftDataManager.fetchAppTherapistFileSwiftData(bShowDetailAfterFetch:false)
+
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Fetch> Invoked  'self.jmAppSwiftDataManager.fetchAppTherapistFileSwiftData()'...")
+        }
+        else
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Fetch> Unable to 'fetch' the SwiftData for PFTherapistFile - 'self.jmAppSwiftDataManager.modelContext' is nil - Error!") 
+        }
+
+        self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Fetch> SwiftData now has #(\(self.jmAppSwiftDataManager.pfTherapistFileSwiftDataItems.count)) PFTherapistFile item(s)...")
+    
         // Exit:
 
         self.xcgLogMsg("\(sCurrMethodDisp) Exiting...")
@@ -2147,6 +2164,23 @@ struct AppLogPFDataView:View
         
     //  self.isAppLogPFDataReloading = false
     //  self.progressTrigger.isProgressOverlayOn = false
+
+        // Fetch the SwiftData for PFTherapistFile item(s)...
+
+        if (self.jmAppSwiftDataManager.modelContext != nil)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Fetch> Invoking 'self.jmAppSwiftDataManager.fetchAppTherapistFileSwiftData()'...")
+
+            self.jmAppSwiftDataManager.fetchAppTherapistFileSwiftData(bShowDetailAfterFetch:false)
+
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Fetch> Invoked  'self.jmAppSwiftDataManager.fetchAppTherapistFileSwiftData()'...")
+        }
+        else
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Fetch> Unable to 'fetch' the SwiftData for PFTherapistFile - 'self.jmAppSwiftDataManager.modelContext' is nil - Error!") 
+        }
+
+        self.xcgLogMsg("\(sCurrMethodDisp) <SwiftData Fetch> SwiftData now has #(\(self.jmAppSwiftDataManager.pfTherapistFileSwiftDataItems.count)) PFTherapistFile item(s)...")
 
         // Exit:
 

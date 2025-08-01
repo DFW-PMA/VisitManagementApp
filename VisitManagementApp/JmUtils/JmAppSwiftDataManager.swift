@@ -17,7 +17,7 @@ public class JmAppSwiftDataManager:NSObject, ObservableObject
     {
         
         static let sClsId        = "JmAppSwiftDataManager"
-        static let sClsVers      = "v1.0803"
+        static let sClsVers      = "v1.0901"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2024-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -341,11 +341,11 @@ public class JmAppSwiftDataManager:NSObject, ObservableObject
             //
             //  self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager Invoked  'self.sortAppSwiftDataAlarmItems()'...")
 
-                self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager Invoking 'self.fetchAppTherapistFileSwiftData()' to get 'TherapistFile' item(s)...")
-
-                self.fetchAppTherapistFileSwiftData(bShowDetailAfterFetch:true)
-
-                self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager Invoked  'self.fetchAppTherapistFileSwiftData()' to get 'TherapistFile' item(s)...")
+            //  self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager Invoking 'self.fetchAppTherapistFileSwiftData()' to get 'TherapistFile' item(s)...")
+            //
+            //  self.fetchAppTherapistFileSwiftData(bShowDetailAfterFetch:true)
+            //
+            //  self.xcgLogMsg("\(sCurrMethodDisp) SwiftDataManager Invoked  'self.fetchAppTherapistFileSwiftData()' to get 'TherapistFile' item(s)...")
           
             }
 

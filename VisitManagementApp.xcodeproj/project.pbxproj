@@ -167,6 +167,8 @@
 		F0BD25062DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BD25042DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift */; };
 		F0C6A8FF2C4AA2A40004606A /* ObjcExceptionBridging in Frameworks */ = {isa = PBXBuildFile; productRef = F0C6A8FE2C4AA2A40004606A /* ObjcExceptionBridging */; settings = {ATTRIBUTES = (Required, ); }; };
 		F0C6A9012C4AA2A40004606A /* XCGLogger in Frameworks */ = {isa = PBXBuildFile; productRef = F0C6A9002C4AA2A40004606A /* XCGLogger */; };
+		F0C96EE82E3D1E000031CAF7 /* CoreLocationSiteDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C96EE72E3D1E000031CAF7 /* CoreLocationSiteDetailsView.swift */; };
+		F0C96EE92E3D1E000031CAF7 /* CoreLocationSiteDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C96EE72E3D1E000031CAF7 /* CoreLocationSiteDetailsView.swift */; };
 		F0CBE9002CEBDD6E00B0625E /* AppWorkRouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CBE8FF2CEBDD6E00B0625E /* AppWorkRouteMapView.swift */; };
 		F0CBE9012CEBDD6E00B0625E /* AppWorkRouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CBE8FF2CEBDD6E00B0625E /* AppWorkRouteMapView.swift */; };
 		F0D0AD142D5F956B00C34916 /* AppScheduleLoadingAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0AD132D5F956B00C34916 /* AppScheduleLoadingAssistant.swift */; };
@@ -301,6 +303,7 @@
 		F0BCCC4F2C820ECB007EA382 /* VisitManagementAppUIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitManagementAppUIAppDelegate.swift; sourceTree = "<group>"; };
 		F0BCCC762C820EF1007EA382 /* VisitManagementApp_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisitManagementApp_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0BD25042DB17F5800A85934 /* AppVisitMgmtExportAudit1DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVisitMgmtExportAudit1DetailsView.swift; sourceTree = "<group>"; };
+		F0C96EE72E3D1E000031CAF7 /* CoreLocationSiteDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationSiteDetailsView.swift; sourceTree = "<group>"; };
 		F0CBE8FF2CEBDD6E00B0625E /* AppWorkRouteMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWorkRouteMapView.swift; sourceTree = "<group>"; };
 		F0D0AD132D5F956B00C34916 /* AppScheduleLoadingAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScheduleLoadingAssistant.swift; sourceTree = "<group>"; };
 		F0D17B872C52E414000E5A52 /* JmFileIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JmFileIO.swift; sourceTree = "<group>"; };
@@ -456,6 +459,7 @@
 		F028C5BF2C486134007C459E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F0C96EE72E3D1E000031CAF7 /* CoreLocationSiteDetailsView.swift */,
 				F0FA3C622E26992100F1A4E6 /* AppDetailsView.swift */,
 				F09B7EBA2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift */,
 				F09B7EB72DE77AB60031B9E8 /* AppVisitMgmtCoreLocMapView.swift */,
@@ -753,6 +757,7 @@
 				F0D17B892C52E414000E5A52 /* JmFileIO.swift in Sources */,
 				F0289D292C53D85B001B19CD /* JmUserDefaults.swift in Sources */,
 				F0DC5D312CDBCE7A009F0090 /* MultipartZipFileService.swift in Sources */,
+				F0C96EE92E3D1E000031CAF7 /* CoreLocationSiteDetailsView.swift in Sources */,
 				F0D17B8D2C52E572000E5A52 /* AppInfoCommands.swift in Sources */,
 				F09B7EBC2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift in Sources */,
 				F0F717802DAEE43600E7CA2A /* ParsePFBackupFileItem.swift in Sources */,
@@ -847,6 +852,7 @@
 				F05EDC352D53FA2F00306C62 /* AppVisitMgmtPatient1View.swift in Sources */,
 				F05EDC362D53FA2F00306C62 /* AppVisitMgmtPatient2View.swift in Sources */,
 				F0A8FB3E2D650BBF00ADD658 /* AppSchedPatLocMapView.swift in Sources */,
+				F0C96EE82E3D1E000031CAF7 /* CoreLocationSiteDetailsView.swift in Sources */,
 				F00DC4A12DA7FD3A004B07DC /* AppVisitMgmtSchedule1ExportView.swift in Sources */,
 				F09B7EBB2DE7A78B0031B9E8 /* AppVisitMgmtCoreLocMapContainer.swift in Sources */,
 				F0BCCC682C820EF1007EA382 /* JmStringExtensions.swift in Sources */,
@@ -1007,7 +1013,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 22.07.25C212;
+				CURRENT_PROJECT_VERSION = 23.01.25C213;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1051,7 +1057,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisitManagementApp/VisitManagementApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 22.07.25C212;
+				CURRENT_PROJECT_VERSION = 23.01.25C213;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1095,7 +1101,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 22.07.25C212;
+				CURRENT_PROJECT_VERSION = 23.10.25C213;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";
@@ -1148,7 +1154,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 22.07.25C212;
+				CURRENT_PROJECT_VERSION = 23.10.25C213;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VisitManagementApp/Preview Content\"";

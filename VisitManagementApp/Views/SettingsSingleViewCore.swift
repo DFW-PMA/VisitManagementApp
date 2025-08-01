@@ -15,7 +15,7 @@ struct SettingsSingleViewCore: View
     {
         
         static let sClsId        = "SettingsSingleViewCore"
-        static let sClsVers      = "v1.2801"
+        static let sClsVers      = "v1.2901"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -25,18 +25,21 @@ struct SettingsSingleViewCore: View
     
     // App Data field(s):
 
-//  @Environment(\.dismiss)              var dismiss
-    @Environment(\.presentationMode)     var presentationMode
-    @Environment(\.openURL)              var openURL
-    @Environment(\.openWindow)           var openWindow
-    
+//  @Environment(\.dismiss)             var dismiss
+    @Environment(\.presentationMode)    var presentationMode
+    @Environment(\.openWindow)          var openWindow
+    @Environment(\.openURL)             var openURL
+    @Environment(\.appGlobalDeviceType) var appGlobalDeviceType
+
            private var bInternalZipTest:Bool                                 = false
 
     @State private var cAppLogPFDataButtonPresses:Int                        = 0
+    @State private var cContentViewSiteDetailsButtonPresses:Int              = 0
     @State private var cAppZipFileButtonPresses:Int                          = 0
     @State private var cAppCrashButtonPresses:Int                            = 0
 
     @State private var isAppLogPFDataViewModal:Bool                          = false
+    @State private var isAppSiteDetailsViewModal:Bool                        = false
     @State private var isAppZipFileShowing:Bool                              = false
     @State private var isAppCrashShowing:Bool                                = false
 
@@ -549,12 +552,10 @@ struct SettingsSingleViewCore: View
       
                 HStack(alignment:.center)
                 {
-      
                     Spacer()
 
                     Button
                     {
-
                         self.cAppLogPFDataButtonPresses += 1
 
                         let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):SettingsSingleViewCore.Button(Xcode).'Log/Reload Data'.#(\(self.cAppLogPFDataButtonPresses)) pressed...")
@@ -568,19 +569,14 @@ struct SettingsSingleViewCore: View
                     }
                     label:
                     {
-
                         VStack(alignment:.center)
                         {
-
                             Label("", systemImage: "doc.text.magnifyingglass")
                                 .help(Text("Log PFXxxDataItem(s)..."))
                                 .imageScale(.small)
-
                             Text("Log/Reload Data")
                                 .font(.caption2)
-
                         }
-
                     }
             //  #if os(macOS)
             //      .sheet(isPresented:$isAppLogPFDataViewModal, content:
@@ -602,6 +598,48 @@ struct SettingsSingleViewCore: View
                     .padding()
                 #if os(macOS)
                     .buttonStyle(.borderedProminent)
+                //  .background(???.isPressed ? .blue : .gray)
+                    .cornerRadius(10)
+                    .foregroundColor(Color.primary)
+                #endif
+
+                    Spacer()
+
+                    Button
+                    {
+                        self.cContentViewSiteDetailsButtonPresses += 1
+
+                        let _ = xcgLogMsg("\(ClassInfo.sClsDisp)SettingsSingleViewCore.Button(Xcode).'Site Detail(s)'.#(\(self.cContentViewSiteDetailsButtonPresses))...")
+
+                        self.isAppSiteDetailsViewModal.toggle()
+                    }
+                    label:
+                    {
+                        VStack(alignment:.center)
+                        {
+                            Label("", systemImage: "location.fill.viewfinder")
+                                .help(Text("App 'site' Information Screen..."))
+                                .imageScale(.large)
+                            Text("Site")
+                                .font(.caption)
+                        }
+                    }
+                #if os(macOS)
+                    .sheet(isPresented:$isAppSiteDetailsViewModal, content:
+                        {
+                            CoreLocationSiteDetailsView()
+                        }
+                    )
+                #endif
+                #if os(iOS)
+                    .fullScreenCover(isPresented:$isAppSiteDetailsViewModal)
+                    {
+                        CoreLocationSiteDetailsView()
+                    }
+                #endif
+                #if os(macOS)
+                    .buttonStyle(.borderedProminent)
+                    .padding()
                 //  .background(???.isPressed ? .blue : .gray)
                     .cornerRadius(10)
                     .foregroundColor(Color.primary)

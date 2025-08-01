@@ -21,7 +21,7 @@ class ParsePFTherapistFileItem:Identifiable
     {
         
         static let sClsId        = "ParsePFTherapistFileItem"
-        static let sClsVers      = "v1.1403"
+        static let sClsVers      = "v1.1501"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -1133,7 +1133,7 @@ class ParsePFTherapistFileItem:Identifiable
 
     //  self.xcgLogMsg("\(sCurrMethodDisp) Invoked - 'self' is [\(String(describing: self))] for Therapist [\(self.idPFTherapistFileObject)] - parameter 'bIsDownstreamObject' is [\(bIsDownstreamObject)] - 'requestID' is [\(requestID)] - 'dictCurrentLocation' is [\(String(describing: dictCurrentLocation))]...")
     //  self.xcgLogMsg("\(sCurrMethodDisp) Invoked - for Therapist [\(self.idPFTherapistFileObject)] - parameter 'bIsDownstreamObject' is [\(bIsDownstreamObject)]...")
-        self.xcgLogMsg("\(sCurrMethodDisp) Invoked - for Therapist #(\(self.iPFTherapistFileTID))/[\(self.sPFTherapistFileName)] - 'self.dblConvertedLatitude' is [\(self.dblConvertedLatitude)] and 'self.dblConvertedLongitude' is [\(self.dblConvertedLongitude)] - parameter 'bIsDownstreamObject' is [\(bIsDownstreamObject)] - 'requestID' is [\(requestID)] - 'dictCurrentLocation' is [\(String(describing: dictCurrentLocation))]...")
+        self.xcgLogMsg("\(sCurrMethodDisp) Invoked <closure> - for Therapist #(\(self.iPFTherapistFileTID))/[\(self.sPFTherapistFileName)] - 'self.dblConvertedLatitude' is [\(self.dblConvertedLatitude)] and 'self.dblConvertedLongitude' is [\(self.dblConvertedLongitude)] - parameter 'bIsDownstreamObject' is [\(bIsDownstreamObject)] - 'requestID' is [\(requestID)] - 'dictCurrentLocation' is [\(String(describing: dictCurrentLocation))]...")
 
         // Update the address info for BOTH 'self' and (possibly 'from'/'to')...
 
@@ -1183,7 +1183,7 @@ class ParsePFTherapistFileItem:Identifiable
         else
         {
 
-            self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): Dictionary 'dictCurrentLocation' is 'empty' - bypassing update - Warning!")
+            self.xcgLogMsg("\(sCurrMethodDisp) #(\(requestID)): <closure> Dictionary 'dictCurrentLocation' is 'empty' - bypassing update - Warning!")
 
             self.bHomeLocAddessLookupComplete = false
 

@@ -26,7 +26,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
     {
         
         static let sClsId        = "CoreLocationModelObservable2"
-        static let sClsVers      = "v1.1601"
+        static let sClsVers      = "v1.1711"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -58,6 +58,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
     @Published var clAuthorizationStatus:CLAuthorizationStatus       = .notDetermined
     @Published var clLocationAccuracy:CLLocationAccuracy             = 0.000000
     @Published var clLocationLastUpdateTimestamp:Date                = Date()
+    @Published var clLocationGPSTolerance:Double                     = 1e-10     // GPS location (double) tollerance...
 
     @Published var bCLLocationUpdateIsPossiblyThrottling:Bool        = false
                var clLocationPendingRequestsTimestamps:[UUID:Date]   = [UUID:Date]()
@@ -173,6 +174,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         asToString.append("'clAuthorizationStatus': [\(String(describing: self.clAuthorizationStatus))],")
         asToString.append("'clLocationAccuracy': (\(String(describing: self.clLocationAccuracy))),")
         asToString.append("'clLocationLastUpdateTimestamp': [\(String(describing: self.clLocationLastUpdateTimestamp))],")
+        asToString.append("'clLocationGPSTolerance': [\(String(describing: self.clLocationGPSTolerance))],")
         asToString.append("],")
         asToString.append("[")
         asToString.append("'bCLLocationUpdateIsPossiblyThrottling': [\(String(describing: self.bCLLocationUpdateIsPossiblyThrottling))],")
@@ -668,15 +670,41 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         let sCurrMethod:String = #function
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
 
+        let bIsLatitudeNearlyZero:Bool  = self.isDoubleValueNearlyZero(dblValue:latitude)
+        let bIsLongitudeNearlyZero:Bool = self.isDoubleValueNearlyZero(dblValue:longitude)
+
         if (self.bInternalTraceFlag == true)
         {
-            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - 'latitude' is (\(latitude)) - 'longitude' is (\(longitude))...")
+            self.xcgLogMsg("\(sCurrMethodDisp) <CLRequest> Invoked - 'latitude' is (\(latitude)) <'nearly' Zero [\(bIsLatitudeNearlyZero)]> - 'longitude' is (\(longitude)) <'nearly' Zero [\(bIsLongitudeNearlyZero)]>...")
+        }
+
+        // If the Latitude/Longitude values are 'nearly' Zero, then return a 'dummy' dictionary to the completionHandler...
+
+        var bGeocoderSuccessful:Bool = false
+
+        self.clearLastCLLocationSettings()
+
+        if (bIsLatitudeNearlyZero  == true &&
+            bIsLongitudeNearlyZero == true)
+        {
+            // Exit...
+
+            bGeocoderSuccessful = true
+
+        //  OOOPS: There are NO 'requestID' nor 'completionHandler()' parameters in this method...
+        //
+        //  completionHandler(requestID, self.generateANearlyZeroCurrentLocationDictionary())
+
+            if (self.bInternalTraceFlag == true)
+            {
+                self.xcgLogMsg("\(sCurrMethodDisp) Exiting <CLRequest> - 'dummy' dictionary - 'bGeocoderSuccessful' is [\(bGeocoderSuccessful)]...")
+            }
+
+            return bGeocoderSuccessful
         }
 
         // Instantiate a CLGeocoder and attempt to convert latitude/longitude into an address...
 
-        self.clearLastCLLocationSettings()
-        
         let clGeocoder:CLGeocoder      = CLGeocoder()
         let currentLocation:CLLocation = CLLocation(latitude:latitude, longitude:longitude)
 
@@ -738,12 +766,12 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
         if (self.bInternalTraceFlag == true)
         {
-            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - returning 'true'...")
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting <CLRequest> - returning 'true'...")
         }
     
         return true
         
-    }   // End of public func updateGeocoderLocations().
+    }   // End of public func updateGeocoderLocation().
 
     public func updateGeocoderLocations(requestID:Int = 1, latitude:Double, longitude:Double, withCompletionHandler completionHandler:@escaping(_ requestID:Int, _ dictCurrentLocation:[String:Any])->Void)->Bool
     {
@@ -751,17 +779,39 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         let sCurrMethod:String = #function
         let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
 
+        let bIsLatitudeNearlyZero:Bool  = self.isDoubleValueNearlyZero(dblValue:latitude)
+        let bIsLongitudeNearlyZero:Bool = self.isDoubleValueNearlyZero(dblValue:longitude)
+
         if (self.bInternalTraceFlag == true)
         {
-            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - 'requestID' is (\(requestID)) - 'latitude' is (\(latitude)) - 'longitude' is (\(longitude))...")
+            self.xcgLogMsg("\(sCurrMethodDisp) <CLRequest> Invoked - 'requestID' is (\(requestID)) - 'latitude' is (\(latitude)) <'nearly' Zero [\(bIsLatitudeNearlyZero)]> - 'longitude' is (\(longitude)) <'nearly' Zero [\(bIsLongitudeNearlyZero)]>...")
         }
-    
+
+        // If the Latitude/Longitude values are 'nearly' Zero, then return a 'dummy' dictionary to the completionHandler...
+
         var bGeocoderSuccessful:Bool = false
+
+        self.clearLastCLLocationSettings()
+
+        if (bIsLatitudeNearlyZero  == true &&
+            bIsLongitudeNearlyZero == true)
+        {
+            // Exit...
+
+            bGeocoderSuccessful = true
+
+            completionHandler(requestID, self.generateANearlyZeroCurrentLocationDictionary())
+
+            if (self.bInternalTraceFlag == true)
+            {
+                self.xcgLogMsg("\(sCurrMethodDisp) Exiting <CLRequest> - 'dummy' dictionary - 'bGeocoderSuccessful' is [\(bGeocoderSuccessful)]...")
+            }
+
+            return bGeocoderSuccessful
+        }
 
         // Instantiate a CLGeocoder and attempt to convert latitude/longitude into an address...
 
-        self.clearLastCLLocationSettings()
-        
         let clGeocoder:CLGeocoder      = CLGeocoder()
         let currentLocation:CLLocation = CLLocation(latitude:latitude, longitude:longitude)
 
@@ -860,7 +910,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
                     self.xcgLogMsg("\(sCurrMethodDisp) Exiting <CLRequest> - 'bGeocoderSuccessful' is [\(bGeocoderSuccessful)]...")
                 }
 
-                return
+                return 
             })
 
         // Exit...
@@ -1262,6 +1312,125 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         return true
         
     }   // End of func locationManagerShouldDisplayHeadingCalibration(_ manager:CLLocationManager)->Bool.
+
+    private func isDoubleValueNearlyZero(dblValue:Double)->Bool
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+
+        if (self.bInternalTraceFlag == true)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) Invoked - 'dblValue' is (\(dblValue))...")
+        }
+
+        // Determine if the Double value parameter is 'nearly' Zero...
+    
+        var bIsDoubleValueNearlyZero:Bool = false
+
+        if (abs(dblValue) > self.clLocationGPSTolerance)
+        {
+            bIsDoubleValueNearlyZero = false
+        }
+        else
+        {
+            bIsDoubleValueNearlyZero = true
+        }
+
+        // Exit...
+
+        if (self.bInternalTraceFlag == true)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - 'dblValue' was (\(dblValue)) - 'self.clLocationGPSTolerance' is (\(self.clLocationGPSTolerance)) - returning 'bIsDoubleValueNearlyZero' of [\(bIsDoubleValueNearlyZero)]...")
+        }
+    
+        return bIsDoubleValueNearlyZero
+        
+    }   // End of private func isDoubleValueNearlyZero(dblValue:Double)->Bool.
+
+    private func generateANearlyZeroCurrentLocationDictionary()->[String:Any]
+    {
+        
+        let sCurrMethod:String = #function
+        let sCurrMethodDisp    = "\(ClassInfo.sClsDisp)'"+sCurrMethod+"':"
+
+        if (self.bInternalTraceFlag == true)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) Invoked...")
+        }
+
+        // Create a few objects for inclusion in the generated dictionary...
+
+        let clCurrentLocation:CLLocation    = CLLocation(coordinate:        CLLocationCoordinate2D(latitude:0.000000, longitude:0.000000),
+                                                         altitude:          100.0,
+                                                         horizontalAccuracy:5.0,
+                                                         verticalAccuracy:  10.0,
+                                                         course:            1.0,
+                                                         courseAccuracy:    5.0,       // degrees (course accuracy)
+                                                         speed:             1.0,
+                                                         speedAccuracy:     2.0,       // meters per second (speed accuracy)
+                                                         timestamp:         Date())
+
+        let clCurrentHeadingAccuracy:Double = 0.000000
+
+
+        let clCurrentRegion:CLRegion?       = CLCircularRegion(center:CLLocationCoordinate2D(latitude:0.000000, longitude:0.000000),
+                                                               radius:    10.0,
+                                                               identifier:"<+0.00000000,-0.00000000> radius 10.0")
+
+        // Generate a 'dictCurrentLocation' for a 'nearly' Zero current location...
+    
+        var dictCurrentLocation:[String:Any]                 = [String:Any]()
+
+        dictCurrentLocation["iRequestID"]                    = "0"
+        dictCurrentLocation["sRequestError"]                 = ""
+        dictCurrentLocation["sRequestAddress"]               = ""
+        dictCurrentLocation["dblLatitude"]                   = "0.0"
+        dictCurrentLocation["dblLongitude"]                  = "0.0"
+
+        dictCurrentLocation["clCurrentLocation"]             = clCurrentLocation
+        dictCurrentLocation["clCurrentHeadingAccuracy"]      = clCurrentHeadingAccuracy
+
+        dictCurrentLocation["sCurrentLocationName"]          = "North Atlantic Ocean"         
+        dictCurrentLocation["sCurrentCity"]                  = "-N/A-"                 
+        dictCurrentLocation["sCurrentCountry"]               = "-N/A-"              
+        dictCurrentLocation["sCurrentPostalCode"]            = "-N/A-"           
+        dictCurrentLocation["tzCurrentTimeZone"]             = TimeZone.current            
+        dictCurrentLocation["clCurrentRegion"]               = clCurrentRegion              
+        dictCurrentLocation["sCurrentSubLocality"]           = "-N/A-"          
+        dictCurrentLocation["sCurrentThoroughfare"]          = "-N/A-"         
+        dictCurrentLocation["sCurrentSubThoroughfare"]       = "-N/A-"      
+        dictCurrentLocation["sCurrentAdministrativeArea"]    = "-N/A-"   
+        dictCurrentLocation["sCurrentSubAdministrativeArea"] = "-N/A-"
+        dictCurrentLocation["sCurrentLocationAddress"]       = "North Atlantic Ocean, -N/A-, -N/A-, -N/A-"         
+
+        // Mirror the 'dummy' dictionary values in 'self.' fields...
+
+        self.clCurrentLocation             = dictCurrentLocation["clCurrentLocation"]             as? CLLocation
+        self.clCurrentHeadingAccuracy      = dictCurrentLocation["clCurrentHeadingAccuracy"]      as! CLLocationDirection
+
+        self.sCurrentLocationName          = dictCurrentLocation["sCurrentLocationName"]          as! String
+        self.sCurrentCity                  = dictCurrentLocation["sCurrentCity"]                  as! String
+        self.sCurrentCountry               = dictCurrentLocation["sCurrentCountry"]               as! String
+        self.sCurrentPostalCode            = dictCurrentLocation["sCurrentPostalCode"]            as! String
+        self.tzCurrentTimeZone             = dictCurrentLocation["tzCurrentTimeZone"]             as? TimeZone
+        self.clCurrentRegion               = dictCurrentLocation["clCurrentRegion"]               as? CLRegion
+        self.sCurrentSubLocality           = dictCurrentLocation["sCurrentSubLocality"]           as! String
+        self.sCurrentThoroughfare          = dictCurrentLocation["sCurrentThoroughfare"]          as! String
+        self.sCurrentSubThoroughfare       = dictCurrentLocation["sCurrentSubThoroughfare"]       as! String
+        self.sCurrentAdministrativeArea    = dictCurrentLocation["sCurrentAdministrativeArea"]    as! String
+        self.sCurrentSubAdministrativeArea = dictCurrentLocation["sCurrentSubAdministrativeArea"] as! String
+
+        // Exit...
+
+        if (self.bInternalTraceFlag == true)
+        {
+            self.xcgLogMsg("\(sCurrMethodDisp) Exiting - returning 'dictCurrentLocation' of [\(dictCurrentLocation)]...")
+        }
+    
+        return dictCurrentLocation
+        
+    }   // End of generateANearlyZeroCurrentLocationDictionary()->[String:Any].
 
 }   // End of class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, ObservableObject.
 
