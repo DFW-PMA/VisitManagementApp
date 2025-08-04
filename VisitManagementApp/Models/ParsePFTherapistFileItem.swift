@@ -19,14 +19,12 @@ class ParsePFTherapistFileItem:Identifiable
     @Transient
     struct ClassInfo
     {
-        
         static let sClsId        = "ParsePFTherapistFileItem"
-        static let sClsVers      = "v1.1501"
+        static let sClsVers      = "v1.1601"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
         static let bClsFileLog   = true
-        
     }
 
     // 'Internal' Trace flag(s):

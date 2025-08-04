@@ -26,7 +26,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
     {
         
         static let sClsId        = "CoreLocationModelObservable2"
-        static let sClsVers      = "v1.1711"
+        static let sClsVers      = "v1.1803"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -66,6 +66,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
                let clLocationMaxResponseTimeHistory:Int              = 20
                let clLocationMaxRequestIsStale:TimeInterval          = 20.0000
     @Published var clLocationRequestAverageResponseTime:TimeInterval = 0.0000
+    @Published var cLocationRequestsTotal:Int                        = 0
 
     @Published var bCLManagerHeadingAvailable:Bool                   = false
     @Published var clCurrentHeading:CLHeading?                       = nil
@@ -183,6 +184,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         asToString.append("'clLocationMaxResponseTimeHistory': (\(String(describing: self.clLocationMaxResponseTimeHistory))),")
         asToString.append("'clLocationMaxRequestIsStale': (\(String(describing: self.clLocationMaxRequestIsStale))),")
         asToString.append("'clLocationRequestAverageResponseTime': (\(String(describing: self.clLocationRequestAverageResponseTime))),")
+        asToString.append("'cLocationRequestsTotal': (\(String(describing: self.cLocationRequestsTotal))),")
         asToString.append("],")
         asToString.append("[")
         asToString.append("'bCLManagerHeadingAvailable': [\(String(describing: self.bCLManagerHeadingAvailable))],")
@@ -294,7 +296,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
     }   // End of private func runPostInitializationTasks().
 
-    public func startCLLocationUpdateRequest()->UUID
+    public func startCLLocationUpdateRequest(latitude:Double = 0.000000, longitude:Double = 0.000000, address:String = "")->UUID
     {
 
         let sCurrMethod:String = #function
@@ -307,8 +309,9 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
         // Record the start of a CLLocation update request...
 
-        let uuidCLLocationRequest:UUID = UUID()
-        let dateNow:Date               = Date()
+        self.cLocationRequestsTotal    += 1
+        let uuidCLLocationRequest:UUID  = UUID()
+        let dateNow:Date                = Date()
 
         self.clLocationPendingRequestsTimestamps[uuidCLLocationRequest] = dateNow
 
@@ -333,7 +336,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
     }   // End of public func startCLLocationUpdateRequest()->UUID.
 
-    public func stopCLLocationUpdateRequest(uuidCLLocationRequest:UUID)->TimeInterval
+    public func stopCLLocationUpdateRequest(uuidCLLocationRequest:UUID, dictCurrentLocation:[String:Any])->TimeInterval
     {
 
         let sCurrMethod:String = #function
@@ -351,7 +354,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         
         let tiClLocationRequest = Date().timeIntervalSince(dateClLocationRequestStart)
 
-        self.recordCLLocationUpdateResponseTime(tiClLocationRequest:tiClLocationRequest)
+        self.recordCLLocationUpdateResponseTime(tiClLocationRequest:tiClLocationRequest, dictCurrentLocation:dictCurrentLocation)
 
         // Exit:
 
@@ -364,7 +367,7 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
     }   // End of public func stopCLLocationUpdateRequest(uuidCLLocationRequest:UUID)->TimeInterval.
 
-    private func recordCLLocationUpdateResponseTime(tiClLocationRequest:TimeInterval)
+    private func recordCLLocationUpdateResponseTime(tiClLocationRequest:TimeInterval, dictCurrentLocation:[String:Any])
     {
 
         let sCurrMethod:String = #function
@@ -708,12 +711,20 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         let clGeocoder:CLGeocoder      = CLGeocoder()
         let currentLocation:CLLocation = CLLocation(latitude:latitude, longitude:longitude)
 
-        let uuidCLLocationRequest:UUID = self.startCLLocationUpdateRequest()
+        let uuidCLLocationRequest:UUID = self.startCLLocationUpdateRequest(latitude:latitude, longitude:longitude)
         
         clGeocoder.reverseGeocodeLocation(currentLocation, completionHandler: 
             { (placemarks, error) in
 
-                let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest)
+            //  let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest)
+
+                var dictCurrentLocation:[String:Any]   = [String:Any]()
+
+                dictCurrentLocation["iRequestID"]      = "0"
+                dictCurrentLocation["sRequestError"]   = ""
+                dictCurrentLocation["sRequestAddress"] = ""
+                dictCurrentLocation["dblLatitude"]     = "\(latitude)"
+                dictCurrentLocation["dblLongitude"]    = "\(longitude)"
 
                 if error == nil 
                 {
@@ -739,6 +750,39 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
                     let _ = self.updateCoreLocationSiteItemList()
 
+                    dictCurrentLocation["clCurrentLocation"]             = self.clCurrentLocation
+                    dictCurrentLocation["clCurrentHeadingAccuracy"]      = self.clCurrentHeadingAccuracy
+
+                    dictCurrentLocation["sCurrentLocationName"]          = self.sCurrentLocationName         
+                    dictCurrentLocation["sCurrentCity"]                  = self.sCurrentCity                 
+                    dictCurrentLocation["sCurrentCountry"]               = self.sCurrentCountry              
+                    dictCurrentLocation["sCurrentPostalCode"]            = self.sCurrentPostalCode           
+                    dictCurrentLocation["tzCurrentTimeZone"]             = self.tzCurrentTimeZone            
+                    dictCurrentLocation["clCurrentRegion"]               = self.clCurrentRegion              
+                    dictCurrentLocation["sCurrentSubLocality"]           = self.sCurrentSubLocality          
+                    dictCurrentLocation["sCurrentThoroughfare"]          = self.sCurrentThoroughfare         
+                    dictCurrentLocation["sCurrentSubThoroughfare"]       = self.sCurrentSubThoroughfare      
+                    dictCurrentLocation["sCurrentAdministrativeArea"]    = self.sCurrentAdministrativeArea   
+                    dictCurrentLocation["sCurrentSubAdministrativeArea"] = self.sCurrentSubAdministrativeArea
+
+                    var sLocationAddress:String = ""
+                    let sStreetAddress:String   = String(describing: (dictCurrentLocation["sCurrentLocationName"]       ?? ""))
+                    let sCity:String            = String(describing: (dictCurrentLocation["sCurrentCity"]               ?? ""))
+                    let sState:String           = String(describing: (dictCurrentLocation["sCurrentAdministrativeArea"] ?? ""))
+                    let sZipCode:String         = String(describing: (dictCurrentLocation["sCurrentPostalCode"]         ?? ""))
+
+                    if (sStreetAddress.count < 1 ||
+                        sCity.count          < 1)
+                    {
+                        sLocationAddress = "-N/A-"
+                    }
+                    else
+                    {
+                        sLocationAddress = "\(sStreetAddress), \(sCity), \(sState), \(sZipCode)"
+                    }
+
+                    dictCurrentLocation["sCurrentLocationAddress"] = sLocationAddress         
+
                 //  if (self.bInternalTraceFlag == true)
                 //  {
                         self.xcgLogMsg("\(sCurrMethodDisp) <CLRequestGood> CLGeocoder 'reverseGeocodeLocation()' returned a 'location' of [\(self.sCurrentLocationName)]/[\(self.sCurrentCity)] for 'latitude'/'longitude' of (\(latitude):\(longitude))...")
@@ -752,6 +796,8 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
                 }
 
                 // Exit...
+
+            let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest, dictCurrentLocation:dictCurrentLocation)
 
                 if (self.bInternalTraceFlag == true)
                 {
@@ -815,12 +861,12 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         let clGeocoder:CLGeocoder      = CLGeocoder()
         let currentLocation:CLLocation = CLLocation(latitude:latitude, longitude:longitude)
 
-        let uuidCLLocationRequest:UUID = self.startCLLocationUpdateRequest()
+        let uuidCLLocationRequest:UUID = self.startCLLocationUpdateRequest(latitude:latitude, longitude:longitude)
         
         clGeocoder.reverseGeocodeLocation(currentLocation, completionHandler: 
             { (placemarks, error) in
 
-                let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest)
+            //  let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest)
 
                 var dictCurrentLocation:[String:Any]   = [String:Any]()
 
@@ -903,6 +949,8 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
 
                 // Exit...
 
+                let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest, dictCurrentLocation:dictCurrentLocation)
+
                 completionHandler(requestID, dictCurrentLocation)
 
                 if (self.bInternalTraceFlag == true)
@@ -960,13 +1008,13 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
         let clGeocoder:CLGeocoder      = CLGeocoder()
     //  let currentLocation:CLLocation = CLLocation(latitude:latitude, longitude:longitude)
 
-        let uuidCLLocationRequest:UUID = self.startCLLocationUpdateRequest()
+        let uuidCLLocationRequest:UUID = self.startCLLocationUpdateRequest(address:address)
         
     //  clGeocoder.reverseGeocodeLocation(currentLocation, completionHandler: 
         clGeocoder.geocodeAddressString(address) 
             { (placemarks, error) in
 
-                let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest)
+            //  let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest)
 
                 var dictCurrentLocation:[String:Any]   = [String:Any]()
 
@@ -1053,6 +1101,8 @@ class CoreLocationModelObservable2:NSObject, CLLocationManagerDelegate, Observab
                 }
 
                 // Exit...
+
+                let _ = self.stopCLLocationUpdateRequest(uuidCLLocationRequest:uuidCLLocationRequest, dictCurrentLocation:dictCurrentLocation)
 
                 completionHandler(requestID, dictCurrentLocation)
 

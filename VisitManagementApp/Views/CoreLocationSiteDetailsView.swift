@@ -9,19 +9,17 @@
 import SwiftUI
 import CoreLocation
 
-struct CoreLocationSiteDetailsView: View 
+struct CoreLocationSiteDetailsView:View 
 {
     
     struct ClassInfo
     {
-        
         static let sClsId        = "CoreLocationSiteDetailsView"
-        static let sClsVers      = "v1.1504"
+        static let sClsVers      = "v1.1601"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2024. All Rights Reserved."
         static let bClsTrace     = true
         static let bClsFileLog   = true
-        
     }
     
     // App Data field(s):
@@ -54,7 +52,7 @@ struct CoreLocationSiteDetailsView: View
 
     }   // End of private func xcgLogMsg().
 
-    var body: some View
+    var body:some View
     {
         
         let _ = self.xcgLogMsg("\(ClassInfo.sClsDisp):body(some Scene) 'appGlobalDeviceType' is (\(String(describing:appGlobalDeviceType)))...")
@@ -149,6 +147,7 @@ struct CoreLocationSiteDetailsView: View
                     Text("Max # 'response' history:    (\(coreLocationModelObservable.clLocationMaxResponseTimeHistory))")
                     Text("Max time Reqs 'stale':       (\(coreLocationModelObservable.clLocationMaxRequestIsStale))")
                     Text("Average 'response' time:     (\(coreLocationModelObservable.clLocationRequestAverageResponseTime))")
+                    Text("Total' # Reqs:               (\(coreLocationModelObservable.cLocationRequestsTotal))")
 
                     Text("Heading 'available'?:        [\(coreLocationModelObservable.bCLManagerHeadingAvailable)]")
                     Text("Heading 'current':           (\(coreLocationModelObservable.clCurrentHeading))")
