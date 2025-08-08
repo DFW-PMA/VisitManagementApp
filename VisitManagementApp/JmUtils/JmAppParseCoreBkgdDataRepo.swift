@@ -21,7 +21,7 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
     {
 
         static let sClsId        = "JmAppParseCoreBkgdDataRepo"
-        static let sClsVers      = "v1.2701"
+        static let sClsVers      = "v1.2801"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = false
@@ -2559,7 +2559,7 @@ public class JmAppParseCoreBkgdDataRepo: NSObject
 
             pfQueryBackupVisit.whereKey("tid",            containedIn:listOfExportTIDs)
             pfQueryBackupVisit.whereKey("pid",            containedIn:listOfExportPIDs)
-            pfQueryBackupVisit.whereKey("billable",       equalTo:1)
+        //  pfQueryBackupVisit.whereKey("billable",       equalTo:1)
         //  pfQueryBackupVisit.whereKey("isTelepractice", notEqualTo:1)
             pfQueryBackupVisit.whereKey("VDate",          greaterThan:sCurrentQueryDate)
 

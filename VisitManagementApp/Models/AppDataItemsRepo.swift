@@ -17,7 +17,7 @@ public class AppDataItemsRepo:NSObject, ObservableObject, DataItemRepo
     {
         
         static let sClsId        = "AppDataItemsRepo"
-        static let sClsVers      = "v1.0703"
+        static let sClsVers      = "v1.0801"
         static let sClsDisp      = sClsId+".("+sClsVers+"): "
         static let sClsCopyRight = "Copyright (C) JustMacApps 2024-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -35,11 +35,11 @@ public class AppDataItemsRepo:NSObject, ObservableObject, DataItemRepo
 
     // Various App SwiftData field(s):
 
-           public   var schema:Schema?                             = nil
-           public   var modelConfiguration:ModelConfiguration?     = nil
-           public   var modelContainer:ModelContainer?             = nil
-           public   var modelContext:ModelContext?                 = nil
-    //     public   var undoManager:UndoManager?                   = nil
+//         public   var schema:Schema?                             = nil
+//         public   var modelConfiguration:ModelConfiguration?     = nil
+//         public   var modelContainer:ModelContainer?             = nil
+//         public   var modelContext:ModelContext?                 = nil
+//  //     public   var undoManager:UndoManager?                   = nil
 
            private  var dataItemsStorage:[String:[Any]]            = [String:[Any]]()
 //  @Published      var dataItemsStorage:[String:[Any]]            = [String:[Any]]()
@@ -161,13 +161,13 @@ public class AppDataItemsRepo:NSObject, ObservableObject, DataItemRepo
         asToString.append("],")
         asToString.append("[")
         asToString.append("bInternalTest': [\(self.bInternalTest)],")
-        asToString.append("],")
-        asToString.append("[")
-        asToString.append("SwiftData 'schema': [\(String(describing: self.schema))],")
-        asToString.append("SwiftData 'modelConfiguration': [\(String(describing: self.modelConfiguration))],")
-        asToString.append("SwiftData 'modelContainer': [\(String(describing: self.modelContainer))],")
-        asToString.append("SwiftData 'modelContext': [\(String(describing: self.modelContext))]")
-    //  asToString.append("SwiftData 'undoManager': [\(String(describing: self.undoManager))],")
+//      asToString.append("],")
+//      asToString.append("[")
+//      asToString.append("SwiftData 'schema': [\(String(describing: self.schema))],")
+//      asToString.append("SwiftData 'modelConfiguration': [\(String(describing: self.modelConfiguration))],")
+//      asToString.append("SwiftData 'modelContainer': [\(String(describing: self.modelContainer))],")
+//      asToString.append("SwiftData 'modelContext': [\(String(describing: self.modelContext))]")
+//  //  asToString.append("SwiftData 'undoManager': [\(String(describing: self.undoManager))],")
         asToString.append("],")
         asToString.append("[")
         asToString.append("SwiftData 'dataItemsStorage': [\(String(describing: self.dataItemsStorage))[,")

@@ -9,6 +9,8 @@
 import Foundation
 import SwiftUI
 import SwiftData
+import CoreLocation
+import MapKit
 
 @Model
 final class CoreLocationSiteTrackingItem:Identifiable, DataItem
@@ -18,7 +20,7 @@ final class CoreLocationSiteTrackingItem:Identifiable, DataItem
     struct ClassInfo
     {
         static let sClsId        = "CoreLocationSiteTrackingItem"
-        static let sClsVers      = "v1.0101"
+        static let sClsVers      = "v1.0301"
         static let sClsDisp      = sClsId+"(.swift).("+sClsVers+"):"
         static let sClsCopyRight = "Copyright (C) JustMacApps 2023-2025. All Rights Reserved."
         static let bClsTrace     = true
@@ -47,13 +49,15 @@ final class CoreLocationSiteTrackingItem:Identifiable, DataItem
     @Transient
     var dictCurrentLocation:[String:Any]          = [String:Any]()
 
-    // Item (not-@Transient) 'computed' field(s):
+    // Item (@Transient) 'computed' field(s):
 
+    @Transient
     var sId:String
     {
         return String(describing:self.id).stripOptionalStringWrapper()
     }
     
+    @Transient
     var sTimestamp:String
     {
         let dtFormatterDateStamp:DateFormatter = DateFormatter()
@@ -68,13 +72,12 @@ final class CoreLocationSiteTrackingItem:Identifiable, DataItem
         return sFormattedTimestamp
     }
 
-    // Item (@Transient) 'computed' field(s):
-
     @Transient
     var sCLLocationLatitude:String
     {
         return "\(self.dblCLLocationLatitude)"
     }
+
     @Transient
     var sCLLocationLongitude:String
     {
@@ -91,6 +94,7 @@ final class CoreLocationSiteTrackingItem:Identifiable, DataItem
     {
         return String(format:"%.5f", self.dblCLLocationLongitude)
     }
+
     @Transient
     var sCLLocationAddressAsKey:String
     {
@@ -221,30 +225,30 @@ final class CoreLocationSiteTrackingItem:Identifiable, DataItem
 
 
 
-        var bInternalTraceFlag:Bool                   = false
-        var bInternalCLLocationTraceFlag:Bool            = true
-
-        var id                                        = UUID()
-        var dateCLLocationTimestamp:Date              = Date()
-
-        var dblCLLocationLatitude:Double              = 0.0
-        var dblCLLocationLongitude:Double             = 0.0
-
-        var sCLLocationAddress:String                 = ""
-
-        var dictCurrentLocation:[String:Any]          = [String:Any]()
-
-        var sId:String
-        var sTimestamp:String
-
-        var sCLLocationLatitude:String
-        var sCLLocationLongitude:String
-        var sCLLocationLatitudeAsKey:String
-        var sCLLocationLongitudeAsKey:String
-        var sCLLocationAddressAsKey:String
-        var clLocationCoordinate2D:CLLocationCoordinate2D
-        var mapCoordinateRegion:MKCoordinateRegion
-        var mapPosition:MapCameraPosition
+    //  var bInternalTraceFlag:Bool                   = false
+    //  var bInternalCLLocationTraceFlag:Bool            = true
+    //
+    //  var id                                        = UUID()
+    //  var dateCLLocationTimestamp:Date              = Date()
+    //
+    //  var dblCLLocationLatitude:Double              = 0.0
+    //  var dblCLLocationLongitude:Double             = 0.0
+    //
+    //  var sCLLocationAddress:String                 = ""
+    //
+    //  var dictCurrentLocation:[String:Any]          = [String:Any]()
+    //
+    //  var sId:String
+    //  var sTimestamp:String
+    //
+    //  var sCLLocationLatitude:String
+    //  var sCLLocationLongitude:String
+    //  var sCLLocationLatitudeAsKey:String
+    //  var sCLLocationLongitudeAsKey:String
+    //  var sCLLocationAddressAsKey:String
+    //  var clLocationCoordinate2D:CLLocationCoordinate2D
+    //  var mapCoordinateRegion:MKCoordinateRegion
+    //  var mapPosition:MapCameraPosition
 
 
 
